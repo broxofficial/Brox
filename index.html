@@ -11,101 +11,97 @@
 
   <style>
     :root{
-      --bg-1:#050507; --bg-2:#0e0e14;
-      --accent:#ff6b35; --accent-2:#ffd166; --muted:#98a3b0;
+      --bg1:#050507; --bg2:#0f1116;
+      --accent:#ff6b35; --accent2:#ffd166; --muted:#98a3b0;
       --glass: rgba(255,255,255,0.04);
       --card: rgba(255,255,255,0.03);
-      --success: #00d4aa;
+      --success:#00d4aa;
       --maxw:1200px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#fff;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#fff;background:linear-gradient(180deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
     a{color:inherit;text-decoration:none}
 
     /* Header */
-    header{position:fixed;top:0;left:0;right:0;z-index:1400;background:linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0.35));backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,0.03)}
+    header{position:fixed;top:0;left:0;right:0;z-index:1400;background:linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.3));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.03)}
     .nav{max-width:var(--maxw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:12px}
     .logo-btn{background:none;border:0;cursor:pointer;padding:4px;border-radius:10px}
     .logo-btn img{height:64px;width:auto;border-radius:10px;display:block;transition:transform .25s ease, box-shadow .25s;}
     .logo-btn img:hover{transform:scale(1.06);box-shadow:0 10px 30px rgba(0,0,0,0.5)}
     .header-actions{display:flex;gap:10px;align-items:center}
     .social-icon{width:44px;height:44px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:var(--glass);border:1px solid rgba(255,255,255,0.03);color:#fff}
-    .social-icon:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
-    .btn-buy{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-weight:700;cursor:not-allowed;opacity:.6}
+    .social-icon:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,0.45)}
+    .btn-disabled{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-weight:700;cursor:not-allowed;opacity:.6}
 
     /* Container */
     .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
 
     /* Hero */
-    .hero{min-height:88vh;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:32px;padding:120px 0 60px}
-    .hero-left{max-width:680px}
+    .hero{min-height:86vh;display:grid;grid-template-columns:1fr 420px;align-items:center;gap:32px;padding:120px 0 60px}
+    .hero-left{max-width:700px}
     .kicker{display:inline-block;padding:.35rem .7rem;border-radius:999px;background:linear-gradient(90deg,rgba(255,107,53,0.12),rgba(255,209,102,0.08));color:var(--accent);font-weight:700;font-family:Orbitron,monospace}
     .title{font-family:Orbitron,monospace;font-size:3rem;margin:.6rem 0;line-height:1}
     .tag{color:var(--muted);margin-top:6px;font-size:1rem}
     .cta{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap}
-    .cta a, .cta button{padding:12px 18px;border-radius:12px;border:0;font-weight:700;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#0b0b0b}
-    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
-    .btn-wait{background:transparent;border:1px dashed rgba(255,255,255,0.06);color:var(--muted);padding:10px 14px;border-radius:10px}
-
-    .hero-right{display:flex;align-items:center;justify-content:center}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#ff9f1c);color:#0b0b0b;padding:12px 18px;border-radius:12px;border:0;font-weight:800;display:inline-flex;align-items:center;gap:10px}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff;padding:10px 14px;border-radius:10px;font-weight:700}
+    .meta-cards{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+    .meta-card{background:var(--card);padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);min-width:120px;text-align:left}
+    .mascot-wrap{display:flex;align-items:center;justify-content:center}
     .mascot{width:360px;border-radius:18px;box-shadow:0 30px 80px rgba(0,0,0,0.6);transition:transform .25s ease}
     .mascot:hover{transform:translateY(-8px) scale(1.02)}
 
-    /* tokenomics */
+    /* Sections */
     section{padding:64px 0}
-    .section-title{font-family:Orbitron,monospace;color:var(--accent);font-size:1.8rem;margin-bottom:12px}
+    .section-title{font-family:Orbitron,monospace;color:var(--accent);font-size:1.6rem;margin-bottom:12px}
+
+    /* Tokenomics */
     .token-row{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:center}
     .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 10px 30px rgba(0,0,0,0.4)}
-    .legend{display:flex;flex-direction:column;gap:10px;margin-top:10px}
-    .legend .item{display:flex;align-items:center;gap:10px}
-    .swatch{width:14px;height:14px;border-radius:4px;display:inline-block}
+    .legend{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+    .legend .item{display:flex;align-items:center;gap:12px}
+    .swatch{width:16px;height:16px;border-radius:4px;display:inline-block}
 
-    /* liquidity double circle */
-    .liquidity-wrap{display:flex;flex-direction:column;align-items:center;gap:10px}
-    .liquidity-svg{width:320px;height:320px}
-    .liquidity-center{position:relative;top:-220px;pointer-events:none;font-family:Orbitron,monospace;font-size:2.6rem;color:#fff;text-align:center}
-    .liquidity-sub{color:var(--muted);font-size:.95rem;margin-top:8px;text-align:center}
+    /* progress circle */
+    .circle-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+    .progress-svg{width:280px;height:280px}
+    .progress-center{position:relative;top:-220px;pointer-events:none;font-family:Orbitron,monospace;font-size:2.6rem;color:#fff;text-align:center}
+    .progress-sub{color:var(--muted);font-size:.95rem;margin-top:8px;text-align:center}
 
-    /* roadmap */
-    .timeline{display:flex;gap:12px;flex-direction:column}
+    /* Roadmap */
+    .timeline{display:flex;flex-direction:column;gap:14px}
     .step{display:flex;gap:12px;align-items:flex-start}
-    .dot{width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 8px 18px rgba(255,107,53,0.18);margin-top:6px}
-    .step .content{background:transparent}
+    .dot{width:14px;height:14px;border-radius:50%;background:var(--accent);box-shadow:0 8px 18px rgba(255,107,53,0.18);margin-top:6px}
 
-    /* community */
+    /* Community */
     .social-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-    .social-cta{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .subscribe{display:flex;gap:8px;align-items:center;margin-top:12px}
 
-    /* modal (logo-triggered) */
-    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(4,6,8,0.6);backdrop-filter:blur(6px);z-index:2200;padding:20px}
-    .modal{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(10,10,12,0.92), rgba(16,16,20,0.9));border-radius:16px;padding:20px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.6)}
+    /* Modal */
+    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(4,6,8,0.65);backdrop-filter:blur(6px);z-index:2200;padding:20px}
+    .modal{width:100%;max-width:980px;background:linear-gradient(180deg, rgba(10,10,12,0.96), rgba(16,16,20,0.9));border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.6)}
     .modal-grid{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    .modal-cards{display:flex;flex-direction:column;gap:10px}
-    .modal-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:16px;border-radius:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.02);transition:transform .24s ease, box-shadow .24s}
+    .modal-cards{display:flex;flex-direction:column;gap:12px}
+    .modal-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:14px;border-radius:12px;cursor:pointer;border:1px solid rgba(255,255,255,0.02);transition:transform .2s,box-shadow .2s}
     .modal-card:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.5)}
-    .modal-detail{min-height:220px;padding:12px;border-radius:12px;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.02)}
+    .modal-detail{min-height:220px;padding:12px;border-radius:12px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.02);overflow:auto}
     .modal-footer{display:flex;gap:10px;align-items:center;justify-content:flex-end;margin-top:12px}
 
-    /* waitlist modal */
-    .modal-small{max-width:520px}
-    .form-row{display:flex;gap:8px;align-items:center}
-    input[type="email"]{padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;min-width:200px}
+    .btn-ghost{cursor:pointer}
+    .btn-primary-small{background:linear-gradient(90deg,var(--accent),var(--accent2));border:0;padding:10px 14px;border-radius:10px;color:#08050a;font-weight:800}
 
     /* reveal */
-    [data-reveal]{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s ease}
+    [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s ease, transform .6s ease}
     [data-reveal].visible{opacity:1;transform:none}
 
     footer{padding:36px 0;color:var(--muted);text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
 
     @media (max-width:1000px){
       .hero{grid-template-columns:1fr;gap:18px;padding:100px 0 30px}
-      .hero-right{order:-1}
       .mascot{width:280px}
       .token-row{grid-template-columns:1fr}
-      .liquidity-svg{width:260px;height:260px}
       .modal-grid{grid-template-columns:1fr}
-      .liquidity-center{top:-175px}
+      .progress-center{top:-180px}
     }
   </style>
 </head>
@@ -132,7 +128,7 @@
           <i class="fa-brands fa-tiktok"></i>
         </a>
 
-        <button class="btn-buy" aria-disabled="true" title="Token not live yet">Buy (Coming Soon)</button>
+        <button class="btn-disabled" aria-disabled="true" title="Token not live yet">Buy (Coming Soon)</button>
       </div>
     </div>
   </header>
@@ -142,25 +138,23 @@
     <section class="hero" aria-labelledby="heroTitle">
       <div class="hero-left" data-reveal>
         <span class="kicker">Community • Pre-Launch</span>
-        <h1 id="heroTitle" class="title">Born in Fire — <span style="color:var(--accent-2)">$BROX</span></h1>
+        <h1 id="heroTitle" class="title">Born in Fire — <span style="color:var(--accent2)">$BROX</span></h1>
         <p class="tag">BROX is community-driven and not live yet. Join official channels for airdrops, launch updates and priority access.</p>
 
         <div class="cta" role="group" aria-label="Primary actions">
-          <a class="btn-primary" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer">Join Telegram</a>
-          <a class="btn-ghost" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer">Follow</a>
-          <button id="openWaitlist" class="btn-ghost" title="Join waitlist">Join Waitlist</button>
+          <a class="btn-primary" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i> Join Telegram</a>
+          <a class="btn-ghost" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i> Follow</a>
+          <button id="openWaitlist" class="btn-ghost" title="Join waitlist"><i class="fa-regular fa-envelope"></i> Waitlist</button>
         </div>
 
-        <div class="meta" style="margin-top:18px;color:var(--muted)" aria-hidden="false">
-          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:10px">
-            <div style="background:var(--card);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)"><small style="display:block;color:var(--muted)">Status</small><strong>Pre-Launch</strong></div>
-            <div style="background:var(--card);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)"><small style="display:block;color:var(--muted)">Launch</small><strong>Soon</strong></div>
-            <div style="background:var(--card);padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)"><small style="display:block;color:var(--muted)">Community</small><strong id="communityCount">—</strong></div>
-          </div>
+        <div class="meta-cards" aria-hidden="false">
+          <div class="meta-card"><small style="color:var(--muted);display:block">Status</small><strong>Pre-Launch</strong></div>
+          <div class="meta-card"><small style="color:var(--muted);display:block">Launch window</small><strong>Soon</strong></div>
+          <div class="meta-card"><small style="color:var(--muted);display:block">Community</small><strong id="communityCount">—</strong></div>
         </div>
       </div>
 
-      <div class="hero-right" data-reveal>
+      <div class="hero-right mascot-wrap" data-reveal>
         <img id="mascotImg" class="mascot" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX mascot">
       </div>
     </section>
@@ -171,54 +165,51 @@
       <div class="token-row">
         <div class="card">
           <h3 style="margin:0 0 6px">Allocation (Preview)</h3>
-          <p style="color:var(--muted)">This is the planned distribution for launch. Final allocation will be confirmed by community governance.</p>
+          <p style="color:var(--muted)">Planned distribution. Final distribution will be confirmed via governance before launch.</p>
 
           <div class="legend" aria-hidden="false">
-            <div class="item"><span class="swatch" style="background:linear-gradient(90deg,#ff6b35,#ff9f1c)"></span> <strong>Community</strong> — 99%</div>
-            <div class="item"><span class="swatch" style="background:#ffd166"></span> <strong>Team</strong> — 1%</div>
+            <div class="item"><span class="swatch" style="background:linear-gradient(90deg,#ff6b35,#ff9f1c)"></span><strong>Community</strong> — 99%</div>
+            <div class="item"><span class="swatch" style="background:#ffd166"></span><strong>Team</strong> — 1%</div>
           </div>
 
-          <p style="color:var(--muted);margin-top:12px"><strong>Note:</strong> Liquidity & listing decisions are community-driven. No premature buy buttons — official contract will be published on launch.</p>
+          <p style="color:var(--muted);margin-top:12px"><strong>Note:</strong> Liquidity & listing decisions are community-driven. A verified contract will be published at launch and audits will be shared publicly.</p>
         </div>
 
-        <div class="card" style="display:flex;align-items:center;justify-content:center;flex-direction:column;">
-          <!-- Double liquidity circle (SVG with arc) -->
-          <svg class="liquidity-svg" viewBox="0 0 200 200" aria-hidden="true">
+        <div class="card circle-wrap">
+          <!-- SVG progress circle (we animate via JS) -->
+          <svg class="progress-svg" viewBox="0 0 200 200" aria-hidden="true">
             <defs>
-              <linearGradient id="gA" x1="0%" x2="100%"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffd166"/></linearGradient>
+              <linearGradient id="grad" x1="0%" x2="100%"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ffd166"/></linearGradient>
             </defs>
-            <!-- background ring -->
-            <circle cx="100" cy="100" r="72" stroke="#111" stroke-width="16" fill="none"></circle>
-            <!-- highlight arc - community 99% -->
-            <circle id="arcCommunity" cx="100" cy="100" r="72" stroke="url(#gA)" stroke-width="16" stroke-linecap="round" fill="none" transform="rotate(-90 100 100)" stroke-dasharray="0 100"></circle>
-            <!-- inner accent ring -->
+            <circle cx="100" cy="100" r="72" stroke="rgba(255,255,255,0.04)" stroke-width="16" fill="none"></circle>
+            <circle id="progressArc" cx="100" cy="100" r="72" stroke="url(#grad)" stroke-width="16" stroke-linecap="round" fill="none" transform="rotate(-90 100 100)" stroke-dasharray="0 452.4"></circle>
             <circle cx="100" cy="100" r="52" stroke="rgba(255,255,255,0.02)" stroke-width="6" fill="none"></circle>
           </svg>
 
-          <div class="liquidity-center" aria-hidden="true">
+          <div class="progress-center" aria-hidden="true">
             <div id="percentNum">0%</div>
             <div style="font-size:0.85rem;color:var(--muted);font-weight:600">Community</div>
           </div>
 
-          <div class="liquidity-sub">Community 99% — Team 1% • Liquidity decided by community</div>
+          <div class="progress-sub">Community 99% • Team 1% — Liquidity community-driven</div>
         </div>
       </div>
     </section>
 
     <!-- Roadmap -->
     <section id="roadmap" data-reveal>
-      <div class="section-title">Roadmap</div>
+      <div class="section-title">Roadmap (Phases)</div>
       <div class="card timeline">
-        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 1 — Community</strong><div style="color:var(--muted)">Website, social channels, airdrop planning.</div></div></div>
-        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 2 — Beta</strong><div style="color:var(--muted)">Closed testing, liquidity pools & audits.</div></div></div>
-        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 3 — Launch</strong><div style="color:var(--muted)">Verified contract, guides, initial listings.</div></div></div>
+        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 1 — Community Setup</strong><div style="color:var(--muted)">Create channels, build community incentives, plan airdrops.</div></div></div>
+        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 2 — Audits & Beta</strong><div style="color:var(--muted)">Smart contract audits, closed testing, and community beta pools.</div></div></div>
+        <div class="step"><div class="dot" aria-hidden="true"></div><div class="content"><strong>Phase 3 — Launch & Listings</strong><div style="color:var(--muted)">Publish verified contract, guides, and initial liquidity steps.</div></div></div>
       </div>
     </section>
 
     <!-- Community -->
     <section id="community" data-reveal>
       <div class="section-title">Join the Community</div>
-      <p style="color:var(--muted);max-width:780px;margin:8px auto">Active members receive priority airdrops and early access — join our official channels and be part of the governance.</p>
+      <p style="color:var(--muted);max-width:780px;margin:8px auto">Active members receive priority airdrops and early access. Follow official channels and join the waitlist for verified launch instructions.</p>
 
       <div style="display:flex;gap:18px;align-items:center;justify-content:center;margin-top:18px;flex-wrap:wrap">
         <div class="social-row" aria-hidden="false">
@@ -228,10 +219,10 @@
           <a class="social-icon" href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
         </div>
 
-        <div class="social-cta">
+        <div class="subscribe">
           <form id="subscribeForm" aria-label="Subscribe to launch updates" style="display:flex;gap:8px;align-items:center">
             <input id="emailInput" type="email" placeholder="Your email (launch updates)" aria-label="Email address">
-            <button class="btn-primary" type="submit">Notify Me</button>
+            <button class="btn-primary-small" type="submit">Notify Me</button>
           </form>
         </div>
       </div>
@@ -245,7 +236,7 @@
     © <span id="year"></span> BROX — Pre-Launch. All rights reserved. — This site is informational; token not live yet.
   </footer>
 
-  <!-- MENU MODAL (logo-triggered): big modal with cards + socials -->
+  <!-- MENU MODAL (logo-triggered) -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal" id="modal" role="document" aria-labelledby="modalTitle">
       <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
@@ -283,22 +274,23 @@
         <div class="modal-detail" id="modalDetail" aria-live="polite">
           <div id="p-about" style="display:none">
             <h3 style="margin:0 0 8px;color:var(--accent)">About BROX</h3>
-            <p style="color:var(--muted)">BROX is a community-led meme token focused on fair allocation, transparency, and rewards for active holders. The project is in pre-launch and will publish a verified contract at launch.</p>
+            <p style="color:var(--muted)">BROX is a community-led meme token focused on fair allocation, transparency, and rewards for active holders. The project is in pre-launch — verified contract and audits will be published at launch.</p>
           </div>
 
           <div id="p-token" style="display:none">
             <h3 style="margin:0 0 8px;color:var(--accent)">Tokenomics</h3>
-            <p style="color:var(--muted)">Planned distribution: <strong>Community 99%</strong> • <strong>Team 1%</strong>. Liquidity and listing decisions are community-driven — full transparency and audits will be published before launch.</p>
+            <p style="color:var(--muted)"><strong>Community 99%</strong> • <strong>Team 1%</strong>. Liquidity and listing decisions are community-driven — all details and audits will be shared before any launch activity.</p>
           </div>
 
           <div id="p-comm" style="display:none">
             <h3 style="margin:0 0 8px;color:var(--accent)">Community</h3>
-            <p style="color:var(--muted)">Join the official channels for announcements, governance, and airdrops. Active members will receive priority access during launch phases.</p>
+            <p style="color:var(--muted)">Join official channels for announcements, governance, and airdrops. Active members receive priority access and governance privileges.</p>
           </div>
         </div>
       </div>
 
       <div class="modal-footer" style="margin-top:18px">
+        <button class="btn-primary-small" id="openWaitInModal">Join Waitlist</button>
         <button class="close-btn" id="modalCloseX">Close</button>
       </div>
     </div>
@@ -312,7 +304,7 @@
 
       <form id="waitForm" style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <input id="waitEmail" type="email" placeholder="your@email.com" aria-label="Waitlist email" required>
-        <button class="btn-primary" type="submit">Join</button>
+        <button class="btn-primary-small" type="submit">Join</button>
         <button class="btn-ghost" type="button" id="waitClose">Close</button>
       </form>
       <div id="waitMsg" style="margin-top:10px;color:var(--muted);display:none"></div>
@@ -320,10 +312,10 @@
   </div>
 
   <script>
-    // Year
+    // set year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Image fallbacks (logo & mascot)
+    // Image fallbacks
     (function(){
       const logo = document.getElementById('logoImg');
       const mascot = document.getElementById('mascotImg');
@@ -332,7 +324,7 @@
       mascot.addEventListener('error', ()=>{ mascot.src = fallback; });
     })();
 
-    // IntersectionObserver reveal
+    // reveal on scroll
     (function(){
       const io = new IntersectionObserver((entries)=>{
         entries.forEach(en=>{
@@ -340,58 +332,83 @@
         });
       },{threshold:0.12});
       document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
+      // mark common sections
+      document.querySelectorAll('.hero-left, .hero-right, #tokenomics, #roadmap, #community').forEach(el=>el.setAttribute('data-reveal',''));
     })();
 
     // community faux counter
     (function(){
-      const el = document.getElementById('communityCount'); let n = 215; el.textContent = n + 'K';
-      setInterval(()=>{ n += Math.floor(Math.random()*2); el.textContent = n + 'K'; }, 9000);
+      const el = document.getElementById('communityCount'); let n = 215; if(el) el.textContent = n + 'K';
+      setInterval(()=>{ n += Math.floor(Math.random()*2); if(el) el.textContent = n + 'K'; }, 9000);
     })();
 
-    // Animate tokenomics arc
+    // animate tokenomics arc (99%)
     (function(){
-      const arc = document.getElementById('arcCommunity');
+      const arc = document.getElementById('progressArc');
       const center = document.getElementById('percentNum');
-      // target 99%
+      if(!arc || !center) return;
+      const r = 72;
+      const circ = 2 * Math.PI * r; // ~452.4
       const target = 99;
-      // stroke-dasharray approach: total 100
       let current = 0;
-      arc.setAttribute('stroke-dasharray','0 100');
+      arc.style.strokeDasharray = '0 ' + circ;
       const step = setInterval(()=>{
         current++;
-        if(current>target) { clearInterval(step); return; }
-        arc.setAttribute('stroke-dasharray', current + ' ' + (100-current));
+        if(current > target){ clearInterval(step); return; }
+        const filled = (current/100) * circ;
+        arc.setAttribute('stroke-dasharray', filled + ' ' + (circ - filled));
         center.textContent = current + '%';
-      }, 12);
+      }, 10);
     })();
 
-    // Modal open/close + card selection
+    // Modal logic + keyboard focus trap
     (function(){
       const overlay = document.getElementById('overlay');
       const logoBtn = document.getElementById('logoBtn');
-      const closeBtns = [document.getElementById('closeModal'), document.getElementById('modalCloseX')];
+      const closeButtons = [document.getElementById('closeModal'), document.getElementById('modalCloseX')];
       const modalCards = document.querySelectorAll('.modal-card');
       const panels = ['p-about','p-token','p-comm'];
 
+      let lastFocused = null;
+
       function openModal(){
+        lastFocused = document.activeElement;
         overlay.style.display = 'flex';
         overlay.setAttribute('aria-hidden','false');
-        // show first panel by default
-        showPanel('p-about');
+        document.getElementById('p-about').style.display = 'block';
+        focusFirst();
+        document.addEventListener('keydown', onKeyDown);
       }
       function closeModal(){
         overlay.style.display = 'none';
         overlay.setAttribute('aria-hidden','true');
-        // hide panels
         panels.forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
+        if(lastFocused) lastFocused.focus();
+        document.removeEventListener('keydown', onKeyDown);
       }
       function showPanel(id){
         panels.forEach(pid => { const el=document.getElementById(pid); if(el) el.style.display = (pid===id)?'block':'none'; });
+        focusFirst();
+      }
+      function onKeyDown(e){
+        if(e.key === 'Escape') closeModal();
+        // Basic focus trap: cycle Tab inside modal
+        if(e.key === 'Tab' && overlay.style.display === 'flex'){
+          const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+          if(focusable.length === 0) return;
+          const first = focusable[0], last = focusable[focusable.length-1];
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
+      function focusFirst(){
+        const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        if(focusable.length) focusable[0].focus();
       }
 
-      logoBtn.addEventListener('click', openModal);
-      closeBtns.forEach(b => b && b.addEventListener('click', closeModal));
-      document.getElementById('overlay').addEventListener('click', (e)=>{ if(e.target.id==='overlay') closeModal(); });
+      logoBtn && logoBtn.addEventListener('click', openModal);
+      closeButtons.forEach(b => b && b.addEventListener('click', closeModal));
+      overlay && overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
 
       modalCards.forEach(card=>{
         card.addEventListener('click', ()=>{ const panel = card.getAttribute('data-panel'); if(panel) showPanel(panel); });
@@ -399,9 +416,10 @@
       });
     })();
 
-    // Waitlist modal
+    // Waitlist (small modal) logic
     (function(){
       const openWait = document.getElementById('openWaitlist');
+      const openWaitInModal = document.getElementById('openWaitInModal');
       const waitOverlay = document.getElementById('waitOverlay');
       const waitClose = document.getElementById('waitClose');
       const waitForm = document.getElementById('waitForm');
@@ -411,6 +429,7 @@
       function closeWait(){ waitOverlay.style.display = 'none'; waitOverlay.setAttribute('aria-hidden','true'); waitMsg.style.display='none'; }
 
       openWait && openWait.addEventListener('click', openWait);
+      openWaitInModal && openWaitInModal.addEventListener('click', openWait);
       waitClose && waitClose.addEventListener('click', closeWait);
       waitOverlay && waitOverlay.addEventListener('click', (e)=>{ if(e.target === waitOverlay) closeWait(); });
 
@@ -429,7 +448,7 @@
       });
     })();
 
-    // Subscribe form on community section
+    // Subscribe form in community section
     (function(){
       const form = document.getElementById('subscribeForm');
       const input = document.getElementById('emailInput');
