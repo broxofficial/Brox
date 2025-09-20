@@ -19,73 +19,90 @@
       top: 0;
       background: rgba(0,0,0,0.85);
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       z-index: 1000;
     }
 
-    header img {
-      height: 60px;
+    /* شعار قابل للضغط */
+    .logo-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
     }
 
-    header button {
-      padding: 10px 20px;
+    .logo-btn img {
+      height: 70px;
+      transition: transform 0.3s;
+    }
+
+    .logo-btn img:hover {
+      transform: scale(1.08);
+    }
+
+    /* القائمة */
+    .menu {
+      display: none;
+      position: absolute;
+      top: 90px;
+      right: 20px;
+      background: #111;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(0,255,200,0.3);
+      overflow: hidden;
+      min-width: 220px;
+      animation: slideDown 0.3s ease forwards;
+    }
+
+    .menu button {
+      width: 100%;
+      padding: 15px;
       border: none;
-      border-radius: 20px;
+      background: none;
+      color: white;
+      text-align: left;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .menu button:hover {
       background: #00ffcc;
       color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
     }
 
-    header button:hover {
-      background: #00ffaa;
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     section {
       padding: 80px 20px;
     }
 
-    .tokenomics {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 40px;
-    }
-
-    .card {
+    .info-box {
+      display: none;
       background: #111;
-      padding: 20px;
+      padding: 25px;
+      margin: 30px auto;
       border-radius: 15px;
-      box-shadow: 0 0 20px rgba(0,255,200,0.2);
+      max-width: 650px;
+      box-shadow: 0 0 25px rgba(0,255,200,0.25);
+      animation: fadeIn 0.4s ease forwards;
     }
 
-    .socials {
-      margin-top: 40px;
-      display: flex;
-      justify-content: center;
-      gap: 20px;
+    .info-box h2 {
+      margin-bottom: 10px;
+      color: #00ffcc;
     }
 
-    .socials a {
-      width: 50px;
-      height: 50px;
-      background: #222;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: 0.3s;
-      text-decoration: none;
-    }
-
-    .socials a:hover {
-      background: #00ffcc;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     footer {
-      margin-top: 60px;
+      margin-top: 80px;
       padding: 20px;
       font-size: 14px;
       color: #aaa;
@@ -94,48 +111,58 @@
 </head>
 <body>
   <header>
-    <!-- شعار العملة -->
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX Logo">
-    <button onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
-      About
+    <!-- زر الشعار -->
+    <button class="logo-btn" onclick="toggleMenu()">
+      <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX Logo">
     </button>
+
+    <!-- القائمة -->
+    <div class="menu" id="menu">
+      <button onclick="showInfo('info1')">📌 About BROX</button>
+      <button onclick="showInfo('info2')">📊 Tokenomics</button>
+      <button onclick="showInfo('info3')">🌐 Community</button>
+    </div>
   </header>
 
-  <section id="about">
-    <h1>🚀 BROX is Coming Soon</h1>
-    <p>The meme coin powered by the community. 100% for trading — 1% for the team, liquidity driven by the community.</p>
-  </section>
-
-  <section id="tokenomics">
-    <h2>Tokenomics</h2>
-    <div class="tokenomics">
-      <div class="card">
-        <h3>💰 Total Supply</h3>
-        <p>100% in circulation</p>
-      </div>
-      <div class="card">
-        <h3>👥 Team</h3>
-        <p>1% only</p>
-      </div>
-      <div class="card">
-        <h3>🌐 Community</h3>
-        <p>Liquidity relies on the community</p>
-      </div>
-    </div>
-  </section>
-
   <section>
-    <h2>Follow Us</h2>
-    <div class="socials">
-      <a href="https://x.com/Brox__official" target="_blank">🐦</a>
-      <a href="http://t.me/brox_offi" target="_blank">📢</a>
-      <a href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==" target="_blank">📸</a>
-      <a href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank">🎵</a>
-    </div>
+    <h1>🚀 BROX is Coming Soon</h1>
+    <p>The meme coin powered by the community. Stay tuned for launch!</p>
   </section>
+
+  <!-- صناديق المعلومات -->
+  <div class="info-box" id="info1">
+    <h2>About BROX</h2>
+    <p>BROX is a meme coin created for the people, fully community-driven and decentralized.</p>
+  </div>
+
+  <div class="info-box" id="info2">
+    <h2>Tokenomics</h2>
+    <p>100% in circulation — only 1% reserved for the team. All liquidity is fueled by the community.</p>
+  </div>
+
+  <div class="info-box" id="info3">
+    <h2>Community</h2>
+    <p>The strength of BROX comes from its holders. Together, we shape the future of memes and crypto.</p>
+  </div>
 
   <footer>
     © 2025 BROX • All rights reserved
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('menu');
+      menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function showInfo(id) {
+      document.querySelectorAll('.info-box').forEach(box => {
+        box.style.display = 'none';
+      });
+      const target = document.getElementById(id);
+      target.style.display = 'block';
+      document.getElementById('menu').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
