@@ -1,372 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BROX — Born in Fire (Pre-Launch)</title>
-  <meta name="description" content="BROX — community-driven meme token. Pre-launch landing page. Join the community and waitlist." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BROX Coin - Coming Soon</title>
   <style>
-    :root{
-      --bg0:#050507; --bg1:#0b0b10;
-      --lava:#ff6b35; --gold:#ffd166; --muted:#9aa3b2;
-      --card: rgba(255,255,255,0.03); --accent: rgba(255,107,53,0.12);
-      --maxw:1150px;
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0a0a0a;
+      color: #fff;
+      overflow-x: hidden;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#fff;background:linear-gradient(180deg,var(--bg0),var(--bg1) 65%);}
-    a{color:inherit}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 1rem}
 
-    /* header */
-    header{position:fixed;inset-inline:0;top:0;z-index:1200;padding:.7rem 0;background:linear-gradient(90deg,var(--lava),#f7931e);box-shadow:0 8px 30px rgba(0,0,0,0.5)}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem}
-    .brand{display:flex;align-items:center;gap:.6rem}
-    .brand .logo{font-family:Orbitron,monospace;font-weight:800;font-size:1.15rem;background:linear-gradient(90deg,#fff,#fff);-webkit-background-clip:text;color:transparent}
-    .top-actions{display:flex;align-items:center;gap:.5rem}
-    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:10px;background:rgba(0,0,0,0.06);border:1px solid rgba(255,255,255,0.03);color:#fff;text-decoration:none}
-    .menu-btn{margin-left:8px;padding:.45rem .8rem;border-radius:10px;background:rgba(0,0,0,0.08);border:0;color:#fff;font-weight:700;cursor:pointer}
-
-    /* particles canvas */
-    #particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
-
-    /* hero */
-    main{min-height:92vh;display:grid;place-items:center;padding:6.5rem 0 3rem;position:relative}
-    .hero-wrap{width:100%;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:1.4rem;border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));border:1px solid rgba(255,255,255,0.02)}
-    .left {padding-right:1rem}
-    .kicker{display:inline-block;padding:.25rem .6rem;border-radius:999px;background:var(--accent);color:var(--gold);font-weight:700;font-size:.88rem}
-    h1{font-family:Orbitron,monospace;font-size:2.4rem;margin:.6rem 0;background:linear-gradient(90deg,var(--lava),#ff9f1c);-webkit-background-clip:text;color:transparent}
-    p.lead{color:var(--muted);margin-top:.6rem;max-width:60ch}
-    .cta{margin-top:1.2rem;display:flex;gap:.8rem;flex-wrap:wrap}
-    .btn{padding:.7rem 1rem;border-radius:12px;font-weight:700;text-decoration:none;display:inline-flex;gap:.6rem;align-items:center;border:0;cursor:pointer}
-    .btn.primary{background:linear-gradient(90deg,var(--lava),#f7931e);color:#08050a;box-shadow:0 12px 36px rgba(255,107,53,0.12)}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
-    .btn.disabled{opacity:.55;pointer-events:none}
-    .meta{display:flex;gap:1rem;margin-top:1.4rem;flex-wrap:wrap}
-    .meta .m{background:var(--card);padding:.6rem 1rem;border-radius:10px;border:1px solid rgba(255,255,255,0.02);min-width:120px;text-align:center}
-    .m small{display:block;color:var(--muted);font-size:.82rem}
-    .m strong{display:block;font-family:Orbitron,monospace;margin-top:.25rem}
-
-    /* mascot */
-    .mascot-wrap{display:flex;align-items:center;justify-content:center}
-    .mascot{width:360px;border-radius:16px;box-shadow:0 30px 90px rgba(0,0,0,0.6);transition:transform .25s ease}
-    .mascot:hover{transform:translateY(-6px) scale(1.02)}
-
-    /* tokenomics section */
-    section{padding:3.6rem 0}
-    .card{background:var(--card);padding:1rem;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
-    .token-grid{display:grid;grid-template-columns:1fr 320px;gap:1.2rem;align-items:center}
-    .legend{display:flex;flex-direction:column;gap:.6rem;padding-left:1rem}
-
-    /* liquidity double circle highlight */
-    .liquidity-circle{display:flex;align-items:center;justify-content:center;position:relative;width:280px;height:280px;margin:0 auto}
-    .circle-outer{position:absolute;inset:0;border-radius:50%;display:flex;align-items:center;justify-content:center;filter:drop-shadow(0 20px 40px rgba(255,107,53,0.12))}
-    .circle-outer svg{width:100%;height:100%}
-    .circle-inner{position:absolute;inset:22%;border-radius:50%;background:radial-gradient(circle at 40% 30%, rgba(255,107,53,0.12), transparent 40%);display:flex;align-items:center;justify-content:center;font-family:Orbitron,monospace;font-weight:800;font-size:2rem}
-    .liquidity-note{text-align:center;margin-top:.7rem;color:var(--muted);font-size:.95rem}
-
-    /* roadmap/timeline */
-    .timeline{display:flex;flex-direction:column;gap:1rem}
-    .row{display:flex;gap:1rem;align-items:flex-start}
-    .bullet{width:12px;height:12px;border-radius:50%;background:var(--lava);box-shadow:0 0 18px rgba(255,107,53,0.28);margin-top:.6rem}
-    .content{flex:1;padding:.8rem;border-radius:10px;background:transparent}
-
-    /* socials icons bar (icons only, no names) */
-    .social-bar{display:flex;gap:.6rem;align-items:center}
-    .social-icon{width:44px;height:44px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);color:#fff;text-decoration:none}
-
-    /* reveal on scroll */
-    [data-reveal]{opacity:0;transform:translateY(20px);transition:opacity .6s ease, transform .6s ease}
-    [data-reveal].visible{opacity:1;transform:none}
-
-    /* modal / info panel */
-    .panel-back{position:fixed;inset:0;display:none;z-index:2200}
-    .info-panel{position:fixed;top:72px;right:20px;width:340px;max-width:92%;background:#070708;border-radius:12px;padding:1rem;border:1px solid rgba(255,255,255,0.03);box-shadow:0 20px 60px rgba(0,0,0,0.6)}
-    .info-panel h4{font-family:Orbitron,monospace;margin:0 0 .4rem}
-    .info-panel p{color:var(--muted);font-size:.92rem;margin:0 0 .6rem}
-
-    /* waitlist modal */
-    .modal-back{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:2100}
-    .modal{background:#0b0b0f;padding:1.2rem;border-radius:12px;max-width:520px;width:94%;border:1px solid rgba(255,255,255,0.03)}
-
-    footer{padding:2rem 0;text-align:center;color:var(--muted);border-top:1px solid rgba(255,255,255,0.02)}
-
-    /* responsive */
-    @media (max-width:1000px){
-      .hero-wrap{grid-template-columns:1fr;row-gap:1.2rem;padding:1rem}
-      .mascot{width:300px}
-      .token-grid{grid-template-columns:1fr;row-gap:1rem}
-      .info-panel{position:fixed;left:50%;transform:translateX(-50%);top:80px;width:92%}
+    header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 10, 10, 0.85);
+      z-index: 1000;
     }
+
+    header h1 {
+      font-size: 22px;
+      color: #00ff99;
+      margin: 0;
+    }
+
+    header button {
+      background: #00ff99;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    header button:hover {
+      background: #00cc77;
+    }
+
+    .hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(180deg, #0a0a0a, #111);
+      padding: 100px 20px 40px;
+    }
+
+    .hero img {
+      width: 180px;
+      border-radius: 50%;
+      box-shadow: 0 0 40px #00ff99;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h2 {
+      margin-top: 20px;
+      font-size: 36px;
+      color: #fff;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: #aaa;
+      max-width: 600px;
+      margin-top: 10px;
+    }
+
+    .tokenomics {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .circle {
+      position: relative;
+      margin: 0 auto 20px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(#00ff99 0% 99%, #ff0066 99% 100%);
+      animation: spin 6s linear infinite;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .tokenomics h3 {
+      margin-top: 20px;
+      font-size: 28px;
+      color: #00ff99;
+    }
+
+    .tokenomics p {
+      font-size: 16px;
+      color: #aaa;
+      margin: 5px 0;
+    }
+
+    .socials {
+      padding: 60px 20px;
+      text-align: center;
+    }
+
+    .socials h3 {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .icons a img {
+      width: 40px;
+      filter: brightness(0) invert(1);
+      transition: 0.3s;
+    }
+
+    .icons a img:hover {
+      transform: scale(1.2);
+      filter: drop-shadow(0 0 8px #00ff99);
+    }
+
+    footer {
+      padding: 20px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+
+    /* Popup */
+    .popup {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .popup-content {
+      background: #111;
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      max-width: 400px;
+      box-shadow: 0 0 20px #00ff99;
+    }
+
+    .popup-content h2 {
+      margin: 0 0 15px;
+      color: #00ff99;
+    }
+
+    .popup-content p {
+      color: #aaa;
+      font-size: 15px;
+      margin: 8px 0;
+    }
+
+    .popup-content button {
+      margin-top: 15px;
+      padding: 8px 20px;
+      background: #00ff99;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
   </style>
 </head>
 <body>
-  <!-- particles canvas -->
-  <canvas id="particles" aria-hidden="true"></canvas>
-
   <header>
-    <div class="container nav" role="navigation" aria-label="Main navigation">
-      <div class="brand" aria-hidden="false">
-        <div class="logo">BROX</div>
-      </div>
-
-      <div class="top-actions" aria-hidden="false">
-        <!-- social icons only (no names) -->
-        <a class="icon-btn social-icon" href="https://x.com/Brox__official" target="_blank" aria-label="X" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="icon-btn social-icon" href="http://t.me/brox_offi" target="_blank" aria-label="Telegram" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i></a>
-        <a class="icon-btn social-icon" href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==%E2%80%8E%E2%80%8F" target="_blank" aria-label="Instagram" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
-        <a class="icon-btn social-icon" href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank" aria-label="TikTok" rel="noopener noreferrer"><i class="fa-brands fa-tiktok"></i></a>
-        <button id="openPanel" class="menu-btn" aria-expanded="false" aria-controls="infoPanel">Info</button>
-      </div>
-    </div>
+    <h1>BROX</h1>
+    <button onclick="openPopup()">More Info</button>
   </header>
 
-  <main>
-    <div class="container hero-wrap" role="region" aria-label="Hero section">
-      <div class="left" data-reveal>
-        <span class="kicker" aria-hidden="true">Community • Pre-Launch</span>
-        <h1 id="hero-title">Born in Fire — <span style="color:var(--gold)">$BROX</span></h1>
-        <p class="lead">BROX is community-driven and currently in <strong>pre-launch</strong>. The token is <strong>not live yet</strong> — coming soon. Join the community for priority access and airdrop details.</p>
-
-        <div class="cta" role="group" aria-label="Primary actions">
-          <a class="btn primary" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer">Join Telegram</a>
-          <a class="btn ghost" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer">Follow</a>
-          <button id="buyNow" class="btn ghost disabled" aria-disabled="true" title="Token not live yet">Buy Now (Coming Soon)</button>
-          <button id="joinWait" class="btn ghost">Join Waitlist</button>
-        </div>
-
-        <div class="meta" aria-hidden="false">
-          <div class="m"><small>Pre-Launch</small><strong>Not Live</strong></div>
-          <div class="m"><small>Launch Window</small><strong>Soon</strong></div>
-          <div class="m"><small>Community</small><strong id="communityCount">—</strong></div>
-        </div>
-      </div>
-
-      <div class="mascot-wrap" data-reveal>
-        <!-- local filename you confirmed; fallback to hosted if missing -->
-        <img id="mascotImg" class="mascot" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX Mascot">
-      </div>
-    </div>
-  </main>
-
-  <!-- Tokenomics -->
-  <section id="tokenomics" class="container" data-reveal>
-    <h2 style="font-family:Orbitron,monospace;color:var(--lava);margin-bottom:.6rem">Tokenomics</h2>
-    <div class="card token-grid" role="region" aria-label="Tokenomics preview">
-      <div>
-        <p style="color:var(--muted)">Preview distribution. This is a pre-launch allocation and can be finalized by community governance.</p>
-        <div style="display:flex;gap:1rem;align-items:center">
-          <div style="flex:1">
-            <!-- small legend + bars -->
-            <div class="legend">
-              <div style="display:flex;gap:.6rem;align-items:center"><span style="width:14px;height:14px;background:linear-gradient(90deg,#ff6b35,#ff9f1c);display:inline-block;border-radius:4px"></span> Community — <strong>99%</strong></div>
-              <div style="display:flex;gap:.6rem;align-items:center"><span style="width:14px;height:14px;background:#ffd166;border-radius:4px;display:inline-block"></span> Team — <strong>1%</strong></div>
-              <div style="color:var(--muted);font-size:.95rem;margin-top:.5rem">Liquidity & trading driven by community — full decentralization of liquidity decisions.</div>
-            </div>
-          </div>
-
-          <div style="width:320px">
-            <!-- double circle emphasizing liquidity -->
-            <div class="liquidity-circle" aria-hidden="true">
-              <div class="circle-outer" aria-hidden="true">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-                  <!-- outer ring (100%) -->
-                  <circle cx="50" cy="50" r="40" stroke="#2b2b2b" stroke-width="10" fill="none"></circle>
-                  <!-- highlight arc for 99% (almost full) -->
-                  <circle cx="50" cy="50" r="40" stroke="url(#g1)" stroke-width="10" fill="none" stroke-dasharray="99 1" stroke-linecap="round" transform="rotate(-90 50 50)"></circle>
-                  <defs>
-                    <linearGradient id="g1" x1="0%" x2="100%">
-                      <stop offset="0%" stop-color="#ff6b35"/>
-                      <stop offset="100%" stop-color="#ffd166"/>
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-              <div class="circle-inner">99%</div>
-            </div>
-            <div class="liquidity-note">Community 99% — Team 1% • Liquidity decisions driven by community</div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <section class="hero">
+    <img src="brox.png" alt="BROX Logo">
+    <h2>BROX Coin</h2>
+    <p>The next big memecoin is coming soon. 100% community-powered.</p>
   </section>
 
-  <!-- Roadmap -->
-  <section id="roadmap" class="container" data-reveal>
-    <h2 style="font-family:Orbitron,monospace;color:var(--lava);margin-bottom:.6rem">Roadmap (Pre-Launch)</h2>
-    <div class="card timeline" role="list">
-      <div class="row" role="listitem"><div class="bullet"></div><div class="content"><strong>Phase 1 — Community</strong><div style="color:var(--muted);margin-top:.4rem">Website, social channels, airdrops & community incentives.</div></div></div>
-      <div class="row" role="listitem"><div class="bullet"></div><div class="content"><strong>Phase 2 — Beta</strong><div style="color:var(--muted);margin-top:.4rem">Closed testing, liquidity pools, audits.</div></div></div>
-      <div class="row" role="listitem"><div class="bullet"></div><div class="content"><strong>Phase 3 — Launch</strong><div style="color:var(--muted);margin-top:.4rem">Verified contract, guides, initial listings.</div></div></div>
-    </div>
+  <section class="tokenomics">
+    <div class="circle"></div>
+    <h3>Tokenomics</h3>
+    <p>1% Team</p>
+    <p>99% Community / Trading</p>
+    <p>Liquidity relies on the community</p>
   </section>
 
-  <!-- community -->
-  <section id="community" class="container" data-reveal>
-    <h2 style="font-family:Orbitron,monospace;color:var(--lava);margin-bottom:.6rem">Join the Community</h2>
-    <p style="color:var(--muted)">Be first to know about airdrops and launch windows. Active members get priority.</p>
-
-    <div style="display:flex;gap:1rem;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:1rem">
-      <div class="social-bar" aria-hidden="false">
-        <a class="social-icon" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="social-icon" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        <a class="social-icon" href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==%E2%80%8E%E2%80%8F" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a class="social-icon" href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-        <a class="social-icon" href="#" target="_blank" rel="noopener noreferrer" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
-      </div>
-
-      <form id="subscribeForm" aria-label="Subscribe form">
-        <input id="emailInput" type="email" placeholder="Your email (for launch updates)" required>
-        <button class="btn primary" type="submit">Notify Me</button>
-      </form>
-    </div>
-
-    <div id="subscribeMsg" role="status" aria-live="polite" style="margin-top:.8rem;color:var(--muted);display:none"></div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" class="container" data-reveal>
-    <h2 style="font-family:Orbitron,monospace;color:var(--lava);margin-bottom:.6rem">FAQ</h2>
-    <div class="card">
-      <div style="margin-bottom:.6rem"><strong>Is BROX launched?</strong><div style="color:var(--muted)">Not yet — BROX is in pre-launch. Follow official channels for launch updates.</div></div>
-      <div style="margin-bottom:.6rem"><strong>How can I buy?</strong><div style="color:var(--muted)">A step-by-step guide and verified contract address will be published at launch. Do not trust unofficial addresses.</div></div>
-      <div style="margin-bottom:.6rem"><strong>Is there an audit?</strong><div style="color:var(--muted)">An external audit is planned and will be shared before full launch.</div></div>
+  <section class="socials">
+    <h3>Join the Community</h3>
+    <div class="icons">
+      <a href="https://x.com/Brox__official" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733635.png" alt="X"></a>
+      <a href="http://t.me/brox_offi" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"></a>
+      <a href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram"></a>
+      <a href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
     </div>
   </section>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> BROX — Pre-Launch. All rights reserved.<br>
-      This website is informational. BROX token is not live yet. Always verify official channels.
-    </div>
+    © 2025 BROX Coin. Community-driven project.
   </footer>
 
-  <!-- Info panel toggled from top -->
-  <div class="panel-back" id="panelBack" aria-hidden="true">
-    <aside id="infoPanel" class="info-panel" role="dialog" aria-modal="false" aria-labelledby="infoTitle" style="display:none">
-      <h4 id="infoTitle">Quick Info</h4>
-      <p><strong>Vision:</strong> Build a fun, community-first meme token with community-controlled liquidity and fair distribution.</p>
-      <p><strong>Distribution:</strong> Community <strong>99%</strong> • Team <strong>1%</strong> — liquidity decisions community-driven.</p>
-      <p><strong>Status:</strong> Pre-Launch — Coming Soon (no token available yet).</p>
-      <div style="display:flex;gap:.6rem;margin-top:.6rem;justify-content:flex-end">
-        <a class="icon-btn" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-        <a class="icon-btn" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
-      </div>
-    </aside>
-  </div>
-
-  <!-- Waitlist modal -->
-  <div id="modal" class="modal-back" role="dialog" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="modalTitle" aria-modal="true">
-      <h3 id="modalTitle">Token Not Live Yet</h3>
-      <p style="color:var(--muted)">BROX is currently in pre-launch and not available to buy. Subscribe to the waitlist to receive launch alerts and verified instructions.</p>
-
-      <form id="waitForm" style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:.6rem">
-        <input id="waitEmail" type="email" placeholder="your@email.com" required style="min-width:200px;padding:.6rem .8rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff">
-        <button class="btn primary" type="submit">Join Waitlist</button>
-        <button class="btn ghost" id="modalClose" type="button">Close</button>
-      </form>
-      <div id="waitMsg" role="status" aria-live="polite" style="margin-top:.6rem;color:var(--muted);display:none"></div>
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h2>About BROX</h2>
+      <p>Supply: 100% Community</p>
+      <p>Team: 1%</p>
+      <p>Trading: 99%</p>
+      <p>Liquidity: Relies on the community</p>
+      <button onclick="closePopup()">Close</button>
     </div>
   </div>
 
   <script>
-    // set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // particles (embers)
-    (function(){
-      const canvas = document.getElementById('particles');
-      if(!canvas) return;
-      const ctx = canvas.getContext('2d'); let W=0,H=0,parts=[];
-      function resize(){ const dpr=Math.min(2,window.devicePixelRatio||1); canvas.width=Math.floor(window.innerWidth*dpr); canvas.height=Math.floor(window.innerHeight*dpr); canvas.style.width=window.innerWidth+'px'; canvas.style.height=window.innerHeight+'px'; ctx.setTransform(dpr,0,0,dpr,0,0); W=window.innerWidth; H=window.innerHeight }
-      function rand(a,b){return Math.random()*(b-a)+a}
-      function create(){ parts = Array.from({length:Math.floor(Math.min(120,Math.max(30,W/8)))}, ()=>({x:rand(0,W),y:rand(0,H),r:rand(0.6,3.2),vx:rand(-0.12,0.12),vy:rand(-0.9,-0.2),alpha:rand(0.12,0.9),h:rand(18,42)})) }
-      function draw(){ ctx.clearRect(0,0,W,H); parts.forEach(p=>{ p.x+=p.vx; p.y+=p.vy; if(p.y<-12)p.y=H+12; if(p.x<-20)p.x=W+20; if(p.x>W+20)p.x=-20; const g = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8); g.addColorStop(0,`rgba(255,${110 + (p.h-18)},70,${p.alpha})`); g.addColorStop(0.5,`rgba(255,90,55,${p.alpha*0.6})`); g.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle=g; ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill(); }); requestAnimationFrame(draw) }
-      window.addEventListener('resize', ()=>{ resize(); create(); }); resize(); create(); draw();
-    })();
-
-    // mascot fallback + parallax
-    (function(){
-      const img = document.getElementById('mascotImg');
-      img.addEventListener('error', ()=>{ img.src = 'https://i.ibb.co/4tBkQ8y/brox-mascot.png'; });
-      window.addEventListener('mousemove', (e)=>{
-        const w=window.innerWidth, h=window.innerHeight; const mx=(e.clientX-w/2)/(w/2); const my=(e.clientY-h/2)/(h/2);
-        img.style.transform = `translate(${mx*8}px, ${my*6}px) scale(${1+Math.abs(mx)/80})`;
-      });
-    })();
-
-    // reveal on scroll
-    (function(){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-          if(entry.isIntersecting){ entry.target.classList.add('visible'); io.unobserve(entry.target); }
-        });
-      },{threshold:0.12});
-      document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-      // mark hero children for reveal
-      document.querySelectorAll('.left, .mascot-wrap, section').forEach((el)=>el.setAttribute('data-reveal',''));
-    })();
-
-    // community counter
-    (function(){ const el = document.getElementById('communityCount'); let n = 215; el.textContent = n + 'K'; setInterval(()=>{ n += Math.floor(Math.random()*2); el.textContent = n + 'K'; }, 9000); })();
-
-    // info panel toggle
-    (function(){
-      const open = document.getElementById('openPanel'), panelBack = document.getElementById('panelBack'), panel = document.getElementById('infoPanel');
-      open.addEventListener('click', ()=>{
-        const expanded = open.getAttribute('aria-expanded') === 'true';
-        open.setAttribute('aria-expanded', String(!expanded));
-        if(!expanded){ panel.style.display='block'; panelBack.style.display='block'; panelBack.setAttribute('aria-hidden','false'); } else { panel.style.display='none'; panelBack.style.display='none'; panelBack.setAttribute('aria-hidden','true'); }
-      });
-      panelBack.addEventListener('click', (e)=>{ if(e.target === panelBack){ panel.style.display='none'; panelBack.style.display='none'; panelBack.setAttribute('aria-hidden','true'); open.setAttribute('aria-expanded','false'); }});
-    })();
-
-    // waitlist modal + subscribe
-    (function(){
-      const joinWait = document.getElementById('joinWait'), modal = document.getElementById('modal'), waitForm = document.getElementById('waitForm'), waitMsg = document.getElementById('waitMsg'), modalClose = document.getElementById('modalClose'), buyNow = document.getElementById('buyNow');
-      function openModal(){ modal.style.display='flex'; modal.setAttribute('aria-hidden','false'); }
-      function closeModal(){ modal.style.display='none'; modal.setAttribute('aria-hidden','true'); waitMsg.style.display='none'; }
-      joinWait && joinWait.addEventListener('click', openModal);
-      buyNow && buyNow.addEventListener('click', openModal);
-      modalClose && modalClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
-
-      if(waitForm){
-        waitForm.addEventListener('submit', (e)=>{
-          e.preventDefault();
-          const val = document.getElementById('waitEmail').value.trim();
-          if(!val || !/.+@.+\..+/.test(val)){ waitMsg.style.display='block'; waitMsg.textContent='Enter a valid email.'; return; }
-          try{
-            const key='brox_waitlist_v1'; const arr = JSON.parse(localStorage.getItem(key)||'[]');
-            if(!arr.includes(val)){ arr.push(val); localStorage.setItem(key, JSON.stringify(arr)); waitMsg.textContent='You are on the waitlist (saved locally).'; } else waitMsg.textContent='You are already on the waitlist.';
-            waitMsg.style.display='block';
-            setTimeout(()=>{ window.location.href = `mailto:contact@brox.io?subject=Waitlist Signup&body=Please add this email to waitlist: ${encodeURIComponent(val)}` }, 700);
-            document.getElementById('waitEmail').value='';
-          }catch(err){ waitMsg.style.display='block'; waitMsg.textContent='Could not save — try again.'; }
-        });
-      }
-    })();
-
-    // subscribe form
-    (function(){
-      const form = document.getElementById('subscribeForm'), input = document.getElementById('emailInput'), msg = document.getElementById('subscribeMsg');
-      if(form){
-        form.addEventListener('submit', (e)=>{
-          e.preventDefault();
-          const v = input.value.trim();
-          if(!v || !/.+@.+\..+/.test(v)){ msg.style.display='block'; msg.textContent='Please enter a valid email.'; return; }
-          try{
-            const key='brox_subs_v1'; const arr = JSON.parse(localStorage.getItem(key)||'[]');
-            if(!arr.includes(v)){ arr.push(v); localStorage.setItem(key, JSON.stringify(arr)); msg.textContent='Thanks — you are subscribed (saved locally).'; } else msg.textContent='You are already subscribed.';
-            msg.style.display='block';
-            setTimeout(()=>{ window.location.href = `mailto:contact@brox.io?subject=Subscribe&body=Please add this email to updates: ${encodeURIComponent(v)}` }, 700);
-            input.value='';
-          }catch(err){ msg.style.display='block'; msg.textContent='Could not save — try again.'; }
-        });
-      }
-    })();
+    function openPopup() {
+      document.getElementById("popup").style.display = "flex";
+    }
+    function closePopup() {
+      document.getElementById("popup").style.display = "none";
+    }
   </script>
 </body>
 </html>
