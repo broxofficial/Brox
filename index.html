@@ -1,167 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brox Official</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/framer-motion/dist/framer-motion.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BROX MemeCoin</title>
   <style>
     body {
       margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at center, #ff4500, #000000 80%);
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: #0d0d0d;
       color: white;
-      position: relative;
-      overflow-x: hidden;
+      text-align: center;
     }
-    /* particles */
-    #particles {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      pointer-events: none;
+    header {
+      padding: 20px;
+      background: linear-gradient(90deg, #ff4d00, #ff9900);
+      font-size: 28px;
+      font-weight: bold;
+      text-transform: uppercase;
     }
-    /* modal */
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center;
-      align-items: center;
+    .logo img {
+      width: 300px;
+      margin: 20px auto;
+      display: block;
     }
-    .modal.active { display: flex; }
+    .content {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 25px;
+      background: #ff4d00;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #ff9900;
+    }
+    footer {
+      margin-top: 40px;
+      padding: 15px;
+      background: #1a1a1a;
+      font-size: 14px;
+    }
   </style>
 </head>
-<body class="relative">
+<body>
 
-<!-- Particles -->
-<canvas id="particles"></canvas>
+  <header>
+    🚀 BROX MemeCoin 🚀
+  </header>
 
-<!-- Hero -->
-<section class="text-center py-20 relative z-10">
-  <h1 class="text-5xl font-extrabold mb-6">🔥 Brox Official 🔥</h1>
-  <p class="text-lg text-gray-200 mb-6">Born in Fire, Powered by Community</p>
-  <button id="openModal" class="bg-orange-600 hover:bg-orange-700 px-6 py-3 rounded-xl font-semibold transition">
-    Join Waitlist
-  </button>
-</section>
-
-<!-- Tokenomics -->
-<section class="py-20 relative z-10 text-center">
-  <h2 class="text-4xl font-bold mb-10">Tokenomics</h2>
-  <div class="max-w-md mx-auto">
-    <canvas id="tokenomicsChart"></canvas>
-    <div class="mt-6 space-y-2">
-      <p><span class="inline-block w-4 h-4 bg-orange-500 mr-2"></span>Community — <strong>99%</strong></p>
-      <p><span class="inline-block w-4 h-4 bg-gray-300 mr-2"></span>Team — <strong>1%</strong></p>
-    </div>
+  <div class="logo">
+    <img src="images/brox-mascot.png" alt="BROX Mascot">
   </div>
-</section>
 
-<!-- FAQ -->
-<section class="py-20 relative z-10 max-w-2xl mx-auto">
-  <h2 class="text-3xl font-bold mb-8 text-center">FAQ</h2>
-  <div class="space-y-4">
-    <div class="border border-gray-600 rounded-lg p-4 cursor-pointer" onclick="toggleFAQ(this)">
-      <div class="flex justify-between items-center">
-        <h3 class="font-semibold">What makes Brox unique?</h3>
-        <span>+</span>
-      </div>
-      <p class="hidden mt-2 text-gray-300">Brox is a community-driven meme coin with open liquidity and fair distribution.</p>
-    </div>
-    <div class="border border-gray-600 rounded-lg p-4 cursor-pointer" onclick="toggleFAQ(this)">
-      <div class="flex justify-between items-center">
-        <h3 class="font-semibold">How can I join?</h3>
-        <span>+</span>
-      </div>
-      <p class="hidden mt-2 text-gray-300">Simply follow our socials and join the waitlist to stay updated.</p>
-    </div>
+  <div class="content">
+    <h1>Welcome to BROX</h1>
+    <p>
+      The funniest and most explosive meme coin of the season! <br>
+      Born from chaos, powered by memes, and ready to moon 🌕🔥
+    </p>
+    <a href="https://t.me/YourTelegramLink" class="btn">Join Telegram</a>
+    <a href="https://twitter.com/YourTwitterLink" class="btn">Follow Twitter</a>
+    <a href="#" class="btn">Buy Now</a>
   </div>
-</section>
 
-<!-- Socials -->
-<section class="py-10 relative z-10 text-center">
-  <h2 class="text-2xl font-bold mb-6">Follow Us</h2>
-  <div class="flex justify-center space-x-6 text-3xl">
-    <a href="https://x.com/Brox__official" target="_blank">🐦</a>
-    <a href="http://t.me/brox_offi" target="_blank">💬</a>
-    <a href="https://tiktok.com/@brox__official" target="_blank">🎵</a>
-    <a href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==" target="_blank">📸</a>
-  </div>
-</section>
-
-<!-- Footer -->
-<footer class="py-6 text-center text-gray-400 relative z-10">
-  © 2025 Brox Official — All Rights Reserved
-</footer>
-
-<!-- Modal -->
-<div id="emailModal" class="modal">
-  <div class="bg-gray-900 p-8 rounded-xl max-w-md w-full text-center">
-    <h3 class="text-2xl font-bold mb-4">Join Waitlist</h3>
-    <input type="email" placeholder="Enter your email" class="w-full p-3 rounded mb-4 text-black"/>
-    <button id="closeModal" class="bg-orange-600 px-6 py-2 rounded-xl hover:bg-orange-700">Submit</button>
-  </div>
-</div>
-
-<script>
-  // Chart
-  const ctx = document.getElementById('tokenomicsChart');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Community', 'Team'],
-      datasets: [{
-        data: [99, 1],
-        backgroundColor: ['#f97316','#d1d5db'],
-        borderWidth: 0
-      }]
-    },
-    options: { cutout: '70%' }
-  });
-
-  // FAQ toggle
-  function toggleFAQ(el) {
-    const p = el.querySelector('p');
-    const span = el.querySelector('span');
-    p.classList.toggle('hidden');
-    span.textContent = p.classList.contains('hidden') ? '+' : '–';
-  }
-
-  // Modal
-  const modal = document.getElementById('emailModal');
-  document.getElementById('openModal').onclick = () => modal.classList.add('active');
-  document.getElementById('closeModal').onclick = () => modal.classList.remove('active');
-
-  // Particles
-  const canvas = document.getElementById('particles');
-  const ctx2 = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-  let particles = [];
-  for(let i=0;i<80;i++){
-    particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,s:Math.random()*2+1,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5});
-  }
-  function draw(){
-    ctx2.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-      ctx2.beginPath();
-      ctx2.arc(p.x,p.y,p.s,0,2*Math.PI);
-      ctx2.fillStyle="rgba(255,100,0,0.7)";
-      ctx2.fill();
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>canvas.width) p.vx*=-1;
-      if(p.y<0||p.y>canvas.height) p.vy*=-1;
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-</script>
+  <footer>
+    © 2025 BROX MemeCoin - All Rights Reserved
+  </footer>
 
 </body>
 </html>
