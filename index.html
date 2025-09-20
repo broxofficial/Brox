@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,75 +7,87 @@
   <style>
     body {
       margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
-      background: #0d0d0d;
+      background-color: #000;
       color: white;
       text-align: center;
     }
+
     header {
+      background: linear-gradient(90deg, #ff4d00, #ff7300);
       padding: 20px;
-      background: linear-gradient(90deg, #ff4d00, #ff9900);
       font-size: 28px;
       font-weight: bold;
-      text-transform: uppercase;
     }
-    .logo img {
-      width: 300px;
+
+    header span {
+      margin: 0 10px;
+    }
+
+    img {
+      max-width: 300px;
       margin: 20px auto;
       display: block;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff4d00;
     }
-    .content {
-      max-width: 800px;
-      margin: auto;
-      padding: 20px;
+
+    h1 {
+      font-size: 32px;
+      margin: 20px 0 10px;
     }
+
+    p {
+      font-size: 18px;
+      margin: 10px auto 30px;
+      max-width: 500px;
+    }
+
     .btn {
       display: inline-block;
-      margin: 15px;
-      padding: 12px 25px;
+      margin: 10px;
+      padding: 15px 25px;
       background: #ff4d00;
       color: white;
       text-decoration: none;
       font-weight: bold;
-      border-radius: 8px;
-      transition: 0.3s;
+      border-radius: 10px;
+      transition: background 0.3s;
     }
+
     .btn:hover {
-      background: #ff9900;
+      background: #ff7300;
     }
+
     footer {
       margin-top: 40px;
       padding: 15px;
-      background: #1a1a1a;
       font-size: 14px;
+      background: #111;
     }
   </style>
 </head>
 <body>
-
   <header>
-    🚀 BROX MemeCoin 🚀
+    🚀 BROX MEMECOIN 🚀
   </header>
 
-  <div class="logo">
-    <img src="images/brox-mascot.png" alt="BROX Mascot">
-  </div>
+  <!-- صورتك -->
+  <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX Mascot">
 
-  <div class="content">
-    <h1>Welcome to BROX</h1>
-    <p>
-      The funniest and most explosive meme coin of the season! <br>
-      Born from chaos, powered by memes, and ready to moon 🌕🔥
-    </p>
-    <a href="https://t.me/YourTelegramLink" class="btn">Join Telegram</a>
-    <a href="https://twitter.com/YourTwitterLink" class="btn">Follow Twitter</a>
-    <a href="#" class="btn">Buy Now</a>
-  </div>
+  <h1>Welcome to BROX</h1>
+  <p>
+    The funniest and most explosive meme coin of the season! <br>
+    Born from chaos, powered by memes, and ready to moon 🌕🔥
+  </p>
+
+  <!-- الأزرار -->
+  <a class="btn" href="http://t.me/brox_offi" target="_blank">Join Telegram</a>
+  <a class="btn" href="https://x.com/Brox__official" target="_blank">Follow Twitter</a>
+  <a class="btn" href="#">Buy Now</a>
 
   <footer>
     © 2025 BROX MemeCoin - All Rights Reserved
   </footer>
-
 </body>
 </html>
