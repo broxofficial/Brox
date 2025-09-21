@@ -1,211 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BROX — Official</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  body{font-family:'Segoe UI',Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6;}
-  a{text-decoration:none;color:inherit;}
-
-  header{
-    position:fixed;top:0;left:0;width:100%;
-    display:flex;justify-content:space-between;align-items:center;
-    padding:18px 40px;z-index:1000;
-    background:rgba(0,0,0,0.55);backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,69,0,0.4);
-  }
-  .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
-  .menu-btn{font-size:2rem;cursor:pointer;transition:.3s;}
-
-  .side-menu{
-    position:fixed;top:0;right:-280px;height:100%;width:260px;
-    background:rgba(15,15,15,0.97);backdrop-filter:blur(15px);
-    padding-top:90px;transition:.35s;z-index:2000;
-    box-shadow:-5px 0 25px rgba(255,69,0,0.4);
-  }
-  .side-menu.open{right:0;}
-  .side-menu a{
-    display:block;padding:20px 28px;font-size:1.2rem;
-    transition:.25s;color:#fff;font-weight:500;
-  }
-  .side-menu a:hover{background:linear-gradient(135deg,#ff4500,#ff6633);border-radius:8px;}
-
-  .hero{
-    height:100vh;display:flex;flex-direction:column;justify-content:center;
-    align-items:center;text-align:center;padding-top:100px;position:relative;
-  }
-  .hero img{
-    width:200px;height:200px;border-radius:50%;
-    box-shadow:0 0 60px rgba(255,69,0,1),0 0 100px rgba(255,100,0,0.6);
-    animation:float 4s ease-in-out infinite;
-  }
-  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-  .hero h1{margin-top:28px;font-size:3.5rem;text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;}
-  .hero p{max-width:650px;margin-top:15px;font-size:1.25rem;color:#ccc;}
-  .hero button{
-    margin-top:35px;padding:16px 40px;border:none;border-radius:50px;
-    background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
-    font-size:1.1rem;font-weight:bold;cursor:pointer;
-    box-shadow:0 0 25px rgba(255,69,0,0.9);
-    transition:.3s;
-  }
-  .hero button:hover{transform:scale(1.08);box-shadow:0 0 40px rgba(255,69,0,1);}
-
-  .teaser{
-    padding:120px 20px;text-align:center;
-    background:linear-gradient(135deg,#141414,#0d0d0d);
-    opacity:0;transform:translateY(50px);transition:all 1s ease;
-  }
-  .teaser.visible{opacity:1;transform:translateY(0);}
-  .teaser img{width:340px;border-radius:22px;margin-bottom:28px;box-shadow:0 0 35px rgba(255,69,0,0.8);}
-  .teaser h2{
-    font-size:2.8rem;color:#ff4500;
-    text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;
-    animation:pulse 2s infinite alternate;
-  }
-  @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.1)}}
-
-  .allocation{padding:100px 20px;text-align:center;}
-  .allocation h2{font-size:2.5rem;margin-bottom:40px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
-  .alloc-visual{display:flex;justify-content:center;margin-bottom:40px;}
-  .alloc-cards{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:25px;max-width:950px;margin:auto;
-  }
-  .card{
-    background:rgba(30,30,30,0.8);padding:28px;border-radius:18px;
-    box-shadow:0 0 25px rgba(255,69,0,0.4);transition:.3s;
-  }
-  .card:hover{transform:translateY(-8px);}
-  .card h3{color:#ff4500;margin-bottom:12px;font-size:1.7rem;}
-
-  .roadmap{padding:100px 20px;text-align:center;}
-  .roadmap h2{font-size:2.5rem;margin-bottom:35px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
-  .steps{max-width:750px;margin:auto;text-align:left;display:grid;gap:28px;}
-  .step{
-    padding:25px;border-left:5px solid #ff4500;
-    background:rgba(35,35,35,0.8);border-radius:14px;
-    box-shadow:0 0 25px rgba(255,69,0,0.4);
-    opacity:0;transform:translateY(50px);transition:.9s ease;
-  }
-  .step.visible{opacity:1;transform:translateY(0);}
-
-  .modal{
-    display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
-    background:rgba(0,0,0,0.75);justify-content:center;align-items:center;
-  }
-  .modal-content{
-    background:rgba(25,25,25,0.95);padding:35px;border-radius:18px;
-    text-align:center;width:90%;max-width:420px;
-    transform:scale(.8);opacity:0;transition:.4s;
-    box-shadow:0 0 35px rgba(255,69,0,0.8);
-    backdrop-filter:blur(8px);
-  }
-  .modal.show .modal-content{transform:scale(1);opacity:1;}
-  .modal-content h3{margin-bottom:18px;color:#ff4500;font-size:1.5rem;}
-  .modal-content input{
-    width:100%;padding:14px;margin-bottom:18px;border:none;border-radius:10px;
-    background:rgba(0,0,0,0.3);color:#fff;text-align:center;
-  }
-  .modal-content input:focus{outline:none;box-shadow:0 0 12px #ff4500;}
-  .modal-content button{
-    padding:14px 28px;border:none;border-radius:10px;
-    background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
-    cursor:pointer;font-weight:bold;
-    box-shadow:0 0 20px rgba(255,69,0,0.9);
-    transition:.3s;
-  }
-  .modal-content button:hover{transform:scale(1.05);box-shadow:0 0 30px #ff4500;}
-
-  footer{
-    padding:45px 20px;text-align:center;
-    background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
-    box-shadow:0 -6px 25px rgba(255,69,0,0.4);
-  }
-  .socials a{
-    margin:0 14px;font-size:2rem;color:#fff;transition:.3s;
-  }
-  .socials a:hover{color:#ff4500;transform:scale(1.25);}
-  footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
-
-  #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-
-  @media(max-width:768px){
-    .hero h1{font-size:2.4rem;}
-    .hero p{font-size:1rem;}
-    .teaser img{width:250px;}
-    .teaser h2{font-size:2.2rem;}
-  }
-</style>
-</head>
-<body>
-<canvas id="particles"></canvas>
-
-<header>
-  <div class="logo">BROX</div>
-  <div class="menu-btn" id="menuBtn">☰</div>
-</header>
-
-<div class="side-menu" id="sideMenu">
-  <a href="#hero">Home</a>
-  <a href="#teaser">Teaser</a>
-  <a href="#allocation">Allocation</a>
-  <a href="#roadmap">Roadmap</a>
-  <a href="#footer">Contact</a>
-</div>
-
-<section class="hero" id="hero">
-  <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-  <h1>🔥 Welcome to BROX 🔥</h1>
-  <p>The meme revolution begins. Powered by community.</p>
-  <button onclick="openModal()">Early Access</button>
-</section>
-
-<section class="teaser" id="teaser">
-  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
-  <h2>🚀 Coming Soon...</h2>
-</section>
-
-<section class="allocation" id="allocation">
-  <h2>Token Allocation</h2>
-  <div class="alloc-visual"><canvas id="allocChart" width="250" height="250"></canvas></div>
-  <div class="alloc-cards">
-    <div class="card"><h3>99%</h3><p>Community</p></div>
-    <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
-  </div>
-</section>
-
-<section class="roadmap" id="roadmap">
-  <h2>Roadmap</h2>
-  <div class="steps">
-    <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
-    <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-    <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
-    <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
-  </div>
-</section>
-
-<footer id="footer">
-  <div class="socials">
-    <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-    <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
-  </div>
-  <p>© 2025 BROX. All Rights Reserved.</p>
-</footer>
-
-<div class="modal" id="myModal" onclick="closeModal(event)">
-  <div class="modal-content">
-    <h3>Get Notified on Launch 🚀</h3>
-    <input type="email" placeholder="Enter your email">
-    <button onclick="closeModal()">Submit</button>
-  </div>
-</div>
-
 <script>
   // ===== Menu =====
   const menuBtn = document.getElementById("menuBtn");
@@ -216,6 +8,7 @@
     menuBtn.textContent = sideMenu.classList.contains("open") ? "×" : "☰";
   };
 
+  // غلق القائمة عند الضغط على رابط
   document.querySelectorAll(".side-menu a").forEach(link => {
     link.onclick = () => {
       sideMenu.classList.remove("open");
@@ -223,7 +16,8 @@
     };
   });
 
-  document.addEventListener("click", (e) => {
+  // غلق القائمة عند الضغط خارجها
+  document.addEventListener("click", e => {
     if (!sideMenu.contains(e.target) && e.target !== menuBtn) {
       sideMenu.classList.remove("open");
       menuBtn.textContent = "☰";
@@ -231,38 +25,52 @@
   });
 
   // ===== Modal =====
-  function openModal(){
-    const modal = document.getElementById("myModal");
+  const modal = document.getElementById("myModal");
+  function openModal() {
     modal.style.display = "flex";
-    setTimeout(()=>modal.classList.add("show"),10);
-  }
-  function closeModal(event){
-    const modal = document.getElementById("myModal");
-    if(event && event.target!==modal && event.target.tagName!=="BUTTON") return;
-    modal.classList.remove("show");
-    setTimeout(()=>modal.style.display="none",300);
+    setTimeout(() => modal.classList.add("show"), 10);
   }
 
-  // ===== Chart =====
-  const canvas=document.getElementById("allocChart"),ctx=canvas.getContext("2d");
-  const data=[99,1],colors=["#ff4500","#333"];let currentPercent=0;
+  function closeModal(event) {
+    // إذا كان الضغط خارج المودال أو على الزر، يغلق المودال
+    if (!event || event.target === modal || event.target.tagName === "BUTTON") {
+      modal.classList.remove("show");
+      setTimeout(() => (modal.style.display = "none"), 300);
+    }
+  }
+
+  // ===== Chart Animation =====
+  const canvas = document.getElementById("allocChart"), ctx = canvas.getContext("2d");
+  const data = [99,1], colors = ["#ff4500","#333"]; let currentPercent = 0;
   function drawChart(percent){
     ctx.clearRect(0,0,250,250);
-    let start=-Math.PI/2,remaining=(percent/100)*2*Math.PI;
+    let start=-Math.PI/2, remaining=(percent/100)*2*Math.PI;
     for(let i=0;i<data.length;i++){
       const slice=(data[i]/100)*2*Math.PI;
       const draw=Math.min(slice,remaining);
-      ctx.beginPath();ctx.moveTo(125,125);
-      ctx.arc(125,125,120,start,start+draw);ctx.closePath();
-      ctx.fillStyle=colors[i];ctx.fill();
-      start+=slice;remaining-=draw;if(remaining<=0)break;
+      ctx.beginPath(); ctx.moveTo(125,125);
+      ctx.arc(125,125,120,start,start+draw); ctx.closePath();
+      ctx.fillStyle=colors[i]; ctx.fill();
+      start+=slice; remaining-=draw; if(remaining<=0) break;
     }
-    ctx.beginPath();ctx.arc(125,125,70,0,2*Math.PI);
-    ctx.fillStyle="#141414";ctx.fill();
-    ctx.fillStyle="#fff";ctx.font="20px Arial";ctx.textAlign="center";
+    ctx.beginPath(); ctx.arc(125,125,70,0,2*Math.PI); ctx.fillStyle="#141414"; ctx.fill();
+    ctx.fillStyle="#fff"; ctx.font="20px Arial"; ctx.textAlign="center";
     ctx.fillText("99% / 1%",125,130);
   }
-  (function animate(){if(currentPercent<100){currentPercent++;drawChart(currentPercent);requestAnimationFrame(animate);}})();
+  (function animate(){ if(currentPercent<100){ currentPercent++; drawChart(currentPercent); requestAnimationFrame(animate); } })();
 
-  // ===== Scroll reveal =====
-  function
+  // ===== Scroll Reveal =====
+  function revealOnScroll(){
+    document.querySelectorAll('.teaser,.step').forEach(el=>{
+      if(el.getBoundingClientRect().top<window.innerHeight-50) el.classList.add('visible');
+    });
+  }
+  window.addEventListener("scroll",revealOnScroll); revealOnScroll();
+
+  // ===== Particles =====
+  const particles = document.getElementById("particles"), ctxP = particles.getContext("2d");
+  let w,h,stars=[];
+  function resize(){ w=particles.width=innerWidth; h=particles.height=innerHeight; stars=[]; for(let i=0;i<100;i++){ stars.push({x:Math.random()*w, y:Math.random()*h, r:Math.random()*2.2, dx:(Math.random()-.5), dy:(Math.random()-.5)}) } }
+  function draw(){ ctxP.clearRect(0,0,w,h); ctxP.fillStyle="#ff4500"; stars.forEach(s=>{ ctxP.beginPath(); ctxP.arc(s.x,s.y,s.r,0,2*Math.PI); ctxP.fill(); s.x+=s.dx; s.y+=s.dy; if(s.x<0||s.x>w)s.dx*=-1; if(s.y<0||s.y>h)s.dy*=-1; }); requestAnimationFrame(draw); }
+  window.onresize=resize; resize(); draw();
+</script>
