@@ -1,1017 +1,535 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BROX - Born in Fire | Pre-Launch Cryptocurrency</title>
-    <meta name="description" content="BROX - The volcanic cryptocurrency born in fire. Join our community before launch. 99% Community, 1% Team.">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="BROX - Born in Fire">
-    <meta property="og:description" content="The volcanic cryptocurrency born in fire. Pre-Launch - Join the waitlist now!">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="./assets/Picsart_25-09-20_12-05-00-500.png">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔥</text></svg>">
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-orange: #ff6b35;
-            --primary-red: #dc2626;
-            --dark-bg: #0a0a0a;
-            --darker-bg: #050505;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --card-border: rgba(255, 107, 53, 0.2);
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --text-muted: #666666;
-            --volcanic-gradient: linear-gradient(135deg, #ff6b35 0%, #dc2626 50%, #991b1b 100%);
-            --glow-orange: 0 0 30px rgba(255, 107, 53, 0.5);
-            --glow-red: 0 0 30px rgba(220, 38, 38, 0.5);
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
-        }
-
-        .embers {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .ember {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: var(--volcanic-gradient);
-            border-radius: 50%;
-            opacity: 0;
-            animation: emberFloat 8s infinite ease-in-out;
-        }
-
-        @keyframes emberFloat {
-            0% {
-                transform: translateY(100vh) scale(0);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 0.8;
-            }
-            100% {
-                transform: translateY(-100px) scale(1);
-                opacity: 0;
-            }
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(10, 10, 10, 0.9);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--card-border);
-            z-index: 1000;
-            padding: 1rem 0;
-            transition: var(--transition);
-        }
-
-        .header.scrolled {
-            background: rgba(5, 5, 5, 0.95);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-family: 'Orbitron', monospace;
-            font-size: 2rem;
-            font-weight: 900;
-            background: var(--volcanic-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-shadow: var(--glow-orange);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.8));
-        }
-
-        .nav-controls {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .coming-soon-btn {
-            padding: 0.8rem 1.5rem;
-            background: var(--volcanic-gradient);
-            border: none;
-            border-radius: 25px;
-            color: white;
-            font-weight: 600;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .coming-soon-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--glow-orange);
-        }
-
-        .menu-toggle {
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            transition: var(--transition);
-            z-index: 1001;
-        }
-
-        .menu-toggle:hover {
-            color: var(--primary-orange);
-            transform: scale(1.1);
-        }
-
-        /* Full Screen Menu */
-        .fullscreen-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(5, 5, 5, 0.98);
-            backdrop-filter: blur(20px);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .fullscreen-menu.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .menu-close {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 2rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .menu-close:hover {
-            color: var(--primary-orange);
-            transform: scale(1.1);
-        }
-
-        .menu-items {
-            list-style: none;
-            text-align: center;
-        }
-
-        .menu-items li {
-            margin-bottom: 2rem;
-        }
-
-        .menu-items a {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 2rem;
-            font-weight: 600;
-            transition: var(--transition);
-            position: relative;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .menu-items a:hover {
-            color: var(--primary-orange);
-            text-shadow: var(--glow-orange);
-        }
-
-        .menu-items a::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: var(--volcanic-gradient);
-            transition: var(--transition);
-            transform: translateX(-50%);
-        }
-
-        .menu-items a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 6rem 2rem 4rem;
-            position: relative;
-        }
-
-        .mascot-container {
-            position: relative;
-            margin-bottom: 3rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .mascot-container:hover {
-            transform: scale(1.05);
-            filter: drop-shadow(0 0 30px rgba(255, 107, 53, 0.8));
-        }
-
-        .mascot-image {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary-orange);
-            box-shadow: var(--glow-orange);
-            position: relative;
-            z-index: 2;
-        }
-
-        .glow-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: var(--volcanic-gradient);
-            opacity: 0.3;
-            animation: glowPulse 3s ease-in-out infinite alternate;
-            z-index: 1;
-        }
-
-        @keyframes glowPulse {
-            0% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 0.3;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1.1);
-                opacity: 0.5;
-            }
-        }
-
-        .hero-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
-            background: var(--volcanic-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 1rem;
-            animation: titleGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes titleGlow {
-            0% {
-                filter: drop-shadow(0 0 20px rgba(255, 107, 53, 0.5));
-            }
-            100% {
-                filter: drop-shadow(0 0 40px rgba(255, 107, 53, 1));
-            }
-        }
-
-        .hero-subtitle {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
-            color: var(--text-secondary);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .pre-launch-badge {
-            display: inline-block;
-            padding: 0.5rem 1.5rem;
-            background: rgba(255, 107, 53, 0.1);
-            border: 1px solid var(--primary-orange);
-            border-radius: 25px;
-            color: var(--primary-orange);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2rem;
-            animation: badgeGlow 2s ease-in-out infinite alternate;
-        }
-
-        @keyframes badgeGlow {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
-            }
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border-radius: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: var(--transition);
-            cursor: pointer;
-            border: none;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            min-width: 150px;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background: var(--volcanic-gradient);
-            color: white;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--primary-orange);
-        }
-
-        .btn-secondary:hover {
-            background: var(--volcanic-gradient);
-            color: white;
-            transform: translateY(-3px);
-        }
-
-        /* Tokenomics Section */
-        .tokenomics {
-            padding: 6rem 2rem;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', monospace;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 900;
-            background: var(--volcanic-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 3rem;
-        }
-
-        .tokenomics-container {
-            max-width: 800px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .pie-chart-container {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .pie-chart {
-            width: 250px;
-            height: 250px;
-            border-radius: 50%;
-            background: conic-gradient(
-                from 0deg,
-                var(--primary-orange) 0deg 3.6deg,
-                var(--primary-red) 3.6deg 360deg
-            );
-            position: relative;
-            animation: pieRotate 10s linear infinite;
-            box-shadow: var(--glow-orange);
-        }
-
-        @keyframes pieRotate {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .pie-chart::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150px;
-            height: 150px;
-            background: var(--dark-bg);
-            border-radius: 50%;
-            border: 2px solid var(--primary-orange);
-        }
-
-        .pie-chart-center {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-        }
-
-        .pie-chart-center h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .tokenomics-breakdown {
-            text-align: left;
-        }
-
-        .breakdown-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background: var(--card-bg);
-            border-radius: 15px;
-            border: 1px solid var(--card-border);
-            transition: var(--transition);
-        }
-
-        .breakdown-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glow-orange);
-        }
-
-        .breakdown-color {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-        }
-
-        .community-color {
-            background: var(--primary-red);
-        }
-
-        .team-color {
-            background: var(--primary-orange);
-        }
-
-        .breakdown-text h4 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 0.5rem;
-        }
-
-        .breakdown-text p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-        }
-
-        /* Supply Section */
-        .supply {
-            padding: 4rem 2rem;
-            text-align: center;
-            background: rgba(255, 107, 53, 0.05);
-        }
-
-        .supply-info {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 3rem;
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            backdrop-filter: blur(20px);
-        }
-
-        .supply-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 2rem;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-        }
-
-        .supply-status {
-            font-size: 1.5rem;
-            color: var(--primary-orange);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0.5;
-            }
-        }
-
-        /* Roadmap Section */
-        .roadmap {
-            padding: 6rem 2rem;
-        }
-
-        .roadmap-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .roadmap-timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .roadmap-timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--volcanic-gradient);
-        }
-
-        .roadmap-item {
-            position: relative;
-            margin-bottom: 4rem;
-            padding-left: 3rem;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: var(--transition);
-        }
-
-        .roadmap-item.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .roadmap-item::before {
-            content: '';
-            position: absolute;
-            left: -0.7rem;
-            top: 1rem;
-            width: 1.5rem;
-            height: 1.5rem;
-            border-radius: 50%;
-            background: var(--volcanic-gradient);
-            box-shadow: var(--glow-orange);
-        }
-
-        .roadmap-item h3 {
-            font-family: 'Orbitron', monospace;
-            font-size: 1.5rem;
-            color: var(--primary-orange);
-            margin-bottom: 0.5rem;
-        }
-
-        .roadmap-item p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* How to Buy Section */
-        .how-to-buy {
-            padding: 6rem 2rem;
-            background: rgba(255, 107, 53, 0.05);
-        }
-
-        .steps-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .step-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            padding: 3rem 2rem;
-            text-align: center;
-            transition: var(--transition);
-            opacity: 0;
-            transform: translateY(50px);
-        }
-
-        .step-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .step-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--glow-orange);
-        }
-
-        .step-number {
-            display: inline-block;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--volcanic-gradient);
-            color: white;
-            font-size: 1.5rem;
-            font-weight: 700;
-            line-height: 60px;
-            margin-bottom: 1.5rem;
-        }
-
-        .step-card h3 {
-            font-family: 'Orbitron', monospace;
-            color: var(--text-primary);
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Modal Styles */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 2000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-        }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .modal-content {
-            background: var(--darker-bg);
-            border-radius: 20px;
-            border: 1px solid var(--card-border);
-            padding: 3rem;
-            max-width: 800px;
-            width: 90%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .modal-close:hover {
-            color: var(--primary-orange);
-            transform: scale(1.1);
-        }
-
-        .modal-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .modal-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            border: 1px solid var(--card-border);
-            padding: 2rem;
-            text-align: center;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .modal-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--glow-orange);
-        }
-
-        .modal-card h3 {
-            font-family: 'Orbitron', monospace;
-            color: var(--primary-orange);
-            margin-bottom: 1rem;
-        }
-
-        .modal-card p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Waitlist Modal */
-        .waitlist-form {
-            text-align: center;
-        }
-
-        .waitlist-form h2 {
-            font-family: 'Orbitron', monospace;
-            color: var(--primary-orange);
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--card-border);
-            border-radius: 10px;
-            background: var(--card-bg);
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary-orange);
-            box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
-        }
-
-        .success-message {
-            background: rgba(0, 212, 170, 0.1);
-            border: 1px solid #00d4aa;
-            color: #00d4aa;
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-            display: none;
-        }
-
-        /* Footer */
-        .footer {
-            padding: 4rem 2rem 2rem;
-            text-align: center;
-            border-top: 1px solid var(--card-border);
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            color: var(--text-primary);
-            text-decoration: none;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--volcanic-gradient);
-            transform: translateY(-3px);
-            box-shadow: var(--glow-orange);
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav {
-                padding: 0 1rem;
-            }
-
-            .hero {
-                padding: 4rem 1rem 2rem;
-            }
-
-            .mascot-image {
-                width: 150px;
-                height: 150px;
-            }
-
-            .glow-circle {
-                width: 200px;
-                height: 200px;
-            }
-
-            .tokenomics-container {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .pie-chart {
-                width: 200px;
-                height: 200px;
-            }
-
-            .roadmap-timeline {
-                padding-left: 1rem;
-            }
-
-            .roadmap-item {
-                padding-left: 2rem;
-            }
-
-            .steps-container {
-                grid-template-columns: 1fr;
-            }
-
-            .modal-content {
-                padding: 2rem;
-                margin: 1rem;
-            }
-
-            .social-links {
-                gap: 1rem;
-            }
-
-            .social-link {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-        }
-
-        /* Accessibility */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border: 0;
-        }
-
-        /* Focus styles */
-        button:focus,
-        a:focus,
-        input:focus {
-            outline: 2px solid var(--primary-orange);
-            outline-offset: 2px;
-        }
-
-        /* Reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BROX — Born in Fire (Pre-Launch)</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* ============================
+       CONFIG (change image name/path here)
+       Place your mascot image in the same folder as index.html
+       and update --mascot-image if needed (example: "assets/logo.png")
+    ============================ */
+    :root{
+      --mascot-image: "Picsart_25-09-20_12-05-00-500.png";
+      --bg-1: #050406;
+      --bg-2: #0f0c0c;
+      --lava1: #ff6b35;
+      --lava2: #ff2e00;
+      --accent: #ffd18a;
+      --muted: #9ea9b3;
+      --card: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.03);
+      --radius: 14px;
+      --maxw: 1200px;
+      --ease: cubic-bezier(.18,.9,.32,1);
+    }
+
+    /* Reset & base */
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#eaf8f4;background:linear-gradient(180deg,var(--bg-1),var(--bg-2));-webkit-font-smoothing:antialiased}
+    img{display:block;max-width:100%;height:auto}
+    a{color:inherit;text-decoration:none}
+
+    /* --- Animated volcanic background & embers --- */
+    .lava-bg{
+      position:fixed;inset:0;z-index:-4;pointer-events:none;
+      background:
+        radial-gradient(700px 420px at 10% 15%, rgba(255,107,53,0.06), transparent 10%),
+        radial-gradient(520px 320px at 85% 75%, rgba(255,46,0,0.04), transparent 12%),
+        linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      animation:lavaShift 14s ease-in-out infinite;
+    }
+    @keyframes lavaShift{0%{background-position:0% 0%,0% 100%,0 0}50%{background-position:6% 4%,-6% 96%,0 0}100%{background-position:0% 0%,0% 100%,0 0}}
+    .embers{position:fixed;inset:0;z-index:-3;pointer-events:none;opacity:0.35;background-image:
+      radial-gradient(circle at 10% 30%, rgba(255,140,0,0.06) 0 1px, transparent 2px),
+      radial-gradient(circle at 70% 80%, rgba(255,200,90,0.03) 0 1px, transparent 2px);
+      background-size:1200px 1200px;filter:blur(.4px);animation:embersMove 20s linear infinite}
+    @keyframes embersMove{from{transform:translateY(0)} to{transform:translateY(-30px)}}
+
+    /* --- Header --- */
+    header{
+      position:fixed;inset-inline:0;top:0;z-index:1200;padding:12px 18px;
+      backdrop-filter:blur(6px);background:linear-gradient(90deg, rgba(0,0,0,0.45), rgba(0,0,0,0.12));
+      border-bottom:1px solid rgba(255,255,255,0.02);
+    }
+    .nav{max-width:var(--maxw);margin:0 auto;padding:0 18px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .brand{font-family:Orbitron,monospace;font-size:1.05rem;color:var(--accent);letter-spacing:1px}
+    .header-actions{display:flex;gap:10px;align-items:center}
+
+    /* menu button */
+    .menu-toggle{width:48px;height:48px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);display:inline-grid;place-items:center;background:transparent;cursor:pointer;transition:all .28s var(--ease)}
+    .menu-toggle:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(255,46,0,0.08)}
+    .hamburger{position:relative;width:20px;height:12px}
+    .hamburger span{position:absolute;left:0;right:0;height:2px;background:var(--lava1);display:block;border-radius:2px;transition:transform .28s var(--ease),opacity .18s}
+    .hamburger span:nth-child(1){top:0}
+    .hamburger span:nth-child(2){top:5px}
+    .hamburger span:nth-child(3){top:10px}
+    .menu-toggle.open .hamburger span:nth-child(1){transform:translateY(5px) rotate(45deg)}
+    .menu-toggle.open .hamburger span:nth-child(2){opacity:0}
+    .menu-toggle.open .hamburger span:nth-child(3){transform:translateY(-5px) rotate(-45deg)}
+
+    /* --- Fullscreen overlay menu --- */
+    .fs-menu{position:fixed;inset:0;z-index:2200;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(10,6,4,0.98),rgba(2,1,1,0.99))}
+    .fs-inner{max-width:760px;padding:28px;text-align:center;color:#fff}
+    .fs-close{position:absolute;right:18px;top:18px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+    .fs-list{display:flex;flex-direction:column;gap:26px;align-items:center;justify-content:center;margin-top:28px}
+    .fs-list a{font-family:Orbitron,monospace;font-size:44px;color:var(--accent);text-decoration:none}
+    .fs-list a:hover{color:var(--lava1);text-shadow:0 8px 40px rgba(255,107,53,0.12)}
+
+    /* --- Main hero --- */
+    .container{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+    .hero{min-height:86vh;display:grid;place-items:center;padding:110px 0 50px;text-align:center}
+    .center-stage{display:flex;flex-direction:column;align-items:center;gap:18px;max-width:980px}
+    .glow-ring{position:relative;width:440px;height:440px;border-radius:50%;pointer-events:none;z-index:-1;filter:blur(36px);
+      background:radial-gradient(circle at 30% 30%, rgba(255,107,53,0.08), transparent 25%), radial-gradient(circle at 70% 70%, rgba(255,46,0,0.04), transparent 40%)}
+    .mascot{width:240px;border-radius:18px;box-shadow:0 30px 90px rgba(0,0,0,0.6);transition:transform .28s var(--ease)}
+    .mascot:hover{transform:translateY(-8px) scale(1.03)}
+    .kicker{font-family:Orbitron,monospace;color:var(--lava1);letter-spacing:1px}
+    .headline{font-family:Orbitron,monospace;font-size:2.6rem;margin:6px 0;background:linear-gradient(90deg,var(--lava1),var(--accent));-webkit-background-clip:text;color:transparent}
+    .sub{color:var(--muted);max-width:780px}
+
+    .hero-cta{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;justify-content:center}
+    .btn-primary{background:linear-gradient(90deg,var(--lava1),var(--lava2));border:0;padding:12px 16px;border-radius:12px;font-weight:800;color:#071017;cursor:pointer;box-shadow:0 20px 60px rgba(255,46,0,0.08)}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px 14px;border-radius:12px;color:var(--accent);cursor:pointer}
+
+    .info-row{display:flex;gap:16px;align-items:center;justify-content:center;flex-wrap:wrap;margin-top:12px}
+    .chip{background:var(--card);padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);min-width:120px;text-align:center}
+
+    /* --- Sections layout --- */
+    .sections{max-width:1200px;margin:28px auto 100px;padding:0 18px;display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:start}
+    @media (max-width:980px){.sections{grid-template-columns:1fr} .glow-ring{width:320px;height:320px} .mascot{width:200px}}
+
+    /* --- Card --- */
+    .card{background:var(--card);padding:18px;border-radius:14px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 16px 50px rgba(0,0,0,0.45)}
+
+    /* --- Tokenomics pie & rotation --- */
+    .pie-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .pie-svg{width:280px;height:280px;animation:rotateSlow 28s linear infinite;transform-origin:50% 50%}
+    @keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+    .pie-center{position:relative;top:-220px;pointer-events:none;display:flex;align-items:center;justify-content:center;flex-direction:column}
+    .pie-center img{width:86px;border-radius:999px;border:6px solid rgba(255,255,255,0.02);box-shadow:0 12px 40px rgba(255,46,0,0.06)}
+    .legend{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+
+    /* --- How to buy --- */
+    .how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+    .how-card{background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(0,0,0,0.04));padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02);text-align:center}
+    .how-num{font-size:28px;font-weight:800;color:var(--lava1)}
+
+    /* --- Roadmap timeline --- */
+    .road{padding:12px}
+    .road h2{font-family:Orbitron,monospace;color:var(--lava1);margin:6px 0 12px}
+    .timeline{position:relative;margin:20px 0;padding-left:36px;max-width:720px}
+    .timeline:before{content:'';position:absolute;left:14px;top:0;bottom:0;width:4px;background:linear-gradient(var(--lava1),var(--lava2));border-radius:2px}
+    .timeline .step{position:relative;margin-bottom:26px;opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .timeline .step.visible{opacity:1;transform:none}
+    .timeline .dot{position:absolute;left:6px;top:2px;width:20px;height:20px;border-radius:50%;background:radial-gradient(circle,var(--lava1) 30%,var(--lava2) 90%);box-shadow:0 10px 30px rgba(255,46,0,0.12)}
+    .timeline .content{margin-left:34px;color:var(--muted)}
+    .timeline .content strong{display:block;color:var(--lava1);font-family:Orbitron,monospace;margin-bottom:6px}
+
+    /* --- Footer & socials --- */
+    footer{padding:28px 18px 60px;text-align:center}
+    .socials{display:flex;gap:12px;justify-content:center;align-items:center;margin-bottom:10px}
+    .social-btn{width:56px;height:56px;border-radius:999px;display:inline-grid;place-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.06));border:1px solid rgba(255,255,255,0.03);transition:transform .18s}
+    .social-btn i{font-size:20px;color:#fff}
+    .social-btn:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(255,46,0,0.10)}
+    .copy{color:var(--muted);font-size:.95rem;margin-top:10px}
+
+    /* --- Modal overlay --- */
+    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,4,6,0.75);backdrop-filter:blur(6px);z-index:2400;padding:20px}
+    .modal-box{width:100%;max-width:980px;background:linear-gradient(180deg,#0f0f10,#141314);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    .modal-grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
+    .modal-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
+    .modal-detail{min-height:200px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.02);overflow:auto}
+    .close-modal{float:right;background:transparent;border:0;color:var(--muted);font-size:18px;cursor:pointer}
+
+    @media (max-width:980px){
+      .sections{grid-template-columns:1fr;padding:0 18px}
+      .modal-grid{grid-template-columns:1fr}
+      .pie-svg{width:220px;height:220px}
+      .glow-ring{width:320px;height:320px}
+      .mascot{width:200px}
+    }
+  </style>
 </head>
 <body>
-    <!-- Background Animation -->
-    <div class="bg-animation"></div>
-    <div class="embers" id="embers"></div>
+  <div class="lava-bg" aria-hidden="true"></div>
+  <div class="embers" aria-hidden="true"></div>
 
-    <!-- Header -->
-    <header class="header" id="header" role="banner">
-        <nav class="nav" role="navigation" aria-label="Main navigation">
-            <div class="logo" onclick="scrollToTop()" role="button" tabindex="0" aria-label="BROX Logo - Go to top">
-                BROX
-            </div>
-            <div class="nav-controls">
-                <button class="coming-soon-btn" onclick="openWaitlist()" aria-label="Join waitlist">
-                    Coming Soon
-                </button>
-                <button class="menu-toggle" id="menuToggle" aria-label="Open navigation menu" aria-expanded="false">
-                    <span class="hamburger">☰</span>
-                </button>
-            </div>
-        </nav>
-    </header>
+  <header>
+    <div class="container nav" role="navigation" aria-label="Main nav">
+      <div class="brand" aria-hidden="true">BROX</div>
 
-    <!-- Fullscreen Menu -->
-    <div class="full
+      <div class="header-actions">
+        <button class="btn-primary" id="comingBtn" title="Token not live yet">Coming Soon</button>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">
+          <span class="hamburger" aria-hidden="true"><span></span><span></span><span></span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- fullscreen overlay menu (populated in JS) -->
+  <div id="fsMenu" class="fs-menu" aria-hidden="true">
+    <div class="fs-inner">
+      <button class="fs-close" id="fsClose" aria-label="Close menu">✕</button>
+      <nav class="fs-list" role="navigation" aria-label="Main menu">
+        <a href="#home" class="fsLink">home</a>
+        <a href="#about" class="fsLink">about</a>
+        <a href="#how" class="fsLink">how to buy</a>
+        <a href="#tokenomics" class="fsLink">tokenomics</a>
+        <a href="#roadmap" class="fsLink">roadmap</a>
+      </nav>
+    </div>
+  </div>
+
+  <main id="home" class="hero" role="main">
+    <div class="container center-stage">
+      <div class="glow-ring" aria-hidden="true"></div>
+
+      <!-- mascot/button opens info modal -->
+      <button id="mascotBtn" style="border:0;background:transparent;cursor:pointer;padding:0" aria-haspopup="dialog" aria-controls="infoModal" title="Open BROX info">
+        <img id="mascotImg" class="mascot" src="" alt="BROX mascot">
+      </button>
+
+      <div class="kicker">COMMUNITY • PRE-LAUNCH</div>
+      <h1 class="headline">Born in Fire — <span style="background:linear-gradient(90deg,var(--lava1),var(--accent));-webkit-background-clip:text;color:transparent">$BROX</span></h1>
+      <p class="sub">BROX is community driven and not live yet. Follow official channels for verified launch updates, airdrops and priority access.</p>
+
+      <div class="hero-cta">
+        <button class="btn-primary" id="joinWait">Join Waitlist</button>
+        <button class="btn-ghost" disabled title="Token not live yet">Buy (Coming Soon)</button>
+      </div>
+
+      <div class="info-row" style="margin-top:12px">
+        <div class="chip"><small style="color:var(--muted);display:block">Status</small><strong>Pre-Launch</strong></div>
+        <div class="chip"><small style="color:var(--muted);display:block">Community</small><strong id="communityCount">Coming Soon</strong></div>
+        <div class="chip"><small style="color:var(--muted);display:block">Allocation</small><strong>99% / 1%</strong></div>
+      </div>
+    </div>
+  </main>
+
+  <section class="sections container" aria-label="Main content">
+    <div class="left-col">
+      <div class="card about" id="about">
+        <h2 style="font-family:Orbitron,monospace;font-size:2.3rem;color:var(--lava1);margin:0 0 12px">About</h2>
+        <p style="color:var(--muted);line-height:1.8">BROX is a community-first memecoin built for fairness and longevity. Token is pre-launch — verified contract & audits will be published prior to trading. Join the official channels for launch updates, governance, and airdrops.</p>
+      </div>
+
+      <div style="margin-top:20px" id="tokenomics">
+        <div class="card">
+          <h3 style="font-family:Orbitron,monospace;color:var(--lava1);margin:0 0 8px">Token Supply</h3>
+          <div class="supply" style="font-family:Orbitron,monospace;font-size:2.2rem;margin-top:8px;color:var(--muted)">Coming Soon</div>
+          <p style="color:var(--muted);margin-top:10px">No taxes. Liquidity & listing decisions are community-governed. Team allocation: 1% (vested) — Community: 99%.</p>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card">
+          <h3 style="font-family:Orbitron,monospace;color:var(--lava1);margin:0 0 8px">How to Buy (Overview)</h3>
+          <div class="how-grid" style="margin-top:12px" id="how">
+            <div class="how-card"><div class="how-num">1</div><h4 style="margin:8px 0;font-family:Orbitron">Create Wallet</h4><p style="color:var(--muted)">Install MetaMask or a compatible wallet (mobile/desktop).</p></div>
+            <div class="how-card"><div class="how-num">2</div><h4 style="margin:8px 0;font-family:Orbitron">Add Funds</h4><p style="color:var(--muted)">Buy ETH/BNB on an exchange and transfer to your wallet.</p></div>
+            <div class="how-card"><div class="how-num">3</div><h4 style="margin:8px 0;font-family:Orbitron">Swap</h4><p style="color:var(--muted)">Use the verified contract & guide when the token is live.</p></div>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card road" id="roadmap">
+          <h2>Roadmap</h2>
+          <div class="timeline" id="timeline">
+            <div class="step">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="content"><strong>Phase 1 — Community</strong> Grow channels, airdrop planning, reward early supporters.</div>
+            </div>
+
+            <div class="step">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="content"><strong>Phase 2 — Audit & Beta</strong> Contract audits, security hardening, closed beta testing.</div>
+            </div>
+
+            <div class="step">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="content"><strong>Phase 3 — Launch</strong> Publish verified contract, liquidity & guides, community governance steps.</div>
+            </div>
+
+            <div class="step">
+              <div class="dot" aria-hidden="true"></div>
+              <div class="content"><strong>Phase 4 — Expansion</strong> Listings, partnerships, continuous governance and feature rollouts.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="right-col" style="display:flex;flex-direction:column;gap:20px">
+      <div class="card" aria-labelledby="allocationTitle">
+        <h3 id="allocationTitle" style="font-family:Orbitron,monospace;color:var(--lava1);margin:0 0 8px">Allocation</h3>
+
+        <div class="pie-wrap" aria-hidden="true">
+          <svg id="pieSVG" class="pie-svg" viewBox="0 0 200 200" role="img" aria-label="Tokenomics pie chart">
+            <defs><linearGradient id="gradL" x1="0%" x2="100%"><stop offset="0%" stop-color="#ff6b35"/><stop offset="100%" stop-color="#ff2e00"/></linearGradient></defs>
+
+            <circle cx="100" cy="100" r="72" stroke="rgba(255,255,255,0.04)" stroke-width="16" fill="none"></circle>
+            <circle id="arcCommunity" cx="100" cy="100" r="72" stroke="url(#gradL)" stroke-width="16" stroke-linecap="round" fill="none" transform="rotate(-90 100 100)" stroke-dasharray="0 452.3893421169302"></circle>
+            <circle id="arcTeam" cx="100" cy="100" r="72" stroke="#ffd166" stroke-width="16" stroke-linecap="round" fill="none" transform="rotate(-90 100 100)" stroke-dasharray="0 452.3893421169302"></circle>
+            <circle cx="100" cy="100" r="52" stroke="rgba(255,255,255,0.02)" stroke-width="6" fill="none"></circle>
+          </svg>
+
+          <div class="pie-center" aria-hidden="true">
+            <img id="pieCenterImg" src="" alt="BROX mascot center">
+            <div style="margin-top:8px;font-family:Orbitron;color:var(--accent)">Community 99% • Team 1%</div>
+          </div>
+        </div>
+
+        <div class="legend" style="margin-top:8px">
+          <div class="item"><span style="width:14px;height:14px;border-radius:4px;background:linear-gradient(90deg,#ff6b35,#ff2e00);display:inline-block"></span><div style="margin-left:8px;display:inline-block"><strong>Community</strong><div style="color:var(--muted);font-size:.9rem">99%</div></div></div>
+          <div class="item"><span style="width:14px;height:14px;border-radius:4px;background:#ffd166;display:inline-block"></span><div style="margin-left:8px;display:inline-block"><strong>Team</strong><div style="color:var(--muted);font-size:.9rem">1% (vested)</div></div></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3 style="font-family:Orbitron,monospace;color:var(--lava1);margin:0 0 8px">Quick Facts</h3>
+        <ul style="list-style:none;padding:0;margin:0;color:var(--muted);line-height:1.9">
+          <li><strong>Supply:</strong> Coming Soon</li>
+          <li><strong>Team:</strong> 1% (vested)</li>
+          <li><strong>Liquidity:</strong> Community-governed</li>
+          <li><strong>Audit:</strong> Planned before launch</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+
+  <footer>
+    <div class="socials" id="socials">
+      <a class="social-btn" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <a class="social-btn" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      <a class="social-btn" href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a class="social-btn" href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+    </div>
+    <div class="copy">© <span id="year"></span> BROX. All Rights Reserved.</div>
+  </footer>
+
+  <!-- info modal -->
+  <div id="infoModal" class="overlay" role="dialog" aria-hidden="true" aria-modal="true">
+    <div class="modal-box" role="document">
+      <button class="close-modal" id="closeInfo" aria-label="Close">✕</button>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+        <div>
+          <div style="font-family:Orbitron,monospace;color:var(--lava1);font-size:1.05rem">BROX — Quick Menu</div>
+          <div style="color:var(--muted);margin-top:6px">Core info & official links</div>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center">
+          <a class="social-btn" href="https://x.com/Brox__official" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
+          <a class="social-btn" href="http://t.me/brox_offi" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+      </div>
+
+      <div style="height:12px"></div>
+      <div class="modal-grid">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button class="modal-card" data-panel="p-about" tabindex="0"><strong>About</strong><div style="color:var(--muted);font-size:.95rem;margin-top:6px">Community-first token & transparency promise.</div></button>
+          <button class="modal-card" data-panel="p-token" tabindex="0"><strong>Tokenomics</strong><div style="color:var(--muted);font-size:.95rem;margin-top:6px">Community 99% • Team 1% — allocation preview.</div></button>
+          <button class="modal-card" data-panel="p-comm" tabindex="0"><strong>Community</strong><div style="color:var(--muted);font-size:.95rem;margin-top:6px">Channels, airdrops & governance.</div></button>
+        </div>
+
+        <div class="modal-detail" id="modalDetail" aria-live="polite">
+          <div id="p-about" style="display:none">
+            <h3 style="margin:0 0 8px;color:var(--lava1)">About BROX</h3>
+            <p style="color:var(--muted)">BROX is built for the community. Pre-launch status — verified contracts & audits will be published prior to trading.</p>
+          </div>
+
+          <div id="p-token" style="display:none">
+            <h3 style="margin:0 0 8px;color:var(--lava1)">Tokenomics</h3>
+            <p style="color:var(--muted)"><strong>Community 99%</strong> • <strong>Team 1%</strong>. Liquidity & listing decisions are community-driven.</p>
+          </div>
+
+          <div id="p-comm" style="display:none">
+            <h3 style="margin:0 0 8px;color:var(--lava1)">Community</h3>
+            <p style="color:var(--muted)">Join our official channels for announcements, governance, and priority airdrops.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:10px;justify-content:flex-end">
+        <button id="modalWait" class="btn-primary">Join Waitlist</button>
+        <button id="modalCloseX" class="btn-ghost">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- waitlist overlay -->
+  <div id="waitOverlay" class="overlay" role="dialog" aria-hidden="true" style="display:none;align-items:center;justify-content:center">
+    <div class="modal-box" role="document">
+      <button class="close-modal" id="waitClose">✕</button>
+      <div style="font-family:Orbitron,monospace;color:var(--lava1);font-size:1.05rem;margin-bottom:8px">Join Waitlist</div>
+      <p style="color:var(--muted);margin:0 0 10px">Enter your email to receive verified launch instructions.</p>
+      <form id="waitForm" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input id="waitEmail" type="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;min-width:220px">
+        <button type="submit" class="btn-primary">Join</button>
+        <button type="button" class="btn-ghost" id="waitCloseBtn">Close</button>
+      </form>
+      <div id="waitMsg" style="margin-top:10px;color:var(--muted);display:none"></div>
+    </div>
+  </div>
+
+<script>
+/* ========= Initialization & helpers ========= */
+
+const MASCOT_PATH = (function(){
+  // read CSS variable for mascot image (so user can change in :root)
+  try{
+    const computed = getComputedStyle(document.documentElement).getPropertyValue('--mascot-image').trim();
+    // CSS value is quoted in the style variable above; remove quotes if present
+    return computed.replace(/^["']|["']$/g,'') || 'Picsart_25-09-20_12-05-00-500.png';
+  }catch(e){ return 'Picsart_25-09-20_12-05-00-500.png'; }
+})();
+
+const FALLBACK = 'https://i.ibb.co/4tBkQ8y/brox-mascot.png';
+
+// set mascot images (center + pie center). If file not found, fallback will be used via error handler.
+document.getElementById('mascotImg').src = MASCOT_PATH;
+document.getElementById('pieCenterImg').src = MASCOT_PATH;
+[document.getElementById('mascotImg'), document.getElementById('pieCenterImg')].forEach(img=>{
+  if(!img) return;
+  img.addEventListener('error', ()=>{ img.src = FALLBACK; img.alt = 'BROX (fallback)' });
+});
+
+/* set year */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ========== Fullscreen menu (fsMenu) ========== */
+(function(){
+  const btn = document.getElementById('menuToggle');
+  const fs = document.getElementById('fsMenu');
+  const fsClose = document.getElementById('fsClose');
+  let open = false;
+  btn.addEventListener('click', ()=>{
+    open = !open;
+    btn.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    fs.style.display = open ? 'flex' : 'none';
+    fs.setAttribute('aria-hidden', String(!open));
+  });
+  fsClose.addEventListener('click', ()=>{ open=false; fs.style.display='none'; btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+  document.querySelectorAll('.fsLink').forEach(a=>a.addEventListener('click', ()=>{ open=false; fs.style.display='none'; btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }));
+})();
+
+/* ========== Scroll reveal (IntersectionObserver) ========== */
+(function(){
+  const steps = document.querySelectorAll('.timeline .step');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
+    });
+  },{threshold:0.18});
+  steps.forEach(s=>io.observe(s));
+
+  // reveal cards and hero items
+  const reveal = new IntersectionObserver((entries)=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){ en.target.style.opacity = 1; en.target.style.transform = 'none'; reveal.unobserve(en.target); }
+    });
+  },{threshold:0.12});
+  document.querySelectorAll('.card, .hero-cta, .info-row, .about').forEach(el=>{
+    el.style.opacity = 0; el.style.transform = 'translateY(18px)'; reveal.observe(el);
+  });
+})();
+
+/* ========== Pie animation (99% / 1%) ========== */
+(function(){
+  const arc = document.getElementById('arcCommunity');
+  const arcTeam = document.getElementById('arcTeam');
+  if(!arc || !arcTeam) return;
+  const r = 72;
+  const circ = 2 * Math.PI * r;
+  const target = 99;
+  let cur = 0;
+  const interval = setInterval(()=>{
+    cur++;
+    if(cur > target){ clearInterval(interval); cur = target; }
+    const filled = (cur/100) * circ;
+    arc.setAttribute('stroke-dasharray', `${filled} ${circ - filled}`);
+    arcTeam.setAttribute('stroke-dasharray', `${circ - filled} ${filled}`);
+  }, 10);
+})();
+
+/* ========== Modal (mascot click) ========== */
+(function(){
+  const infoModal = document.getElementById('infoModal');
+  const mascotBtn = document.getElementById('mascotBtn');
+  const closeInfo = document.getElementById('closeInfo');
+  const modalCards = document.querySelectorAll('.modal-card');
+  const panels = ['p-about','p-token','p-comm'];
+
+  function openInfo(){ infoModal.style.display='flex'; infoModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; showPanel('p-about'); }
+  function closeInfoFn(){ infoModal.style.display='none'; infoModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; panels.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; }); }
+  mascotBtn?.addEventListener('click', openInfo);
+  closeInfo?.addEventListener('click', closeInfoFn);
+  document.getElementById('modalCloseX')?.addEventListener('click', closeInfoFn);
+  infoModal?.addEventListener('click', (e)=>{ if(e.target === infoModal) closeInfoFn(); });
+
+  modalCards.forEach(card=>{
+    card.addEventListener('click', ()=>{ const p=card.getAttribute('data-panel'); if(p) showPanel(p); });
+    card.addEventListener('keypress', (e)=>{ if(e.key === 'Enter'){ const p=card.getAttribute('data-panel'); if(p) showPanel(p); }});
+  });
+  function showPanel(id){ panels.forEach(pid=>{ const el=document.getElementById(pid); if(el) el.style.display = (pid===id)?'block':'none'; }); }
+})();
+
+/* ========== Waitlist overlay (localStorage) ========== */
+(function(){
+  const waitOverlay = document.getElementById('waitOverlay');
+  const waitForm = document.getElementById('waitForm');
+  const joinWait = document.getElementById('joinWait');
+  const modalWaitBtn = document.getElementById('modalWait');
+  const waitClose = document.getElementById('waitClose');
+  const waitCloseBtn = document.getElementById('waitCloseBtn');
+  const waitMsg = document.getElementById('waitMsg');
+
+  function openWait(){ waitOverlay.style.display='flex'; waitOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
+  function closeWait(){ waitOverlay.style.display='none'; waitOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; waitMsg.style.display='none'; }
+
+  joinWait?.addEventListener('click', openWait);
+  modalWaitBtn?.addEventListener('click', openWait);
+  waitClose?.addEventListener('click', closeWait);
+  waitCloseBtn?.addEventListener('click', closeWait);
+  waitForm?.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    const v = document.getElementById('waitEmail').value.trim();
+    if(!v || !/.+@.+\..+/.test(v)){ waitMsg.style.display='block'; waitMsg.textContent='Enter a valid email.'; return; }
+    try{
+      const key = 'brox_waitlist_v1'; const arr = JSON.parse(localStorage.getItem(key) || '[]');
+      if(!arr.includes(v)){ arr.push(v); localStorage.setItem(key, JSON.stringify(arr)); waitMsg.textContent='Added to waitlist (saved locally).'; }
+      else waitMsg.textContent='You are already on the waitlist.';
+      waitMsg.style.display='block';
+      setTimeout(()=>{ window.location.href = `mailto:contact@brox.io?subject=Waitlist Signup&body=Please add this email to waitlist: ${encodeURIComponent(v)}`; }, 700);
+      document.getElementById('waitEmail').value = '';
+    }catch(err){ waitMsg.style.display='block'; waitMsg.textContent='Could not save — try again.'; }
+  });
+  waitOverlay?.addEventListener('click', (e)=>{ if(e.target === waitOverlay) closeWait(); });
+})();
+
+/* ========== Smooth in-page scroll for anchor links ========== */
+(function(){
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click', e=>{
+      const id = a.getAttribute('href');
+      if(!id || id === '#') return;
+      const el = document.querySelector(id);
+      if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth',block:'start'}); document.getElementById('fsMenu').style.display='none'; document.getElementById('menuToggle').classList.remove('open'); }
+    });
+  });
+})();
+
+/* ========== Community placeholder text ========== */
+(function(){ const el = document.getElementById('communityCount'); if(el) el.textContent = 'Coming Soon'; })();
+
+</script>
+</body>
+</html>
