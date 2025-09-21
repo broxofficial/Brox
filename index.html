@@ -3,259 +3,248 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brox Official</title>
-  <script src="https://kit.fontawesome.com/4f53c2f8c7.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* إعدادات عامة */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0d0d0d;
-      color: #fff;
-      overflow-x: hidden;
-    }
-    a { text-decoration: none; color: inherit; }header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background: rgba(0,0,0,0.85);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
+    body { font-family: Arial, sans-serif; background: #0d0d0d; color: white; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }/* Header */
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 15px 30px; background: rgba(0,0,0,0.85); position: fixed; width:100%; top:0; z-index:1000;
 }
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.menu-btn { font-size: 2rem; cursor: pointer; }
+.logo { font-size: 1.8rem; font-weight: bold; color: #ff4500; }
+.menu-btn { font-size: 1.8rem; cursor: pointer; }
 
-.side-menu {
-  position: fixed;
-  right: -250px;
-  top: 0;
-  height: 100%;
-  width: 250px;
-  background: #111;
-  transition: 0.3s;
-  padding-top: 80px;
-  z-index: 2000;
-}
-.side-menu a {
-  display: block;
-  padding: 15px 25px;
-  font-size: 1.2rem;
-  color: #fff;
-  transition: 0.2s;
-}
-.side-menu a:hover { background: #ff4500; }
+/* Side menu */
+.side-menu { position: fixed; right: -320px; top: 0; height: 100%; width: 320px; max-width:86vw; background: #121212; transition: right .28s ease; padding-top:70px; z-index:1500; box-shadow: -20px 0 40px rgba(0,0,0,0.6); }
 .side-menu.open { right: 0; }
+.side-menu nav a { display:block; padding:16px 26px; color:#eaeaea; font-size:1.05rem; border-left:4px solid transparent; transition: all .16s; }
+.side-menu nav a:hover { background: linear-gradient(90deg, rgba(255,69,0,0.06), transparent); border-left-color:#ff4500; padding-left:32px; }
 
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding-top: 80px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle,#ff450055 10%,transparent 60%),
-              radial-gradient(circle,#ff880055 10%,transparent 60%);
-  background-size: 400px 400px;
-  animation: moveBg 15s linear infinite;
-  z-index: 0;
-}
-@keyframes moveBg {
-  from { transform: translate(0,0) rotate(0deg); }
-  to { transform: translate(50px,50px) rotate(360deg); }
-}
-.hero-content { position: relative; z-index: 1; }
-.circle-container {
-  width: 280px;
-  height: 280px;
-  border: 4px solid #ff4500;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 40px rgba(255,69,0,0.7);
-  animation: pulse 3s infinite;
-}
-.circle-container img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-}
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 30px rgba(255,69,0,0.6); }
-  50% { box-shadow: 0 0 70px rgba(255,69,0,1); }
-}
-.hero h1 {
-  margin-top: 25px;
-  font-size: 3rem;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hero p { max-width: 500px; margin: 15px auto; color: #ccc; }
-.cta { margin-top: 20px; }
-.cta a {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 25px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #fff;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  box-shadow: 0 0 20px rgba(255,69,0,0.5);
-  transition: 0.3s;
-}
-.cta a:hover { transform: scale(1.1); }
+/* Hero */
+.hero { min-height:100vh; padding-top:88px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
+.circle-container { width:280px; height:280px; border-radius:50%; border:4px solid rgba(255,69,0,0.95); display:flex; align-items:center; justify-content:center; box-shadow:0 0 40px rgba(255,69,0,0.12); animation:spin 18s linear infinite; }
+.circle-container img { width:140px; height:140px; border-radius:50%; object-fit:cover; animation:spinReverse 14s linear infinite; }
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes spinReverse{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
 
-.allocation {
-  padding: 80px 20px;
-  background: #141414;
-  text-align: center;
-}
-.allocation h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #ff4500;
-}
-.alloc-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 900px;
-  margin: auto;
-}
-.card {
-  background: #1f1f1f;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255,69,0,0.3);
-  transition: transform 0.3s;
-}
-.card:hover { transform: translateY(-8px); }
-.card h3 { color: #ff4500; margin-bottom: 10px; }
+.hero h1 { margin-top:26px; font-size:2.5rem; background:linear-gradient(90deg,#ff8a3d,#ff4a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
+.hero p { max-width:540px; color:#cfcfcf; margin-top:8px }
+.hero .early-btn { margin-top:22px; padding:12px 22px; border-radius:10px; border:none; background:linear-gradient(90deg,#ff6a00,#ff8a4a); color:#111; font-weight:700; cursor:pointer }
 
-.roadmap {
-  padding: 80px 20px;
-  background: #0d0d0d;
-  text-align: center;
-}
-.roadmap h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #ff4500;
-}
-.steps {
-  max-width: 700px;
-  margin: auto;
-  text-align: left;
-}
-.step {
-  margin-bottom: 20px;
-  padding: 15px;
-  border-left: 4px solid #ff4500;
-  background: #1a1a1a;
-  border-radius: 8px;
-}
+/* Allocation */
+.allocation { padding:80px 20px; background:#141414; text-align:center }
+.allocation h2 { font-size:2rem; color:#ff4500; margin-bottom:26px }
+.alloc-visual { display:flex; justify-content:center; margin-bottom:22px }
+.alloc-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; max-width:900px; margin:auto }
+.card { background:#1f1f1f; padding:20px; border-radius:12px; box-shadow:0 0 15px rgba(255,69,0,0.18); transition:transform .28s }
+.card:hover { transform:translateY(-8px) }
+.card h3 { color:#ff4500; margin-bottom:8px }
 
-footer {
-  padding: 30px 20px;
-  text-align: center;
-  background: #141414;
-}
-.socials a {
-  margin: 0 12px;
-  font-size: 1.6rem;
-  transition: 0.3s;
-  color: white;
-}
-.socials a:hover { color: #ff4500; transform: scale(1.2); }
-footer p { font-size: 0.9rem; color: #aaa; }
+/* Roadmap */
+.roadmap { padding:72px 20px; background:#0d0d0d; text-align:center }
+.roadmap h2 { font-size:2rem; color:#ff4500; margin-bottom:22px }
+.steps { max-width:760px; margin:auto; display:flex; flex-direction:column; gap:18px; align-items:stretch }
+.step { padding:18px; border-left:6px solid #ff4500; background:#111; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.6) }
+
+/* Reveal on scroll */
+.reveal { opacity:0; transform: translateY(18px); transition: opacity .7s ease-out, transform .7s cubic-bezier(.2,.9,.3,1); will-change:transform,opacity }
+.reveal.visible { opacity:1; transform:none }
+
+/* Footer */
+footer { padding:30px 20px; text-align:center; background:#141414 }
+.socials { margin-bottom:14px }
+.socials a { margin:0 10px; font-size:1.6rem; color:#fff; transition:transform .18s, color .18s }
+.socials a:hover { color:#ff4500; transform:translateY(-3px) }
+footer p { color:#9b9b9b }
+
+/* Modal */
+.modal { display:none; position:fixed; inset:0; z-index:2200; background:rgba(0,0,0,0.68); align-items:center; justify-content:center }
+.modal.open { display:flex }
+.modal-content { background:#151515; padding:26px; border-radius:12px; width:92%; max-width:420px; box-shadow:0 12px 40px rgba(0,0,0,0.6) }
+.modal-content h3 { color:#ff4500; margin-bottom:12px }
+.modal-content input { width:100%; padding:10px 12px; border-radius:8px; border:none; margin-bottom:12px; background:#0f0f0f; color:#fff }
+.modal-content .row { display:flex; gap:8px }
+.modal-content button { padding:10px 14px; border-radius:8px; border:none; background:#ff6a00; color:#111; font-weight:700; cursor:pointer }
+
+@media (max-width:720px) { .hero h1{font-size:2rem} .circle-container{width:220px;height:220px} .circle-container img{width:110px;height:110px} }
 
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  </header>  <div class="side-menu" id="sideMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#allocation" onclick="closeMenu()">Allocation</a>
-    <a href="#roadmap" onclick="closeMenu()">Roadmap</a>
-    <a href="#footer" onclick="closeMenu()">Contact</a>
-  </div>  <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="circle-container">
+    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
+  </header>  <!-- Side Menu -->  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#allocation">Allocation</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </aside>  <!-- Main -->  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="circle-container reveal">
         <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
       </div>
-      <h1>Welcome to BROX</h1>
-      <p>The meme revolution begins. Powered by community & trust.</p>
-      <div class="cta">
-        <a href="https://t.me/brox__official" target="_blank">🚀 Join Telegram</a>
-        <a href="#" target="_blank">💰 Buy BROX</a>
-      </div>
+      <h1 class="reveal">Welcome to BROX</h1>
+      <p class="reveal">The meme revolution begins. Powered by community.</p>
+      <button class="early-btn reveal" onclick="openModal()">Early Access</button>
+    </section><!-- Allocation -->
+<section class="allocation" id="allocation">
+  <h2 class="reveal">Token Allocation</h2>
+  <div class="alloc-visual reveal">
+    <canvas id="allocChart" width="260" height="260"></canvas>
+  </div>
+
+  <div class="alloc-cards">
+    <div class="card reveal">
+      <h3>99%</h3>
+      <p>Community</p>
     </div>
-  </section>  <section class="allocation" id="allocation">
-    <h2>Token Allocation</h2>
-    <div class="alloc-cards">
-      <div class="card">
-        <h3>99%</h3>
-        <p>Community</p>
-      </div>
-      <div class="card">
-        <h3>1%</h3>
-        <p>Team & Holders</p>
-      </div>
+    <div class="card reveal">
+      <h3>1%</h3>
+      <p>Team & Holders</p>
     </div>
-  </section>  <section class="roadmap" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="steps">
-      <div class="step"><strong>Phase 1:</strong> Launch social presence & build community</div>
-      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-      <div class="step"><strong>Phase 3:</strong> CEX / DEX Listings</div>
-      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
-    </div>
-  </section>  <footer id="footer">
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section class="roadmap" id="roadmap">
+  <h2 class="reveal">Roadmap</h2>
+  <div class="steps">
+    <div class="step reveal"><strong>Phase 1:</strong> Launch social presence & build community</div>
+    <div class="step reveal"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+    <div class="step reveal"><strong>Phase 3:</strong> CEX / DEX Listings</div>
+    <div class="step reveal"><strong>Phase 4:</strong> Expansion & partnerships</div>
+  </div>
+</section>
+
+  </main>  <!-- Footer -->  <footer id="footer">
     <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://x.com/brox" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("open");
+  </footer>  <!-- Modal -->  <div class="modal" id="modal">
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <h3 id="modalTitle">Get Notified on Launch 🚀</h3>
+      <input id="emailInput" type="email" placeholder="Enter your email" aria-label="email">
+      <div class="row">
+        <button id="submitBtn">Submit</button>
+        <button id="cancelBtn" style="background:#333;color:#fff">Cancel</button>
+      </div>
+    </div>
+  </div>  <script>
+    // Menu controls
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+
+    function toggleMenu(){
+      sideMenu.classList.toggle('open');
+      sideMenu.setAttribute('aria-hidden', !sideMenu.classList.contains('open'));
     }
-    function closeMenu() {
-      document.getElementById("sideMenu").classList.remove("open");
+    function closeMenu(){
+      sideMenu.classList.remove('open');
+      sideMenu.setAttribute('aria-hidden','true');
     }
-    document.addEventListener("click", function(e) {
-      if (!document.getElementById("sideMenu").contains(e.target) && !document.querySelector(".menu-btn").contains(e.target)) {
-        closeMenu();
+
+    // Close menu when clicking any link inside it
+    Array.from(sideMenu.querySelectorAll('nav a')).forEach(a => a.addEventListener('click', () => closeMenu()));
+
+    // Close when clicking outside menu
+    document.addEventListener('click', (e) => {
+      const isOpen = sideMenu.classList.contains('open');
+      if(!isOpen) return;
+      const clickedInsideMenu = sideMenu.contains(e.target) || menuBtn.contains(e.target);
+      if(!clickedInsideMenu) closeMenu();
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') { closeMenu(); closeModal(); } });
+
+    // Modal logic
+    const modal = document.getElementById('modal');
+    const submitBtn = document.getElementById('submitBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const emailInput = document.getElementById('emailInput');
+
+    function openModal(){ modal.classList.add('open'); emailInput.focus(); }
+    function closeModal(){ modal.classList.remove('open'); }
+
+    // close modal when clicking background
+    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
+    cancelBtn.addEventListener('click', closeModal);
+
+    // Dummy submit (placeholder: replace with real endpoint)
+    submitBtn.addEventListener('click', () => {
+      const email = emailInput.value.trim();
+      if(!email || !email.includes('@')){ alert('Please enter a valid email'); return; }
+      // TODO: send to backend / Google Sheets / Formspree
+      alert('Thanks! We will notify you.');
+      emailInput.value = '';
+      closeModal();
+    });
+
+    // Reveal on scroll (for cards, hero, steps...)
+    const reveals = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+    reveals.forEach(el => obs.observe(el));
+
+    // Allocation animated donut chart
+    const canvas = document.getElementById('allocChart');
+    const ctx = canvas.getContext('2d');
+    const data = [99,1];
+    const colors = ['#ff4500','#333'];
+    const cx = canvas.width/2, cy = canvas.height/2, radius = Math.min(cx,cy)-10;
+
+    let animProgress = 0; // 0..100
+    function drawDonut(progress){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      let start = -0.5 * Math.PI;
+      let remaining = progress; // percent left to draw
+      for(let i=0;i<data.length;i++){
+        const slicePercent = data[i];
+        // amount of this slice to draw (cap by remaining)
+        const drawPercent = Math.max(0, Math.min(slicePercent, remaining));
+        const sliceAngle = (drawPercent / 100) * 2 * Math.PI;
+        ctx.beginPath();
+        ctx.moveTo(cx,cy);
+        ctx.arc(cx,cy,radius,start,start+sliceAngle);
+        ctx.closePath();
+        ctx.fillStyle = colors[i];
+        ctx.fill();
+        start += (slicePercent/100) * 2 * Math.PI; // advance start by full slice size so next slice remains placed correctly
+        remaining -= drawPercent;
+        if(remaining <= 0) break;
       }
-    });
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") closeMenu();
-    });
+      // inner circle (donut)
+      ctx.beginPath(); ctx.arc(cx,cy,radius*0.55,0,2*Math.PI); ctx.fillStyle = '#141414'; ctx.fill();
+      // center text
+      ctx.fillStyle = '#fff'; ctx.font = '18px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText('99% / 1%', cx, cy);
+    }
+
+    function animateDonut(){
+      if(animProgress < 100){ animProgress += 2.5; drawDonut(animProgress); requestAnimationFrame(animateDonut); }
+      else drawDonut(100);
+    }
+    // start animation when allocation section is visible
+    const allocSection = document.getElementById('allocation');
+    const allocObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(entry => { if(entry.isIntersecting){ animateDonut(); allocObserver.disconnect(); } });
+    }, { threshold: 0.2 });
+    allocObserver.observe(allocSection);
+
   </script></body>
 </html>
