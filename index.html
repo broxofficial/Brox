@@ -1,352 +1,311 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Brox Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <style>
-    /* ===== Reset & Body ===== */
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body { 
-      font-family: 'Segoe UI', Arial, sans-serif;
-      background: radial-gradient(circle at top, #0d0d0d, #000);
-      color:white; overflow-x:hidden;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BROX — Official</title>
+  <meta name="description" content="BROX — Community driven meme token. Join the revolution. Early access, roadmap, token allocation and socials." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <!-- Open Graph -->
+  <meta property="og:title" content="BROX — Official" />
+  <meta property="og:description" content="BROX — Community driven meme token. Join the revolution." />
+  <meta property="og:type" content="website" />  <!-- Font Awesome (icons) -->  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous">  <!-- Favicons (basic) -->  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />  <style>
+    /* ===== Reset & Base ===== */
+    :root{
+      --bg-1:#050505; --bg-2:#0d0d0d; --accent:#ff4500; --muted:#bfbfbf;
+      --glass: rgba(255,255,255,0.03);
+      --card: rgba(20,20,20,0.75);
+      --radius:14px;
+      --max-width:1200px;
+      --gap:18px;
+      --glass-strong: rgba(255,69,0,0.06);
     }
-    a { text-decoration:none; color:inherit; }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      background: radial-gradient(circle at 10% 0%, #071018 5%, var(--bg-2) 40%, #000 100%);
+      color:#fff;font-family: 'Segoe UI','Tajawal', Arial, sans-serif;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
 
     /* ===== Header ===== */
-    header {
-      display:flex; justify-content:space-between; align-items:center;
-      padding:15px 30px; 
-      background:rgba(0,0,0,0.6);
-      backdrop-filter:blur(10px);
-      position:fixed; top:0; width:100%; z-index:1000;
-      box-shadow:0 0 20px rgba(255,69,0,0.5);
-    }
-    .logo {
-      font-size:2rem; font-weight:bold;
-      color:#ff4500; text-shadow:0 0 15px #ff4500;
-    }
-    .menu-btn {
-      font-size:2rem; cursor:pointer; color:white;
-      transition:0.3s;
-    }
+    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:linear-gradient(180deg, rgba(255,69,0,0.04), rgba(0,0,0,0.2));backdrop-filter:blur(6px);z-index:60;border-bottom:1px solid rgba(255,69,0,0.03)}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--accent);font-size:1.35rem}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff8a50);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(255,69,0,0.12)}
 
-    /* ===== Side Menu ===== */
-    .side-menu {
-      position:fixed; right:-260px; top:0; height:100%; width:250px;
-      background:rgba(20,20,20,0.98); backdrop-filter:blur(12px);
-      transition:0.3s; padding-top:80px; z-index:2000;
-      box-shadow:-5px 0 20px rgba(255,69,0,0.3);
-    }
-    .side-menu a {
-      display:block; padding:18px 25px; font-size:1.3rem;
-      color:white; transition:0.2s;
-    }
-    .side-menu a:hover { background:#ff4500; }
-    .side-menu.open { right:0; }
+    nav{display:flex;align-items:center;gap:14px}
+    nav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);transition:all .18s}
+    nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(255,69,0,0.06), rgba(255,102,51,0.03))}
+
+    .actions{display:flex;align-items:center;gap:10px}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#ff6a33);border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 22px rgba(255,69,0,0.14)}
+    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px}
+
+    /* ===== Mobile menu ===== */
+    .hamburger{display:none;font-size:1.6rem;background:transparent;border:none;color:#fff}
+    @media (max-width:900px){nav{display:none}.hamburger{display:inline-flex}}
 
     /* ===== Hero ===== */
-    .hero {
-      height:100vh; display:flex; flex-direction:column;
-      justify-content:center; align-items:center; text-align:center;
-      padding-top:90px; position:relative;
-    }
-    .hero img {
-      width:180px; height:180px; border-radius:50%;
-      box-shadow:0 0 40px rgba(255,69,0,0.8);
-    }
-    .hero h1 {
-      margin-top:25px; font-size:3rem;
-      text-shadow:0 0 15px #ff4500, 0 0 30px #ff6633;
-    }
-    .hero p {
-      max-width:600px; margin-top:12px; font-size:1.2rem;
-      color:#ddd;
-    }
-    .hero button {
-      margin-top:30px; padding:14px 35px;
-      background:linear-gradient(135deg,#ff4500,#ff6633);
-      border:none; border-radius:50px; color:white; font-size:1.2rem;
-      cursor:pointer; font-weight:bold;
-      box-shadow:0 0 20px rgba(255,69,0,0.7);
-      transition:transform 0.3s, box-shadow 0.3s;
-    }
-    .hero button:hover {
-      transform:scale(1.07);
-      box-shadow:0 0 30px rgba(255,69,0,1);
-    }
+    .hero{min-height:86vh;display:grid;place-items:center;position:relative;padding-top:72px}
+    .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;width:100%;max-width:1100px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:18px;box-shadow:0 12px 50px rgba(0,0,0,0.6);border:1px solid rgba(255,69,0,0.04)}
 
-    /* ===== Teaser ===== */
-    .teaser {
-      padding:100px 20px; text-align:center;
-      background:linear-gradient(135deg,#141414,#0d0d0d);
-      opacity:0; transform:translateY(40px); transition:all 1s ease;
-    }
-    .teaser.visible { opacity:1; transform:translateY(0); }
-    .teaser img {
-      width:320px; border-radius:18px; margin-bottom:25px;
-      box-shadow:0 0 25px rgba(255,69,0,0.7);
-    }
-    .teaser h2 {
-      font-size:2.5rem; color:#ff4500;
-      text-shadow:0 0 20px #ff4500, 0 0 40px #ff6633;
-      animation:pulse 2s infinite alternate;
-    }
-    @keyframes pulse {
-      from{opacity:0.7; transform:scale(0.95);}
-      to{opacity:1; transform:scale(1.08);}
-    }
+    .hero-media{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .hero-media img{width:160px;height:160px;border-radius:50%;object-fit:cover;box-shadow:0 18px 60px rgba(255,69,0,0.12)}
+    .hero-title{font-size:2.4rem;color:var(--accent);text-shadow:0 6px 28px rgba(255,69,0,0.06)}
+    .hero-desc{color:var(--muted);margin-top:10px}
 
-    /* ===== Allocation ===== */
-    .allocation { padding:90px 20px; text-align:center; }
-    .allocation h2 { font-size:2.3rem; margin-bottom:30px; color:#ff4500; }
-    .alloc-visual { display:flex; justify-content:center; margin-bottom:30px; }
-    .alloc-cards {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-      gap:20px; max-width:900px; margin:auto;
-    }
-    .card {
-      background:rgba(30,30,30,0.7); padding:25px; border-radius:16px;
-      box-shadow:0 0 20px rgba(255,69,0,0.3);
-      transition:transform 0.3s;
-    }
-    .card:hover { transform:translateY(-6px); }
-    .card h3 { color:#ff4500; margin-bottom:10px; font-size:1.5rem; }
+    .hero-cta{display:flex;flex-direction:column;gap:12px}
+    .cta-row{display:flex;gap:12px}
 
-    /* ===== Roadmap ===== */
-    .roadmap { padding:90px 20px; text-align:center; }
-    .roadmap h2 { font-size:2.3rem; margin-bottom:30px; color:#ff4500; }
-    .steps { max-width:700px; margin:auto; text-align:left; display:grid; gap:25px; }
-    .step {
-      padding:22px; border-left:4px solid #ff4500;
-      background:rgba(30,30,30,0.7); border-radius:12px;
-      box-shadow:0 0 20px rgba(255,69,0,0.3);
-      opacity:0; transform:translateY(40px); transition:all 0.8s ease;
-    }
-    .step.visible { opacity:1; transform:translateY(0); }
+    /* alloc quick info */
+    .quick-stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{background:var(--card);padding:12px 16px;border-radius:12px;min-width:120px;text-align:center}
+    .stat b{display:block;font-size:1.25rem;color:var(--accent)}
 
-    /* ===== Modal ===== */
-    .modal {
-      display:none; position:fixed; z-index:3000; left:0; top:0;
-      width:100%; height:100%; background:rgba(0,0,0,0.7);
-      justify-content:center; align-items:center;
-    }
-    .modal-content {
-      background:rgba(30,30,30,0.95); padding:30px; border-radius:16px;
-      text-align:center; width:90%; max-width:400px;
-      transform:scale(0.8); opacity:0; transition:all 0.4s ease;
-    }
-    .modal.show .modal-content { transform:scale(1); opacity:1; }
-    .modal-content h3 { margin-bottom:15px; color:#ff4500; font-size:1.4rem; }
-    .modal-content input {
-      width:100%; padding:12px; margin-bottom:15px;
-      border:none; border-radius:8px;
-    }
-    .modal-content button {
-      padding:12px 25px; background:linear-gradient(135deg,#ff4500,#ff6633);
-      border:none; border-radius:8px; color:white; cursor:pointer;
-      box-shadow:0 0 15px rgba(255,69,0,0.8);
-      font-weight:bold;
-    }
+    /* ===== Sections ===== */
+    section{padding:80px 0}
+    .teaser{display:flex;align-items:center;gap:28px}
+    .teaser .media{flex:0 0 420px;border-radius:16px;overflow:hidden}
+    .teaser h2{font-size:2rem;color:var(--accent)}
 
-    /* ===== Footer ===== */
-    footer {
-      padding:40px 20px; text-align:center; 
-      background:rgba(20,20,20,0.8); backdrop-filter:blur(8px);
-      box-shadow:0 -5px 20px rgba(255,69,0,0.3);
-    }
-    .socials a {
-      margin:0 12px; font-size:1.9rem; color:white; transition:0.3s;
-    }
-    .socials a:hover { color:#ff4500; transform:scale(1.2); }
-    footer p { font-size:0.9rem; color:#aaa; margin-top:10px; }
+    /* Allocation */
+    .allocation .inner{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:center}
+    .chart-wrap{background:var(--card);padding:20px;border-radius:14px}
+    canvas#allocChart{width:100%;height:300px;display:block}
+    .alloc-list{display:grid;gap:12px}
+    .alloc-item{display:flex;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:10px}
 
-    /* ===== Particles Background ===== */
-    #particles {
-      position:fixed; top:0; left:0; width:100%; height:100%;
-      z-index:-1; background:#000;
-    }
+    /* Roadmap */
+    .roadmap .timeline{display:grid;gap:14px}
+    .roadmap .phase{padding:14px;border-radius:12px;background:var(--card);border-left:6px solid var(--accent)}
 
-    /* ===== Responsive ===== */
-    @media(max-width:768px){
-      .hero h1{font-size:2.2rem;}
-      .hero p{font-size:1rem;}
-      .teaser img{width:240px;}
-      .teaser h2{font-size:2rem;}
-    }
-  </style>
-</head>
+    /* Footer */
+    footer{padding:40px 0;background:linear-gradient(180deg,rgba(0,0,0,0.4), rgba(0,0,0,0.6));border-top:1px solid rgba(255,69,0,0.03)}
+    .socials{display:flex;gap:16px;align-items:center}
+
+    /* Modal */
+    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.7));z-index:120}
+    .modal.show{display:flex}
+    .modal-card{width:100%;max-width:480px;background:linear-gradient(180deg,#0b0b0b,#111);padding:22px;border-radius:14px;border:1px solid rgba(255,69,0,0.06)}
+    .form-control{display:flex;gap:10px}
+    input[type=email]{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
+
+    /* Particles canvas full-screen (behind) */
+    canvas#particles{position:fixed;inset:0;z-index:-1}
+
+    /* Responsive */
+    @media (max-width:1100px){.hero-inner{grid-template-columns:1fr;}.teaser .media{display:none}.allocation .inner{grid-template-columns:1fr}}
+    @media (max-width:600px){.hero-title{font-size:1.5rem}.logo{font-size:1rem}}
+
+    /* micro animations */
+    .fade-up{opacity:0;transform:translateY(20px);transition:all .6s ease}
+    .fade-up.in{opacity:1;transform:none}
+  </style></head>
 <body>
-  <div id="particles"></div>
+  <!-- Particles canvas (correct element) -->
+  <canvas id="particles" aria-hidden="true"></canvas>  <header class="container" role="banner">
+    <div class="logo" aria-label="BROX logo">
+      <div class="mark" aria-hidden>🔥</div>
+      <div>BROX</div>
+    </div><nav role="navigation" aria-label="Main navigation">
+  <a href="#hero">الرئيسية</a>
+  <a href="#teaser">قريبا</a>
+  <a href="#allocation">التوزيع</a>
+  <a href="#roadmap">خريطة الطريق</a>
+  <a href="#footer">تواصل</a>
+</nav>
 
-  <!-- Header -->
-  <header>
-    <div class="logo">BROX</div>
-    <div class="menu-btn" id="menuBtn">☰</div>
-  </header>
+<div class="actions">
+  <button class="ghost" id="copyAddress" title="Copy contract address">نسخ العقد</button>
+  <button class="btn" id="openModal">انضم الآن</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+</div>
 
-  <!-- Side Menu -->
-  <div class="side-menu" id="sideMenu">
-    <a href="#hero">Home</a>
-    <a href="#teaser">Teaser</a>
-    <a href="#allocation">Allocation</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#footer">Contact</a>
+  </header>  <main>
+    <!-- Hero -->
+    <section class="hero container" id="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div class="hero-card fade-up in">
+          <div class="hero-media" role="img" aria-label="Brox avatar">
+            <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" onerror="this.src='https://via.placeholder.com/160'" loading="lazy">
+            <div class="hero-title" id="hero-title">🔥 Welcome to BROX</div>
+            <p class="hero-desc">عملة ميم مجتمعية — مبنية للمتعة والدعم الجماهيري. انضم الآن واحصل على تحديثات الإطلاق.</p>
+          </div>
+        </div><aside class="hero-card hero-cta">
+      <div class="quick-stats">
+        <div class="stat"><span>التوزيع</span><b>99% / 1%</b></div>
+        <div class="stat"><span>القائمة</span><b>Pre-Launch</b></div>
+      </div>
+
+      <div class="cta-row">
+        <button class="btn" id="ctaPrimary">الحصول على إشعار</button>
+        <a class="ghost" href="#allocation">انظر التوزيع</a>
+      </div>
+
+      <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
+        <input id="contractInput" readonly value="0xYOURCONTRACTADDRESS" style="flex:1;background:transparent;border-radius:10px;padding:10px;border:1px solid rgba(255,255,255,0.04);color:#ddd">
+        <button class="ghost" id="copyBtn">نسخ</button>
+      </div>
+
+      <small style="color:var(--muted);margin-top:10px;display:block">ملاحظة: لا تشارك مفاتيحك الخاصة. هذا عقد افتراضي.</small>
+    </aside>
   </div>
+</section>
 
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-    <h1>🔥 Welcome to BROX 🔥</h1>
-    <p>The meme revolution begins. Powered by community.</p>
-    <button onclick="openModal()">Early Access</button>
-  </section>
+<!-- Teaser -->
+<section id="teaser" class="teaser container">
+  <div class="media hero-card">
+    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="coming soon" onerror="this.src='https://via.placeholder.com/420x300'" loading="lazy">
+  </div>
+  <div>
+    <h2 class="fade-up in">🚀 Coming Soon</h2>
+    <p class="fade-up in" style="margin-top:12px;color:var(--muted)">نحن نبني التجربة — موقع احترافي، حملات تسويق، وإدراجات في منصات تداول لامركزية ومركزية. اشترك لتتلقى آخر المستجدات.</p>
+  </div>
+</section>
 
-  <!-- Teaser -->
-  <section class="teaser" id="teaser">
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
-    <h2>🚀 Coming Soon...</h2>
-  </section>
-
-  <!-- Allocation -->
-  <section class="allocation" id="allocation">
-    <h2>Token Allocation</h2>
-    <div class="alloc-visual">
-      <canvas id="allocChart" width="250" height="250"></canvas>
+<!-- Allocation -->
+<section id="allocation" class="allocation container">
+  <h2 style="color:var(--accent)">Token Allocation</h2>
+  <div class="inner" style="margin-top:18px">
+    <div class="chart-wrap">
+      <canvas id="allocChart" aria-label="Allocation chart" role="img"></canvas>
     </div>
-    <div class="alloc-cards">
-      <div class="card"><h3>99%</h3><p>Community</p></div>
-      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
-    </div>
-  </section>
+    <div>
+      <div class="alloc-list">
+        <div class="alloc-item"><span>Community</span><strong>99%</strong></div>
+        <div class="alloc-item"><span>Team & Holders</span><strong>1%</strong></div>
+      </div>
 
-  <!-- Roadmap -->
-  <section class="roadmap" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="steps">
-      <div class="step"><strong>Phase 1:</strong> Launch social presence & build community</div>
-      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-      <div class="step"><strong>Phase 3:</strong> CEX / DEX Listings</div>
-      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
-    </div>
-    <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-content">
-      <h3>Get Notified on Launch 🚀</h3>
-      <input type="email" placeholder="Enter your email">
-      <button onclick="closeModal()">Submit</button>
+      <p style="color:var(--muted);margin-top:12px">توزيع بسيط وواضح يضمن غالبية العرض للمجتمع. يمكنك تعديل النِسَب بسهولة في السكربت الخاص بالمخطط.</p>
     </div>
   </div>
+</section>
 
-  <script>
-    // ===== Menu Toggle =====
-    const menuBtn=document.getElementById("menuBtn");
-    const sideMenu=document.getElementById("sideMenu");
-    menuBtn.onclick=function(){
-      sideMenu.classList.toggle("open");
-      menuBtn.textContent= sideMenu.classList.contains("open") ? "×" : "☰";
-    };
-    document.querySelectorAll(".side-menu a").forEach(link=>{
-      link.onclick=()=>{sideMenu.classList.remove("open"); menuBtn.textContent="☰";}
+<!-- Roadmap -->
+<section id="roadmap" class="roadmap container">
+  <h2 style="color:var(--accent)">Roadmap</h2>
+  <div class="timeline" style="margin-top:18px">
+    <div class="phase">Phase 1 — Build social presence & community growth</div>
+    <div class="phase">Phase 2 — Website upgrade, marketing campaigns</div>
+    <div class="phase">Phase 3 — DEX/CEX listings & liquidity</div>
+    <div class="phase">Phase 4 — Partnerships & ecosystem expansion</div>
+  </div>
+</section>
+
+  </main>  <!-- Footer -->  <footer id="footer" class="container">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
+      <div>
+        <strong style="color:var(--accent)">BROX</strong>
+        <p style="color:var(--muted);margin-top:6px">© 2025 BROX. All rights reserved.</p>
+      </div>
+      <div class="socials">
+        <a href="https://www.instagram.com/brox__official" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
+        <a href="https://www.tiktok.com/@brox__official" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok fa-lg"></i></a>
+        <a href="https://x.com/brox" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
+        <a href="https://t.me/brox" target="_blank" aria-label="Telegram"><i class="fab fa-telegram fa-lg"></i></a>
+      </div>
+    </div>
+  </footer>  <!-- Modal -->  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-card">
+      <h3 style="color:var(--accent)">Get Notified on Launch 🚀</h3>
+      <p style="color:var(--muted);margin-top:6px">أدخل بريدك الإلكتروني لتتلقى إشعار الإطلاق.</p>
+      <form id="notifyForm" style="margin-top:12px" onsubmit="return false">
+        <div class="form-control">
+          <input id="emailInput" type="email" placeholder="you@email.com" required aria-label="email">
+          <button class="btn" id="submitEmail">Submit</button>
+        </div>
+        <p id="formMsg" style="color:var(--muted);margin-top:8px"></p>
+      </form>
+    </div>
+  </div>  <script>
+    /* ===== Small helpers ===== */
+    const qs = sel => document.querySelector(sel);
+
+    // ===== Mobile menu toggle (simple) =====
+    const hamburger = qs('#hamburger');
+    const nav = qs('nav');
+    hamburger.addEventListener('click', ()=>{
+      if(getComputedStyle(nav).display==='none'){
+        nav.style.display='flex';nav.style.position='absolute';nav.style.right='18px';nav.style.top='72px';nav.style.background='var(--card)';nav.style.padding='10px';nav.style.borderRadius='10px';
+      } else {nav.style.display='none'}
     });
-    window.onclick=function(e){
-      if(e.target===sideMenu){sideMenu.classList.remove("open"); menuBtn.textContent="☰";}
-    };
+
+    // ===== Copy contract address =====
+    const copyBtn = qs('#copyBtn');
+    const copyAddress = qs('#copyAddress');
+    const contractInput = qs('#contractInput');
+    function copyAddressToClipboard(){
+      navigator.clipboard?.writeText(contractInput.value).then(()=>{
+        const prev = copyBtn.textContent; copyBtn.textContent='تم النسخ'; setTimeout(()=>copyBtn.textContent=prev,1500);
+      }).catch(()=>alert('النسخ غير متاح'))
+    }
+    copyBtn.addEventListener('click', copyAddressToClipboard);
+    copyAddress.addEventListener('click', copyAddressToClipboard);
 
     // ===== Modal =====
-    function openModal(){
-      const modal=document.getElementById("myModal");
-      modal.style.display="flex";
-      setTimeout(()=>modal.classList.add("show"),10);
-    }
-    function closeModal(){
-      const modal=document.getElementById("myModal");
-      modal.classList.remove("show");
-      setTimeout(()=>modal.style.display="none",300);
-    }
+    const modal = qs('#modal');
+    const openModalBtn = qs('#openModal');
+    const ctaPrimary = qs('#ctaPrimary');
+    [openModalBtn, ctaPrimary].forEach(b=>b.addEventListener('click', ()=>{
+      modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
+    }));
+    // close modal on background click or ESC
+    modal.addEventListener('click', (e)=>{ if(e.target===modal) closeModal(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
+    function closeModal(){ modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
 
-    // ===== Allocation Donut Chart =====
-    const canvas=document.getElementById("allocChart");
-    const ctx=canvas.getContext("2d");
-    const data=[99,1]; const colors=["#ff4500","#333"];
-    let startAngle=-0.5*Math.PI; let currentPercent=0;
-    function drawChart(percent){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      let totalAngle=(percent/100)*2*Math.PI; let angle=startAngle;
-      for(let i=0;i<data.length;i++){
-        const slice=(data[i]/100)*2*Math.PI;
-        const sliceAngle=Math.min(slice,Math.max(0,totalAngle));
-        ctx.beginPath(); ctx.moveTo(125,125);
-        ctx.arc(125,125,120,angle,angle+sliceAngle);
-        ctx.closePath(); ctx.fillStyle=colors[i]; ctx.fill();
-        angle+=slice; totalAngle-=slice; if(totalAngle<=0) break;
-      }
-      ctx.beginPath(); ctx.arc(125,125,70,0,2*Math.PI);
-      ctx.fillStyle="#141414"; ctx.fill();
-      ctx.fillStyle="#fff"; ctx.font="20px Arial"; ctx.textAlign="center";
-      ctx.fillText("99% / 1%",125,130);
-    }
-    function animateChart(){
-      if(currentPercent<100){
-        currentPercent+=1; drawChart(currentPercent);
-        requestAnimationFrame(animateChart);
-      }
-    }
-    animateChart();
+    // ===== Email form (placeholder) =====
+    const form = qs('#notifyForm');
+    const emailInput = qs('#emailInput');
+    const formMsg = qs('#formMsg');
+    form.addEventListener('submit', ()=>{
+      const email = emailInput.value.trim();
+      if(!email) return; formMsg.textContent='جاري الإرسال...';
+      // Here: replace with your backend endpoint
+      setTimeout(()=>{ formMsg.textContent='تم التسجيل! سنخطرك عند الإطلاق.'; emailInput.value=''; }, 900);
+    });
 
-    // ===== Scroll reveal =====
-    function revealOnScroll(){
-      document.querySelectorAll('.teaser,.step').forEach(el=>{
-        const rect=el.getBoundingClientRect();
-        if(rect.top<window.innerHeight-50){ el.classList.add('visible'); }
-      });
-    }
-    window.addEventListener("scroll",revealOnScroll);
-    revealOnScroll();
-
-    // ===== Particles Background =====
-    const particles=document.getElementById("particles");
-    const ctxP=particles.getContext("2d");
-    let w,h,stars=[];
-    function resize(){
-      w=particles.width=window.innerWidth;
-      h=particles.height=window.innerHeight;
-      stars=[];
-      for(let i=0;i<80;i++){
-        stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2,dx:(Math.random()-0.5),dy:(Math.random()-0.5)});
+    // ===== Allocation chart (canvas donut) =====
+    (function(){
+      const canvas = qs('#allocChart'); const ctx = canvas.getContext('2d');
+      function resize(){ canvas.width = canvas.clientWidth * devicePixelRatio; canvas.height = 300 * devicePixelRatio; ctx.scale(devicePixelRatio, devicePixelRatio); draw(); }
+      const data = [{label:'Community',value:99,color:'#ff4500'},{label:'Team',value:1,color:'#444'}];
+      function draw(){
+        const w = canvas.clientWidth; const h = 300; const cx = w/2; const cy = h/2; const radius = Math.min(w,h)/2 - 20;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        let start = -Math.PI/2; const total = data.reduce((s,d)=>s+d.value,0);
+        data.forEach(d=>{
+          const slice = (d.value/total) * Math.PI*2;
+          ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,radius,start,start+slice); ctx.closePath(); ctx.fillStyle = d.color; ctx.fill(); start += slice;
+        });
+        // inner circle
+        ctx.beginPath(); ctx.fillStyle = '#0b0b0b'; ctx.arc(cx,cy,radius*0.55,0,Math.PI*2); ctx.fill();
+        // text
+        ctx.fillStyle='#fff'; ctx.font = '16px Arial'; ctx.textAlign='center'; ctx.fillText('99% / 1%', cx, cy+6);
       }
-    }
-    function drawStars(){
-      ctxP.clearRect(0,0,w,h);
-      ctxP.fillStyle="#ff4500";
-      stars.forEach(s=>{
-        ctxP.beginPath();
-        ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);
-        ctxP.fill();
-        s.x+=s.dx; s.y+=s.dy;
-        if(s.x<0||s.x>w) s.dx*=-1;
-        if(s.y<0||s.y>h) s.dy*=-1;
-      });
-      requestAnimationFrame(drawStars);
-    }
-    window.onresize=resize;
-    resize();
-    drawStars();
-  </script>
-</body>
+      resize(); window.addEventListener('resize', ()=>{ ctx.setTransform(1,0,0,1,0,0); resize(); });
+    })();
+
+    // ===== Particles (simple stars) =====
+    (function(){
+      const cvs = qs('#particles'); const ctx = cvs.getContext('2d'); let w,h,stars=[];
+      function reset(){ w = cvs.width = innerWidth; h = cvs.height = innerHeight; stars = Array.from({length:80}, ()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+0.2,vx:(Math.random()-0.5)/2,vy:(Math.random()-0.5)/2})); }
+      function draw(){ ctx.clearRect(0,0,w,h); for(const s of stars){ ctx.beginPath(); ctx.fillStyle = (Math.random()>0.99)?'#ffffff':'#ff6a40'; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.x += s.vx; s.y += s.vy; if(s.x<0) s.x=w; if(s.x>w) s.x=0; if(s.y<0) s.y=h; if(s.y>h) s.y=0; } requestAnimationFrame(draw); }
+      reset(); draw(); addEventListener('resize', reset);
+    })();
+
+    // ===== Simple scroll reveal =====
+    (function(){ const els = document.querySelectorAll('.fade-up'); function reveal(){ els.forEach(el=>{ const r = el.getBoundingClientRect(); if(r.top < innerHeight - 80) el.classList.add('in'); }); } reveal(); addEventListener('scroll', reveal); } )();
+
+    // Small accessibility improvement: focus trap for modal could be added later
+  </script>  <!-- Structured data (JSON-LD) -->  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebSite","name":"BROX","url":"https://brox.example/","description":"Community driven meme token."}
+  </script></body>
 </html>
