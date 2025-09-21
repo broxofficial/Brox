@@ -6,6 +6,7 @@
   <title>BROX — Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
+    /* ===== Reset & Base ===== */
     *{margin:0;padding:0;box-sizing:border-box;}
     body{font-family:'Segoe UI',Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6;}
     a{text-decoration:none;color:inherit;}
@@ -20,83 +21,90 @@
     }
     .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
 
+    /* === menu-btn === */
     .menu-btn{
       font-size:2rem;
       cursor:pointer;
       transition:.3s;
-      z-index:2001;
+      z-index:1500;
     }
+
+    /* ===== Overlay ===== */
+    .overlay{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.5);z-index:1200;
+      display:none;
+    }
+    .overlay.show{display:block;}
 
     /* ===== Side Menu ===== */
     .side-menu{
-      position:fixed;top:0;right:-280px;
-      height:100%;width:260px;
+      position:fixed;
+      top:0;
+      right:-300px;
+      height:100%;
+      width:260px;
       background:rgba(15,15,15,0.97);
       backdrop-filter:blur(15px);
-      padding-top:80px;
       transition:.35s;
-      z-index:2000;
+      z-index:1300;
       box-shadow:-5px 0 25px rgba(255,69,0,0.4);
+      padding-top:70px; /* أسفل الهيدر */
     }
     .side-menu.open{right:0;}
     .side-menu a{
       display:block;padding:20px 28px;font-size:1.2rem;
       transition:.25s;color:#fff;font-weight:500;
     }
-    .side-menu a:hover{
-      background:linear-gradient(135deg,#ff4500,#ff6633);
-      border-radius:8px;
+    .side-menu a:hover{background:linear-gradient(135deg,#ff4500,#ff6633);border-radius:8px;}
+
+    /* زر إغلاق */
+    .close-btn{
+      position:absolute;
+      top:15px;
+      right:20px;
+      font-size:1.8rem;
+      cursor:pointer;
+      color:#fff;
+      transition:.3s;
     }
+    .close-btn:hover{color:#ff4500;}
 
     /* ===== Hero ===== */
-    .hero{
-      height:100vh;display:flex;flex-direction:column;justify-content:center;
-      align-items:center;text-align:center;padding-top:100px;position:relative;
-    }
-    .hero img{
-      width:200px;height:200px;border-radius:50%;
+    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:center;text-align:center;padding-top:100px;position:relative;}
+    .hero img{width:200px;height:200px;border-radius:50%;
       box-shadow:0 0 60px rgba(255,69,0,1),0 0 100px rgba(255,100,0,0.6);
-      animation:float 4s ease-in-out infinite;
-    }
+      animation:float 4s ease-in-out infinite;}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
     .hero h1{margin-top:28px;font-size:3.5rem;text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;}
     .hero p{max-width:650px;margin-top:15px;font-size:1.25rem;color:#ccc;}
-    .hero button{
-      margin-top:35px;padding:16px 40px;border:none;border-radius:50px;
+    .hero button{margin-top:35px;padding:16px 40px;border:none;border-radius:50px;
       background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
       font-size:1.1rem;font-weight:bold;cursor:pointer;
-      box-shadow:0 0 25px rgba(255,69,0,0.9);
-      transition:.3s;
-    }
+      box-shadow:0 0 25px rgba(255,69,0,0.9);transition:.3s;}
     .hero button:hover{transform:scale(1.08);box-shadow:0 0 40px rgba(255,69,0,1);}
 
     /* ===== Teaser ===== */
-    .teaser{
-      padding:120px 20px;text-align:center;
+    .teaser{padding:120px 20px;text-align:center;
       background:linear-gradient(135deg,#141414,#0d0d0d);
-      opacity:0;transform:translateY(50px);transition:all 1s ease;
-    }
+      opacity:0;transform:translateY(50px);transition:all 1s ease;}
     .teaser.visible{opacity:1;transform:translateY(0);}
-    .teaser img{width:340px;border-radius:22px;margin-bottom:28px;box-shadow:0 0 35px rgba(255,69,0,0.8);}
-    .teaser h2{
-      font-size:2.8rem;color:#ff4500;
+    .teaser img{width:340px;border-radius:22px;margin-bottom:28px;
+      box-shadow:0 0 35px rgba(255,69,0,0.8);}
+    .teaser h2{font-size:2.8rem;color:#ff4500;
       text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;
-      animation:pulse 2s infinite alternate;
-    }
+      animation:pulse 2s infinite alternate;}
     @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.1)}}
 
     /* ===== Allocation ===== */
     .allocation{padding:100px 20px;text-align:center;}
     .allocation h2{font-size:2.5rem;margin-bottom:40px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
     .alloc-visual{display:flex;justify-content:center;margin-bottom:40px;}
-    .alloc-cards{
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:25px;max-width:950px;margin:auto;
-    }
-    .card{
-      background:rgba(30,30,30,0.8);padding:28px;border-radius:18px;
-      box-shadow:0 0 25px rgba(255,69,0,0.4);transition:.3s;
-    }
+    .alloc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:25px;max-width:950px;margin:auto;}
+    .card{background:rgba(30,30,30,0.8);padding:28px;border-radius:18px;
+      box-shadow:0 0 25px rgba(255,69,0,0.4);transition:.3s;}
     .card:hover{transform:translateY(-8px);}
     .card h3{color:#ff4500;margin-bottom:12px;font-size:1.7rem;}
 
@@ -104,57 +112,41 @@
     .roadmap{padding:100px 20px;text-align:center;}
     .roadmap h2{font-size:2.5rem;margin-bottom:35px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
     .steps{max-width:750px;margin:auto;text-align:left;display:grid;gap:28px;}
-    .step{
-      padding:25px;border-left:5px solid #ff4500;
+    .step{padding:25px;border-left:5px solid #ff4500;
       background:rgba(35,35,35,0.8);border-radius:14px;
       box-shadow:0 0 25px rgba(255,69,0,0.4);
-      opacity:0;transform:translateY(50px);transition:.9s ease;
-    }
+      opacity:0;transform:translateY(50px);transition:.9s ease;}
     .step.visible{opacity:1;transform:translateY(0);}
 
     /* ===== Modal ===== */
-    .modal{
-      display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.75);justify-content:center;align-items:center;
-    }
-    .modal-content{
-      background:rgba(25,25,25,0.95);padding:35px;border-radius:18px;
-      text-align:center;width:90%;max-width:420px;
-      transform:scale(.8);opacity:0;transition:.4s;
-      box-shadow:0 0 35px rgba(255,69,0,0.8);
-      backdrop-filter:blur(8px);
-    }
+    .modal{display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.75);justify-content:center;align-items:center;}
+    .modal-content{background:rgba(25,25,25,0.95);padding:35px;border-radius:18px;
+      text-align:center;width:90%;max-width:420px;transform:scale(.8);opacity:0;transition:.4s;
+      box-shadow:0 0 35px rgba(255,69,0,0.8);backdrop-filter:blur(8px);}
     .modal.show .modal-content{transform:scale(1);opacity:1;}
     .modal-content h3{margin-bottom:18px;color:#ff4500;font-size:1.5rem;}
-    .modal-content input{
-      width:100%;padding:14px;margin-bottom:18px;border:none;border-radius:10px;
-      background:rgba(0,0,0,0.3);color:#fff;text-align:center;
-    }
+    .modal-content input{width:100%;padding:14px;margin-bottom:18px;border:none;border-radius:10px;
+      background:rgba(0,0,0,0.3);color:#fff;text-align:center;}
     .modal-content input:focus{outline:none;box-shadow:0 0 12px #ff4500;}
-    .modal-content button{
-      padding:14px 28px;border:none;border-radius:10px;
+    .modal-content button{padding:14px 28px;border:none;border-radius:10px;
       background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
       cursor:pointer;font-weight:bold;
-      box-shadow:0 0 20px rgba(255,69,0,0.9);
-      transition:.3s;
-    }
+      box-shadow:0 0 20px rgba(255,69,0,0.9);transition:.3s;}
     .modal-content button:hover{transform:scale(1.05);box-shadow:0 0 30px #ff4500;}
 
     /* ===== Footer ===== */
-    footer{
-      padding:45px 20px;text-align:center;
+    footer{padding:45px 20px;text-align:center;
       background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
-      box-shadow:0 -6px 25px rgba(255,69,0,0.4);
-    }
-    .socials a{
-      margin:0 14px;font-size:2rem;color:#fff;transition:.3s;
-    }
+      box-shadow:0 -6px 25px rgba(255,69,0,0.4);}
+    .socials a{margin:0 14px;font-size:2rem;color:#fff;transition:.3s;}
     .socials a:hover{color:#ff4500;transform:scale(1.25);}
     footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
 
     /* ===== Background Particles ===== */
     #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
 
+    /* ===== Responsive ===== */
     @media(max-width:768px){
       .hero h1{font-size:2.4rem;}
       .hero p{font-size:1rem;}
@@ -165,14 +157,19 @@
 </head>
 <body>
   <canvas id="particles"></canvas>
+
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
     <div class="menu-btn" id="menuBtn">☰</div>
   </header>
 
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
   <!-- Side Menu -->
   <div class="side-menu" id="sideMenu">
+    <div class="close-btn" id="closeBtn">&times;</div>
     <a href="#hero">Home</a>
     <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
@@ -220,7 +217,7 @@
     <div class="socials">
       <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
       <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
@@ -236,19 +233,28 @@
   </div>
 
   <script>
-    // ===== Menu Toggle =====
+    // ===== Menu =====
     const menuBtn=document.getElementById("menuBtn");
     const sideMenu=document.getElementById("sideMenu");
+    const closeBtn=document.getElementById("closeBtn");
+    const overlay=document.getElementById("overlay");
 
     menuBtn.onclick=()=>{
-      sideMenu.classList.toggle("open");
-      menuBtn.textContent=sideMenu.classList.contains("open")?"×":"☰";
+      sideMenu.classList.add("open");
+      overlay.classList.add("show");
     };
-
+    closeBtn.onclick=()=>{
+      sideMenu.classList.remove("open");
+      overlay.classList.remove("show");
+    };
+    overlay.onclick=()=>{
+      sideMenu.classList.remove("open");
+      overlay.classList.remove("show");
+    };
     document.querySelectorAll(".side-menu a").forEach(link=>{
       link.onclick=()=>{
         sideMenu.classList.remove("open");
-        menuBtn.textContent="☰";
+        overlay.classList.remove("show");
       };
     });
 
@@ -294,8 +300,12 @@
 
     // ===== Particles =====
     const particles=document.getElementById("particles"),ctxP=particles.getContext("2d");let w,h,stars=[];
-    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];for(let i=0;i<100;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
-    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#ff4500";stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});requestAnimationFrame(draw);}
+    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];
+      for(let i=0;i<100;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
+    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#ff4500";
+      stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();
+        s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});
+      requestAnimationFrame(draw);}
     window.onresize=resize;resize();draw();
   </script>
 </body>
