@@ -63,6 +63,51 @@
     .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
     .allocation{text-align:center}
 
+    /* الدائرة */
+    .circle-chart {
+      position: relative;
+      width: 200px;
+      margin: 30px auto 0;
+    }
+    .circular-chart {
+      display: block;
+      margin: 10px auto;
+      max-width: 100%;
+      max-height: 200px;
+    }
+    .circle-bg {
+      fill: none;
+      stroke: #333;
+      stroke-width: 3.8;
+    }
+    .circle {
+      fill: none;
+      stroke-width: 2.8;
+      stroke-linecap: round;
+      stroke: #00f5ff;
+      animation: progress 1.5s ease-out forwards;
+    }
+    @keyframes progress {
+      0% { stroke-dasharray: 0 100; }
+      100% { stroke-dasharray: 99 100; }
+    }
+    .circle-label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .circle-label span {
+      display:block;
+    }
+    .circle-label.small {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
     /* roadmap */
     .roadmap{background:#0c0c0c;padding-bottom:100px}
     .roadmap h2{font-size:2.2rem;color:#00f5ff;margin-bottom:20px;text-align:center}
@@ -122,6 +167,29 @@
   <section id="allocation" class="allocation">
     <h2 style="color:#00f5ff">Token Allocation</h2>
     <p>99% Community / 1% Team</p>
+
+    <!-- الدائرة -->
+    <div class="circle-chart">
+      <svg viewBox="0 0 36 36" class="circular-chart">
+        <path class="circle-bg"
+          d="M18 2.0845
+            a 15.9155 15.9155 0 0 1 0 31.831
+            a 15.9155 15.9155 0 0 1 0 -31.831"/>
+        <path class="circle"
+          stroke-dasharray="99, 100"
+          d="M18 2.0845
+            a 15.9155 15.9155 0 0 1 0 31.831
+            a 15.9155 15.9155 0 0 1 0 -31.831"/>
+      </svg>
+      <div class="circle-label">
+        <span style="color:#00f5ff;font-size:1.2rem;font-weight:700">99%</span>
+        <small style="color:#ccc">Community</small>
+      </div>
+      <div class="circle-label small">
+        <span style="color:#ff6666;font-size:0.9rem;font-weight:600">1%</span>
+        <small style="color:#ccc">Team</small>
+      </div>
+    </div>
   </section>
 
   <section id="roadmap" class="roadmap">
