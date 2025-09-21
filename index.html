@@ -19,17 +19,23 @@
       border-bottom:1px solid rgba(255,69,0,0.4);
     }
     .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
+
     .menu-btn{
-      font-size:2rem;cursor:pointer;transition:.3s;
-      position:fixed;top:18px;right:40px;z-index:2500;
+      font-size:2rem;
+      cursor:pointer;
+      transition:.3s;
+      z-index:2001;
     }
 
     /* ===== Side Menu ===== */
     .side-menu{
-      position:fixed;top:70px;right:-280px;
-      height:calc(100% - 70px);width:260px;
-      background:rgba(15,15,15,0.97);backdrop-filter:blur(15px);
-      padding-top:20px;transition:.35s;z-index:2000;
+      position:fixed;top:0;right:-280px;
+      height:100%;width:260px;
+      background:rgba(15,15,15,0.97);
+      backdrop-filter:blur(15px);
+      padding-top:80px;
+      transition:.35s;
+      z-index:2000;
       box-shadow:-5px 0 25px rgba(255,69,0,0.4);
     }
     .side-menu.open{right:0;}
@@ -37,7 +43,10 @@
       display:block;padding:20px 28px;font-size:1.2rem;
       transition:.25s;color:#fff;font-weight:500;
     }
-    .side-menu a:hover{background:linear-gradient(135deg,#ff4500,#ff6633);border-radius:8px;}
+    .side-menu a:hover{
+      background:linear-gradient(135deg,#ff4500,#ff6633);
+      border-radius:8px;
+    }
 
     /* ===== Hero ===== */
     .hero{
@@ -137,7 +146,9 @@
       background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
       box-shadow:0 -6px 25px rgba(255,69,0,0.4);
     }
-    .socials a{margin:0 14px;font-size:2rem;color:#fff;transition:.3s;}
+    .socials a{
+      margin:0 14px;font-size:2rem;color:#fff;transition:.3s;
+    }
     .socials a:hover{color:#ff4500;transform:scale(1.25);}
     footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
 
@@ -159,6 +170,7 @@
     <div class="logo">BROX</div>
     <div class="menu-btn" id="menuBtn">☰</div>
   </header>
+
   <!-- Side Menu -->
   <div class="side-menu" id="sideMenu">
     <a href="#hero">Home</a>
@@ -167,6 +179,7 @@
     <a href="#roadmap">Roadmap</a>
     <a href="#footer">Contact</a>
   </div>
+
   <!-- Hero -->
   <section class="hero" id="hero">
     <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
@@ -174,11 +187,13 @@
     <p>The meme revolution begins. Powered by community.</p>
     <button onclick="openModal()">Early Access</button>
   </section>
+
   <!-- Teaser -->
   <section class="teaser" id="teaser">
     <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
     <h2>🚀 Coming Soon...</h2>
   </section>
+
   <!-- Allocation -->
   <section class="allocation" id="allocation">
     <h2>Token Allocation</h2>
@@ -188,6 +203,7 @@
       <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
     </div>
   </section>
+
   <!-- Roadmap -->
   <section class="roadmap" id="roadmap">
     <h2>Roadmap</h2>
@@ -198,16 +214,18 @@
       <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
     </div>
   </section>
+
   <!-- Footer -->
   <footer id="footer">
     <div class="socials">
       <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
       <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
       <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
   </footer>
+
   <!-- Modal -->
   <div class="modal" id="myModal">
     <div class="modal-content">
@@ -218,7 +236,7 @@
   </div>
 
   <script>
-    // ===== Menu =====
+    // ===== Menu Toggle =====
     const menuBtn=document.getElementById("menuBtn");
     const sideMenu=document.getElementById("sideMenu");
 
