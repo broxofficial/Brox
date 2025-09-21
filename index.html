@@ -17,7 +17,15 @@
       box-shadow:0 0 15px rgba(255,69,0,0.3);
     }
     .logo { font-size:1.8rem; font-weight:bold; color:#ff4500; text-shadow:0 0 10px #ff4500; }
-    .menu-btn { font-size:1.8rem; cursor:pointer; color:white; }
+    /* زر القائمة — عملت له قوة ظهور بسيطة حتى يظهر على أي خلفية */
+    .menu-btn {
+      font-size:1.8rem; cursor:pointer; color:white;
+      background:rgba(255,69,0,0.08); padding:6px 10px; border-radius:8px;
+      border:1px solid rgba(255,69,0,0.06); z-index:1101;
+      transition:background .18s, transform .12s;
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .menu-btn:hover { background:rgba(255,69,0,0.14); transform:translateY(-2px); }
 
     /* Side Menu */
     .side-menu {
@@ -126,7 +134,8 @@
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
+    <!-- زر القائمة (مع id) -->
+    <div class="menu-btn" id="menuBtn" aria-label="Toggle menu">☰</div>
   </header>
 
   <!-- Side Menu -->
@@ -193,32 +202,71 @@
   <div class="modal" id="myModal">
     <div class="modal-content">
       <h3>Get Notified on Launch 🚀</h3>
-      <input type="email" placeholder="Enter your email">
-      <button onclick="closeModal()">Submit</button>
+      <input type="email" placeholder="Enter your email" id="emailInput">
+      <button onclick="submitEmail()">Submit</button>
     </div>
   </div>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("sideMenu");
-      const btn = document.getElementById("menuBtn");
-      menu.classList.toggle("open");
-      if (menu.classList.contains("open")) {
-        btn.textContent = "×";
-      } else {
-        btn.textContent = "☰";
-      }
+    // زر القائمة مع تبديل الأيقونة (☰ ↔ ×)
+    const menuBtn = document.getElementById("menuBtn");
+    const sideMenu = document.getElementById("sideMenu");
+
+    function setMenuIcon(isOpen){
+      menuBtn.textContent = isOpen ? "×" : "☰";
+      menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     }
 
-    function openModal() {
-      const modal = document.getElementById("myModal");
+    function toggleMenu() {
+      sideMenu.classList.toggle("open");
+      setMenuIcon(sideMenu.classList.contains("open"));
+    }
+
+    // إغلاق القائمة عند الضغط على أي رابط داخلها
+    sideMenu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        sideMenu.classList.remove('open');
+        setMenuIcon(false);
+      });
+    });
+
+    // إغلاق عند النقر خارج القائمة
+    document.addEventListener('click', (e)=>{
+      if(!sideMenu.classList.contains('open')) return;
+      const withinMenu = sideMenu.contains(e.target) || menuBtn.contains(e.target);
+      if(!withinMenu){
+        sideMenu.classList.remove('open');
+        setMenuIcon(false);
+      }
+    });
+
+    // Escape لإغلاق القائمة أو المودال
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape'){
+        if(sideMenu.classList.contains('open')){
+          sideMenu.classList.remove('open');
+          setMenuIcon(false);
+        }
+        closeModal();
+      }
+    });
+
+    // Modal handling (كما كان)
+    const modal = document.getElementById("myModal");
+    function openModal(){
       modal.style.display = "flex";
       setTimeout(()=>modal.classList.add("show"),10);
     }
-    function closeModal() {
-      const modal = document.getElementById("myModal");
+    function closeModal(){
       modal.classList.remove("show");
       setTimeout(()=>modal.style.display="none",300);
+    }
+    function submitEmail(){
+      const v = document.getElementById('emailInput').value.trim();
+      if(!v || v.indexOf('@')===-1){ alert('Please enter a valid email'); return; }
+      alert('Thanks — we will notify you on launch.');
+      document.getElementById('emailInput').value='';
+      closeModal();
     }
 
     // Hero Circle
