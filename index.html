@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,242 +10,281 @@
     /* إعدادات عامة */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: Arial, sans-serif; background: #0d0d0d; color: white; overflow-x: hidden; }
-    a { text-decoration: none; color: inherit; }/* Header */
-header {
-  display: flex; justify-content: space-between; align-items: center;
-  padding: 15px 30px; background: rgba(0,0,0,0.85); position: fixed; width:100%; top:0; z-index:1000;
-}
-.logo { font-size: 1.8rem; font-weight: bold; color: #ff4500; }
-.menu-btn { font-size: 1.8rem; cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
 
-/* Side menu */
-.side-menu { position: fixed; right: -320px; top: 0; height: 100%; width: 320px; max-width:86vw; background: #121212; transition: right .28s ease; padding-top:70px; z-index:1500; box-shadow: -20px 0 40px rgba(0,0,0,0.6); }
-.side-menu.open { right: 0; }
-.side-menu nav a { display:block; padding:16px 26px; color:#eaeaea; font-size:1.05rem; border-left:4px solid transparent; transition: all .16s; }
-.side-menu nav a:hover { background: linear-gradient(90deg, rgba(255,69,0,0.06), transparent); border-left-color:#ff4500; padding-left:32px; }
+    /* خلفيات متدرجة */
+    .gradient-bg {
+      background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #0d0d0d);
+      background-size: 400% 400%;
+      animation: gradientMove 15s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-/* Hero */
-.hero { min-height:100vh; padding-top:88px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; position:relative; overflow:hidden; }
-.circle-container { width:280px; height:280px; border-radius:50%; border:4px solid rgba(255,69,0,0.95); display:flex; align-items:center; justify-content:center; box-shadow:0 0 40px rgba(255,69,0,0.12); animation:spin 18s linear infinite; }
-.circle-container img { width:140px; height:140px; border-radius:50%; object-fit:cover; animation:spinReverse 14s linear infinite; }
-@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes spinReverse{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
+    /* رأس الصفحة */
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px 30px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px);
+      position: fixed; width: 100%; top: 0; z-index: 1000;
+      box-shadow: 0 0 15px rgba(255,69,0,0.3);
+    }
+    .logo { font-size: 1.8rem; font-weight: bold; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
+    .menu-btn { font-size: 1.8rem; cursor: pointer; color: white; }
 
-.hero h1 { margin-top:26px; font-size:2.5rem; background:linear-gradient(90deg,#ff8a3d,#ff4a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent }
-.hero p { max-width:540px; color:#cfcfcf; margin-top:8px }
-.hero .early-btn { margin-top:22px; padding:12px 22px; border-radius:10px; border:none; background:linear-gradient(90deg,#ff6a00,#ff8a4a); color:#111; font-weight:700; cursor:pointer }
+    /* القائمة الجانبية */
+    .side-menu {
+      position: fixed; right: -250px; top: 0; height: 100%; width: 250px;
+      background: rgba(20,20,20,0.95); backdrop-filter: blur(10px);
+      transition: 0.3s; padding-top: 60px; z-index: 2000;
+      box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+    .side-menu a {
+      display: block; padding: 15px 25px; font-size: 1.2rem; color: white; transition: 0.2s;
+    }
+    .side-menu a:hover { background: #ff4500; }
+    .side-menu.open { right: 0; }
 
-/* Allocation */
-.allocation { padding:80px 20px; background:#141414; text-align:center }
-.allocation h2 { font-size:2rem; color:#ff4500; margin-bottom:26px }
-.alloc-visual { display:flex; justify-content:center; margin-bottom:22px }
-.alloc-cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px; max-width:900px; margin:auto }
-.card { background:#1f1f1f; padding:20px; border-radius:12px; box-shadow:0 0 15px rgba(255,69,0,0.18); transition:transform .28s }
-.card:hover { transform:translateY(-8px) }
-.card h3 { color:#ff4500; margin-bottom:8px }
+    /* Hero Section */
+    .hero {
+      height: 100vh; display: flex; justify-content: center; align-items: center;
+      flex-direction: column; text-align: center; padding-top: 80px;
+      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
+    }
+    .circle-container {
+      position: relative; width: 280px; height: 280px;
+      border: 4px solid #ff4500; border-radius: 50%;
+      display: flex; justify-content: center; align-items: center;
+      animation: rotate 20s linear infinite, pulseGlow 2.5s infinite alternate;
+      box-shadow: 0 0 25px rgba(255,69,0,0.6);
+    }
+    .circle-container img {
+      width: 140px; height: 140px; border-radius: 50%;
+      animation: rotate 20s linear infinite reverse;
+    }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 10px rgba(255,69,0,0.5); }
+      to { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
+    }
 
-/* Roadmap */
-.roadmap { padding:72px 20px; background:#0d0d0d; text-align:center }
-.roadmap h2 { font-size:2rem; color:#ff4500; margin-bottom:22px }
-.steps { max-width:760px; margin:auto; display:flex; flex-direction:column; gap:18px; align-items:stretch }
-.step { padding:18px; border-left:6px solid #ff4500; background:#111; border-radius:10px; box-shadow:0 6px 18px rgba(0,0,0,0.6) }
+    .hero button {
+      margin-top: 30px; padding: 12px 25px;
+      background: linear-gradient(135deg,#ff4500,#ff6633);
+      border: none; border-radius: 50px;
+      color: white; font-size: 1.1rem; cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,69,0,0.5);
+      transition: transform 0.3s;
+    }
+    .hero button:hover { transform: scale(1.08); }
 
-/* Reveal on scroll */
-.reveal { opacity:0; transform: translateY(18px); transition: opacity .7s ease-out, transform .7s cubic-bezier(.2,.9,.3,1); will-change:transform,opacity }
-.reveal.visible { opacity:1; transform:none }
+    /* Allocation Section */
+    .allocation { padding: 80px 20px; background: #141414; text-align: center; }
+    .allocation h2 { font-size: 2rem; margin-bottom: 30px; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
+    .alloc-visual { display: flex; justify-content: center; margin-bottom: 30px; }
+    .alloc-cards {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px; max-width: 900px; margin: auto;
+    }
+    .card {
+      background: rgba(30,30,30,0.6); backdrop-filter: blur(10px);
+      padding: 20px; border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,69,0,0.2); transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(255,69,0,0.5); }
+    .card h3 { color: #ff4500; margin-bottom: 10px; }
 
-/* Footer */
-footer { padding:30px 20px; text-align:center; background:#141414 }
-.socials { margin-bottom:14px }
-.socials a { margin:0 10px; font-size:1.6rem; color:#fff; transition:transform .18s, color .18s }
-.socials a:hover { color:#ff4500; transform:translateY(-3px) }
-footer p { color:#9b9b9b }
+    /* Roadmap */
+    .roadmap { padding: 100px 20px; background: #0d0d0d; text-align: center; }
+    .roadmap h2 { font-size: 2rem; margin-bottom: 50px; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
+    .steps { max-width: 700px; margin: auto; display: grid; gap: 30px; }
+    .step {
+      padding: 20px; border-left: 4px solid #ff4500;
+      background: rgba(20,20,20,0.6); backdrop-filter: blur(8px);
+      border-radius: 12px; box-shadow: 0 0 15px rgba(255,69,0,0.2);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .step:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(255,69,0,0.4); }
 
-/* Modal */
-.modal { display:none; position:fixed; inset:0; z-index:2200; background:rgba(0,0,0,0.68); align-items:center; justify-content:center }
-.modal.open { display:flex }
-.modal-content { background:#151515; padding:26px; border-radius:12px; width:92%; max-width:420px; box-shadow:0 12px 40px rgba(0,0,0,0.6) }
-.modal-content h3 { color:#ff4500; margin-bottom:12px }
-.modal-content input { width:100%; padding:10px 12px; border-radius:8px; border:none; margin-bottom:12px; background:#0f0f0f; color:#fff }
-.modal-content .row { display:flex; gap:8px }
-.modal-content button { padding:10px 14px; border-radius:8px; border:none; background:#ff6a00; color:#111; font-weight:700; cursor:pointer }
+    /* Footer */
+    footer {
+      padding: 40px 20px; text-align: center;
+      background: linear-gradient(135deg,#141414,#0d0d0d);
+      box-shadow: 0 -5px 20px rgba(255,69,0,0.2);
+    }
+    .socials { margin-bottom: 15px; }
+    .socials a {
+      margin: 0 12px; font-size: 1.8rem; transition: 0.3s; color: white;
+    }
+    .socials a:hover { color: #ff4500; transform: scale(1.2) rotate(5deg); }
+    footer p { font-size: 0.9rem; color: #aaa; }
 
-@media (max-width:720px) { .hero h1{font-size:2rem} .circle-container{width:220px;height:220px} .circle-container img{width:110px;height:110px} }
-
+    /* Modal */
+    .modal {
+      display: none; position: fixed; z-index: 3000; left: 0; top: 0;
+      width: 100%; height: 100%; background: rgba(0,0,0,0.7);
+      justify-content: center; align-items: center; animation: fadeIn 0.4s;
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-content {
+      background: rgba(30,30,30,0.9); backdrop-filter: blur(12px);
+      padding: 30px; border-radius: 16px; text-align: center;
+      width: 90%; max-width: 400px;
+      box-shadow: 0 0 25px rgba(255,69,0,0.5);
+      transform: scale(0.8); animation: scaleUp 0.4s forwards;
+    }
+    @keyframes scaleUp { to { transform: scale(1); } }
+    .modal-content h3 { margin-bottom: 15px; color: #ff4500; }
+    .modal-content input {
+      width: 100%; padding: 12px; margin-bottom: 15px;
+      border: none; border-radius: 8px;
+    }
+    .modal-content button {
+      padding: 10px 20px; background: linear-gradient(135deg,#ff4500,#ff6633);
+      border: none; border-radius: 8px; color: white; cursor: pointer;
+      box-shadow: 0 0 15px rgba(255,69,0,0.5);
+    }
+    .modal-content button:hover { transform: scale(1.05); }
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
-  </header>  <!-- Side Menu -->  <aside class="side-menu" id="sideMenu" aria-hidden="true">
-    <nav>
-      <a href="#hero">Home</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
-    </nav>
-  </aside>  <!-- Main -->  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="circle-container reveal">
-        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+  </header>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <a href="#hero">Home</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#footer">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="circle-container">
+      <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    </div>
+    <h1 style="margin-top: 25px; font-size: 2.5rem;">Welcome to BROX</h1>
+    <p style="max-width: 500px; margin-top: 10px;">The meme revolution begins. Powered by community.</p>
+    <button onclick="openModal()">Early Access</button>
+  </section>
+
+  <!-- Allocation Section -->
+  <section class="allocation" id="allocation">
+    <h2>Token Allocation</h2>
+    <div class="alloc-visual">
+      <canvas id="allocChart" width="250" height="250"></canvas>
+    </div>
+    <div class="alloc-cards">
+      <div class="card">
+        <h3>99%</h3>
+        <p>Community</p>
       </div>
-      <h1 class="reveal">Welcome to BROX</h1>
-      <p class="reveal">The meme revolution begins. Powered by community.</p>
-      <button class="early-btn reveal" onclick="openModal()">Early Access</button>
-    </section><!-- Allocation -->
-<section class="allocation" id="allocation">
-  <h2 class="reveal">Token Allocation</h2>
-  <div class="alloc-visual reveal">
-    <canvas id="allocChart" width="260" height="260"></canvas>
-  </div>
-
-  <div class="alloc-cards">
-    <div class="card reveal">
-      <h3>99%</h3>
-      <p>Community</p>
+      <div class="card">
+        <h3>1%</h3>
+        <p>Team & Holders</p>
+      </div>
     </div>
-    <div class="card reveal">
-      <h3>1%</h3>
-      <p>Team & Holders</p>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="steps">
+      <div class="step"><strong>Phase 1:</strong> Launch social presence & build community</div>
+      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+      <div class="step"><strong>Phase 3:</strong> CEX / DEX Listings</div>
+      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Roadmap -->
-<section class="roadmap" id="roadmap">
-  <h2 class="reveal">Roadmap</h2>
-  <div class="steps">
-    <div class="step reveal"><strong>Phase 1:</strong> Launch social presence & build community</div>
-    <div class="step reveal"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-    <div class="step reveal"><strong>Phase 3:</strong> CEX / DEX Listings</div>
-    <div class="step reveal"><strong>Phase 4:</strong> Expansion & partnerships</div>
-  </div>
-</section>
-
-  </main>  <!-- Footer -->  <footer id="footer">
+  <!-- Footer -->
+  <footer id="footer">
     <div class="socials">
-      <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
-      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
-      <a href="https://x.com/brox" target="_blank" rel="noopener"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://t.me/brox" target="_blank" rel="noopener"><i class="fab fa-telegram"></i></a>
+      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>  <!-- Modal -->  <div class="modal" id="modal">
-    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h3 id="modalTitle">Get Notified on Launch 🚀</h3>
-      <input id="emailInput" type="email" placeholder="Enter your email" aria-label="email">
-      <div class="row">
-        <button id="submitBtn">Submit</button>
-        <button id="cancelBtn" style="background:#333;color:#fff">Cancel</button>
-      </div>
+  </footer>
+
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <h3>Get Notified on Launch 🚀</h3>
+      <input type="email" placeholder="Enter your email">
+      <button onclick="closeModal()">Submit</button>
     </div>
-  </div>  <script>
-    // Menu controls
-    const menuBtn = document.getElementById('menuBtn');
-    const sideMenu = document.getElementById('sideMenu');
+  </div>
 
-    function toggleMenu(){
-      sideMenu.classList.toggle('open');
-      sideMenu.setAttribute('aria-hidden', !sideMenu.classList.contains('open'));
-    }
-    function closeMenu(){
-      sideMenu.classList.remove('open');
-      sideMenu.setAttribute('aria-hidden','true');
+  <script>
+    function toggleMenu() {
+      document.getElementById("sideMenu").classList.toggle("open");
     }
 
-    // Close menu when clicking any link inside it
-    Array.from(sideMenu.querySelectorAll('nav a')).forEach(a => a.addEventListener('click', () => closeMenu()));
+    function openModal() {
+      document.getElementById("myModal").style.display = "flex";
+    }
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
 
-    // Close when clicking outside menu
-    document.addEventListener('click', (e) => {
-      const isOpen = sideMenu.classList.contains('open');
-      if(!isOpen) return;
-      const clickedInsideMenu = sideMenu.contains(e.target) || menuBtn.contains(e.target);
-      if(!clickedInsideMenu) closeMenu();
-    });
+    // Allocation Animated Pie Chart
+    const canvas = document.getElementById("allocChart");
+    const ctx = canvas.getContext("2d");
+    const data = [99, 1];
+    const colors = ["#ff4500", "#333"];
+    let startAngle = -0.5 * Math.PI;
+    let currentPercent = 0;
 
-    // Close on ESC
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') { closeMenu(); closeModal(); } });
+    function drawChart(percent) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      let totalAngle = (percent / 100) * 2 * Math.PI;
+      let angle = startAngle;
 
-    // Modal logic
-    const modal = document.getElementById('modal');
-    const submitBtn = document.getElementById('submitBtn');
-    const cancelBtn = document.getElementById('cancelBtn');
-    const emailInput = document.getElementById('emailInput');
-
-    function openModal(){ modal.classList.add('open'); emailInput.focus(); }
-    function closeModal(){ modal.classList.remove('open'); }
-
-    // close modal when clicking background
-    modal.addEventListener('click', (e) => { if(e.target === modal) closeModal(); });
-    cancelBtn.addEventListener('click', closeModal);
-
-    // Dummy submit (placeholder: replace with real endpoint)
-    submitBtn.addEventListener('click', () => {
-      const email = emailInput.value.trim();
-      if(!email || !email.includes('@')){ alert('Please enter a valid email'); return; }
-      // TODO: send to backend / Google Sheets / Formspree
-      alert('Thanks! We will notify you.');
-      emailInput.value = '';
-      closeModal();
-    });
-
-    // Reveal on scroll (for cards, hero, steps...)
-    const reveals = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.12 });
-    reveals.forEach(el => obs.observe(el));
-
-    // Allocation animated donut chart
-    const canvas = document.getElementById('allocChart');
-    const ctx = canvas.getContext('2d');
-    const data = [99,1];
-    const colors = ['#ff4500','#333'];
-    const cx = canvas.width/2, cy = canvas.height/2, radius = Math.min(cx,cy)-10;
-
-    let animProgress = 0; // 0..100
-    function drawDonut(progress){
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      let start = -0.5 * Math.PI;
-      let remaining = progress; // percent left to draw
-      for(let i=0;i<data.length;i++){
-        const slicePercent = data[i];
-        // amount of this slice to draw (cap by remaining)
-        const drawPercent = Math.max(0, Math.min(slicePercent, remaining));
-        const sliceAngle = (drawPercent / 100) * 2 * Math.PI;
+      for (let i = 0; i < data.length; i++) {
+        const slice = (data[i] / 100) * (2 * Math.PI);
+        const sliceAngle = Math.min(slice, Math.max(0, totalAngle));
         ctx.beginPath();
-        ctx.moveTo(cx,cy);
-        ctx.arc(cx,cy,radius,start,start+sliceAngle);
+        ctx.moveTo(125, 125);
+        ctx.arc(125, 125, 120, angle, angle + sliceAngle);
         ctx.closePath();
         ctx.fillStyle = colors[i];
         ctx.fill();
-        start += (slicePercent/100) * 2 * Math.PI; // advance start by full slice size so next slice remains placed correctly
-        remaining -= drawPercent;
-        if(remaining <= 0) break;
+        angle += slice;
+        totalAngle -= slice;
+        if (totalAngle <= 0) break;
       }
-      // inner circle (donut)
-      ctx.beginPath(); ctx.arc(cx,cy,radius*0.55,0,2*Math.PI); ctx.fillStyle = '#141414'; ctx.fill();
-      // center text
-      ctx.fillStyle = '#fff'; ctx.font = '18px Arial'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-      ctx.fillText('99% / 1%', cx, cy);
+
+      // Donut Effect
+      ctx.beginPath();
+      ctx.arc(125, 125, 70, 0, 2 * Math.PI);
+      ctx.fillStyle = "#141414";
+      ctx.fill();
+
+      ctx.fillStyle = "#fff";
+      ctx.font = "20px Arial";
+      ctx.textAlign = "center";
+      ctx.fillText("99% / 1%", 125, 130);
     }
 
-    function animateDonut(){
-      if(animProgress < 100){ animProgress += 2.5; drawDonut(animProgress); requestAnimationFrame(animateDonut); }
-      else drawDonut(100);
+    function animateChart() {
+      if (currentPercent < 100) {
+        currentPercent += 2;
+        drawChart(currentPercent);
+        requestAnimationFrame(animateChart);
+      } else {
+        // glow effect
+        canvas.style.filter = "drop-shadow(0 0 15px #ff4500)";
+      }
     }
-    // start animation when allocation section is visible
-    const allocSection = document.getElementById('allocation');
-    const allocObserver = new IntersectionObserver((entries)=>{
-      entries.forEach(entry => { if(entry.isIntersecting){ animateDonut(); allocObserver.disconnect(); } });
-    }, { threshold: 0.2 });
-    allocObserver.observe(allocSection);
-
-  </script></body>
+    animateChart();
+  </script>
+</body>
 </html>
