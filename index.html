@@ -1,199 +1,352 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brox Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BROX — Official</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:Arial,Helvetica,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
+    html,body{height:100%}
+    body{
+      font-family:'Segoe UI',Arial,sans-serif;
+      background:#0d0d0d;color:#fff;
+      line-height:1.6;overflow-x:hidden;
+    }
     a{text-decoration:none;color:inherit}
-    header{position:fixed;top:0;left:0;width:100%;padding:15px 30px;display:flex;justify-content:space-between;align-items:center;background:rgba(0,0,0,0.85);z-index:1000}
-    header h1{font-size:1.5rem;color:#00f5ff}
-    nav{display:flex;gap:20px}
-    nav a{transition:color 0.3s}
-    nav a:hover{color:#00f5ff}
-    .menu-btn{font-size:1.8rem;cursor:pointer;z-index:2001}
-    .side-menu{position:fixed;top:0;right:-240px;width:220px;height:100%;background:#111;display:flex;flex-direction:column;align-items:center;padding-top:80px;transition:0.3s;z-index:2000;box-shadow:-4px 0 15px rgba(0,245,255,0.2)}
+    header{
+      position:fixed;top:0;left:0;width:100%;
+      height:70px;display:flex;align-items:center;justify-content:space-between;
+      padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
+      border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200;
+    }
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{width:52px;height:52px;border-radius:50%;box-shadow:0 0 18px rgba(0,245,255,0.08)}
+    .logo h1{font-size:1.25rem;color:#00f5ff;letter-spacing:0.6px}
+    nav.desktop{display:flex;gap:18px}
+    nav.desktop a{padding:6px 10px;border-radius:8px;color:#cfefff;transition:all .18s}
+    nav.desktop a:hover{color:#00f5ff;background:rgba(255,255,255,0.02)}
+    /* persistent menu button */
+    .menu-btn{
+      font-size:1.9rem;cursor:pointer;
+      position:fixed;top:18px;right:28px;z-index:1300;
+      width:44px;height:44px;border-radius:10px;display:flex;
+      align-items:center;justify-content:center;background:rgba(0,0,0,0.45);
+      border:1px solid rgba(255,255,255,0.03);
+      transition:transform .18s,background .18s;
+    }
+    .menu-btn:active{transform:scale(.96)}
+    /* sidebar */
+    .side-menu{
+      position:fixed;top:70px;right:-260px;
+      width:260px;height:calc(100% - 70px);
+      background:linear-gradient(180deg, rgba(8,8,8,0.98), rgba(14,14,14,0.98));
+      padding-top:20px;padding-bottom:30px;
+      box-shadow:-6px 0 28px rgba(0,245,255,0.05);
+      transition:right .32s cubic-bezier(.22,.9,.36,1);
+      z-index:1250;border-left:1px solid rgba(255,255,255,0.02);
+    }
     .side-menu.open{right:0}
-    .side-menu a{margin:15px 0;font-size:1.1rem;color:#fff;transition:0.3s}
-    .side-menu a:hover{color:#00f5ff}
-    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#001,#111);padding:20px}
-    .hero img{width:180px;height:180px;border-radius:50%;box-shadow:0 0 40px #00f5ff;margin-bottom:20px}
-    .hero h2{font-size:3rem;margin-bottom:20px;color:#00f5ff;animation:float 3s infinite ease-in-out}
-    .hero p{max-width:600px;font-size:1.2rem;margin-bottom:20px}
-    .btn{padding:10px 20px;background:#00f5ff;color:#000;border-radius:25px;font-weight:bold;cursor:pointer;transition:0.3s}
-    .btn:hover{background:#00c3cc}
-    section{padding:100px 20px;text-align:center}
-    .teaser,.allocation,.roadmap{opacity:0;transform:translateY(40px);transition:0.6s ease-out}
-    .visible{opacity:1;transform:translateY(0)}
-    .allocation canvas{max-width:300px;margin-top:20px}
-    .roadmap h2{margin-bottom:30px;color:#00f5ff}
-    .roadmap .step{margin:20px auto;padding:20px;background:#111;border-left:5px solid #00f5ff;max-width:600px;border-radius:10px;opacity:0;transform:translateY(40px);transition:0.8s}
-    .roadmap .step.visible{opacity:1;transform:translateY(0)}
-    footer{padding:30px;text-align:center;background:#111}
-    footer a{margin:0 10px;font-size:1.5rem;color:#00f5ff;transition:0.3s}
-    footer a:hover{color:#fff}
-    .modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:0.3s;z-index:3000}
+    .side-menu .inner{display:flex;flex-direction:column;gap:8px;padding:12px 18px}
+    .side-menu a{display:block;padding:12px 14px;border-radius:10px;color:#e6f8ff;font-weight:600}
+    .side-menu a:hover{background:linear-gradient(90deg,#00f5ff22,#00f5ff11);color:#00f5ff}
+    /* overlay when menu open (subtle) */
+    .menu-overlay{
+      position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;
+      background:transparent;pointer-events:none;transition:background .25s;
+    }
+    .menu-overlay.visible{background:rgba(0,0,0,0.35);pointer-events:auto}
+    /* Hero */
+    .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;gap:14px}
+    .hero .logoBig{width:180px;height:180px;border-radius:50%;box-shadow:0 0 60px rgba(0,245,255,0.12)}
+    .hero h1{font-size:3rem;color:#00f5ff;text-shadow:0 0 20px rgba(0,245,255,0.08)}
+    .hero p{max-width:760px;color:#d6f6ff88;font-size:1.15rem}
+    .hero .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer;box-shadow:0 6px 30px rgba(0,245,255,0.08)}
+    /* teaser & allocation */
+    section{padding:80px 20px}
+    .teaser{background:linear-gradient(180deg,#0b0b0b,#0d0d0d);text-align:center;border-top:1px solid rgba(255,255,255,0.02)}
+    .teaser img{max-width:340px;border-radius:18px;margin-top:18px;box-shadow:0 10px 40px rgba(0,245,255,0.03)}
+    .allocation{display:flex;flex-direction:column;align-items:center;gap:18px}
+    /* roadmap timeline */
+    .roadmap{position:relative;background:linear-gradient(180deg,#0c0c0c,#0e0e0e);padding-bottom:120px}
+    .roadmap .container{max-width:920px;margin:0 auto;padding:40px 22px}
+    .roadmap h2{font-size:2.4rem;color:#00f5ff;margin-bottom:18px}
+    .timeline{position:relative;margin-left:40px;padding-left:30px}
+    .timeline::before{content:'';position:absolute;left:12px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:4px;box-shadow:0 0 14px rgba(0,245,255,0.06)}
+    .timeline .item{position:relative;margin:28px 0;padding:18px 22px;background:rgba(255,255,255,0.02);border-radius:12px;max-width:760px;transition:transform .6s,opacity .6s;opacity:0;transform:translateY(24px)}
+    .timeline .item.visible{opacity:1;transform:none}
+    .timeline .item::before{content:'';position:absolute;left:-36px;top:20px;width:18px;height:18px;border-radius:50%;background:#00f5ff;box-shadow:0 0 18px rgba(0,245,255,0.2)}
+    .timeline .item h3{font-size:1.05rem;color:#eaffff;margin-bottom:6px}
+    .timeline .item p{color:#cfefff99}
+    /* footer socials */
+    footer{padding:40px 20px;background:#0b0b0b;border-top:1px solid rgba(255,255,255,0.02);text-align:center}
+    .socials{display:flex;gap:18px;justify-content:center;align-items:center;margin-bottom:12px}
+    .socials a{font-size:1.6rem;color:#cfefff;transition:transform .18s, color .18s}
+    .socials a:hover{transform:scale(1.12);color:#00f5ff}
+    footer p{color:#a7f0ff88;margin-top:10px}
+    /* modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:opacity .22s}
     .modal.show{opacity:1;pointer-events:auto}
-    .modal-content{background:#111;padding:30px;border-radius:10px;max-width:500px;text-align:center;position:relative}
-    .modal .close{position:absolute;top:10px;right:15px;font-size:1.5rem;cursor:pointer;color:#fff}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-    @media(max-width:768px){nav{display:none}.hero h2{font-size:2rem}.hero p{font-size:1rem}}
-    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1}
+    .modal .card{background:#0b0b0b;padding:24px;border-radius:12px;max-width:520px;width:92%;box-shadow:0 12px 50px rgba(0,0,0,0.6)}
+    .modal .close-btn{position:absolute;top:18px;right:24px;font-size:1.2rem;cursor:pointer}
+    /* particles canvas */
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-2;pointer-events:none}
+    /* responsive */
+    @media(max-width:880px){
+      .timeline{margin-left:18px;padding-left:18px}
+      .side-menu{width:84vw;max-width:300px;right:-320px}
+    }
+    @media(max-width:640px){
+      nav.desktop{display:none}
+      .logo h1{font-size:1rem}
+      .hero h1{font-size:2rem}
+      .hero .logoBig{width:140px;height:140px}
+    }
   </style>
 </head>
 <body>
+  <canvas id="particles"></canvas>
+
   <header>
-    <h1>BROX</h1>
-    <nav>
+    <div class="logo" aria-hidden="false">
+      <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo">
+      <h1>BROX</h1>
+    </div>
+    <nav class="desktop" aria-label="Main navigation">
       <a href="#hero">Home</a>
       <a href="#teaser">Teaser</a>
       <a href="#allocation">Allocation</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#footer">Contact</a>
     </nav>
-    <div id="menuBtn" class="menu-btn">☰</div>
+
+    <button id="menuBtn" class="menu-btn" aria-label="Open menu" aria-expanded="false">☰</button>
   </header>
 
-  <div id="sideMenu" class="side-menu">
-    <a href="#hero">Home</a>
-    <a href="#teaser">Teaser</a>
-    <a href="#allocation">Allocation</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#footer">Contact</a>
-  </div>
-
-  <!-- Hero Section with Logo -->
-  <section id="hero" class="hero">
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox Logo">
-    <h2>Welcome to BROX</h2>
-    <p>The future of decentralized finance starts here. Explore our vision, roadmap, and community.</p>
-    <button class="btn" onclick="openModal()">Learn More</button>
-  </section>
-
-  <section id="teaser" class="teaser">
-    <h2>Teaser</h2>
-    <p>Exciting things are coming. Stay tuned for updates and innovations that will redefine crypto.</p>
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Teaser Image" width="300">
-  </section>
-
-  <section id="allocation" class="allocation">
-    <h2>Token Allocation</h2>
-    <canvas id="allocChart" width="300" height="300"></canvas>
-  </section>
-
-  <section id="roadmap" class="roadmap">
-    <h2>Roadmap</h2>
-    <div class="step">Phase 1: Launch and Community Building</div>
-    <div class="step">Phase 2: Exchange Listings and Marketing</div>
-    <div class="step">Phase 3: Ecosystem Expansion</div>
-    <div class="step">Phase 4: Global Partnerships</div>
-  </section>
-
-  <footer id="footer">
-    <p>Connect with us:</p>
-    <a href="https://www.instagram.com/broxcoin.0?igsh=MWZkdjd6aXZqa2IxYQ==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@broxcoin?_t=8pvhGH1tdhW&_r=1" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://t.me/brox0" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-    <p>&copy; 2025 BROX. All rights reserved.</p>
-  </footer>
-
-  <div id="modal" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2>About BROX</h2>
-      <p>BROX is a decentralized finance project designed to empower communities with transparency and innovation.</p>
+  <div id="sideMenu" class="side-menu" aria-hidden="true">
+    <div class="inner" role="menu" aria-label="Sidebar menu">
+      <a href="#hero" role="menuitem">Home</a>
+      <a href="#teaser" role="menuitem">Teaser</a>
+      <a href="#allocation" role="menuitem">Allocation</a>
+      <a href="#roadmap" role="menuitem">Roadmap</a>
+      <a href="#footer" role="menuitem">Contact</a>
+      <div style="height:8px"></div>
+      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+      <a href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">TikTok</a>
+      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">X</a>
+      <a href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" aria-label="Telegram">Telegram</a>
     </div>
   </div>
 
-  <canvas id="particles"></canvas>
+  <div id="menuOverlay" class="menu-overlay" aria-hidden="true"></div>
+
+  <main>
+    <section id="hero" class="hero" aria-label="Hero section">
+      <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
+      <h1>🔥 Welcome to BROX 🔥</h1>
+      <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
+      <button class="cta" onclick="openModal()">Early Access</button>
+    </section>
+
+    <section id="teaser" class="teaser" aria-label="Teaser">
+      <h2 style="color:#00f5ff">🚀 Coming Soon...</h2>
+      <p style="max-width:820px;color:#cfefffbb;margin:12px auto">Big updates, token launches and community events — stay tuned.</p>
+      <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
+    </section>
+
+    <section id="allocation" class="allocation" aria-label="Allocation">
+      <h2 style="color:#00f5ff">Token Allocation</h2>
+      <canvas id="allocChart" width="300" height="300" aria-hidden="true"></canvas>
+      <div style="display:flex;gap:18px;margin-top:18px;flex-wrap:wrap;justify-content:center">
+        <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:12px;min-width:160px">
+          <h3 style="color:#00f5ff;margin-bottom:6px">99%</h3><p style="color:#cfefff99">Community</p>
+        </div>
+        <div style="background:rgba(255,255,255,0.02);padding:16px;border-radius:12px;min-width:160px">
+          <h3 style="color:#ff9aa2;margin-bottom:6px">1%</h3><p style="color:#cfefff99">Team & Holders</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="roadmap" class="roadmap" aria-label="Roadmap">
+      <div class="container">
+        <h2>Roadmap</h2>
+        <div class="timeline" id="timeline">
+          <div class="item">
+            <h3>Phase 1 — Launch & Community</h3>
+            <p>Launch socials, whitelist, first viral campaigns and community initiatives.</p>
+          </div>
+          <div class="item">
+            <h3>Phase 2 — Website & Growth</h3>
+            <p>Website upgrade, content drops and expansion of ambassador programs.</p>
+          </div>
+          <div class="item">
+            <h3>Phase 3 — Listings</h3>
+            <p>Listing on DEX/CEX, liquidity programs and staking features.</p>
+          </div>
+          <div class="item">
+            <h3>Phase 4 — Partnerships</h3>
+            <p>Global partnerships, NFT drops and ecosystem expansion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" aria-label="Footer">
+    <div class="socials" role="navigation" aria-label="Social links">
+      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x"></i></a>
+      <a href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    </div>
+    <p>&copy; 2025 BROX. All Rights Reserved.</p>
+  </footer>
+
+  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="card">
+      <button class="close-btn" aria-label="Close modal" onclick="closeModal()">✖</button>
+      <h2 style="color:#00f5ff">Get Notified on Launch</h2>
+      <p style="color:#cfefffaa">Leave your email to get early access and updates.</p>
+      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:12px;margin-top:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:14px">
+        <button class="cta" onclick="submitEmail()">Submit</button>
+        <button style="background:#222;color:#fff;border-radius:8px;padding:10px 14px;border:1px solid rgba(255,255,255,0.03)" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
 
   <script>
-    // ===== Menu Toggle =====
-    const menuBtn=document.getElementById('menuBtn');
-    const sideMenu=document.getElementById('sideMenu');
-    menuBtn.onclick=()=>{
-      sideMenu.classList.toggle('open');
-      menuBtn.textContent=sideMenu.classList.contains('open')?'✖':'☰';
-    };
-    document.querySelectorAll('.side-menu a').forEach(link=>{
-      link.addEventListener('click',()=>{
+    // Menu behavior
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+
+    // Toggle function
+    function toggleMenu(forceState) {
+      const willOpen = typeof forceState === 'boolean' ? forceState : !sideMenu.classList.contains('open');
+      if (willOpen) {
+        sideMenu.classList.add('open');
+        menuBtn.textContent = '✖';
+        menuBtn.setAttribute('aria-expanded','true');
+        sideMenu.setAttribute('aria-hidden','false');
+        menuOverlay.classList.add('visible');
+      } else {
         sideMenu.classList.remove('open');
-        menuBtn.textContent='☰';
+        menuBtn.textContent = '☰';
+        menuBtn.setAttribute('aria-expanded','false');
+        sideMenu.setAttribute('aria-hidden','true');
+        menuOverlay.classList.remove('visible');
+      }
+    }
+
+    menuBtn.addEventListener('click', () => toggleMenu());
+
+    // close when clicking overlay
+    menuOverlay.addEventListener('click', () => toggleMenu(false));
+
+    // close when clicking any menu link and keep button visible
+    document.querySelectorAll('.side-menu a').forEach(a => {
+      a.addEventListener('click', () => {
+        toggleMenu(false);
       });
     });
 
-    // ===== Modal =====
-    const modal=document.getElementById('modal');
-    function openModal(){modal.classList.add('show')}
-    function closeModal(){modal.classList.remove('show')}
+    // Close side menu with Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && sideMenu.classList.contains('open')) toggleMenu(false);
+    });
 
-    // ===== Chart =====
-    const canvas=document.getElementById('allocChart');
-    const ctx=canvas.getContext('2d');
-    function drawChart(p1,p2){
-      let start=-Math.PI/2;
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      ctx.beginPath();
-      ctx.fillStyle='#00f5ff';
-      ctx.moveTo(150,150);
-      ctx.arc(150,150,120,start,start+2*Math.PI*p1);
-      ctx.fill();
-      ctx.beginPath();
-      ctx.fillStyle='#ff0066';
-      ctx.moveTo(150,150);
-      ctx.arc(150,150,120,start+2*Math.PI*p1,start+2*Math.PI);
-      ctx.fill();
-      ctx.fillStyle='#fff';
-      ctx.font='20px Arial';
-      ctx.textAlign='center';
-      ctx.fillText(`${Math.round(p1*100)}% / ${Math.round(p2*100)}%`,150,160);
+    // Modal logic
+    const modal = document.getElementById('modal');
+    function openModal() {
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden','false');
     }
-    let progress=0;
-    function animateChart(){
-      if(progress<=1){
-        drawChart(progress*0.99,1-progress*0.99);
-        progress+=0.01;
-        requestAnimationFrame(animateChart);
+    function closeModal() {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden','true');
+    }
+    function submitEmail() {
+      const email = document.getElementById('emailInput').value.trim();
+      if (!email) { alert('Please enter an email.'); return; }
+      // placeholder: in real site send to server
+      alert('Thanks! We received: ' + email);
+      closeModal();
+    }
+
+    // Allocation Chart (animated)
+    const allocCanvas = document.getElementById('allocChart');
+    const actx = allocCanvas.getContext('2d');
+    function drawAlloc(p) {
+      const w = allocCanvas.width, h = allocCanvas.height, cx = w/2, cy = h/2, r = Math.min(w,h)/2 - 20;
+      actx.clearRect(0,0,w,h);
+      // background ring
+      actx.beginPath(); actx.arc(cx,cy,r,0,Math.PI*2); actx.fillStyle = '#0b0b0b'; actx.fill();
+      // community slice (99%)
+      actx.beginPath();
+      const start = -Math.PI/2;
+      const communityAngle = (Math.PI*2) * 0.99 * p;
+      actx.moveTo(cx,cy);
+      actx.arc(cx,cy,r,start,start + communityAngle);
+      actx.closePath(); actx.fillStyle='#00f5ff'; actx.fill();
+      // remainder slice
+      actx.beginPath();
+      actx.moveTo(cx,cy);
+      actx.arc(cx,cy,r,start+communityAngle,start+Math.PI*2); actx.closePath();
+      actx.fillStyle='#2b2b2b'; actx.fill();
+      // inner circle
+      actx.beginPath(); actx.arc(cx,cy,r*0.6,0,Math.PI*2); actx.fillStyle='#0b0b0b'; actx.fill();
+      actx.fillStyle='#fff'; actx.font='18px Arial'; actx.textAlign='center'; actx.fillText(Math.round(99*p)+'% / '+(100-Math.round(99*p))+'%',cx,cy+8);
+    }
+    let ap = 0;
+    function animAlloc(){ if (ap < 1) { ap += 0.01; drawAlloc(ap); requestAnimationFrame(animAlloc); } else drawAlloc(1); }
+    animAlloc();
+
+    // Roadmap reveal with IntersectionObserver
+    const items = document.querySelectorAll('.timeline .item');
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {threshold:0.18});
+    items.forEach(i => obs.observe(i));
+
+    // Make sure roadmap container tall enough for line
+    // (no further action required; CSS covers it)
+
+    // Particles background (lightweight)
+    const pCanvas = document.getElementById('particles');
+    const pCtx = pCanvas.getContext('2d');
+    let pw = pCanvas.width = innerWidth, ph = pCanvas.height = innerHeight;
+    let particles = [];
+    function resize() { pw = pCanvas.width = innerWidth; ph = pCanvas.height = innerHeight; particles = []; for (let i=0;i<90;i++){ particles.push({x:Math.random()*pw,y:Math.random()*ph,r:Math.random()*1.8,dx:(Math.random()-0.5)*0.35,dy:(Math.random()-0.5)*0.35}) } }
+    window.addEventListener('resize', resize);
+    resize();
+    function draw() {
+      pCtx.clearRect(0,0,pw,ph);
+      pCtx.fillStyle = 'rgba(0,245,255,0.06)';
+      for (const s of particles) {
+        pCtx.beginPath(); pCtx.arc(s.x,s.y,s.r,0,Math.PI*2); pCtx.fill();
+        s.x += s.dx; s.y += s.dy;
+        if (s.x < 0 || s.x > pw) s.dx *= -1;
+        if (s.y < 0 || s.y > ph) s.dy *= -1;
       }
+      requestAnimationFrame(draw);
     }
-    animateChart();
+    draw();
 
-    // ===== Reveal on Scroll =====
-    function reveal(){
-      document.querySelectorAll('.teaser,.allocation,.roadmap,.roadmap .step').forEach(el=>{
-        const top=el.getBoundingClientRect().top;
-        if(top<window.innerHeight-50){el.classList.add('visible')}
-      });
-    }
-    window.addEventListener('scroll',reveal);
-    reveal();
+    // Accessibility: ensure menu overlay element exists even if initially empty
+    // (menuOverlay variable is already wired)
 
-    // ===== Particles =====
-    const pCanvas=document.getElementById('particles');
-    const pCtx=pCanvas.getContext('2d');
-    let particles=[];
-    function resizeCanvas(){pCanvas.width=window.innerWidth;pCanvas.height=window.innerHeight}
-    window.addEventListener('resize',resizeCanvas);
-    resizeCanvas();
-    for(let i=0;i<100;i++){
-      particles.push({x:Math.random()*pCanvas.width,y:Math.random()*pCanvas.height,vx:(Math.random()-0.5)*0.5,vy:(Math.random()-0.5)*0.5,size:2});
-    }
-    function drawParticles(){
-      pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
-      pCtx.fillStyle='#00f5ff';
-      particles.forEach(p=>{
-        p.x+=p.vx;p.y+=p.vy;
-        if(p.x<0||p.x>pCanvas.width)p.vx*=-1;
-        if(p.y<0||p.y>pCanvas.height)p.vy*=-1;
-        pCtx.beginPath();pCtx.arc(p.x,p.y,p.size,0,Math.PI*2);pCtx.fill();
+    // Ensure initial roadmap items visible if already on-screen
+    window.addEventListener('load', () => {
+      items.forEach(i => {
+        const rect = i.getBoundingClientRect();
+        if (rect.top < innerHeight - 60) i.classList.add('visible');
       });
-      requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
+    });
   </script>
 </body>
 </html>
