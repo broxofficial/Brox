@@ -4,27 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brox Official</title>
-  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* إعدادات عامة */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #0d0d0d; color: white; overflow-x: hidden; }
+    body { font-family: Arial, sans-serif; background: #0d0d0d; color: white; margin: 0; }
     a { text-decoration: none; color: inherit; }
 
-    /* خلفيات متدرجة */
-    .gradient-bg {
-      background: linear-gradient(135deg, #0d0d0d, #1a1a1a, #0d0d0d);
-      background-size: 400% 400%;
-      animation: gradientMove 15s ease infinite;
-    }
-    @keyframes gradientMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* رأس الصفحة */
+    /* Header */
     header {
       display: flex; justify-content: space-between; align-items: center;
       padding: 15px 30px; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(6px);
@@ -34,12 +19,11 @@
     .logo { font-size: 1.8rem; font-weight: bold; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
     .menu-btn { font-size: 1.8rem; cursor: pointer; color: white; }
 
-    /* القائمة الجانبية */
+    /* Side Menu */
     .side-menu {
       position: fixed; right: -250px; top: 0; height: 100%; width: 250px;
       background: rgba(20,20,20,0.95); backdrop-filter: blur(10px);
       transition: 0.3s; padding-top: 60px; z-index: 2000;
-      box-shadow: -5px 0 15px rgba(0,0,0,0.5);
     }
     .side-menu a {
       display: block; padding: 15px 25px; font-size: 1.2rem; color: white; transition: 0.2s;
@@ -47,95 +31,74 @@
     .side-menu a:hover { background: #ff4500; }
     .side-menu.open { right: 0; }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
       height: 100vh; display: flex; justify-content: center; align-items: center;
       flex-direction: column; text-align: center; padding-top: 80px;
-      background: radial-gradient(circle at center, #1a1a1a, #0d0d0d);
     }
     .circle-container {
       position: relative; width: 280px; height: 280px;
-      border: 4px solid #ff4500; border-radius: 50%;
+      border: 4px solid #333; border-radius: 50%;
       display: flex; justify-content: center; align-items: center;
-      animation: rotate 20s linear infinite, pulseGlow 2.5s infinite alternate;
-      box-shadow: 0 0 25px rgba(255,69,0,0.6);
+      box-shadow: 0 0 20px rgba(255,69,0,0.6);
     }
+    .circle-container canvas { position: absolute; top: 0; left: 0; }
+
     .circle-container img {
       width: 140px; height: 140px; border-radius: 50%;
-      animation: rotate 20s linear infinite reverse;
+      position: relative; z-index: 2;
     }
-    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    @keyframes pulseGlow {
-      from { box-shadow: 0 0 10px rgba(255,69,0,0.5); }
-      to { box-shadow: 0 0 25px rgba(255,69,0,0.9); }
-    }
-
+    .hero h1 { margin-top: 25px; font-size: 2.5rem; }
     .hero button {
       margin-top: 30px; padding: 12px 25px;
       background: linear-gradient(135deg,#ff4500,#ff6633);
       border: none; border-radius: 50px;
       color: white; font-size: 1.1rem; cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,69,0,0.5);
-      transition: transform 0.3s;
     }
-    .hero button:hover { transform: scale(1.08); }
 
-    /* Allocation Section */
-    .allocation { padding: 80px 20px; background: #141414; text-align: center; }
-    .allocation h2 { font-size: 2rem; margin-bottom: 30px; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
+    /* Teaser Section */
+    .teaser {
+      padding: 100px 20px; text-align: center;
+      background: linear-gradient(135deg,#141414,#0d0d0d);
+    }
+    .teaser img {
+      width: 250px; border-radius: 16px; margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(255,69,0,0.6);
+    }
+    .teaser h2 {
+      font-size: 2rem; color: #ff4500;
+      text-shadow: 0 0 10px #ff4500;
+      animation: pulse 2s infinite alternate;
+    }
+    @keyframes pulse {
+      from { opacity: 0.6; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1.05); }
+    }
+
+    /* Allocation */
+    .allocation { padding: 80px 20px; text-align: center; }
+    .allocation h2 { font-size: 2rem; margin-bottom: 30px; color: #ff4500; }
     .alloc-visual { display: flex; justify-content: center; margin-bottom: 30px; }
     .alloc-cards {
       display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px; max-width: 900px; margin: auto;
     }
     .card {
-      background: rgba(30,30,30,0.6); backdrop-filter: blur(10px);
-      padding: 20px; border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255,69,0,0.2); transition: transform 0.3s, box-shadow 0.3s;
+      background: rgba(30,30,30,0.6); padding: 20px; border-radius: 16px;
+      box-shadow: 0 0 20px rgba(255,69,0,0.2);
     }
-    .card:hover { transform: translateY(-8px); box-shadow: 0 0 25px rgba(255,69,0,0.5); }
     .card h3 { color: #ff4500; margin-bottom: 10px; }
-
-    /* Roadmap */
-    .roadmap { padding: 100px 20px; background: #0d0d0d; text-align: center; }
-    .roadmap h2 { font-size: 2rem; margin-bottom: 50px; color: #ff4500; text-shadow: 0 0 10px #ff4500; }
-    .steps { max-width: 700px; margin: auto; display: grid; gap: 30px; }
-    .step {
-      padding: 20px; border-left: 4px solid #ff4500;
-      background: rgba(20,20,20,0.6); backdrop-filter: blur(8px);
-      border-radius: 12px; box-shadow: 0 0 15px rgba(255,69,0,0.2);
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-    .step:hover { transform: translateY(-5px); box-shadow: 0 0 25px rgba(255,69,0,0.4); }
-
-    /* Footer */
-    footer {
-      padding: 40px 20px; text-align: center;
-      background: linear-gradient(135deg,#141414,#0d0d0d);
-      box-shadow: 0 -5px 20px rgba(255,69,0,0.2);
-    }
-    .socials { margin-bottom: 15px; }
-    .socials a {
-      margin: 0 12px; font-size: 1.8rem; transition: 0.3s; color: white;
-    }
-    .socials a:hover { color: #ff4500; transform: scale(1.2) rotate(5deg); }
-    footer p { font-size: 0.9rem; color: #aaa; }
 
     /* Modal */
     .modal {
       display: none; position: fixed; z-index: 3000; left: 0; top: 0;
       width: 100%; height: 100%; background: rgba(0,0,0,0.7);
-      justify-content: center; align-items: center; animation: fadeIn 0.4s;
+      justify-content: center; align-items: center;
     }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .modal-content {
-      background: rgba(30,30,30,0.9); backdrop-filter: blur(12px);
-      padding: 30px; border-radius: 16px; text-align: center;
-      width: 90%; max-width: 400px;
-      box-shadow: 0 0 25px rgba(255,69,0,0.5);
-      transform: scale(0.8); animation: scaleUp 0.4s forwards;
+      background: rgba(30,30,30,0.9); padding: 30px; border-radius: 16px;
+      text-align: center; width: 90%; max-width: 400px;
     }
-    @keyframes scaleUp { to { transform: scale(1); } }
     .modal-content h3 { margin-bottom: 15px; color: #ff4500; }
     .modal-content input {
       width: 100%; padding: 12px; margin-bottom: 15px;
@@ -144,9 +107,12 @@
     .modal-content button {
       padding: 10px 20px; background: linear-gradient(135deg,#ff4500,#ff6633);
       border: none; border-radius: 8px; color: white; cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,69,0,0.5);
     }
-    .modal-content button:hover { transform: scale(1.05); }
+
+    /* Footer */
+    footer { padding: 40px 20px; text-align: center; background: #141414; }
+    .socials a { margin: 0 12px; font-size: 1.8rem; color: white; }
+    .socials a:hover { color: #ff4500; }
   </style>
 </head>
 <body>
@@ -159,47 +125,37 @@
   <!-- Side Menu -->
   <div class="side-menu" id="sideMenu">
     <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
-    <a href="#roadmap">Roadmap</a>
     <a href="#footer">Contact</a>
   </div>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero" id="hero">
     <div class="circle-container">
+      <canvas id="circleCanvas" width="280" height="280"></canvas>
       <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
     </div>
-    <h1 style="margin-top: 25px; font-size: 2.5rem;">Welcome to BROX</h1>
-    <p style="max-width: 500px; margin-top: 10px;">The meme revolution begins. Powered by community.</p>
+    <h1>Welcome to BROX</h1>
+    <p>The meme revolution begins. Powered by community.</p>
     <button onclick="openModal()">Early Access</button>
   </section>
 
-  <!-- Allocation Section -->
+  <!-- Teaser Section -->
+  <section class="teaser" id="teaser">
+    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
+    <h2>🚀 Coming Soon...</h2>
+  </section>
+
+  <!-- Allocation -->
   <section class="allocation" id="allocation">
     <h2>Token Allocation</h2>
     <div class="alloc-visual">
       <canvas id="allocChart" width="250" height="250"></canvas>
     </div>
     <div class="alloc-cards">
-      <div class="card">
-        <h3>99%</h3>
-        <p>Community</p>
-      </div>
-      <div class="card">
-        <h3>1%</h3>
-        <p>Team & Holders</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section class="roadmap" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="steps">
-      <div class="step"><strong>Phase 1:</strong> Launch social presence & build community</div>
-      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-      <div class="step"><strong>Phase 3:</strong> CEX / DEX Listings</div>
-      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
+      <div class="card"><h3>99%</h3><p>Community</p></div>
+      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
     </div>
   </section>
 
@@ -235,7 +191,28 @@
       document.getElementById("myModal").style.display = "none";
     }
 
-    // Allocation Animated Pie Chart
+    // Circle Fill Animation
+    const canvasCircle = document.getElementById("circleCanvas");
+    const ctxCircle = canvasCircle.getContext("2d");
+    let percentCircle = 0;
+    function drawCircle(p) {
+      ctxCircle.clearRect(0, 0, 280, 280);
+      ctxCircle.beginPath();
+      ctxCircle.arc(140, 140, 135, -0.5 * Math.PI, ((2 * Math.PI) * (p/100)) - 0.5 * Math.PI);
+      ctxCircle.strokeStyle = "#ff4500";
+      ctxCircle.lineWidth = 8;
+      ctxCircle.stroke();
+    }
+    function animateCircle() {
+      if (percentCircle <= 100) {
+        drawCircle(percentCircle);
+        percentCircle += 1;
+        requestAnimationFrame(animateCircle);
+      }
+    }
+    animateCircle();
+
+    // Allocation Donut
     const canvas = document.getElementById("allocChart");
     const ctx = canvas.getContext("2d");
     const data = [99, 1];
@@ -261,13 +238,10 @@
         totalAngle -= slice;
         if (totalAngle <= 0) break;
       }
-
-      // Donut Effect
       ctx.beginPath();
       ctx.arc(125, 125, 70, 0, 2 * Math.PI);
       ctx.fillStyle = "#141414";
       ctx.fill();
-
       ctx.fillStyle = "#fff";
       ctx.font = "20px Arial";
       ctx.textAlign = "center";
@@ -279,9 +253,6 @@
         currentPercent += 2;
         drawChart(currentPercent);
         requestAnimationFrame(animateChart);
-      } else {
-        // glow effect
-        canvas.style.filter = "drop-shadow(0 0 15px #ff4500)";
       }
     }
     animateChart();
