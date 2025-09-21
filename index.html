@@ -20,16 +20,18 @@
     .side-menu a{margin:15px 0;font-size:1.1rem;color:#fff;transition:0.3s}
     .side-menu a:hover{color:#00f5ff}
     .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(135deg,#001,#111);padding:20px}
+    .hero img{width:180px;height:180px;border-radius:50%;box-shadow:0 0 40px #00f5ff;margin-bottom:20px}
     .hero h2{font-size:3rem;margin-bottom:20px;color:#00f5ff;animation:float 3s infinite ease-in-out}
     .hero p{max-width:600px;font-size:1.2rem;margin-bottom:20px}
     .btn{padding:10px 20px;background:#00f5ff;color:#000;border-radius:25px;font-weight:bold;cursor:pointer;transition:0.3s}
     .btn:hover{background:#00c3cc}
     section{padding:100px 20px;text-align:center}
-    .teaser,.allocation,.roadmap .step{opacity:0;transform:translateY(40px);transition:0.6s ease-out}
+    .teaser,.allocation,.roadmap{opacity:0;transform:translateY(40px);transition:0.6s ease-out}
     .visible{opacity:1;transform:translateY(0)}
     .allocation canvas{max-width:300px;margin-top:20px}
     .roadmap h2{margin-bottom:30px;color:#00f5ff}
-    .roadmap .step{margin:20px auto;padding:20px;background:#111;border-left:5px solid #00f5ff;max-width:600px;border-radius:10px}
+    .roadmap .step{margin:20px auto;padding:20px;background:#111;border-left:5px solid #00f5ff;max-width:600px;border-radius:10px;opacity:0;transform:translateY(40px);transition:0.8s}
+    .roadmap .step.visible{opacity:1;transform:translateY(0)}
     footer{padding:30px;text-align:center;background:#111}
     footer a{margin:0 10px;font-size:1.5rem;color:#00f5ff;transition:0.3s}
     footer a:hover{color:#fff}
@@ -63,7 +65,9 @@
     <a href="#footer">Contact</a>
   </div>
 
+  <!-- Hero Section with Logo -->
   <section id="hero" class="hero">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox Logo">
     <h2>Welcome to BROX</h2>
     <p>The future of decentralized finance starts here. Explore our vision, roadmap, and community.</p>
     <button class="btn" onclick="openModal()">Learn More</button>
@@ -160,7 +164,7 @@
 
     // ===== Reveal on Scroll =====
     function reveal(){
-      document.querySelectorAll('.teaser,.allocation,.roadmap .step').forEach(el=>{
+      document.querySelectorAll('.teaser,.allocation,.roadmap,.roadmap .step').forEach(el=>{
         const top=el.getBoundingClientRect().top;
         if(top<window.innerHeight-50){el.classList.add('visible')}
       });
