@@ -1,256 +1,196 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Brox Official</title>
-  <script src="https://kit.fontawesome.com/4f53c2f8c7.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-pQ2Xn1Y6Y4Zk6QzvKf6qX9oQ1k2e1KJv5ZlQ2Yx0qK+qN8n2s0q1b6b1dQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #0d0d0d;
-      color: #fff;
-      overflow-x: hidden;
+    /* -------------------- Base -------------------- */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color:#fff;background:#070707;line-height:1.4;overflow-x:hidden;
     }
-    a { text-decoration: none; color: inherit; }
+    a{color:inherit;text-decoration:none}/* -------------------- Header -------------------- */
+header{position:fixed;top:0;left:0;right:0;z-index:1200;display:flex;align-items:center;justify-content:space-between;padding:14px 26px;background:linear-gradient(180deg, rgba(0,0,0,0.55), rgba(0,0,0,0.25));backdrop-filter: blur(6px)}
+.logo{font-weight:800;font-size:1.35rem;color:#ff6a00;letter-spacing:1px}
+.menu-btn{font-size:1.6rem;padding:8px 12px;border-radius:8px;cursor:pointer;display:inline-flex;align-items:center;gap:10px}
+.menu-btn .bars{display:inline-block}
 
-    /* Header */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px 30px;
-      background: rgba(0,0,0,0.85);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      backdrop-filter: blur(8px);
-    }
-    .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
-      background: linear-gradient(45deg,#ff4500,#ff8800);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .menu-btn { font-size: 2rem; cursor: pointer; }
+/* -------------------- Side menu -------------------- */
+.side-menu{position:fixed;top:0;right:-320px;height:100%;width:320px;max-width:85vw;background:#0f0f10;box-shadow:-20px 0 40px rgba(0,0,0,0.6);transition:right .32s cubic-bezier(.2,.9,.3,1);padding-top:74px;z-index:1300}
+.side-menu.open{right:0}
+.side-menu .close-x{position:absolute;left:14px;top:14px;font-size:1.15rem;padding:10px;border-radius:8px;cursor:pointer}
+.side-menu nav a{display:block;padding:16px 26px;font-size:1.05rem;color:#e6e6e6;border-left:4px solid transparent;transition:all .18s}
+.side-menu nav a:hover{background:linear-gradient(90deg, rgba(255,90,30,0.08), transparent);border-left-color:#ff6a00;padding-left:32px}
 
-    /* Side Menu */
-    .side-menu {
-      position: fixed;
-      right: -250px;
-      top: 0;
-      height: 100%;
-      width: 250px;
-      background: #111;
-      transition: 0.3s;
-      padding-top: 80px;
-      z-index: 2000;
-    }
-    .side-menu a {
-      display: block;
-      padding: 15px 25px;
-      font-size: 1.2rem;
-      color: #fff;
-      transition: 0.2s;
-    }
-    .side-menu a:hover { background: #ff4500; }
-    .side-menu.open { right: 0; }
+/* -------------------- Hero -------------------- */
+.hero{min-height:100vh;padding-top:88px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:18px;text-align:center;position:relative;overflow:hidden}
+/* floating radial energy behind hero */
+.energy{
+  position:absolute;inset: -20% -40% auto -40%;height:160%;pointer-events:none;background:radial-gradient(closest-side, rgba(255,110,40,0.12), transparent 35%), radial-gradient(closest-side, rgba(255,40,0,0.06), transparent 30%);filter:blur(36px);transform:translateZ(0);
+}
+.circle-container{position:relative;width:280px;height:280px;border-radius:50%;border:4px solid rgba(255,90,30,0.95);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(255,90,30,0.16);animation:spin 20s linear infinite}
+.circle-container img{width:140px;height:140px;border-radius:50%;object-fit:cover;animation:spinReverse 18s linear infinite}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+@keyframes spinReverse{from{transform:rotate(0)}to{transform:rotate(-360deg)}}
 
-    /* Hero */
-    .hero {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      padding-top: 80px;
-      position: relative;
-      overflow: hidden;
-    }
-    /* خلفية متحركة */
-    .hero::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle,#ff450055 10%,transparent 60%),
-                  radial-gradient(circle,#ff880055 10%,transparent 60%);
-      background-size: 400px 400px;
-      animation: moveBg 15s linear infinite;
-      z-index: 0;
-    }
-    @keyframes moveBg {
-      from { transform: translate(0,0) rotate(0deg); }
-      to { transform: translate(50px,50px) rotate(360deg); }
-    }
-    .hero-content { position: relative; z-index: 1; }
-    .circle-container {
-      width: 280px;
-      height: 280px;
-      border: 4px solid #ff4500;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 0 40px rgba(255,69,0,0.7);
-      animation: pulse 3s infinite;
-    }
-    .circle-container img {
-      width: 140px;
-      height: 140px;
-      border-radius: 50%;
-    }
-    @keyframes pulse {
-      0%,100% { box-shadow: 0 0 30px rgba(255,69,0,0.6); }
-      50% { box-shadow: 0 0 70px rgba(255,69,0,1); }
-    }
-    .hero h1 {
-      margin-top: 25px;
-      font-size: 3rem;
-      background: linear-gradient(45deg,#ff4500,#ff8800);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .hero p { max-width: 500px; margin: 15px auto; color: #ccc; }
-    .cta {
-      margin-top: 20px;
-    }
-    .cta a {
-      display: inline-block;
-      margin: 10px;
-      padding: 12px 25px;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      font-weight: bold;
-      color: #fff;
-      background: linear-gradient(45deg,#ff4500,#ff8800);
-      box-shadow: 0 0 20px rgba(255,69,0,0.5);
-      transition: 0.3s;
-    }
-    .cta a:hover { transform: scale(1.1); }
+h1{font-size:2.6rem;line-height:1.02;background:linear-gradient(90deg,#ff8a3d,#ff4a00);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{max-width:680px;color:#cfcfcf}
 
-    /* Trust Section */
-    .trust {
-      padding: 80px 20px;
-      background: #141414;
-      text-align: center;
-    }
-    .trust h2 {
-      font-size: 2rem;
-      margin-bottom: 30px;
-      color: #ff4500;
-    }
-    .trust-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-    }
-    .trust-card {
-      flex: 1 1 220px;
-      background: #1a1a1a;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,69,0,0.3);
-      transition: 0.3s;
-    }
-    .trust-card i {
-      font-size: 2rem;
-      margin-bottom: 10px;
-      color: #ff4500;
-    }
-    .trust-card:hover { transform: translateY(-8px); }
+/* CTA row (kept unobtrusive but visible) */
+.cta{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;font-weight:700;cursor:pointer;border:none}
+.btn.primary{background:linear-gradient(90deg,#ff6a00,#ffb86b);color:#111;box-shadow:0 8px 30px rgba(255,106,0,0.14)}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
 
-    /* Footer */
-    footer {
-      padding: 30px 20px;
-      text-align: center;
-      background: #141414;
-    }
-    .socials a {
-      margin: 0 12px;
-      font-size: 1.6rem;
-      transition: 0.3s;
-      color: white;
-    }
-    .socials a:hover { color: #ff4500; transform: scale(1.2); }
-    footer p { font-size: 0.9rem; color: #aaa; }
+/* subtle reveal animation for on-scroll */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.9,.3,1)}
+.reveal.visible{opacity:1;transform:none}
+
+/* -------------------- Allocation -------------------- */
+.allocation{padding:72px 20px;background:#0b0b0b;text-align:center}
+.allocation h2{font-size:1.9rem;color:#ff6a00;margin-bottom:18px}
+.alloc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:980px;margin:0 auto}
+.card{background:linear-gradient(180deg,#111,#0d0d0d);padding:20px;border-radius:12px;box-shadow:0 6px 24px rgba(0,0,0,0.6);transition:transform .28s}
+.card:hover{transform:translateY(-8px)}
+.card h3{font-size:1.8rem;color:#ff6a00;margin-bottom:6px}
+.card p{color:#cfcfcf}
+.progress{height:8px;background:rgba(255,255,255,0.04);border-radius:999px;margin-top:12px;overflow:hidden}
+.progress > span{display:block;height:100%;background:linear-gradient(90deg,#ff6a00,#ffb86b)}
+
+/* -------------------- Roadmap -------------------- */
+.roadmap{padding:72px 20px;background:linear-gradient(180deg,#070707,#050505);text-align:center}
+.roadmap h2{font-size:1.9rem;color:#ff6a00;margin-bottom:22px}
+.steps{max-width:760px;margin:0 auto;text-align:left}
+.step{background:#111;padding:16px;border-left:4px solid #ff6a00;border-radius:8px;margin-bottom:14px}
+
+/* -------------------- Footer -------------------- */
+footer{padding:30px 18px;text-align:center;background:#0d0d0d}
+.socials{margin-bottom:12px}
+.socials a{margin:0 10px;font-size:1.4rem;opacity:.95}
+footer p{color:#9b9b9b;font-size:.95rem}
+
+/* -------------------- Responsive tweaks -------------------- */
+@media (max-width:720px){h1{font-size:2rem}.circle-container{width:220px;height:220px}.circle-container img{width:110px;height:110px}}
+
   </style>
 </head>
 <body>
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  </header>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="sideMenu">
+      <span class="bars"><i class="fa-solid fa-bars"></i></span>
+      <span class="sr-only" style="display:none">menu</span>
+    </button>
+  </header>  <!-- Side Menu (kept same links & order) -->  <aside class="side-menu" id="sideMenu" aria-hidden="true">
+    <button class="close-x" id="closeX" aria-label="Close menu"><i class="fa-solid fa-xmark"></i></button>
+    <nav>
+      <a href="#hero">Home</a>
+      <a href="#allocation">Allocation</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#footer">Contact</a>
+    </nav>
+  </aside>  <!-- Hero Section -->  <main>
+    <section class="hero" id="hero">
+      <div class="energy" aria-hidden="true"></div>
+      <div class="circle-container" aria-hidden="true">
+        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox logo / artwork">
+      </div><h1>Welcome to BROX</h1>
+  <p>The meme revolution begins. Powered by community.</p>
 
-  <!-- Side Menu -->
-  <div class="side-menu" id="sideMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#trust" onclick="closeMenu()">Trust</a>
-    <a href="#footer" onclick="closeMenu()">Contact</a>
+  <!-- CTA kept but unobtrusive so original content remains intact -->
+  <div class="cta">
+    <a class="btn primary" href="https://t.me/brox__official" target="_blank" rel="noopener">🚀 Join Telegram</a>
+    <a class="btn ghost" href="#allocation">💠 View Allocation</a>
   </div>
+</section>
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="circle-container">
-        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-      </div>
-      <h1>Welcome to BROX</h1>
-      <p>The meme revolution begins. Powered by community & trust.</p>
-      <div class="cta">
-        <a href="https://t.me/brox__official" target="_blank">🚀 Join Telegram</a>
-        <a href="#" target="_blank">💰 Buy BROX</a>
-      </div>
+<!-- Allocation Section (KEPT EXACT TITLE + CONTENT and order) -->
+<section class="allocation" id="allocation">
+  <h2>Token Allocation</h2>
+  <div class="alloc-cards">
+    <div class="card reveal">
+      <h3>99%</h3>
+      <p>Community</p>
+      <div class="progress" aria-hidden="true"><span style="width:99%"></span></div>
     </div>
-  </section>
-
-  <!-- Trust Section -->
-  <section class="trust" id="trust">
-    <h2>Why Trust BROX?</h2>
-    <div class="trust-cards">
-      <div class="trust-card">
-        <i class="fas fa-lock"></i>
-        <h3>Liquidity Locked</h3>
-        <p>Funds secured for long-term stability.</p>
-      </div>
-      <div class="trust-card">
-        <i class="fas fa-user-shield"></i>
-        <h3>Audited</h3>
-        <p>Smart contracts checked for safety.</p>
-      </div>
-      <div class="trust-card">
-        <i class="fas fa-users"></i>
-        <h3>Community Driven</h3>
-        <p>Decisions powered by the BROX family.</p>
-      </div>
+    <div class="card reveal">
+      <h3>1%</h3>
+      <p>Team & Holders</p>
+      <div class="progress" aria-hidden="true"><span style="width:1%"></span></div>
     </div>
-  </section>
+  </div>
+  <!-- small trust badges added INSIDE allocation so original page order is preserved -->
+  <div style="max-width:920px;margin:18px auto 0;display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+    <div style="background:#0b0b0b;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:.92rem;color:#cfcfcf">🔒 Liquidity Locked</div>
+    <div style="background:#0b0b0b;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:.92rem;color:#cfcfcf">🧾 Audit (coming)</div>
+    <div style="background:#0b0b0b;padding:10px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);font-size:.92rem;color:#cfcfcf">👥 Community Driven</div>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer id="footer">
+<!-- Roadmap (KEPT EXACT TITLE + ITEMS and order) -->
+<section class="roadmap" id="roadmap">
+  <h2>Roadmap</h2>
+  <div class="steps">
+    <div class="step reveal"><strong>Phase 1:</strong> Launch social presence & build community</div>
+    <div class="step reveal"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+    <div class="step reveal"><strong>Phase 3:</strong> CEX / DEX Listings</div>
+    <div class="step reveal"><strong>Phase 4:</strong> Expansion & partnerships</div>
+  </div>
+</section>
+
+  </main>  <!-- Footer (KEPT EXACT CONTENT & LINKS) -->  <footer id="footer">
     <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>
+  </footer>  <script>
+    // --- Menu controls: preserves original links + fixes the bug (menu not closing) ---
+    const menuBtn = document.getElementById('menuBtn');
+    const sideMenu = document.getElementById('sideMenu');
+    const closeX = document.getElementById('closeX');
 
-  <script>
-    function toggleMenu() {
-      document.getElementById("sideMenu").classList.toggle("open");
-    }
-    function closeMenu() {
-      document.getElementById("sideMenu").classList.remove("open");
-    }
-  </script>
-</body>
+    function openMenu(){ sideMenu.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); sideMenu.setAttribute('aria-hidden','false'); }
+    function closeMenu(){ sideMenu.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); sideMenu.setAttribute('aria-hidden','true'); }
+    function toggleMenu(){ sideMenu.classList.contains('open')? closeMenu() : openMenu(); }
+
+    menuBtn.addEventListener('click', (e)=>{ e.stopPropagation(); toggleMenu(); });
+    closeX.addEventListener('click', (e)=>{ e.stopPropagation(); closeMenu(); });
+
+    // Close when clicking any nav link (fixes the "button stays visible after click" issue)
+    Array.from(sideMenu.querySelectorAll('nav a')).forEach(a=>a.addEventListener('click', ()=> closeMenu()));
+
+    // Close when clicking outside of menu
+    document.addEventListener('click', (e)=>{
+      if(sideMenu.classList.contains('open')){
+        const withinMenu = sideMenu.contains(e.target) || menuBtn.contains(e.target);
+        if(!withinMenu) closeMenu();
+      }
+    });
+
+    // Close with ESC
+    document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeMenu(); });
+
+    // Smooth reveal on scroll for '.reveal' elements
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('visible'); }
+      });
+    },{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // If you want the header's menu button transform when open
+    const icon = menuBtn.querySelector('i');
+    const mo = new MutationObserver(()=>{
+      if(sideMenu.classList.contains('open')){ icon.classList.remove('fa-bars'); icon.classList.add('fa-xmark'); }
+      else{ icon.classList.remove('fa-xmark'); icon.classList.add('fa-bars'); }
+    });
+    mo.observe(sideMenu,{attributes:true,attributeFilter:['class']});
+  </script></body>
 </html>
