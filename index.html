@@ -1,132 +1,168 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BROX — Official</title>
-  <meta name="description" content="BROX — Community-driven meme token. Join the revolution. Early access, roadmap, token allocation and socials." />
-  <meta name="theme-color" content="#0b0b0b" />
-  <!-- Open Graph -->
-  <meta property="og:title" content="BROX — Official" />
-  <meta property="og:description" content="BROX — Community driven meme token. Join the revolution." />
-  <meta property="og:type" content="website" />
-  <!-- Font Awesome (icons) -->
-  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Favicons -->
-  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <meta name="description" content="BROX — Community-driven meme token. Join the revolution."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    /* نفس التنسيقات التي وضعتها من قبل (لن أعيدها هنا لتوفير المساحة) */
+    /* Reset */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:#0b0b0b; color:#fff; line-height:1.6;
+    }
+    a {color:inherit; text-decoration:none;}
+    img {max-width:100%; display:block;}
+    h1,h2,h3 {font-weight:700;}
+    button {
+      background:#ff3c00; border:none; padding:12px 25px;
+      border-radius:30px; cursor:pointer; font-weight:600;
+      color:#fff; transition:0.3s;
+    }
+    button:hover {background:#ff5722;}
+
+    /* Header */
+    header {
+      display:flex; justify-content:space-between; align-items:center;
+      padding:20px 8%; position:sticky; top:0; background:#0b0b0b; z-index:10;
+    }
+    header .logo {display:flex; align-items:center; gap:10px; font-size:20px; font-weight:700;}
+    nav ul {display:flex; list-style:none; gap:25px;}
+    nav a {font-weight:500; transition:0.3s;}
+    nav a:hover {color:#ff3c00;}
+
+    /* Hero */
+    .hero {
+      display:grid; grid-template-columns:1fr 1fr; gap:40px;
+      align-items:center; padding:80px 8%;
+    }
+    .hero-text h1 {font-size:3rem; margin-bottom:20px;}
+    .hero-text p {margin-bottom:30px; font-size:1.1rem; color:#ccc;}
+    .hero img {border-radius:20px; box-shadow:0 0 20px #ff3c00;}
+    @media(max-width:900px){
+      .hero {grid-template-columns:1fr; text-align:center;}
+    }
+
+    /* Section */
+    section {padding:80px 8%;}
+    .title {text-align:center; margin-bottom:50px;}
+    .title h2 {font-size:2rem; margin-bottom:10px;}
+
+    /* Tokenomics */
+    .tokenomics {
+      display:grid; grid-template-columns:1fr 1fr; gap:40px;
+      align-items:center;
+    }
+    .donut {width:280px; height:280px; margin:auto; position:relative;}
+    .donut svg {transform:rotate(-90deg);}
+    .donut text {fill:#fff; font-weight:600;}
+    .donut-center {
+      position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
+      text-align:center; font-size:1.2rem;
+    }
+    @media(max-width:900px){
+      .tokenomics {grid-template-columns:1fr;}
+    }
+
+    /* Roadmap */
+    .roadmap {display:grid; gap:25px; max-width:800px; margin:auto;}
+    .roadmap div {
+      padding:20px; border-left:4px solid #ff3c00;
+      background:#111; border-radius:10px;
+    }
+
+    /* Footer */
+    footer {
+      background:#111; padding:30px 8%; text-align:center;
+      border-top:1px solid #222; margin-top:50px;
+    }
+    .socials {display:flex; justify-content:center; gap:20px; margin-top:15px;}
+    .socials a {font-size:1.5rem; transition:0.3s;}
+    .socials a:hover {color:#ff3c00;}
   </style>
 </head>
 <body>
-  <!-- Particles canvas -->
-  <canvas id="particles" aria-hidden="true"></canvas>
 
   <!-- Header -->
-  <header class="container" role="banner">
-    <div class="logo" aria-label="BROX logo">
-      <div class="mark" aria-hidden>🔥</div>
-      <div>BROX</div>
+  <header>
+    <div class="logo">
+      <img src="assets/images/logo-sm.png" alt="BROX" width="35" height="35"/>
+      BROX
     </div>
-    <nav role="navigation" aria-label="Main navigation">
-      <a href="#hero">Home</a>
-      <a href="#teaser">Coming Soon</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#tokenomics">Tokenomics</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#community">Community</a></li>
+      </ul>
     </nav>
-    <div class="actions">
-      <button class="ghost" id="copyAddress" title="Copy contract address">Copy Contract</button>
-      <button class="btn" id="openModal">Join Now</button>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-    </div>
   </header>
 
-  <!-- Main -->
-  <main>
-    <!-- Hero -->
-    <section class="hero container" id="hero" aria-labelledby="hero-title">
-      <div class="hero-inner">
-        <div class="hero-card fade-up in">
-          <div class="hero-media" role="img" aria-label="Brox avatar">
-            <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" onerror="this.src='https://via.placeholder.com/160'" loading="lazy">
-            <div class="hero-title" id="hero-title">🔥 Welcome to BROX</div>
-            <p class="hero-desc">A community-driven meme token — built for fun and powered by the crowd. Join now and get launch updates.</p>
-          </div>
-        </div>
-        <aside class="hero-card hero-cta">
-          <div class="quick-stats">
-            <div class="stat"><span>Allocation</span><b>99% / 1%</b></div>
-            <div class="stat"><span>Status</span><b>Pre-Launch</b></div>
-          </div>
-          <div class="cta-row">
-            <button class="btn" id="ctaPrimary">Get Notified</button>
-            <a class="ghost" href="#allocation">See Allocation</a>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-            <input id="contractInput" readonly value="0xYOURCONTRACTADDRESS" style="flex:1;background:transparent;border-radius:10px;padding:10px;border:1px solid rgba(255,255,255,0.04);color:#ddd">
-            <button class="ghost" id="copyBtn">Copy</button>
-          </div>
-          <small style="color:var(--muted);margin-top:10px;display:block">Note: Never share your private keys. This is a placeholder contract.</small>
-        </aside>
-      </div>
-    </section>
+  <!-- Hero -->
+  <section class="hero" id="about">
+    <div class="hero-text">
+      <h1>Welcome to BROX 🚀</h1>
+      <p>The meme token that unites the community and takes it to the moon. Built by the people, for the people.</p>
+      <button onclick="window.location.href='#tokenomics'">Explore Tokenomics</button>
+    </div>
+    <div>
+      <img src="assets/images/hero-avatar.png" alt="BROX Mascot"/>
+    </div>
+  </section>
 
-    <!-- Teaser -->
-    <section id="teaser" class="teaser container">
-      <div class="media hero-card">
-        <img src="Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" onerror="this.src='https://via.placeholder.com/420x300'" loading="lazy">
+  <!-- Tokenomics -->
+  <section id="tokenomics">
+    <div class="title">
+      <h2>Tokenomics</h2>
+      <p>Fair & transparent distribution of BROX.</p>
+    </div>
+    <div class="tokenomics">
+      <div class="donut">
+        <svg width="280" height="280">
+          <circle r="120" cx="140" cy="140" fill="transparent" stroke="#222" stroke-width="30"/>
+          <circle r="120" cx="140" cy="140" fill="transparent" stroke="#ff3c00" stroke-width="30"
+                  stroke-dasharray="754" stroke-dashoffset="150"/>
+        </svg>
+        <div class="donut-center">
+          <p><b>Supply</b><br/>1,000,000,000</p>
+        </div>
       </div>
       <div>
-        <h2 class="fade-up in">🚀 Coming Soon</h2>
-        <p class="fade-up in" style="margin-top:12px;color:var(--muted)">We are building the full experience — professional website, marketing campaigns, and listings on decentralized and centralized exchanges. Subscribe to get the latest updates.</p>
-      </div>
-    </section>
-
-    <!-- Allocation -->
-    <section id="allocation" class="allocation container">
-      <h2 style="color:var(--accent)">Token Allocation</h2>
-      <div class="inner" style="margin-top:18px">
-        <div class="chart-wrap">
-          <canvas id="allocChart" aria-label="Allocation chart" role="img"></canvas>
-        </div>
-        <div>
-          <div class="alloc-list">
-            <div class="alloc-item"><span>Community</span><strong>99%</strong></div>
-            <div class="alloc-item"><span>Team & Holders</span><strong>1%</strong></div>
-          </div>
-          <p style="color:var(--muted);margin-top:12px">A simple and transparent distribution ensures the majority of supply goes to the community. You can easily adjust the percentages inside the chart script.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Roadmap -->
-    <section id="roadmap" class="roadmap container">
-      <h2 style="color:var(--accent)">Roadmap</h2>
-      <div class="timeline" style="margin-top:18px">
-        <div class="phase">Phase 1 — Build social presence & community growth</div>
-        <div class="phase">Phase 2 — Website upgrade, marketing campaigns</div>
-        <div class="phase">Phase 3 — DEX/CEX listings & liquidity</div>
-        <div class="phase">Phase 4 — Partnerships & ecosystem expansion</div>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer id="footer" class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
-      <div class="socials">
-        <a href="https://www.instagram.com/brox__official" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
-        <a href="https://www.tiktok.com/@brox__official" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok fa-lg"></i></a>
-        <a href="https://x.com/brox" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
-        <a href="https://t.me/brox" target="_blank" aria-label="Telegram"><i class="fab fa-telegram fa-lg"></i></a>
-      </div>
-      <div style="margin-top:8px">
-        <strong style="color:var(--accent)">BROX</strong>
-        <p style="color:var(--muted);margin-top:6px">© 2025 BROX. All rights reserved.</p>
+        <p>🔥 50% Burned</p>
+        <p>💧 30% Liquidity</p>
+        <p>👥 15% Community Rewards</p>
+        <p>🛠️ 5% Development</p>
       </div>
     </div>
+  </section>
+
+  <!-- Roadmap -->
+  <section id="roadmap">
+    <div class="title">
+      <h2>Roadmap</h2>
+      <p>Our journey to the moon.</p>
+    </div>
+    <div class="roadmap">
+      <div><b>Phase 1:</b> Launch + Community building</div>
+      <div><b>Phase 2:</b> Listings & Partnerships</div>
+      <div><b>Phase 3:</b> Expansion + Utilities</div>
+      <div><b>Phase 4:</b> Global Recognition</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="community">
+    <p>Join the BROX revolution</p>
+    <div class="socials">
+      <a href="#"><i class="fab fa-telegram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-discord"></i></a>
+    </div>
+    <p style="margin-top:10px; font-size:0.9rem;">&copy; 2025 BROX. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
