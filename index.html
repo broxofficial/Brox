@@ -8,157 +8,164 @@
   <meta name="description" content="BROX — Community-driven meme token. Join the revolution. Early access, roadmap, token allocation and socials." />
   <meta name="theme-color" content="#0b0b0b" />  <!-- Open Graph -->  <meta property="og:title" content="BROX — Official" />
   <meta property="og:description" content="BROX — Community driven meme token. Join the revolution." />
-  <meta property="og:type" content="website" />  <!-- Font Awesome (icons) -->  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  <!-- Favicons -->  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />  <style>
-    /* ===== Reset & Base ===== */
+  <meta property="og:type" content="website" />  <!-- Font Awesome -->  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  <style>
     :root{
-      --bg-1:#050505; --bg-2:#0d0d0d; --accent:#ff4500; --muted:#bfbfbf;
-      --glass: rgba(255,255,255,0.03);
-      --card: rgba(20,20,20,0.75);
-      --radius:14px;
-      --max-width:1200px;
-      --gap:18px;
-      --glass-strong: rgba(255,69,0,0.06);
+      --bg-1:#030305; --bg-2:#0b0d10; --accent:#ff4500; --muted:#bfbfbf;
+      --glass: rgba(255,255,255,0.03); --card: rgba(18,18,20,0.7);
+      --radius:16px; --max-width:1200px; --gap:18px;
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
-    body{
-      background: radial-gradient(circle at 10% 0%, #071018 5%, var(--bg-2) 40%, #000 100%);
-      color:#fff;font-family: 'Segoe UI','Tajawal', Arial, sans-serif;
-      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-    }
+    body{background: radial-gradient(1200px 600px at 10% 0%, #071018 5%, var(--bg-2) 40%, #000 100%);color:#fff;font-family:Inter, 'Segoe UI', Arial, sans-serif;line-height:1.45;}
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block}
     .container{max-width:var(--max-width);margin:0 auto;padding:0 20px}
 
-    /* ===== Header ===== */
-    header{position:fixed;inset:0 0 auto 0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:linear-gradient(180deg, rgba(255,69,0,0.04), rgba(0,0,0,0.2));backdrop-filter:blur(6px);z-index:60;border-bottom:1px solid rgba(255,69,0,0.03)}
-    .logo{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--accent);font-size:1.35rem}
-    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff8a50);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 28px rgba(255,69,0,0.12)}
+    /* Header */
+    header{position:fixed;top:0;left:0;right:0;height:72px;display:flex;align-items:center;justify-content:space-between;padding:12px 24px;backdrop-filter:blur(8px);z-index:60}
+    .glass-bar{background:linear-gradient(90deg, rgba(255,69,0,0.04), rgba(0,0,0,0.35));border-bottom:1px solid rgba(255,69,0,0.04);padding:6px;border-radius:12px}
+    .logo{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--accent);font-size:1.25rem}
+    .logo .mark{width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff8a50);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(255,69,0,0.12)}
 
     nav{display:flex;align-items:center;gap:14px}
     nav a{padding:8px 12px;border-radius:10px;font-weight:600;color:var(--muted);transition:all .18s}
-    nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(255,69,0,0.06), rgba(255,102,51,0.03))}
+    nav a:hover{color:#fff;background:linear-gradient(90deg, rgba(255,69,0,0.08), rgba(255,102,51,0.04))}
 
     .actions{display:flex;align-items:center;gap:10px}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#ff6a33);border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 22px rgba(255,69,0,0.14)}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent),#ff6a33);border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(255,69,0,0.16);transition:transform .18s}
+    .btn:hover{transform:translateY(-3px)}
     .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px}
 
-    /* ===== Mobile menu ===== */
     .hamburger{display:none;font-size:1.6rem;background:transparent;border:none;color:#fff}
     @media (max-width:900px){nav{display:none}.hamburger{display:inline-flex}}
 
-    /* ===== Hero ===== */
-    .hero{min-height:86vh;display:grid;place-items:center;position:relative;padding-top:72px}
-    .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;width:100%;max-width:1100px}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:30px;border-radius:18px;box-shadow:0 12px 50px rgba(0,0,0,0.6);border:1px solid rgba(255,69,0,0.04)}
+    /* Preloader */
+    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#050505);z-index:200;transition:opacity .5s}
+    .preloader-inner{display:flex;flex-direction:column;align-items:center;gap:12px}
+    .logo-glow{width:90px;height:90px;border-radius:22px;background:linear-gradient(135deg,#ff6a33,#ffbd7a);display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 0 40px rgba(255,69,0,0.25);animation:glow 1.6s infinite}
+    @keyframes glow{0%{transform:scale(1);opacity:1}50%{transform:scale(1.04);opacity:.95}100%{transform:scale(1);opacity:1}}
 
-    .hero-media{display:flex;flex-direction:column;align-items:center;gap:14px}
-    .hero-media img{width:160px;height:160px;border-radius:50%;object-fit:cover;box-shadow:0 18px 60px rgba(255,69,0,0.12)}
-    .hero-title{font-size:2.4rem;color:var(--accent);text-shadow:0 6px 28px rgba(255,69,0,0.06)}
-    .hero-desc{color:var(--muted);margin-top:10px}
+    /* Hero */
+    .hero{min-height:88vh;display:grid;place-items:center;padding-top:92px;position:relative}
+    .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;width:100%;max-width:1200px}
+    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:20px;box-shadow:0 18px 80px rgba(0,0,0,0.6);border:1px solid rgba(255,69,0,0.04)}
 
-    .hero-cta{display:flex;flex-direction:column;gap:12px}
-    .cta-row{display:flex;gap:12px}
+    .hero-media{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .hero-media img{width:180px;height:180px;border-radius:50%;object-fit:cover;box-shadow:0 30px 100px rgba(255,69,0,0.12)}
+    .hero-title{font-size:2.6rem;color:var(--accent);text-shadow:0 10px 40px rgba(255,69,0,0.06);font-weight:800}
+    .hero-desc{color:var(--muted);margin-top:6px;text-align:center;max-width:520px}
 
-    /* alloc quick info */
-    .quick-stats{display:flex;gap:12px;flex-wrap:wrap}
-    .stat{background:var(--card);padding:12px 16px;border-radius:12px;min-width:120px;text-align:center}
-    .stat b{display:block;font-size:1.25rem;color:var(--accent)}
+    .stats-row{display:flex;gap:12px;justify-content:center;margin-top:12px}
+    .stat-pill{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 14px;border-radius:12px;text-align:center;min-width:110px}
+    .stat-pill b{display:block;color:var(--accent);font-size:18px}
 
-    /* ===== Sections ===== */
+    /* CTA column */
+    .hero-cta{display:flex;flex-direction:column;gap:16px}
+    .contract-box{display:flex;gap:8px;align-items:center}
+    .contract-box input{flex:1;background:transparent;border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.06);color:#ddd}
+
+    /* Sections */
     section{padding:80px 0}
-    .teaser{display:flex;align-items:center;gap:28px}
+    .teaser{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
     .teaser .media{flex:0 0 420px;border-radius:16px;overflow:hidden}
     .teaser h2{font-size:2rem;color:var(--accent)}
 
     /* Allocation */
     .allocation .inner{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:center}
-    .chart-wrap{background:var(--card);padding:20px;border-radius:14px}
+    .chart-wrap{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px}
     canvas#allocChart{width:100%;height:300px;display:block}
-    .alloc-list{display:grid;gap:12px}
+    .alloc-list{display:grid;gap:12px;margin-top:12px}
     .alloc-item{display:flex;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:10px}
 
     /* Roadmap */
     .roadmap .timeline{display:grid;gap:14px}
-    .roadmap .phase{padding:14px;border-radius:12px;background:var(--card);border-left:6px solid var(--accent)}
+    .roadmap .phase{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-left:6px solid var(--accent)}
 
     /* Footer */
-    footer{padding:40px 0;background:linear-gradient(180deg,rgba(0,0,0,0.4), rgba(0,0,0,0.6));border-top:1px solid rgba(255,69,0,0.03)}
-    .socials{display:flex;gap:16px;align-items:center}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(0,0,0,0.6),rgba(0,0,0,0.7));z-index:120}
-    .modal.show{display:flex}
-    .modal-card{width:100%;max-width:480px;background:linear-gradient(180deg,#0b0b0b,#111);padding:22px;border-radius:14px;border:1px solid rgba(255,69,0,0.06)}
-    .form-control{display:flex;gap:10px}
-    input[type=email]{flex:1;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff}
-
-    /* Particles canvas full-screen (behind) */
-    canvas#particles{position:fixed;inset:0;z-index:-1}
+    footer{padding:36px 0;background:linear-gradient(180deg,rgba(0,0,0,0.4), rgba(0,0,0,0.6));border-top:1px solid rgba(255,69,0,0.03);margin-top:30px}
+    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+    .socials{display:flex;gap:14px;align-items:center}
+    .copyright{color:var(--muted)}
 
     /* Responsive */
-    @media (max-width:1100px){.hero-inner{grid-template-columns:1fr;}.teaser .media{display:none}.allocation .inner{grid-template-columns:1fr}}
-    @media (max-width:600px){.hero-title{font-size:1.5rem}.logo{font-size:1rem}}
+    @media (max-width:1100px){.hero-inner{grid-template-columns:1fr}.teaser .media{flex:1 1 100%}.allocation .inner{grid-template-columns:1fr}}
+    @media (max-width:700px){.hero-title{font-size:1.6rem}}
 
-    /* micro animations */
     .fade-up{opacity:0;transform:translateY(20px);transition:all .6s ease}
     .fade-up.in{opacity:1;transform:none}
-  </style></head><body>
-  <!-- Particles canvas -->
-  <canvas id="particles" aria-hidden="true"></canvas>  <header class="container" role="banner">
+  </style></head>
+<body>  <!-- Preloader (logo glow) -->  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="logo-glow">🔥</div>
+      <div style="color:#ddd;font-weight:700">BROX — Loading</div>
+    </div>
+  </div>  <!-- Particles canvas --><canvas id="particles" aria-hidden="true"></canvas>
+
+  <header class="container glass-bar" role="banner">
     <div class="logo" aria-label="BROX logo">
       <div class="mark" aria-hidden>🔥</div>
       <div>BROX</div>
-    </div>
-    <nav role="navigation" aria-label="Main navigation">
-      <a href="#hero">Home</a>
-      <a href="#teaser">Coming Soon</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
-    </nav>
-    <div class="actions">
-      <button class="ghost" id="copyAddress" title="Copy contract address">Copy Contract</button>
-      <button class="btn" id="openModal">Join Now</button>
-      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-    </div>
+    </div><nav role="navigation" aria-label="Main navigation">
+  <a href="#hero">Home</a>
+  <a href="#teaser">Coming Soon</a>
+  <a href="#allocation">Allocation</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#footer">Contact</a>
+</nav>
+
+<div class="actions">
+  <button class="ghost" id="copyAddress" title="Copy contract address">Copy Contract</button>
+  <button class="btn" id="openModal">Join Now</button>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+</div>
+
   </header>  <main>
     <!-- Hero -->
     <section class="hero container" id="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
         <div class="hero-card fade-up in">
-          <div class="hero-media" role="img" aria-label="Brox avatar">
-            <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" onerror="this.src='https://via.placeholder.com/160'" loading="lazy">
-            <div class="hero-title" id="hero-title">🔥 Welcome to BROX</div>
-            <p class="hero-desc">A community-driven meme token — built for fun and powered by the crowd. Join now and get launch updates.</p>
-          </div>
+          <div class="hero-media">
+            <!-- Hero image (provided by you) -->
+            <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy" onerror="this.src='https://via.placeholder.com/180'">
+            <div class="hero-title" id="hero-title">BROX — Born in Fire</div>
+            <p class="hero-desc">Community-driven meme token. Built for fun, fueled by the crowd. Join the movement and get notified at launch.</p><div class="stats-row" aria-hidden>
+          <div class="stat-pill"><small>Allocation</small><b>99% / 1%</b></div>
+          <div class="stat-pill"><small>Status</small><b>Pre-Launch</b></div>
+          <div class="stat-pill"><small>Holders</small><b id="holdersCount">0</b></div>
         </div>
-        <aside class="hero-card hero-cta">
-          <div class="quick-stats">
-            <div class="stat"><span>Allocation</span><b>99% / 1%</b></div>
-            <div class="stat"><span>Status</span><b>Pre-Launch</b></div>
-          </div>
-          <div class="cta-row">
-            <button class="btn" id="ctaPrimary">Get Notified</button>
-            <a class="ghost" href="#allocation">See Allocation</a>
-          </div>
-          <div style="margin-top:12px;display:flex;gap:8px;align-items:center">
-            <input id="contractInput" readonly value="0xYOURCONTRACTADDRESS" style="flex:1;background:transparent;border-radius:10px;padding:10px;border:1px solid rgba(255,255,255,0.04);color:#ddd">
-            <button class="ghost" id="copyBtn">Copy</button>
-          </div>
-          <small style="color:var(--muted);margin-top:10px;display:block">Note: Never share your private keys. This is a placeholder contract.</small>
-        </aside>
       </div>
-    </section><!-- Teaser -->
+    </div>
+
+    <aside class="hero-card hero-cta fade-up in">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div style="font-weight:800;color:var(--accent)">Get early access</div>
+        <div style="font-size:12px;color:var(--muted)">Limited whitelist spots</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <button class="btn" id="ctaPrimary">Get Notified</button>
+        <a class="ghost" href="#allocation" style="margin-left:8px">See Allocation</a>
+      </div>
+
+      <div style="margin-top:16px" class="contract-box">
+        <input id="contractInput" readonly value="0xYOURCONTRACTADDRESS">
+        <button class="ghost" id="copyBtn">Copy</button>
+      </div>
+
+      <small style="color:var(--muted);margin-top:10px;display:block">Note: Never share your private keys. This is a demo contract address.</small>
+    </aside>
+  </div>
+</section>
+
+<!-- Teaser / second image -->
 <section id="teaser" class="teaser container">
-  <div class="media hero-card">
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" onerror="this.src='https://via.placeholder.com/420x300'" loading="lazy">
+  <div class="media hero-card fade-up in">
+    <img src="Picsart_25-09-21_10-14-23-094.png" alt="Coming soon banner" loading="lazy" onerror="this.src='https://via.placeholder.com/420x300'">
   </div>
   <div>
-    <h2 class="fade-up in">🚀 Coming Soon</h2>
-    <p class="fade-up in" style="margin-top:12px;color:var(--muted)">We are building the full experience — professional website, marketing campaigns, and listings on decentralized and centralized exchanges. Subscribe to get the latest updates.</p>
+    <h2 class="fade-up in">Road to the Moon 🚀</h2>
+    <p class="fade-up in" style="margin-top:12px;color:var(--muted)">We are designing a professional launch: marketing, liquidity, and exchange listings. Subscribe to stay ahead.</p>
   </div>
 </section>
 
@@ -174,7 +181,7 @@
         <div class="alloc-item"><span>Community</span><strong>99%</strong></div>
         <div class="alloc-item"><span>Team & Holders</span><strong>1%</strong></div>
       </div>
-      <p style="color:var(--muted);margin-top:12px">A simple and transparent distribution ensures the majority of supply goes to the community. You can easily adjust the percentages inside the chart script.</p>
+      <p style="color:var(--muted);margin-top:12px">Clear distribution: majority for the community. Adjust values in the chart script if needed.</p>
     </div>
   </div>
 </section>
@@ -183,41 +190,88 @@
 <section id="roadmap" class="roadmap container">
   <h2 style="color:var(--accent)">Roadmap</h2>
   <div class="timeline" style="margin-top:18px">
-    <div class="phase">Phase 1 — Build social presence & community growth</div>
-    <div class="phase">Phase 2 — Website upgrade, marketing campaigns</div>
-    <div class="phase">Phase 3 — DEX/CEX listings & liquidity</div>
-    <div class="phase">Phase 4 — Partnerships & ecosystem expansion</div>
+    <div class="phase">Phase 1 — Social launch & community growth</div>
+    <div class="phase">Phase 2 — Website upgrade & marketing</div>
+    <div class="phase">Phase 3 — DEX listings & liquidity</div>
+    <div class="phase">Phase 4 — CEX listings & partnerships</div>
   </div>
 </section>
 
-  </main>  <!-- Footer -->  <footer id="footer" class="container">
-    <div style="display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap">
-      <div>
-        <strong style="color:var(--accent)">BROX</strong>
-        <p style="color:var(--muted);margin-top:6px">© 2025 BROX. All rights reserved.</p>
-      </div>
+  </main>  <!-- Footer: socials BEFORE copyright with small gap -->  <footer id="footer">
+    <div class="container footer-inner">
       <div class="socials">
         <a href="https://www.instagram.com/brox__official" target="_blank" aria-label="Instagram"><i class="fab fa-instagram fa-lg"></i></a>
         <a href="https://www.tiktok.com/@brox__official" target="_blank" aria-label="TikTok"><i class="fab fa-tiktok fa-lg"></i></a>
         <a href="https://x.com/brox" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter fa-lg"></i></a>
         <a href="https://t.me/brox" target="_blank" aria-label="Telegram"><i class="fab fa-telegram fa-lg"></i></a>
-      </div>
-    </div>
-  </footer>  <!-- Modal -->  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true">
+      </div><div style="width:10px"></div>
+
+  <div style="display:flex;flex-direction:column;align-items:flex-end">
+    <div style="color:var(--muted);font-size:14px">© 2025 BROX. All rights reserved.</div>
+  </div>
+</div>
+
+  </footer>  <!-- Modal -->  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;">
     <div class="modal-card">
       <h3 style="color:var(--accent)">Get Notified on Launch 🚀</h3>
-      <p style="color:var(--muted);margin-top:6px">Enter your email to receive a launch notification.</p>
+      <p style="color:var(--muted);margin-top:6px">Enter your email to receive launch updates.</p>
       <form id="notifyForm" style="margin-top:12px" onsubmit="return false">
-        <div class="form-control">
-          <input id="emailInput" type="email" placeholder="you@email.com" required aria-label="email">
+        <div style="display:flex;gap:10px">
+          <input id="emailInput" type="email" placeholder="you@email.com" required>
           <button class="btn" id="submitEmail">Submit</button>
         </div>
         <p id="formMsg" style="color:var(--muted);margin-top:8px"></p>
       </form>
     </div>
   </div>  <script>
-    const qs = sel => document.querySelector(sel);
+    // small helpers
+    const qs = s=>document.querySelector(s);
 
-    // ===== Mobile menu toggle =====
-    const hamburger = qs('#hamburger');
-    const nav = qs
+    // Preloader hide after load
+    window.addEventListener('load', ()=>{
+      const pre = qs('#preloader'); pre.style.opacity=0; setTimeout(()=>pre.style.display='none',600);
+    });
+
+    // Mobile menu
+    qs('#hamburger').addEventListener('click',()=>{
+      const nav = qs('nav'); if(getComputedStyle(nav).display==='none'){nav.style.display='flex';nav.style.position='absolute';nav.style.right='18px';nav.style.top='72px';nav.style.background='rgba(20,20,20,0.85)';nav.style.padding='10px';nav.style.borderRadius='10px';} else {nav.style.display='none'}
+    });
+
+    // Copy contract
+    function flash(el,text,ms=1500){const old=el.textContent;el.textContent=text;setTimeout(()=>el.textContent=old,ms)}
+    qs('#copyBtn').addEventListener('click',()=>{navigator.clipboard.writeText(qs('#contractInput').value).then(()=>flash(qs('#copyBtn'),'Copied'))});
+    qs('#copyAddress').addEventListener('click',()=>{navigator.clipboard.writeText(qs('#contractInput').value).then(()=>flash(qs('#copyAddress'),'Copied'))});
+
+    // Modal
+    const modal = qs('#modal'); const openModalBtns = [qs('#openModal'),qs('#ctaPrimary')]; openModalBtns.forEach(b=>b&&b.addEventListener('click',()=>{modal.style.display='flex';modal.setAttribute('aria-hidden','false')}));
+    modal.addEventListener('click',e=>{if(e.target===modal) modal.style.display='none'});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape') modal.style.display='none'});
+
+    // Notify form (placeholder)
+    qs('#notifyForm').addEventListener('submit',()=>{const email=qs('#emailInput').value.trim();if(!email) return;qs('#formMsg').textContent='Sending...';setTimeout(()=>{qs('#formMsg').textContent='Subscribed! We will notify you.';qs('#emailInput').value='';},900);});
+
+    // Animated chart (donut with simple animation)
+    (function(){
+      const canvas = qs('#allocChart'); const ctx = canvas.getContext('2d'); const DPR = devicePixelRatio||1;
+      const data = [{label:'Community',value:99,color:'#ff4500'},{label:'Team',value:1,color:'#444'}];
+      let progress=0; function resize(){canvas.width = canvas.clientWidth*DPR; canvas.height = 300*DPR; ctx.setTransform(DPR,0,0,DPR,0,0); draw();}
+      function draw(){const w=canvas.clientWidth; const h=300; const cx=w/2; const cy=h/2; const radius=Math.min(w,h)/2 - 20; ctx.clearRect(0,0,canvas.width,canvas.height);
+        let start = -Math.PI/2; const total = data.reduce((s,d)=>s+d.value,0);
+        data.forEach(d=>{ const slice=(d.value/total)*Math.PI*2*progress; ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,radius,start,start+slice); ctx.closePath(); ctx.fillStyle=d.color; ctx.fill(); start += (d.value/total)*Math.PI*2; });
+        // inner
+        ctx.beginPath(); ctx.fillStyle='#0b0b0b'; ctx.arc(cx,cy,radius*0.55,0,Math.PI*2); ctx.fill(); ctx.fillStyle='#fff'; ctx.font='18px Inter, Arial'; ctx.textAlign='center'; ctx.fillText('99% / 1%', cx, cy+6);
+      }
+      function animate(){progress += 0.02; if(progress>1) progress=1; draw(); if(progress<1) requestAnimationFrame(animate);} resize(); animate(); window.addEventListener('resize', resize);
+    })();
+
+    // Particles (subtle) - lightweight
+    (function(){const cvs=qs('#particles');const ctx=cvs.getContext('2d');let w,h,pts=[];function reset(){w=cvs.width=innerWidth;h=cvs.height=innerHeight;pts=[];for(let i=0;i<60;i++){pts.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.8+0.3,vx:(Math.random()-0.5)/2,vy:(Math.random()-0.5)/2,alpha:0.2+Math.random()*0.6})}}function draw(){ctx.clearRect(0,0,w,h);for(const p of pts){ctx.beginPath();ctx.globalAlpha=p.alpha;ctx.fillStyle = '#ff6a40';ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();p.x+=p.vx;p.y+=p.vy;if(p.x<0)p.x=w;if(p.x>w)p.x=0;if(p.y<0)p.y=h;if(p.y>h)p.y=0}ctx.globalAlpha=1;requestAnimationFrame(draw)}reset();draw();addEventListener('resize',reset)})();
+
+    // Simple scroll reveal
+    (function(){const els=document.querySelectorAll('.fade-up');function reveal(){els.forEach(el=>{const r=el.getBoundingClientRect(); if(r.top < innerHeight - 80) el.classList.add('in');})}reveal();addEventListener('scroll',reveal)})();
+
+    // Animated counters (holders)
+    (function(){let n=0; const target=1245; const el=qs('#holdersCount'); function step(){n += Math.ceil((target - n)/8); if(n>=target){el.textContent = target;} else {el.textContent = n; setTimeout(step,50)}} step();})();
+
+  </script>  <!-- JSON-LD -->  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"BROX","url":"https://brox.example/","description":"Community driven meme token."}</script></body>
+</html>
