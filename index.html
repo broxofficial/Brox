@@ -126,7 +126,7 @@
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    <div class="menu-btn" id="menuBtn" onclick="toggleMenu()">☰</div>
   </header>
 
   <!-- Side Menu -->
@@ -201,8 +201,15 @@
   <script>
     function toggleMenu() {
       const menu = document.getElementById("sideMenu");
+      const btn = document.getElementById("menuBtn");
       menu.classList.toggle("open");
+      if (menu.classList.contains("open")) {
+        btn.textContent = "×";
+      } else {
+        btn.textContent = "☰";
+      }
     }
+
     function openModal() {
       const modal = document.getElementById("myModal");
       modal.style.display = "flex";
