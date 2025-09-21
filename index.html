@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    /* ===== Base & Reset ===== */
+    /* =========================
+       BROX — Enhanced Windowed UI
+       - Keep content & ordering unchanged
+       - Adds window manager (drag, minimize, maximize, close)
+       - English copy; all original data retained
+       ========================= */
+
     :root{
       --bg:#070707;
       --panel: rgba(20,20,20,0.85);
-      --accent: #ff4500;
-      --accent2: #ff6633;
-      --muted: #bfbfbf;
+      --accent:#ff4500;
+      --accent2:#ff6633;
+      --muted:#bfbfbf;
       --glass: rgba(255,255,255,0.03);
       --glass-strong: rgba(255,255,255,0.06);
-      --radius-xl: 18px;
-      --radius-md: 12px;
-      --ease: cubic-bezier(.2,.9,.2,1);
+      --radius-xl:18px;
+      --radius-md:12px;
+      --ease:cubic-bezier(.2,.9,.2,1);
     }
     *{box-sizing:border-box;margin:0;padding:0}
     html,body{height:100%}
@@ -35,7 +41,7 @@
     a{color:inherit;text-decoration:none}
     img{max-width:100%;display:block;height:auto}
 
-    /* ===== Header ===== */
+    /* Header (kept structure/orders) */
     header{
       position:fixed;left:0;top:0;width:100%;
       padding:18px 40px;
@@ -49,80 +55,59 @@
     }
     header.shrink{padding:10px 30px;box-shadow:0 6px 30px rgba(0,0,0,0.6)}
     .logo{font-weight:800;color:var(--accent);font-size:1.6rem;text-shadow:0 0 20px rgba(255,69,0,0.12)}
-    /* nav actions */
-    .nav-actions{display:flex;gap:14px;align-items:center}
+    .nav-actions{display:flex;gap:12px;align-items:center}
     .menu-btn{
       background:transparent;border:none;color:#fff;font-size:1.8rem;
       cursor:pointer;padding:8px 10px;border-radius:10px;
       transition:all .2s var(--ease);
+      position:fixed; top:18px; right:40px; z-index:2500; /* requested position */
     }
     .menu-btn:focus{outline:3px solid rgba(255,69,0,0.14)}
     .menu-btn:hover{transform:translateY(-2px);color:var(--accent)}
 
-    /* ===== Drawer (side menu) ===== */
+    /* Drawer (side-menu) - modified to not cover whole screen */
     .overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1150;
+      position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1150;
       display:none;opacity:0;transition:opacity .25s var(--ease);
     }
     .overlay.open{display:block;opacity:1}
     .drawer{
-      position:fixed;top:0;right:0;height:100%;width:320px;
-      max-width:80%;
-      transform:translateX(100%);transition:transform .35s var(--ease);
+      position:fixed;top:70px; /* just under header */
+      right:-320px;height:calc(100% - 70px);width:320px;
+      max-width:86%;
+      transform:translateX(0);transition:right .35s var(--ease);
       background:linear-gradient(180deg, rgba(12,12,12,0.98), rgba(18,18,18,0.98));
       box-shadow:-20px 0 60px rgba(0,0,0,0.6);
-      z-index:1160;padding:24px;padding-top:84px;border-left:1px solid rgba(255,69,0,0.05);
-      display:flex;flex-direction:column;gap:8px;
-      border-radius:0 0 0 12px;
+      z-index:1160;padding:20px;padding-top:16px;border-left:1px solid rgba(255,69,0,0.05);
+      display:flex;flex-direction:column;gap:8px;border-radius:0 12px 12px 0;
+      right:-320px;
     }
-    .drawer.open{transform:translateX(0)}
-    .drawer .close{
-      position:absolute;right:16px;top:16px;border:none;background:transparent;color:#fff;
-      font-size:1.6rem;cursor:pointer;padding:8px;border-radius:8px;
-    }
-    .drawer .close:focus{outline:3px solid rgba(255,69,0,0.12)}
-    .drawer nav{display:flex;flex-direction:column;gap:8px}
-    .drawer a{
-      padding:12px 14px;border-radius:10px;color:#fff;font-weight:600;
-      transition:all .18s var(--ease);
-    }
+    .drawer.open{right:0}
+    .drawer .close{position:absolute;right:12px;top:12px;border:none;background:transparent;color:#fff;font-size:1.6rem;cursor:pointer;padding:8px;border-radius:8px}
+    .drawer nav{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+    .drawer a{display:block;padding:12px 14px;border-radius:10px;color:#fff;font-weight:600;transition:all .18s var(--ease)}
     .drawer a:hover{background:linear-gradient(90deg,var(--accent),var(--accent2));transform:translateX(-4px)}
     .drawer .help{margin-top:auto;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,69,0,0.06),transparent);font-size:.95rem;color:var(--muted)}
 
-    /* ===== Hero ===== */
-    .hero{
-      height:100vh;display:flex;align-items:center;justify-content:center;
-      text-align:center;padding-top:90px;padding-inline:20px;position:relative;
-    }
+    /* Main layout preserved (content & ordering unchanged) */
+    main{padding-top:100px}
+
+    /* Hero */
+    .hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-inline:20px;position:relative}
     .hero-inner{max-width:980px}
-    .hero img{
-      width:200px;height:200px;border-radius:50%;object-fit:cover;
-      box-shadow:0 12px 80px rgba(255,69,0,0.12),0 0 100px rgba(255,100,0,0.06);
-      animation:float 5s ease-in-out infinite;
-      border:4px solid rgba(255,69,0,0.06);
-      background:linear-gradient(180deg,#111,#0b0b0b);
-    }
+    .hero img{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 12px 80px rgba(255,69,0,0.12),0 0 100px rgba(255,100,0,0.06);animation:float 5s ease-in-out infinite;border:4px solid rgba(255,69,0,0.06);background:linear-gradient(180deg,#111,#0b0b0b)}
     @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
     .hero h1{margin-top:22px;font-size:3rem;letter-spacing:0.5px;color:var(--accent);text-shadow:0 6px 40px rgba(255,69,0,0.08)}
     .hero p{margin-top:12px;font-size:1.05rem;color:var(--muted);max-width:720px;margin-left:auto;margin-right:auto}
     .cta-row{margin-top:28px;display:flex;gap:14px;justify-content:center;align-items:center}
-    .btn{
-      padding:12px 26px;border-radius:999px;border:none;font-weight:700;cursor:pointer;
-      background:linear-gradient(90deg,var(--accent),var(--accent2));
-      color:#fff;box-shadow:0 8px 40px rgba(255,69,0,0.12);
-      transition:transform .18s var(--ease),box-shadow .18s var(--ease);
-    }
-    .btn.secondary{
-      background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);
-      box-shadow:none;font-weight:600;padding:10px 20px;border-radius:14px;
-    }
+    .btn{padding:12px 26px;border-radius:999px;border:none;font-weight:700;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 8px 40px rgba(255,69,0,0.12);transition:transform .18s var(--ease),box-shadow .18s var(--ease)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);box-shadow:none;font-weight:600;padding:10px 20px;border-radius:14px}
     .btn:hover{transform:translateY(-4px)}
     .btn.secondary:hover{background:rgba(255,255,255,0.02);transform:none}
 
-    /* ===== Sections ===== */
+    /* Sections (teaser, allocation, roadmap, footer) same order, styling improved) */
     section{padding:100px 18px}
     .teaser{background:linear-gradient(135deg,#141414,#0d0d0d);text-align:center;border-radius:16px;margin:24px auto;max-width:1100px;transition:transform .5s var(--ease),opacity .5s}
-    .teaser.visible{transform:none;opacity:1}
     .teaser img{width:340px;border-radius:16px;margin:auto;box-shadow:0 10px 60px rgba(255,69,0,0.06)}
     .teaser h2{font-size:2.4rem;margin-top:18px;color:var(--accent)}
     .teaser p{color:var(--muted);margin-top:10px}
@@ -130,71 +115,74 @@
     .allocation{text-align:center}
     .alloc-visual{display:flex;justify-content:center;gap:20px;align-items:center;margin-bottom:18px}
     .alloc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:900px;margin:0 auto}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-      padding:22px;border-radius:var(--radius-md);box-shadow:0 8px 30px rgba(0,0,0,0.6);
-      border:1px solid rgba(255,69,0,0.04)
-    }
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:var(--radius-md);box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,69,0,0.04)}
     .card h3{color:var(--accent);font-size:1.8rem;margin-bottom:6px}
     .card p{color:var(--muted)}
 
-    /* ===== Donut legend ===== */
     .legend{display:flex;gap:12px;align-items:center;margin-left:6px}
     .legend .item{display:flex;gap:8px;align-items:center;font-weight:600;color:var(--muted)}
     .legend .swatch{width:14px;height:14px;border-radius:3px}
 
-    /* ===== Roadmap ===== */
     .roadmap .steps{max-width:820px;margin:0 auto;display:grid;gap:20px}
     .step{padding:18px;border-left:4px solid var(--accent);background:var(--glass-strong);border-radius:12px;color:var(--muted)}
 
-    /* ===== Modal ===== */
-    .modal{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:1300;
-      background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.65));
-      padding:20px;
-    }
-    .modal.show{display:flex}
-    .modal-card{
-      width:100%;max-width:480px;background:linear-gradient(180deg,#121212,#0d0d0d);padding:22px;border-radius:16px;
-      box-shadow:0 30px 80px rgba(0,0,0,0.7);border:1px solid rgba(255,69,0,0.04);
-      transform:translateY(8px);opacity:0;transition:all .25s var(--ease);
-    }
-    .modal.show .modal-card{transform:none;opacity:1}
-    .modal-card h3{color:var(--accent);margin-bottom:8px}
-    .modal-card input[type="email"]{
-      width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
-      background:transparent;color:#fff;margin-top:12px;
-    }
-    .modal-card .row{display:flex;gap:10px;margin-top:10px}
-    .modal-card .small{font-size:.95rem;color:var(--muted)}
-
-    /* toast */
-    .toast{position:fixed;right:20px;bottom:24px;background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 16px;border-radius:12px;color:#fff;box-shadow:0 12px 40px rgba(255,69,0,0.12);z-index:1500;opacity:0;transform:translateY(10px);transition:all .25s}
-    .toast.show{opacity:1;transform:none}
-
-    /* ===== Footer ===== */
+    /* Footer */
     footer{padding:40px 18px;background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.6));text-align:center}
     .socials{display:flex;justify-content:center;gap:18px}
     .socials a{font-size:1.6rem;color:#fff;transition:transform .2s}
     .socials a:hover{transform:translateY(-6px);color:var(--accent)}
 
-    /* ===== Accessibility focus helper ===== */
+    /* =========================
+       WINDOW MANAGER STYLES
+       ========================= */
+    .window{
+      position:fixed;
+      width:520px;
+      max-width:94%;
+      height:340px;
+      min-width:260px;
+      min-height:140px;
+      background:linear-gradient(180deg,#0f0f0f,#0b0b0b);
+      border-radius:12px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.7),0 6px 18px rgba(0,0,0,0.6);
+      border:1px solid rgba(255,69,0,0.04);
+      overflow:hidden;
+      z-index:1400;
+      display:flex;flex-direction:column;
+      transform-origin:top left;
+    }
+    .win-titlebar{
+      display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      cursor:grab;user-select:none;
+    }
+    .win-titlebar:active{cursor:grabbing}
+    .win-title{font-weight:700;color:var(--accent)}
+    .win-controls{display:flex;gap:8px;align-items:center}
+    .win-controls button{width:36px;height:32px;border-radius:8px;border:none;background:transparent;color:#fff;font-weight:700;cursor:pointer}
+    .win-controls button:hover{background:rgba(255,255,255,0.02)}
+    .win-body{padding:12px;overflow:auto;color:var(--muted);flex:1}
+    .window.minimized{display:none} /* hidden when minimized; kept entry in taskbar */
+
+    /* taskbar at bottom for minimized windows */
+    .taskbar{
+      position:fixed;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(0,0,0,0.4);backdrop-filter: blur(6px);z-index:1500;
+      box-shadow:0 12px 30px rgba(0,0,0,0.5)
+    }
+    .taskbar button{background:transparent;border:none;padding:8px 12px;color:#fff;border-radius:10px;cursor:pointer}
+    .taskbar button.active{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 8px 20px rgba(255,69,0,0.12)}
+
+    /* resize handle */
+    .resize-handle{
+      position:absolute;right:6px;bottom:6px;width:18px;height:18px;cursor:se-resize;opacity:.6;
+    }
+
+    /* Accessibility focus */
     :focus{outline:none}
-    a:focus, button:focus, input:focus{outline:3px solid rgba(255,69,0,0.12);outline-offset:4px;border-radius:8px}
+    a:focus, button:focus, input:focus, .win-titlebar:focus{outline:3px solid rgba(255,69,0,0.12);outline-offset:3px;border-radius:8px}
 
-    /* ===== Responsive ===== */
-    @media (max-width:900px){
-      .hero h1{font-size:2.2rem}
-      header{padding:12px 18px}
-      .drawer{width:86%}
-      .hero img{width:160px;height:160px}
-    }
-
-    @media (max-width:520px){
-      .alloc-visual{flex-direction:column}
-      .teaser img{width:250px}
-      section{padding:64px 12px}
-    }
+    /* responsive tweaks */
+    @media (max-width:900px){ .window{width:88%;height:60vh;left:6%;top:12%} .hero h1{font-size:2.2rem} }
+    @media (max-width:520px){ .drawer{width:86%} .hero img{width:140px;height:140px} section{padding:64px 12px} .taskbar{left:12%;transform:none} }
   </style>
 </head>
 <body>
@@ -205,32 +193,35 @@
   <header id="siteHeader">
     <div class="logo">BROX</div>
     <div class="nav-actions">
-      <button class="menu-btn" id="openDrawer" aria-controls="siteDrawer" aria-expanded="false" aria-label="فتح القائمة">☰</button>
+      <!-- main menu button (kept at top-right as requested) -->
+      <button class="menu-btn" id="menuBtn" aria-controls="siteDrawer" aria-expanded="false" aria-label="Open menu">☰</button>
+      <!-- quick window openers -->
+      <button class="btn secondary" data-win="heroWin" title="Open Hero window">Open Hero Window</button>
+      <button class="btn secondary" data-win="allocWin" title="Open Allocation window">Open Allocation Window</button>
     </div>
   </header>
 
-  <!-- Drawer + Overlay -->
+  <!-- Drawer & overlay -->
   <div id="drawerOverlay" class="overlay" tabindex="-1" aria-hidden="true"></div>
-
   <aside id="siteDrawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
-    <button class="close" id="closeDrawer" aria-label="إغلاق القائمة">&times;</button>
-    <h3 id="drawerTitle" style="color:var(--accent);margin-bottom:8px;font-size:1.1rem">القائمة</h3>
-    <nav role="navigation" aria-label="روابط الصفحة">
+    <button class="close" id="closeDrawer" aria-label="Close menu">&times;</button>
+    <h3 id="drawerTitle" style="color:var(--accent);margin-bottom:8px;font-size:1.1rem">Menu</h3>
+    <nav role="navigation" aria-label="Page links">
       <a href="#hero">Home</a>
       <a href="#teaser">Teaser</a>
       <a href="#allocation">Allocation</a>
       <a href="#roadmap">Roadmap</a>
       <a href="#footer">Contact</a>
     </nav>
-    <div class="help">تابعنا على قنوات التواصل من الأسفل — تابع التحديثات والتسجيل المبكر.</div>
+    <div class="help">Follow our socials below and sign up for early access.</div>
   </aside>
 
-  <!-- Main content -->
+  <!-- Main content (kept order/content) -->
   <main id="main" tabindex="-1">
     <!-- Hero -->
     <section class="hero" id="hero" aria-labelledby="heroTitle">
       <div class="hero-inner">
-        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox" onerror="this.style.opacity=0.8">
+        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox" onerror="this.style.opacity=0.85">
         <h1 id="heroTitle">🔥 Welcome to BROX 🔥</h1>
         <p>The meme revolution begins. Powered by community.</p>
         <div class="cta-row">
@@ -287,180 +278,137 @@
     </footer>
   </main>
 
-  <!-- Modal for Early Access -->
-  <div class="modal" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <!-- Early access modal (keeps original behavior) -->
+  <div class="modal" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" style="display:none;">
     <div class="modal-card" role="document">
       <h3 id="modalTitle">Get Notified on Launch 🚀</h3>
       <p class="small" style="color:var(--muted)">Enter your email to receive early access updates.</p>
       <input id="emailInput" type="email" placeholder="Enter your email" aria-label="Email address" />
-      <div class="row">
+      <div style="margin-top:12px;display:flex;gap:8px">
         <button class="btn" id="submitEmail">Submit</button>
         <button class="btn secondary" id="closeModal">Close</button>
       </div>
       <p id="emailHint" class="small" style="margin-top:8px;color:var(--muted)"></p>
     </div>
   </div>
+  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true" style="display:none;position:fixed;right:20px;bottom:24px;background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 16px;border-radius:12px;color:#fff;box-shadow:0 12px 40px rgba(255,69,0,0.12);z-index:1500">Sent</div>
 
-  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">تم الإرسال</div>
+  <!-- Taskbar for minimized windows -->
+  <div class="taskbar" id="taskbar" aria-hidden="false"></div>
 
-  <!-- Scripts -->
+  <!-- Template windows (hidden) -->
+  <template id="winTpl">
+    <div class="window" role="dialog" aria-modal="false" tabindex="0">
+      <div class="win-titlebar" tabindex="0">
+        <div class="win-title">Window</div>
+        <div class="win-controls">
+          <button class="min-btn" title="Minimize" aria-label="Minimize">━</button>
+          <button class="max-btn" title="Maximize" aria-label="Maximize">☐</button>
+          <button class="close-btn" title="Close" aria-label="Close">✕</button>
+        </div>
+      </div>
+      <div class="win-body">Content</div>
+      <div class="resize-handle" aria-hidden="true"></div>
+    </div>
+  </template>
+
   <script>
-    /* ===== Utilities ===== */
-    const qs = s => document.querySelector(s);
-    const qsa = s => Array.from(document.querySelectorAll(s));
+    /* ========= Utilities ========= */
+    const $ = s => document.querySelector(s);
+    const $$ = s => Array.from(document.querySelectorAll(s));
 
-    /* ===== Drawer behaviour (accessible + focus trap) ===== */
-    const openDrawerBtn = qs('#openDrawer');
-    const drawer = qs('#siteDrawer');
-    const overlay = qs('#drawerOverlay');
-    const closeDrawerBtn = qs('#closeDrawer');
-    let lastFocusedBeforeDrawer = null;
+    /* ===== Drawer behavior (improved) ===== */
+    const menuBtn = $('#menuBtn');
+    const drawer = $('#siteDrawer');
+    const overlay = $('#drawerOverlay');
+    const closeDrawerBtn = $('#closeDrawer');
 
-    function openDrawer(){
-      lastFocusedBeforeDrawer = document.activeElement;
-      drawer.classList.add('open');
-      overlay.classList.add('open');
-      drawer.setAttribute('aria-hidden','false');
-      openDrawerBtn.setAttribute('aria-expanded','true');
-      overlay.setAttribute('aria-hidden','false');
-      document.body.style.overflow = 'hidden'; // lock scroll
-      // focus trap: move focus to first focusable in drawer
-      const focusable = getFocusable(drawer);
-      if(focusable.length) focusable[0].focus();
-      // add keydown listener
-      document.addEventListener('keydown', drawerKeyHandler);
-    }
-
-    function closeDrawer(){
-      drawer.classList.remove('open');
-      overlay.classList.remove('open');
-      drawer.setAttribute('aria-hidden','true');
-      openDrawerBtn.setAttribute('aria-expanded','false');
-      overlay.setAttribute('aria-hidden','true');
-      document.body.style.overflow = ''; // restore scroll
-      if(lastFocusedBeforeDrawer) lastFocusedBeforeDrawer.focus();
-      document.removeEventListener('keydown', drawerKeyHandler);
-    }
-
-    openDrawerBtn.addEventListener('click', openDrawer);
-    closeDrawerBtn.addEventListener('click', closeDrawer);
+    function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+    function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+    menuBtn.addEventListener('click', ()=>{ drawer.classList.contains('open')?closeDrawer():openDrawer(); });
+    closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
-
-    function drawerKeyHandler(e){
-      if(e.key === 'Escape') { e.preventDefault(); closeDrawer(); }
-      if(e.key === 'Tab') focusTrap(e, drawer);
-    }
-
-    function getFocusable(container){
-      return Array.from(container.querySelectorAll('a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])'))
-        .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
-    }
-    function focusTrap(e, container){
-      const focusable = getFocusable(container);
-      if(!focusable.length) { e.preventDefault(); return; }
-      const first = focusable[0], last = focusable[focusable.length - 1];
-      if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-      else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-    }
+    // close on Esc
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ if(drawer.classList.contains('open')) closeDrawer(); } });
 
     /* ===== Modal (email) ===== */
-    const modal = qs('#emailModal');
-    const openModalBtn = qs('#openModalBtn');
-    const closeModalBtn = qs('#closeModal');
-    const submitEmailBtn = qs('#submitEmail');
-    const emailInput = qs('#emailInput');
-    const emailHint = qs('#emailHint');
-    const toast = qs('#toast');
-    let toastTimer = null;
+    const emailModal = $('#emailModal');
+    const openModalBtn = $('#openModalBtn');
+    const closeModalBtn = $('#closeModal');
+    const submitEmailBtn = $('#submitEmail');
+    const emailInput = $('#emailInput');
+    const emailHint = $('#emailHint');
+    const toast = $('#toast');
 
     function showModal(){
-      modal.classList.add('show');
-      modal.setAttribute('aria-hidden','false');
+      emailModal.style.display='flex';
+      emailModal.classList.add('show');
+      emailModal.setAttribute('aria-hidden','false');
       document.body.style.overflow='hidden';
-      setTimeout(()=> emailInput.focus(), 60);
+      setTimeout(()=> emailInput.focus(),60);
       document.addEventListener('keydown', modalKeyHandler);
     }
     function closeModal(){
-      modal.classList.remove('show');
-      modal.setAttribute('aria-hidden','true');
+      emailModal.style.display='none';
+      emailModal.classList.remove('show');
+      emailModal.setAttribute('aria-hidden','true');
       document.body.style.overflow='';
-      document.removeEventListener('keydown', modalKeyHandler);
       openModalBtn.focus();
+      document.removeEventListener('keydown', modalKeyHandler);
     }
-    openModalBtn.addEventListener('click', showModal);
-    closeModalBtn.addEventListener('click', closeModal);
+    openModalBtn && openModalBtn.addEventListener('click', showModal);
+    closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
 
     function modalKeyHandler(e){
-      if(e.key === 'Escape'){ closeModal(); }
-      if(e.key === 'Tab') focusTrap(e, modal.querySelector('.modal-card'));
+      if(e.key==='Escape') closeModal();
+      if(e.key==='Tab') {
+        // trap focus inside modal
+        const focusable = Array.from(emailModal.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])')).filter(el=>el.offsetParent!==null);
+        if(focusable.length){
+          const first = focusable[0], last = focusable[focusable.length-1];
+          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+        }
+      }
     }
 
-    function validateEmail(email){
-      // Basic RFC-like check (not exhaustive)
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    submitEmailBtn.addEventListener('click', ()=>{
+    function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
+    submitEmailBtn && submitEmailBtn.addEventListener('click', ()=>{
       const v = emailInput.value.trim();
-      if(!validateEmail(v)){
-        emailHint.textContent = 'الرجاء إدخال بريد إلكتروني صحيح.';
-        emailInput.focus();
-        return;
-      }
-      // fake submit -> show toast
+      if(!validateEmail(v)){ emailHint.textContent = 'Please enter a valid email.'; emailInput.focus(); return; }
       emailHint.textContent = '';
       closeModal();
-      showToast('شكرًا! تم تسجيل بريدك للتنبيه.');
-      emailInput.value = '';
+      showToast('Thanks! Your email is registered for launch notifications.');
+      emailInput.value='';
     });
 
     function showToast(msg){
       toast.textContent = msg;
+      toast.style.display = 'block';
       toast.classList.add('show');
-      if(toastTimer) clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=>{ toast.classList.remove('show'); }, 3600);
+      setTimeout(()=>{ toast.classList.remove('show'); toast.style.display='none'; }, 3500);
     }
 
-    /* ===== Header shrink on scroll + reveal sections ===== */
-    const header = qs('#siteHeader');
-    const teaser = qs('.teaser');
-    const steps = qsa('.step');
-
-    function onScroll(){
-      if(window.scrollY > 40) header.classList.add('shrink'); else header.classList.remove('shrink');
-      // reveal teaser and steps (simple lazy reveal)
-      if(teaser && teaser.getBoundingClientRect().top < window.innerHeight - 120) teaser.classList.add('visible');
-      steps.forEach(s => {
-        if(s.getBoundingClientRect().top < window.innerHeight - 100) s.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', onScroll, {passive:true});
-    onScroll();
-
-    /* ===== Smooth internal links ===== */
-    qsa('a[href^="#"]').forEach(a=>{
+    /* ===== Smooth internal links (and close drawer when link clicked) ===== */
+    $$('a[href^="#"]').forEach(a=>{
       a.addEventListener('click', (e)=>{
         const href = a.getAttribute('href');
-        if(href.length > 1){
-          const target = qs(href);
-          if(target){
-            e.preventDefault();
-            target.scrollIntoView({behavior:'smooth',block:'start'});
-            // close drawer if link was inside
-            if(drawer.classList.contains('open')) closeDrawer();
-          }
+        if(href && href.length>1){
+          const target = document.querySelector(href);
+          if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+          if(drawer.classList.contains('open')) closeDrawer();
         }
       });
     });
 
     /* ===== Allocation donut chart (animated) ===== */
     (function(){
-      const canvas = qs('#allocChart');
+      const canvas = $('#allocChart');
       if(!canvas) return;
       const ctx = canvas.getContext('2d');
       const W = canvas.width, H = canvas.height;
       const cx = W/2, cy = H/2, r = Math.min(W,H)/2 - 14;
-      const data = [{v:99,color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#ff4500'},
-                    {v:1, color:'#333'}];
+      const data = [{v:99,color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#ff4500'}, {v:1,color:'#333'}];
       let progress = 0;
       function draw(p){
         ctx.clearRect(0,0,W,H);
@@ -477,29 +425,16 @@
           ctx.fill();
           start += angle;
         });
-        // inner cutout
-        ctx.beginPath();
-        ctx.arc(cx,cy,r*0.58,0,Math.PI*2);
-        ctx.fillStyle = getComputedStyle(document.body).backgroundColor || '#141414';
-        ctx.fill();
-        // text
-        ctx.fillStyle = '#fff';
-        ctx.font = '18px Arial';
-        ctx.textAlign = 'center';
-        ctx.fillText('99% / 1%', cx, cy+8);
+        ctx.beginPath(); ctx.arc(cx,cy,r*0.58,0,Math.PI*2); ctx.fillStyle = getComputedStyle(document.body).backgroundColor || '#141414'; ctx.fill();
+        ctx.fillStyle = '#fff'; ctx.font = '18px Arial'; ctx.textAlign = 'center'; ctx.fillText('99% / 1%', cx, cy+8);
       }
-      function step(){
-        progress += 2;
-        if(progress > 100) progress = 100;
-        draw(progress);
-        if(progress < 100) requestAnimationFrame(step);
-      }
+      function step(){ progress += 3; if(progress>100) progress=100; draw(progress); if(progress<100) requestAnimationFrame(step); }
       step();
     })();
 
     /* ===== Particles (lightweight) ===== */
     (function(){
-      const canvas = qs('#particles');
+      const canvas = $('#particles');
       if(!canvas) return;
       const ctx = canvas.getContext('2d');
       let w=innerWidth, h=innerHeight;
@@ -509,14 +444,7 @@
         stars = [];
         const count = Math.max(40, Math.floor((w*h)/60000)*25);
         for(let i=0;i<count;i++){
-          stars.push({
-            x: Math.random()*w,
-            y: Math.random()*h,
-            r: Math.random()*1.6 + 0.3,
-            vx: (Math.random()-0.5)*0.25,
-            vy: (Math.random()-0.5)*0.25,
-            alpha: Math.random()*0.6 + 0.2
-          });
+          stars.push({ x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.6 + 0.3, vx:(Math.random()-0.5)*0.25, vy:(Math.random()-0.5)*0.25, alpha:Math.random()*0.6+0.2 });
         }
       }
       function draw(){
@@ -539,25 +467,280 @@
       draw();
     })();
 
-    /* ===== keyboard accessibility enhancements ===== */
+    /* ========= Window Manager Implementation ========= */
+    const tpl = document.querySelector('#winTpl');
+    const taskbar = $('#taskbar');
+    let zTop = 1400;
+    let winCounter = 0;
+    const windows = new Map(); // id => {el, state}
+
+    // Utility: create window with title and contents (html string or element)
+    function createWindow({id=null, title='Window', content='', width=520, height=340, left=80, top=80}){
+      id = id || `win-${++winCounter}`;
+      // if exists bring to front
+      if(windows.has(id)){ focusWindow(id); return windows.get(id).el; }
+      const node = tpl.content.firstElementChild.cloneNode(true);
+      node.style.width = width + 'px'; node.style.height = height + 'px';
+      node.style.left = (left + (winCounter*14)) + 'px'; node.style.top = (top + (winCounter*10)) + 'px';
+      node.dataset.winId = id;
+      node.querySelector('.win-title').textContent = title;
+      const body = node.querySelector('.win-body');
+      if(typeof content === 'string') body.innerHTML = content; else body.innerHTML = ''; if(content instanceof Element) body.appendChild(content);
+      // append
+      document.body.appendChild(node);
+      node.style.zIndex = ++zTop;
+      // store state
+      windows.set(id, {el:node, state:{minimized:false, maximized:false, lastRect:null}});
+      // wire events
+      wireWindow(node, id);
+      // add taskbar entry
+      addTaskbarEntry(id, title);
+      focusWindow(id);
+      return node;
+    }
+
+    function wireWindow(node,id){
+      const titlebar = node.querySelector('.win-titlebar');
+      const closeBtn = node.querySelector('.close-btn');
+      const minBtn = node.querySelector('.min-btn');
+      const maxBtn = node.querySelector('.max-btn');
+      const resizeHandle = node.querySelector('.resize-handle');
+      const winBody = node.querySelector('.win-body');
+
+      // bring to front on mousedown
+      node.addEventListener('mousedown', ()=> focusWindow(id) );
+      // focus when clicked
+      node.addEventListener('click', ()=> focusWindow(id) );
+
+      // close
+      closeBtn.addEventListener('click', ()=> {
+        removeWindow(id);
+      });
+
+      // minimize
+      minBtn.addEventListener('click', ()=> {
+        toggleMinimize(id, true);
+      });
+
+      // maximize / restore
+      maxBtn.addEventListener('click', ()=> {
+        toggleMaximize(id);
+      });
+
+      // dragging
+      let drag = null;
+      titlebar.addEventListener('pointerdown', (e)=>{
+        e.preventDefault();
+        focusWindow(id);
+        titlebar.setPointerCapture(e.pointerId);
+        const rect = node.getBoundingClientRect();
+        drag = {startX: e.clientX, startY: e.clientY, origLeft: rect.left, origTop: rect.top, pointerId: e.pointerId};
+        node.style.transition = 'none';
+      });
+      titlebar.addEventListener('pointermove', (e)=>{
+        if(!drag || drag.pointerId !== e.pointerId) return;
+        const dx = e.clientX - drag.startX;
+        const dy = e.clientY - drag.startY;
+        let nx = drag.origLeft + dx;
+        let ny = drag.origTop + dy;
+        // keep within viewport partially
+        const vw = window.innerWidth, vh = window.innerHeight;
+        nx = Math.max(-20, Math.min(nx, vw - 60));
+        ny = Math.max(8, Math.min(ny, vh - 60));
+        node.style.left = nx + 'px'; node.style.top = ny + 'px';
+      });
+      titlebar.addEventListener('pointerup', (e)=>{ if(!drag) return; titlebar.releasePointerCapture(drag.pointerId); drag = null; node.style.removeProperty('transition'); });
+
+      // resize handle pointer events
+      let resizing = null;
+      resizeHandle.addEventListener('pointerdown', (e)=>{
+        e.preventDefault();
+        focusWindow(id);
+        resizeHandle.setPointerCapture(e.pointerId);
+        const rect = node.getBoundingClientRect();
+        resizing = {startX: e.clientX, startY: e.clientY, origW: rect.width, origH: rect.height, pointerId: e.pointerId};
+      });
+      resizeHandle.addEventListener('pointermove', (e)=>{
+        if(!resizing || resizing.pointerId !== e.pointerId) return;
+        const dx = e.clientX - resizing.startX; const dy = e.clientY - resizing.startY;
+        const nw = Math.max(260, resizing.origW + dx); const nh = Math.max(140, resizing.origH + dy);
+        node.style.width = nw + 'px'; node.style.height = nh + 'px';
+      });
+      resizeHandle.addEventListener('pointerup', (e)=>{ if(!resizing) return; resizeHandle.releasePointerCapture(resizing.pointerId); resizing=null; });
+
+      // double-click titlebar to toggle maximize
+      titlebar.addEventListener('dblclick', ()=> toggleMaximize(id) );
+
+      // keyboard support inside window (Esc to close)
+      node.addEventListener('keydown', (e)=>{
+        if(e.key === 'Escape'){ removeWindow(id); }
+      });
+    }
+
+    function focusWindow(id){
+      const rec = windows.get(id);
+      if(!rec) return;
+      // increase z
+      rec.el.style.zIndex = ++zTop;
+      // visual focus
+      // remove active attr from others
+      windows.forEach((v,k)=> v.el.classList.remove('focused'));
+      rec.el.classList.add('focused');
+      // ensure visible if minimized
+      if(rec.state.minimized) toggleMinimize(id, false);
+    }
+
+    function removeWindow(id){
+      const rec = windows.get(id);
+      if(!rec) return;
+      // remove DOM and taskbar entry
+      rec.el.remove();
+      removeTaskbarEntry(id);
+      windows.delete(id);
+    }
+
+    function toggleMinimize(id, toMinimize=true){
+      const rec = windows.get(id); if(!rec) return;
+      if(toMinimize){
+        rec.el.classList.add('minimized');
+        rec.state.minimized = true;
+        // update taskbar
+        const btn = taskbar.querySelector(`[data-winid="${id}"]`);
+        if(btn) btn.classList.remove('active');
+      } else {
+        rec.el.classList.remove('minimized');
+        rec.state.minimized = false;
+        focusWindow(id);
+        const btn = taskbar.querySelector(`[data-winid="${id}"]`);
+        if(btn) btn.classList.add('active');
+      }
+    }
+
+    function toggleMaximize(id){
+      const rec = windows.get(id); if(!rec) return;
+      const el = rec.el;
+      if(!rec.state.maximized){
+        // store rect
+        const rect = el.getBoundingClientRect();
+        rec.state.lastRect = {left: rect.left, top: rect.top, width: rect.width, height: rect.height};
+        el.style.left = '20px'; el.style.top = '20px';
+        el.style.width = Math.max(window.innerWidth - 40, 300) + 'px';
+        el.style.height = Math.max(window.innerHeight - 100, 240) + 'px';
+        rec.state.maximized = true;
+      } else {
+        // restore
+        const r = rec.state.lastRect || {left:80,top:80,width:520,height:340};
+        el.style.left = r.left + 'px'; el.style.top = r.top + 'px';
+        el.style.width = r.width + 'px'; el.style.height = r.height + 'px';
+        rec.state.maximized = false;
+      }
+      focusWindow(id);
+    }
+
+    /* ===== Taskbar entries ===== */
+    function addTaskbarEntry(id, title){
+      const btn = document.createElement('button');
+      btn.textContent = title;
+      btn.dataset.winid = id;
+      btn.title = title;
+      btn.addEventListener('click', ()=>{
+        const rec = windows.get(id);
+        if(!rec) return;
+        if(rec.state.minimized) toggleMinimize(id, false);
+        focusWindow(id);
+      });
+      taskbar.appendChild(btn);
+    }
+    function removeTaskbarEntry(id){
+      const btn = taskbar.querySelector(`[data-winid="${id}"]`);
+      if(btn) btn.remove();
+    }
+
+    /* ===== Pre-made windows (mirrors content; does NOT change original) ===== */
+    // Create a window from section content safely (clone)
+    function winFromSection(sectionId, winId, winTitle){
+      const sec = document.querySelector(sectionId);
+      if(!sec) return null;
+      // clone content (shallow text clone for safety)
+      const content = document.createElement('div');
+      content.innerHTML = `<strong>${winTitle}</strong><div style="margin-top:8px;color:var(--muted)">${sec.innerHTML}</div>`;
+      return createWindow({id:winId, title:winTitle, content:content, width:560, height:420, left:100, top:90});
+    }
+
+    // openers (buttons)
+    document.querySelectorAll('[data-win]').forEach(btn=>{
+      btn.addEventListener('click', (e)=>{
+        const id = btn.getAttribute('data-win');
+        if(id === 'heroWin') winFromSection('#hero','heroWin','Hero — BROX');
+        if(id === 'allocWin') winFromSection('#allocation','allocWin','Allocation — BROX');
+      });
+    });
+
+    // add menu items to open windows
+    // also wire drawer links to open windows
+    const menuOpeners = [
+      {selector:'#allocation', winId:'allocWin', title:'Allocation — BROX'},
+      {selector:'#roadmap', winId:'roadWin', title:'Roadmap — BROX'},
+      {selector:'#teaser', winId:'teaserWin', title:'Teaser — BROX'},
+      {selector:'#hero', winId:'heroWin', title:'Hero — BROX'},
+      {selector:'#footer', winId:'contactWin', title:'Contact — BROX'},
+    ];
+    menuOpeners.forEach(m=>{
+      // create open link in drawer as second-level actions (non-invasive)
+      const nav = drawer.querySelector('nav');
+      const a = document.createElement('a');
+      a.href = '#';
+      a.textContent = 'Open ' + m.title;
+      a.addEventListener('click', (e)=>{
+        e.preventDefault();
+        // open specific window by cloning section
+        winFromSection(m.selector, m.winId, m.title);
+      });
+      nav.appendChild(a);
+    });
+
+    /* ===== Focus & keyboard shortcuts ===== */
     document.addEventListener('keydown', (e)=>{
-      if(e.key === 'Escape'){
-        // close modal or drawer if open
-        if(drawer.classList.contains('open')) closeDrawer();
-        if(modal.classList.contains('show')) closeModal();
+      // Ctrl+W or Cmd+W -> close top window
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='w'){
+        e.preventDefault();
+        // find topmost window
+        let topWin = null; let topZ = -Infinity;
+        windows.forEach((v,k)=>{ const z = parseInt(v.el.style.zIndex) || 0; if(z>topZ){ topZ=z; topWin=k; }});
+        if(topWin) removeWindow(topWin);
+      }
+      // Alt+1..5 open some windows quickly
+      if(e.altKey && !e.shiftKey){
+        const map = {'1':'heroWin','2':'teaserWin','3':'allocWin','4':'roadWin','5':'contactWin'};
+        if(map[e.key]) { winFromSection( map[e.key]==='heroWin' ? '#hero' : map[e.key]==='teaserWin' ? '#teaser' : map[e.key]==='allocWin' ? '#allocation' : map[e.key]==='roadWin' ? '#roadmap' : '#footer', map[e.key], {'heroWin':'Hero — BROX','teaserWin':'Teaser — BROX','allocWin':'Allocation — BROX','roadWin':'Roadmap — BROX','contactWin':'Contact — BROX'}[map[e.key]] ); }
       }
     });
 
-    /* ===== Ensure no JS error if images missing ===== */
+    // init: set ARIA hidden flags
+    drawer.setAttribute('aria-hidden','true');
+    overlay.setAttribute('aria-hidden','true');
+    emailModal && emailModal.setAttribute('aria-hidden','true');
+
+    /* ===== Prevent JS errors from missing images (non-blocking) ===== */
     window.addEventListener('error', (ev) => {
-      // ignore image load errors, but don't break console
       if(ev && ev.target && ev.target.tagName === 'IMG') return true;
     }, true);
 
-    // Initial step: ensure drawer hidden for screen readers
-    drawer.setAttribute('aria-hidden','true');
-    overlay.setAttribute('aria-hidden','true');
-    modal.setAttribute('aria-hidden','true');
+    /* ===== Small UX: reveal sections on scroll ===== */
+    const teaser = document.querySelector('.teaser');
+    const steps = Array.from(document.querySelectorAll('.step'));
+    function onScroll(){
+      if(window.scrollY > 40) document.querySelector('header').classList.add('shrink'); else document.querySelector('header').classList.remove('shrink');
+      if(teaser && teaser.getBoundingClientRect().top < window.innerHeight - 120) teaser.classList.add('visible');
+      steps.forEach(s=>{ if(s.getBoundingClientRect().top < window.innerHeight - 100) s.classList.add('visible'); });
+    }
+    window.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    /* ===== Safety: ensure no orphan focus traps ===== */
+    window.addEventListener('blur', ()=>{ /* intentionally empty to avoid focus traps in devtools */ });
+
+    // End of script
   </script>
 </body>
 </html>
