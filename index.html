@@ -1,648 +1,321 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BROX — Official</title>
-  <meta name="description" content="BROX — Community-driven meme token. Built for the people." />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="" crossorigin="anonymous">
-  <meta name="color-scheme" content="dark">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    /* =========================
-       Variables & Reset
-       ========================= */
-    :root{
-      --bg-0:#030305;
-      --bg-1:#071018;
-      --card:#0f1113;
-      --glass: rgba(255,255,255,0.03);
-      --accent-1:#ff4500;   /* primary orange */
-      --accent-2:#ff8a50;   /* light orange */
-      --muted:#bfc3c8;
-      --radius:14px;
-      --maxw:1180px;
-      --shadow-1: 0 8px 40px rgba(0,0,0,0.6);
-      --ease: cubic-bezier(.14,.9,.36,1);
-      --nav-height:76px;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      :root { --motion: none; }
-    }
-
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
+    /* ===== Reset & Base ===== */
+    *{margin:0;padding:0;box-sizing:border-box;}
     body{
-      font-family: Inter, 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      background: radial-gradient(1200px 600px at 10% 0%, #071018 0%, var(--bg-1) 40%, #000 100%);
-      color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      -webkit-tap-highlight-color: transparent;
+      font-family:'Segoe UI',Arial,sans-serif;
+      background:radial-gradient(circle at top,#0b0b0b,#000);
+      color:#fff;overflow-x:hidden;line-height:1.6;
     }
-    img{display:block;max-width:100%;height:auto}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+    a{text-decoration:none;color:inherit;}
 
-    /* =========================
-       Header
-       ========================= */
+    /* ===== Preloader ===== */
+    #preloader{
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:#000;display:flex;justify-content:center;align-items:center;
+      z-index:4000;transition:opacity .6s ease;
+    }
+    #preloader.hidden{opacity:0;pointer-events:none;}
+    .loader{
+      border:6px solid #333;border-top:6px solid #ff4500;
+      border-radius:50%;width:60px;height:60px;animation:spin 1s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    /* ===== Header ===== */
     header{
-      position:fixed;inset:0 0 auto 0;height:var(--nav-height);display:flex;align-items:center;justify-content:space-between;
-      padding:12px 24px;z-index:120;backdrop-filter: blur(8px);
-      transition: background .35s var(--ease), transform .25s var(--ease);
-      background: linear-gradient(90deg, rgba(255,69,0,0.02), rgba(0,0,0,0.35));
-      border-bottom: 1px solid rgba(255,69,0,0.03);
+      position:fixed;top:0;left:0;width:100%;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:15px 30px;z-index:1000;
+      background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);
+      box-shadow:0 0 20px rgba(255,69,0,0.5);
+      transition:.4s ease;
     }
-    header.compact{transform:translateY(-6px);background:rgba(0,0,0,0.75)}
-    .brand{display:flex;align-items:center;gap:12px;font-weight:800;color:var(--accent-1);font-size:1.05rem}
-    .brand .mark{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 10px 36px rgba(255,69,0,0.12)}
-    nav.primary{display:flex;gap:12px;align-items:center}
-    nav.primary a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;transition:all .18s}
-    nav.primary a:hover{color:#fff;background:linear-gradient(90deg, rgba(255,69,0,0.06), rgba(255,102,51,0.03))}
-    .actions{display:flex;gap:10px;align-items:center}
-    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));border:none;color:#fff;font-weight:700;cursor:pointer;box-shadow:0 10px 30px rgba(255,69,0,0.12);transition:transform .18s var(--ease)}
-    .btn:active{transform:translateY(1px)}
-    .ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:var(--muted)}
-    .hamburger{display:none;font-size:1.6rem;background:transparent;border:none;color:#fff}
-    @media (max-width:920px){
-      nav.primary{display:none}
-      .hamburger{display:inline-flex}
+    header.scrolled{background:rgba(0,0,0,0.9);}
+    .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
+    .menu-btn{font-size:2rem;cursor:pointer;transition:.3s;}
+
+    /* ===== Side Menu ===== */
+    .side-menu{
+      position:fixed;top:0;right:-260px;height:100%;width:250px;
+      background:rgba(20,20,20,0.98);backdrop-filter:blur(12px);
+      padding-top:80px;transition:.35s;z-index:2000;
+      box-shadow:-5px 0 20px rgba(255,69,0,0.3);
     }
-
-    /* =========================
-       Preloader (optional)
-       ========================= */
-    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#000,#050505);z-index:210;transition:opacity .5s}
-    .logo-glow{width:90px;height:90px;border-radius:22px;background:linear-gradient(135deg,#ff6a33,#ffbd7a);display:flex;align-items:center;justify-content:center;font-size:34px;box-shadow:0 0 60px rgba(255,69,0,0.22)}
-
-    /* =========================
-       Hero
-       ========================= */
-    .hero{min-height:92vh;display:grid;place-items:center;padding-top:var(--nav-height);position:relative}
-    .hero-inner{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;width:100%;max-width:var(--maxw);padding:28px}
-    .hero-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:34px;border-radius:20px;box-shadow:var(--shadow-1);border:1px solid rgba(255,69,0,0.04)}
-    .hero-media{display:flex;flex-direction:column;align-items:center;gap:16px}
-    .hero-media img{width:180px;height:180px;border-radius:50%;object-fit:cover;box-shadow:0 30px 100px rgba(255,69,0,0.12);transition:transform .45s var(--ease), box-shadow .45s var(--ease)}
-    .hero-media img:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 40px 120px rgba(255,69,0,0.16)}
-    .hero-title{font-size:2.6rem;color:var(--accent-1);text-shadow:0 10px 40px rgba(255,69,0,0.06);font-weight:800}
-    .hero-desc{color:var(--muted);margin-top:6px;text-align:center;max-width:520px}
-
-    .stats-row{display:flex;gap:12px;justify-content:center;margin-top:12px;flex-wrap:wrap}
-    .stat-pill{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px 14px;border-radius:12px;text-align:center;min-width:110px}
-    .stat-pill b{display:block;color:var(--accent-1);font-size:18px}
-
-    .hero-cta{display:flex;flex-direction:column;gap:16px}
-    .contract-box{display:flex;gap:8px;align-items:center}
-    input.contract{flex:1;background:transparent;border-radius:10px;padding:12px;border:1px solid rgba(255,255,255,0.06);color:#ddd}
-
-    /* =========================
-       Sections
-       ========================= */
-    section{padding:80px 0}
-    .teaser{display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding:28px}
-    .teaser .media{flex:0 0 420px;border-radius:16px;overflow:hidden}
-    .teaser img{width:100%;height:auto;display:block}
-    .teaser h2{font-size:2rem;color:var(--accent-1)}
-
-    /* Allocation */
-    .allocation .inner{display:grid;grid-template-columns:360px 1fr;gap:24px;align-items:center;padding:28px}
-    .chart-wrap{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:14px}
-    .donut-wrap{display:flex;align-items:center;justify-content:center}
-    .alloc-list{display:grid;gap:12px;margin-top:12px}
-    .alloc-item{display:flex;justify-content:space-between;padding:12px 14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));border-radius:10px}
-
-    /* Roadmap timeline */
-    .roadmap .timeline{display:grid;gap:14px;max-width:900px;margin:auto;padding:18px}
-    .phase{padding:16px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-left:6px solid var(--accent-1);transition:transform .35s var(--ease)}
-    .phase:hover{transform:translateX(6px)}
-
-    /* Footer */
-    footer{padding:36px 0;background:linear-gradient(180deg,rgba(0,0,0,0.4), rgba(0,0,0,0.6));border-top:1px solid rgba(255,69,0,0.03);margin-top:30px}
-    .footer-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;max-width:var(--maxw);margin:0 auto;padding:0 20px}
-    .socials{display:flex;gap:14px;align-items:center}
-    .socials a{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));color:#fff}
-    .socials a:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(255,69,0,0.08)}
-    .copyright{color:var(--muted)}
-
-    /* Back to top */
-    .backtop{
-      position:fixed;right:20px;bottom:24px;width:52px;height:52px;border-radius:12px;
-      display:grid;place-items:center;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));
-      color:#fff;box-shadow:0 14px 40px rgba(255,69,0,0.16);cursor:pointer;z-index:130;opacity:0;transform:translateY(12px);transition:opacity .28s var(--ease),transform .28s var(--ease)
+    .side-menu.open{right:0;}
+    .side-menu a{
+      display:block;padding:18px 25px;font-size:1.2rem;
+      transition:.25s;color:#fff;position:relative;
     }
-    .backtop.show{opacity:1;transform:translateY(0)}
+    .side-menu a::after{
+      content:"";position:absolute;left:0;bottom:0;width:0;height:2px;
+      background:#ff4500;transition:.3s;
+    }
+    .side-menu a:hover{color:#ff4500;}
+    .side-menu a:hover::after{width:100%;}
 
-    /* Modal (accessible) */
-    .modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.75));z-index:200}
-    .modal[aria-hidden="false"]{display:flex}
-    .modal-card{width:100%;max-width:560px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:28px;border-radius:16px;box-shadow:var(--shadow-1);transform:translateY(18px);opacity:0;transition:all .28s var(--ease)}
-    .modal[aria-hidden="false"] .modal-card{transform:none;opacity:1}
-    .modal-close{position:absolute;top:18px;right:22px;background:transparent;border:0;color:var(--muted);font-size:20px;cursor:pointer}
-    .modal h3{color:var(--accent-1);margin-bottom:8px}
-    .modal p{color:var(--muted);margin-bottom:14px}
+    /* ===== Hero ===== */
+    .hero{
+      height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:center;text-align:center;padding-top:90px;position:relative;
+    }
+    .hero img{
+      width:190px;height:190px;border-radius:50%;
+      box-shadow:0 0 50px rgba(255,69,0,1);
+      animation:float 4s ease-in-out infinite, glow 2s alternate infinite;
+    }
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+    @keyframes glow{from{box-shadow:0 0 25px rgba(255,69,0,0.6);}to{box-shadow:0 0 55px rgba(255,69,0,1);}}
+    .hero h1{margin-top:25px;font-size:3.2rem;text-shadow:0 0 20px #ff4500,0 0 40px #ff6633;}
+    .hero p{max-width:600px;margin-top:12px;font-size:1.2rem;color:#ddd;}
+    .hero button{
+      margin-top:30px;padding:14px 35px;border:none;border-radius:50px;
+      background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
+      font-size:1.1rem;font-weight:bold;cursor:pointer;
+      box-shadow:0 0 25px rgba(255,69,0,0.8);
+      transition:.3s;
+    }
+    .hero button:hover{transform:scale(1.08);box-shadow:0 0 35px rgba(255,69,0,1);}
 
-    /* small helpers */
-    .sr-only{position:absolute!important;height:1px;width:1px;overflow:hidden;clip:rect(1px,1px,1px,1px);white-space:nowrap}
-    @media (max-width:1100px){.hero-inner{grid-template-columns:1fr}.allocation .inner{grid-template-columns:1fr}.teaser .media{flex:1 1 100%}}
-    @media (max-width:700px){.hero-title{font-size:1.6rem}}
+    /* ===== Teaser ===== */
+    .teaser{
+      padding:100px 20px;text-align:center;
+      background:linear-gradient(135deg,#141414,#0d0d0d);
+      opacity:0;transform:translateY(40px);transition:all 1s ease;
+    }
+    .teaser.visible{opacity:1;transform:translateY(0);}
+    .teaser img{
+      width:340px;border-radius:18px;margin-bottom:25px;
+      box-shadow:0 0 30px rgba(255,69,0,0.9);transition:.4s;
+    }
+    .teaser img:hover{transform:scale(1.05);}
+    .teaser h2{
+      font-size:2.7rem;color:#ff4500;
+      text-shadow:0 0 25px #ff4500,0 0 50px #ff6633;
+      animation:pulse 2s infinite alternate;
+    }
+    @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.08)}}
+
+    /* ===== Allocation ===== */
+    .allocation{padding:90px 20px;text-align:center;}
+    .allocation h2{font-size:2.5rem;margin-bottom:30px;color:#ff4500;text-shadow:0 0 25px #ff4500;}
+    .donut{width:260px;height:260px;margin:auto;position:relative;}
+    .donut svg{transform:rotate(-90deg);}
+    .donut text{
+      font-size:20px;fill:#fff;dominant-baseline:middle;text-anchor:middle;
+    }
+    .alloc-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px;max-width:900px;margin:40px auto 0;
+    }
+    .card{
+      background:rgba(30,30,30,0.7);padding:25px;border-radius:16px;
+      box-shadow:0 0 20px rgba(255,69,0,0.3);transition:.3s;
+    }
+    .card:hover{transform:translateY(-8px) scale(1.03);}
+    .card h3{color:#ff4500;margin-bottom:10px;font-size:1.6rem;}
+
+    /* ===== Roadmap (timeline style) ===== */
+    .roadmap{padding:90px 20px;text-align:center;}
+    .roadmap h2{font-size:2.5rem;margin-bottom:40px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
+    .steps{max-width:750px;margin:auto;position:relative;padding-left:20px;}
+    .steps::before{
+      content:"";position:absolute;left:15px;top:0;height:100%;width:3px;background:#ff4500;
+    }
+    .step{
+      position:relative;padding:20px 20px 20px 50px;margin-bottom:30px;
+      background:rgba(30,30,30,0.7);border-radius:12px;box-shadow:0 0 20px rgba(255,69,0,0.3);
+      opacity:0;transform:translateY(40px);transition:.8s ease;
+    }
+    .step::before{
+      content:"";position:absolute;left:-2px;top:20px;width:18px;height:18px;
+      background:#ff4500;border-radius:50%;box-shadow:0 0 10px #ff6633;
+    }
+    .step.visible{opacity:1;transform:translateY(0);}
+
+    /* ===== Modal ===== */
+    .modal{
+      display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.75);justify-content:center;align-items:center;
+    }
+    .modal-content{
+      background:rgba(30,30,30,0.95);padding:30px;border-radius:16px;
+      text-align:center;width:90%;max-width:400px;
+      transform:scale(.8);opacity:0;transition:.4s;position:relative;
+    }
+    .modal.show .modal-content{transform:scale(1);opacity:1;}
+    .modal-content h3{margin-bottom:15px;color:#ff4500;font-size:1.5rem;}
+    .modal-content input{
+      width:100%;padding:12px;margin-bottom:15px;border:none;border-radius:8px;
+    }
+    .modal-content button{
+      padding:12px 25px;border:none;border-radius:8px;
+      background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
+      cursor:pointer;font-weight:bold;
+      box-shadow:0 0 15px rgba(255,69,0,0.8);
+    }
+    .close-btn{
+      position:absolute;top:10px;right:15px;font-size:1.5rem;cursor:pointer;color:#fff;
+    }
+    .close-btn:hover{color:#ff4500;}
+
+    /* ===== Footer ===== */
+    footer{
+      padding:40px 20px;text-align:center;
+      background:rgba(20,20,20,0.85);backdrop-filter:blur(8px);
+      box-shadow:0 -5px 20px rgba(255,69,0,0.3);
+    }
+    .socials a{
+      margin:0 12px;font-size:2rem;color:#fff;transition:.3s;
+    }
+    .socials a:hover{color:#ff4500;transform:scale(1.2);}
+    footer p{font-size:.9rem;color:#aaa;margin-top:15px;}
+
+    /* ===== Background Particles ===== */
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .hero h1{font-size:2.2rem;}
+      .hero p{font-size:1rem;}
+      .teaser img{width:240px;}
+      .teaser h2{font-size:2rem;}
+    }
   </style>
 </head>
 <body>
-
-  <!-- Preloader (optional) -->
-  <div id="preloader" aria-hidden="true">
-    <div class="logo-glow" role="img" aria-label="BROX loading">🔥</div>
-  </div>
-
-  <!-- Particles canvas (optimized) -->
-  <canvas id="particles" aria-hidden="true" style="position:fixed;inset:0;z-index:-1"></canvas>
+  <div id="preloader"><div class="loader"></div></div>
+  <canvas id="particles"></canvas>
 
   <!-- Header -->
-  <header role="banner" class="container" id="siteHeader">
-    <div class="brand" aria-hidden="false">
-      <div class="mark" aria-hidden>🔥</div>
-      <div>BROX</div>
-    </div>
-
-    <nav class="primary" role="navigation" aria-label="Main navigation">
-      <a href="#hero">Home</a>
-      <a href="#teaser">Teaser</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
-    </nav>
-
-    <div class="actions" role="group" aria-label="Header actions">
-      <button class="ghost" id="copyAddress" title="Copy contract address">Copy Contract</button>
-      <button class="btn" id="openModal">Join Now</button>
-      <button class="hamburger" id="navToggle" aria-expanded="false" aria-controls="sideNav" aria-label="Open menu">☰</button>
-    </div>
+  <header id="header">
+    <div class="logo">BROX</div>
+    <div class="menu-btn" id="menuBtn">☰</div>
   </header>
 
-  <!-- Side nav (mobile) -->
-  <nav id="sideNav" class="side-menu" aria-hidden="true" aria-label="Mobile navigation">
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
     <a href="#hero">Home</a>
     <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
     <a href="#roadmap">Roadmap</a>
     <a href="#footer">Contact</a>
-  </nav>
+  </div>
 
-  <main>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    <h1>🔥 Welcome to BROX 🔥</h1>
+    <p>The meme revolution begins. Powered by community.</p>
+    <button onclick="openModal()">Early Access</button>
+  </section>
 
-    <!-- Hero -->
-    <section class="hero container" id="hero" aria-labelledby="heroTitle">
-      <div class="hero-inner">
-        <div class="hero-card" role="region" aria-label="Hero card">
-          <div class="hero-media">
-            <img src="assets/images/hero-avatar.png" alt="BROX mascot" loading="lazy" width="180" height="180" onerror="this.src='https://via.placeholder.com/180'">
-            <div class="hero-title" id="heroTitle">BROX — Born in Fire</div>
-            <p class="hero-desc">Community-driven meme token. Built for fun, fueled by the crowd. Join the movement and get notified at launch.</p>
+  <!-- Teaser -->
+  <section class="teaser" id="teaser">
+    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
+    <h2>🚀 Coming Soon...</h2>
+  </section>
 
-            <div class="stats-row" aria-hidden="true">
-              <div class="stat-pill"><small>Allocation</small><b id="allocText">99% / 1%</b></div>
-              <div class="stat-pill"><small>Status</small><b>Pre-Launch</b></div>
-              <div class="stat-pill"><small>Holders</small><b id="holdersCount">0</b></div>
-            </div>
-          </div>
-        </div>
+  <!-- Allocation -->
+  <section class="allocation" id="allocation">
+    <h2>Token Allocation</h2>
+    <div class="donut">
+      <svg width="260" height="260">
+        <circle cx="130" cy="130" r="120" stroke="#333" stroke-width="40" fill="none"/>
+        <circle id="donutSlice" cx="130" cy="130" r="120" stroke="#ff4500" stroke-width="40" fill="none" stroke-dasharray="0 753"/>
+        <text x="130" y="135">99% / 1%</text>
+      </svg>
+    </div>
+    <div class="alloc-cards">
+      <div class="card"><h3>99%</h3><p>Community</p></div>
+      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
+    </div>
+  </section>
 
-        <aside class="hero-card hero-cta" role="complementary" aria-label="Call to action">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div style="font-weight:800;color:var(--accent-1)">Get early access</div>
-            <div style="font-size:12px;color:var(--muted)">Limited whitelist spots</div>
-          </div>
-
-          <div style="margin-top:12px">
-            <button class="btn" id="ctaPrimary">Get Notified</button>
-            <a class="ghost" href="#allocation" style="margin-left:8px">See Allocation</a>
-          </div>
-
-          <div style="margin-top:16px" class="contract-box">
-            <input id="contractInput" class="contract" readonly value="0xYOURCONTRACTADDRESS" aria-label="Contract address">
-            <button class="ghost" id="copyBtn" aria-label="Copy contract address">Copy</button>
-          </div>
-
-          <small style="color:var(--muted);margin-top:10px;display:block">Note: Never share your private keys. This is a demo contract address.</small>
-        </aside>
-      </div>
-    </section>
-
-    <!-- Teaser -->
-    <section id="teaser" class="teaser container" aria-labelledby="teaserTitle">
-      <div class="media hero-card">
-        <img src="assets/images/teaser-banner.png" alt="Coming soon banner" loading="lazy" onerror="this.src='https://via.placeholder.com/420x300'">
-      </div>
-
-      <div>
-        <h2 id="teaserTitle">Road to the Moon 🚀</h2>
-        <p style="margin-top:12px;color:var(--muted)">We are designing a professional launch: marketing, liquidity, and exchange listings. Subscribe to stay ahead.</p>
-      </div>
-    </section>
-
-    <!-- Allocation -->
-    <section id="allocation" class="allocation container" aria-labelledby="allocHeading">
-      <h2 id="allocHeading" style="color:var(--accent-1)">Token Allocation</h2>
-      <div class="inner" style="margin-top:18px">
-        <div class="chart-wrap" aria-hidden="false">
-          <!-- Accessible SVG donut (animated) -->
-          <div class="donut-wrap" role="img" aria-label="Token allocation donut chart">
-            <svg id="donut" viewBox="0 0 200 200" width="300" height="300" role="presentation" aria-hidden="true">
-              <defs>
-                <linearGradient id="g" x1="0%" x2="100%">
-                  <stop offset="0%" stop-color="#ff4500"/>
-                  <stop offset="100%" stop-color="#ffb077"/>
-                </linearGradient>
-              </defs>
-              <circle cx="100" cy="100" r="70" fill="#0b0b0b"></circle>
-              <!-- background ring -->
-              <circle cx="100" cy="100" r="85" fill="none" stroke="#111" stroke-width="30"></circle>
-              <g id="slices" transform="rotate(-90 100 100)"></g>
-              <circle cx="100" cy="100" r="52" fill="#070709"></circle>
-              <text id="donutCenter" x="100" y="106" text-anchor="middle" font-size="14" fill="#fff">99% / 1%</text>
-            </svg>
-          </div>
-          <div style="margin-top:12px;color:var(--muted);font-size:13px">Distribution can be edited in the script below.</div>
-        </div>
-
-        <div>
-          <div class="alloc-list" role="list">
-            <div class="alloc-item" role="listitem"><span>Community</span><strong id="p1">99%</strong></div>
-            <div class="alloc-item" role="listitem"><span>Team & Holders</span><strong id="p2">1%</strong></div>
-          </div>
-          <p style="color:var(--muted);margin-top:12px">Clear distribution: majority for the community. Adjust values in the script if needed.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Roadmap -->
-    <section id="roadmap" class="roadmap container" aria-labelledby="roadmapTitle">
-      <h2 id="roadmapTitle" style="color:var(--accent-1)">Roadmap</h2>
-      <div class="timeline" style="margin-top:18px" role="list">
-        <div class="phase" role="listitem">Phase 1 — Social launch & community growth</div>
-        <div class="phase" role="listitem">Phase 2 — Website upgrade & marketing</div>
-        <div class="phase" role="listitem">Phase 3 — DEX listings & liquidity</div>
-        <div class="phase" role="listitem">Phase 4 — CEX listings & partnerships</div>
-      </div>
-    </section>
-
-  </main>
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="steps">
+      <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
+      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+      <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
+      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
+    </div>
+  </section>
 
   <!-- Footer -->
-  <footer id="footer" role="contentinfo">
-    <div class="footer-inner">
-      <div class="socials" aria-label="Social links">
-        <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a>
-        <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener"><i class="fab fa-tiktok" aria-hidden="true"></i><span class="sr-only">TikTok</span></a>
-        <a href="https://x.com/brox" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter" aria-hidden="true"></i><span class="sr-only">X</span></a>
-        <a href="https://t.me/brox" target="_blank" rel="noopener"><i class="fab fa-telegram" aria-hidden="true"></i><span class="sr-only">Telegram</span></a>
-      </div>
-
-      <div style="display:flex;flex-direction:column;align-items:flex-end">
-        <div class="copyright">© 2025 BROX. All rights reserved.</div>
-      </div>
+  <footer id="footer">
+    <div class="socials">
+      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
     </div>
+    <p>© 2025 BROX. All Rights Reserved.</p>
   </footer>
 
-  <!-- Back to top -->
-  <button id="backTop" class="backtop" aria-label="Back to top" title="Back to top">↑</button>
-
-  <!-- Modal (accessible) -->
-  <div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modalTitle">
-    <div class="modal-card" role="document">
-      <button class="modal-close" aria-label="Close modal" id="modalClose">✕</button>
-      <h3 id="modalTitle">Get Notified on Launch 🚀</h3>
-      <p style="color:var(--muted)">Enter your email to receive launch updates.</p>
-      <form id="notifyForm" onsubmit="return false" style="margin-top:12px">
-        <div style="display:flex;gap:10px;align-items:center">
-          <input id="emailInput" type="email" placeholder="you@email.com"
-                 style="flex:1;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff" required>
-          <button class="btn" id="submitEmail">Submit</button>
-        </div>
-        <p id="formMsg" style="color:var(--muted);margin-top:8px"></p>
-      </form>
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3>Get Notified on Launch 🚀</h3>
+      <input type="email" placeholder="Enter your email">
+      <button onclick="closeModal()">Submit</button>
     </div>
   </div>
 
   <script>
-  /* =========================
-     Utility & Accessibility Helpers
-     ========================= */
+    // ===== Preloader =====
+    window.addEventListener("load",()=>{document.getElementById("preloader").classList.add("hidden");});
 
-  const $ = sel => document.querySelector(sel);
-  const $$ = sel => Array.from(document.querySelectorAll(sel));
+    // ===== Menu =====
+    const menuBtn=document.getElementById("menuBtn");
+    const sideMenu=document.getElementById("sideMenu");
+    menuBtn.onclick=()=>{
+      sideMenu.classList.toggle("open");
+      menuBtn.textContent=sideMenu.classList.contains("open")?"×":"☰";
+    };
+    document.querySelectorAll(".side-menu a").forEach(link=>{
+      link.onclick=()=>{sideMenu.classList.remove("open");menuBtn.textContent="☰";}
+    });
 
-  // Focus trap for modal
-  function trapFocus(container) {
-    const focusable = container.querySelectorAll('a[href], button:not([disabled]), input, textarea, select, [tabindex]:not([tabindex="-1"])');
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
+    // ===== Modal =====
+    function openModal(){const modal=document.getElementById("myModal");modal.style.display="flex";setTimeout(()=>modal.classList.add("show"),10);}
+    function closeModal(){const modal=document.getElementById("myModal");modal.classList.remove("show");setTimeout(()=>modal.style.display="none",300);}
 
-    function handle(e) {
-      if (e.key !== 'Tab') return;
-      if (e.shiftKey) {
-        if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-      } else {
-        if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    // ===== Donut Animation =====
+    const donut=document.getElementById("donutSlice");
+    const length=2*Math.PI*120; // circumference
+    let progress=0;
+    function animateDonut(){
+      progress+=2;
+      if(progress<=length*0.99){
+        donut.setAttribute("stroke-dasharray",progress+" "+length);
+        requestAnimationFrame(animateDonut);
       }
     }
-    container.addEventListener('keydown', handle);
-    return () => container.removeEventListener('keydown', handle);
-  }
+    animateDonut();
 
-  // Simple debounce
-  function debounce(fn, wait=100){ let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), wait); } }
-
-  /* =========================
-     Preloader hide
-     ========================= */
-  window.addEventListener('load', ()=>{
-    const pre = $('#preloader');
-    if(pre){ pre.style.opacity = 0; setTimeout(()=>pre.remove(), 600); }
-  });
-
-  /* =========================
-     Header compact on scroll
-     ========================= */
-  const header = $('#siteHeader');
-  const handleHeader = () => {
-    if(window.scrollY > 40) header.classList.add('compact'); else header.classList.remove('compact');
-  };
-  window.addEventListener('scroll', handleHeader, {passive:true});
-
-  /* =========================
-     Mobile side nav (accessible)
-     ========================= */
-  const navToggle = $('#navToggle'), sideNav = $('#sideNav');
-  navToggle.addEventListener('click', ()=>{
-    const open = sideNav.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', open);
-    sideNav.setAttribute('aria-hidden', !open);
-    if(open){
-      // focus first link
-      const first = sideNav.querySelector('a');
-      first && first.focus();
-      document.body.style.overflow = 'hidden'; // prevent background scroll (mobile)
-    } else {
-      document.body.style.overflow = '';
-    }
-  });
-
-  // close side nav when clicking a link
-  $$('.side-menu a').forEach(a => a.addEventListener('click', ()=>{
-    sideNav.classList.remove('open');
-    navToggle.setAttribute('aria-expanded','false');
-    sideNav.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
-  }));
-
-  /* =========================
-     Copy contract handlers (graceful)
-     ========================= */
-  const copyBtn = $('#copyBtn'), copyAddress = $('#copyAddress');
-  function flashText(el, txt, ms=1400){
-    const old = el.textContent;
-    el.textContent = txt;
-    setTimeout(()=> el.textContent = old, ms);
-  }
-  function copyContract(){
-    const val = $('#contractInput').value || '';
-    if(!navigator.clipboard) {
-      flashText(copyBtn, 'Unavailable');
-      return;
-    }
-    navigator.clipboard.writeText(val).then(()=> flashText(copyBtn, 'Copied'));
-  }
-  copyBtn.addEventListener('click', copyContract);
-  copyAddress.addEventListener('click', ()=> {
-    const field = $('#contractInput');
-    const txt = field ? field.value : '0xYOURCONTRACTADDRESS';
-    navigator.clipboard.writeText(txt).then(()=> flashText(copyAddress, 'Copied'));
-  });
-
-  /* =========================
-     Modal open/close with focus trap, esc, backdrop
-     ========================= */
-  const modal = $('#modal'), openModalBtn = $('#openModal'), closeModalBtn = $('#modalClose') || $('#modalClose');
-  let releaseTrap = null;
-  function openModal(){
-    modal.setAttribute('aria-hidden','false');
-    const card = modal.querySelector('.modal-card');
-    // preserve last focused
-    const prev = document.activeElement;
-    // focus on input
-    setTimeout(()=> {
-      const input = modal.querySelector('input, button, a');
-      input && input.focus();
-      releaseTrap = trapFocus(modal);
-    }, 80);
-    // disable page scroll
-    document.documentElement.style.overflow = 'hidden';
-    // close handlers
-    function closeHandler(){ closeModal(); }
-    modal.addEventListener('click', backdropClick);
-    window.addEventListener('keydown', escHandler);
-    modal._cleanup = ()=>{ modal.removeEventListener('click', backdropClick); window.removeEventListener('keydown', escHandler); prev && prev.focus(); if(releaseTrap){ releaseTrap(); releaseTrap = null; } document.documentElement.style.overflow = ''; };
-    function backdropClick(e){ if(e.target === modal) closeHandler(); }
-    function escHandler(e){ if(e.key === 'Escape') closeHandler(); }
-  }
-  function closeModal(){
-    modal.setAttribute('aria-hidden','true');
-    if(modal._cleanup) { modal._cleanup(); modal._cleanup = null; }
-  }
-  openModalBtn && openModalBtn.addEventListener('click', openModal);
-  closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
-
-  // Submit form (simulate)
-  $('#notifyForm').addEventListener('submit', ()=>{
-    const email = $('#emailInput').value.trim();
-    const msg = $('#formMsg');
-    if(!email){ msg.textContent = 'Enter a valid email'; return; }
-    msg.textContent = 'Sending...';
-    setTimeout(()=>{ msg.textContent = 'Subscribed! We will notify you.'; $('#emailInput').value=''; setTimeout(closeModal,900); },900);
-  });
-
-  /* =========================
-     Smooth reveal on scroll (optimized)
-     ========================= */
-  const revealEls = $$('.teaser, .phase, .hero-card');
-  const revealObserver = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(e.isIntersecting){ e.target.classList.add('in-view'); revealObserver.unobserve(e.target); }
-    });
-  }, {threshold: 0.12});
-  revealEls.forEach(el=> revealObserver.observe(el));
-
-  /* =========================
-     Animated Donut (SVG) - accessible + performant
-     ========================= */
-  // data array (percentages) - update here if needed
-  const donutData = [
-    { label: 'Community', value: 99, color: 'url(#g)' },
-    { label: 'Team', value: 1, color: '#444' }
-  ];
-  (function renderDonut(){
-    const slicesGroup = document.getElementById('slices');
-    const total = donutData.reduce((s,d)=>s+d.value,0);
-    let angleAccum = 0;
-    // create arcs using path (SVG arc)
-    donutData.forEach((d, idx)=>{
-      const portion = d.value / total;
-      const start = angleAccum * 2 * Math.PI;
-      const end = (angleAccum + portion) * 2 * Math.PI;
-      const rOuter = 85; // radius for stroke center
-      const cx = 100, cy = 100;
-      // draw using stroke-dash technique: create a circle stroke and mask it
-      const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
-      circle.setAttribute('cx', cx);
-      circle.setAttribute('cy', cy);
-      circle.setAttribute('r', rOuter);
-      circle.setAttribute('fill','none');
-      circle.setAttribute('stroke-width', 30);
-      circle.setAttribute('stroke-linecap','butt');
-      circle.setAttribute('stroke', d.color);
-      circle.setAttribute('class', 'donut-slice');
-      // we'll later animate stroke-dashoffset
-      slicesGroup.appendChild(circle);
-      angleAccum += portion;
-    });
-
-    // compute stroke-dasharray and animate
-    const circles = slicesGroup.querySelectorAll('circle');
-    const circumference = 2 * Math.PI * 85;
-    // stacked: each slice gets dasharray = circumference * portion, dashoffset = cumulative offset
-    let cum = 0;
-    donutData.forEach((d,i)=>{
-      const portion = d.value / total;
-      const len = circumference * portion;
-      const circle = circles[i];
-      circle.style.strokeDasharray = `${len} ${circumference - len}`;
-      circle.style.strokeDashoffset = - (circumference * cum);
-      circle.style.transformOrigin = '100px 100px';
-      cum += portion;
-    });
-
-    // animate filling (progressive)
-    let progress = 0;
-    function animate() {
-      progress += 0.02;
-      if(progress > 1) progress = 1;
-      circles.forEach((c,i)=>{
-        const orig = parseFloat(c.style.strokeDashoffset);
-        // ease out for smoothness
-        const eased = 1 - Math.pow(1 - progress, 3);
-        c.style.opacity = eased;
-        c.style.filter = `drop-shadow(0 8px ${8 * eased}px rgba(255,69,0,0.06))`;
-        c.style.transform = `rotate(${0}deg)`; // keep stable
+    // ===== Scroll reveal =====
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add("visible");}
       });
-      // center text update
-      const center = document.getElementById('donutCenter');
-      center.textContent = `${donutData[0].value}% / ${donutData[1].value}%`;
-      if(progress < 1) requestAnimationFrame(animate);
-    }
-    animate();
-  })();
+    },{threshold:0.2});
+    document.querySelectorAll('.teaser,.step').forEach(el=>observer.observe(el));
 
-  /* =========================
-     Animated holders counter
-     ========================= */
-  (function animateHolders(){
-    const el = $('#holdersCount'); if(!el) return;
-    let n = 0; const target = 1245;
-    function step(){
-      n += Math.ceil((target - n)/8);
-      if(n >= target) { el.textContent = target.toLocaleString(); }
-      else { el.textContent = n.toLocaleString(); setTimeout(step, 40); }
-    }
-    // delay start for polish
-    setTimeout(step, 700);
-  })();
+    // ===== Header Scroll Effect =====
+    const header=document.getElementById("header");
+    window.addEventListener("scroll",()=>{if(window.scrollY>50){header.classList.add("scrolled");}else{header.classList.remove("scrolled");}});
 
-  /* =========================
-     Back to top button
-     ========================= */
-  const backTop = $('#backTop');
-  const showBack = () => {
-    if(window.scrollY > 420) backTop.classList.add('show'); else backTop.classList.remove('show');
-  };
-  window.addEventListener('scroll', debounce(showBack, 80), {passive:true});
-  backTop.addEventListener('click', ()=> window.scrollTo({top:0,behavior:'smooth'}));
-
-  /* =========================
-     Particles (optimized & subtle)
-     ========================= */
-  (function particles(){
-    const canvas = document.getElementById('particles');
-    if(!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: true });
-    let w = innerWidth, h = innerHeight, parts = [];
-    const DPR = Math.max(1, Math.min(2, window.devicePixelRatio || 1));
-    function reset(){
-      w = canvas.width = Math.floor(innerWidth * DPR);
-      h = canvas.height = Math.floor(innerHeight * DPR);
-      canvas.style.width = innerWidth + 'px';
-      canvas.style.height = innerHeight + 'px';
-      ctx.setTransform(DPR,0,0,DPR,0,0);
-      parts = [];
-      const count = Math.max(40, Math.floor((innerWidth * innerHeight) / 80000));
-      for(let i=0;i<count;i++){
-        parts.push({
-          x: Math.random() * innerWidth,
-          y: Math.random() * innerHeight,
-          r: Math.random() * 1.8 + 0.3,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
-          a: 0.15 + Math.random() * 0.6
-        });
-      }
-    }
-    let stop = false;
-    function draw(){
-      if(stop) return;
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      for(const p of parts){
-        ctx.beginPath();
-        ctx.globalAlpha = p.a;
-        ctx.fillStyle = '#ff6a40';
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-        ctx.fill();
-        p.x += p.vx; p.y += p.vy;
-        if(p.x < -10) p.x = innerWidth + 10;
-        if(p.x > innerWidth + 10) p.x = -10;
-        if(p.y < -10) p.y = innerHeight + 10;
-        if(p.y > innerHeight + 10) p.y = -10;
-      }
-      requestAnimationFrame(draw);
-    }
-    window.addEventListener('resize', debounce(reset,120));
-    reset(); draw();
-  })();
-
-  /* =========================
-     Small UX polish: keyboard esc closes side nav
-     ========================= */
-  window.addEventListener('keydown', (e)=> {
-    if(e.key === 'Escape'){
-      if(sideNav.classList.contains('open')){
-        sideNav.classList.remove('open');
-        navToggle.setAttribute('aria-expanded','false');
-        sideNav.setAttribute('aria-hidden','true');
-      }
-      if(modal.getAttribute('aria-hidden') === 'false'){
-        closeModal();
-      }
-    }
-  });
-
-  /* =========================
-     Accessibility: respectful reduced motion
-     ========================= */
-  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
-    // stop heavy animations if needed
-    // e.g., remove particle animation by hiding canvas
-    const p = document.getElementById('particles');
-    p && (p.style.display = 'none');
-  }
-
-  </script>
-</body>
-</html>
+    // ===== Particles =====
+    const particles=document.getElementById("particles"),ctxP=particles.getContext("2d");let w,h,stars=[];
+    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];for(let i=0;i<90;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
+    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#ff4500";stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});requestAnimationFrame(draw);}
+    window.onresize
