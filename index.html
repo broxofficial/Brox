@@ -20,7 +20,7 @@
     }
     .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
     
-    /* === تعديل menu-btn === */
+    /* === menu-btn (معدل) === */
     .menu-btn{
       font-size:2rem;
       cursor:pointer;
@@ -31,7 +31,7 @@
       z-index:2500; /* أعلى من side-menu */
     }
 
-    /* ===== Side Menu (معدلة) ===== */
+    /* ===== Side Menu (معدل) ===== */
     .side-menu{
       position:fixed;
       top:70px; /* أسفل الهيدر مباشرة */
@@ -161,6 +161,137 @@
   </style>
 </head>
 <body>
-  <!-- باقي الكود كما هو -->
+  <canvas id="particles"></canvas>
+  <!-- Header -->
+  <header>
+    <div class="logo">BROX</div>
+    <div class="menu-btn" id="menuBtn">☰</div>
+  </header>
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#footer">Contact</a>
+  </div>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    <h1>🔥 Welcome to BROX 🔥</h1>
+    <p>The meme revolution begins. Powered by community.</p>
+    <button onclick="openModal()">Early Access</button>
+  </section>
+  <!-- Teaser -->
+  <section class="teaser" id="teaser">
+    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
+    <h2>🚀 Coming Soon...</h2>
+  </section>
+  <!-- Allocation -->
+  <section class="allocation" id="allocation">
+    <h2>Token Allocation</h2>
+    <div class="alloc-visual"><canvas id="allocChart" width="250" height="250"></canvas></div>
+    <div class="alloc-cards">
+      <div class="card"><h3>99%</h3><p>Community</p></div>
+      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
+    </div>
+  </section>
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="steps">
+      <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
+      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+      <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
+      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="socials">
+      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>© 2025 BROX. All Rights Reserved.</p>
+  </footer>
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <h3>Get Notified on Launch 🚀</h3>
+      <input type="email" placeholder="Enter your email">
+      <button onclick="closeModal()">Submit</button>
+    </div>
+  </div>
+
+  <script>
+    // ===== Menu =====
+    const menuBtn=document.getElementById("menuBtn");
+    const sideMenu=document.getElementById("sideMenu");
+
+    menuBtn.onclick=()=>{
+      sideMenu.classList.toggle("open");
+      menuBtn.textContent=sideMenu.classList.contains("open")?"×":"☰";
+    };
+    document.querySelectorAll(".side-menu a").forEach(link=>{
+      link.onclick=()=>{
+        sideMenu.classList.remove("open");
+        menuBtn.textContent="☰";
+      };
+    });
+    document.addEventListener("click",(e)=>{
+      if(sideMenu.classList.contains("open") && !sideMenu.contains(e.target) && e.target!==menuBtn){
+        sideMenu.classList.remove("open");
+        menuBtn.textContent="☰";
+      }
+    });
+
+    // ===== Modal =====
+    const modal=document.getElementById("myModal");
+    function openModal(){ 
+      modal.style.display="flex";
+      setTimeout(()=>modal.classList.add("show"),10);
+    }
+    function closeModal(){
+      modal.classList.remove("show");
+      setTimeout(()=>modal.style.display="none",300);
+    }
+
+    // ===== Chart =====
+    const canvas=document.getElementById("allocChart"),ctx=canvas.getContext("2d");
+    const data=[99,1],colors=["#ff4500","#333"];let currentPercent=0;
+    function drawChart(percent){
+      ctx.clearRect(0,0,250,250);
+      let start=-Math.PI/2,remaining=(percent/100)*2*Math.PI;
+      for(let i=0;i<data.length;i++){
+        const slice=(data[i]/100)*2*Math.PI;
+        const draw=Math.min(slice,remaining);
+        ctx.beginPath();ctx.moveTo(125,125);
+        ctx.arc(125,125,120,start,start+draw);ctx.closePath();
+        ctx.fillStyle=colors[i];ctx.fill();
+        start+=slice;remaining-=draw;if(remaining<=0)break;
+      }
+      ctx.beginPath();ctx.arc(125,125,70,0,2*Math.PI);
+      ctx.fillStyle="#141414";ctx.fill();
+      ctx.fillStyle="#fff";ctx.font="20px Arial";ctx.textAlign="center";
+      ctx.fillText("99% / 1%",125,130);
+    }
+    (function animate(){if(currentPercent<100){currentPercent++;drawChart(currentPercent);requestAnimationFrame(animate);}})();
+
+    // ===== Scroll reveal =====
+    function revealOnScroll(){
+      document.querySelectorAll('.teaser,.step').forEach(el=>{
+        if(el.getBoundingClientRect().top<window.innerHeight-50){el.classList.add('visible');}
+      });
+    }
+    window.addEventListener("scroll",revealOnScroll);revealOnScroll();
+
+    // ===== Particles =====
+    const particles=document.getElementById("particles"),ctxP=particles.getContext("2d");let w,h,stars=[];
+    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];for(let i=0;i<100;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
+    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#ff4500";stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});requestAnimationFrame(draw);}
+    window.onresize=resize;resize();draw();
+  </script>
 </body>
 </html>
