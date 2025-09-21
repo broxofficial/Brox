@@ -1,224 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Brox Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
-    /* Base */
-    body {
+    /* ===== Reset & Body ===== */
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body { 
       font-family: 'Segoe UI', Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: radial-gradient(circle at top, #111 0%, #000 100%);
-      color: #fff; overflow-x: hidden;
+      background: radial-gradient(circle at top, #0d0d0d, #000);
+      color:white; overflow-x:hidden;
     }
-    a { text-decoration: none; color: inherit; }
+    a { text-decoration:none; color:inherit; }
 
-    /* Background Particles */
-    #particles {
-      position: fixed; top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-    }
-
-    /* Header */
+    /* ===== Header ===== */
     header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 15px 30px;
-      background: rgba(0,0,0,0.6);
-      backdrop-filter: blur(10px);
-      position: fixed; top: 0; width: 100%; z-index: 1000;
-      box-shadow: 0 0 15px rgba(255,69,0,0.4);
+      display:flex; justify-content:space-between; align-items:center;
+      padding:15px 30px; 
+      background:rgba(0,0,0,0.6);
+      backdrop-filter:blur(10px);
+      position:fixed; top:0; width:100%; z-index:1000;
+      box-shadow:0 0 20px rgba(255,69,0,0.5);
     }
     .logo {
-      font-size: 1.8rem; font-weight: bold;
-      color: #ff4500;
-      text-shadow: 0 0 15px #ff4500;
+      font-size:2rem; font-weight:bold;
+      color:#ff4500; text-shadow:0 0 15px #ff4500;
     }
     .menu-btn {
-      font-size: 2rem; cursor: pointer;
-      color: white; transition: 0.3s;
+      font-size:2rem; cursor:pointer; color:white;
+      transition:0.3s;
     }
-    .menu-btn:hover { color: #ff4500; }
 
-    /* Side Menu */
+    /* ===== Side Menu ===== */
     .side-menu {
-      position: fixed; right: -260px; top: 0; height: 100%; width: 260px;
-      background: rgba(20,20,20,0.95);
-      backdrop-filter: blur(12px);
-      transition: 0.3s; padding-top: 80px; z-index: 2000;
+      position:fixed; right:-260px; top:0; height:100%; width:250px;
+      background:rgba(20,20,20,0.98); backdrop-filter:blur(12px);
+      transition:0.3s; padding-top:80px; z-index:2000;
+      box-shadow:-5px 0 20px rgba(255,69,0,0.3);
     }
     .side-menu a {
-      display: block; padding: 15px 25px;
-      font-size: 1.2rem; color: white; transition: 0.2s;
+      display:block; padding:18px 25px; font-size:1.3rem;
+      color:white; transition:0.2s;
     }
-    .side-menu a:hover { background: #ff4500; }
-    .side-menu.open { right: 0; }
+    .side-menu a:hover { background:#ff4500; }
+    .side-menu.open { right:0; }
 
-    /* Hero */
+    /* ===== Hero ===== */
     .hero {
-      height: 100vh; display: flex; flex-direction: column;
-      justify-content: center; align-items: center;
-      text-align: center; padding-top: 80px;
+      height:100vh; display:flex; flex-direction:column;
+      justify-content:center; align-items:center; text-align:center;
+      padding-top:90px; position:relative;
     }
-    .circle-container {
-      position: relative;
-      width: 220px; height: 220px;
-      border-radius: 50%; display: flex;
-      justify-content: center; align-items: center;
-      box-shadow: 0 0 25px rgba(0,255,0,0.6), 0 0 50px rgba(0,200,0,0.4);
-      background: radial-gradient(circle, rgba(0,255,0,0.15), transparent 70%);
-    }
-    .circle-container img {
-      width: 160px; height: 160px; border-radius: 50%;
+    .hero img {
+      width:180px; height:180px; border-radius:50%;
+      box-shadow:0 0 40px rgba(255,69,0,0.8);
     }
     .hero h1 {
-      margin-top: 25px; font-size: 2.8rem;
-      text-shadow: 0 0 10px #ff4500, 0 0 20px #ff6347;
+      margin-top:25px; font-size:3rem;
+      text-shadow:0 0 15px #ff4500, 0 0 30px #ff6633;
     }
     .hero p {
-      max-width: 500px; margin-top: 10px;
-      font-size: 1.1rem; color: #ddd;
+      max-width:600px; margin-top:12px; font-size:1.2rem;
+      color:#ddd;
     }
     .hero button {
-      margin-top: 30px; padding: 12px 30px;
-      background: linear-gradient(135deg,#ff4500,#ff6347);
-      border: none; border-radius: 50px;
-      color: white; font-size: 1.1rem; cursor: pointer;
-      box-shadow: 0 0 20px rgba(255,69,0,0.6);
-      transition: transform 0.2s, box-shadow 0.2s;
+      margin-top:30px; padding:14px 35px;
+      background:linear-gradient(135deg,#ff4500,#ff6633);
+      border:none; border-radius:50px; color:white; font-size:1.2rem;
+      cursor:pointer; font-weight:bold;
+      box-shadow:0 0 20px rgba(255,69,0,0.7);
+      transition:transform 0.3s, box-shadow 0.3s;
     }
     .hero button:hover {
-      transform: scale(1.07);
-      box-shadow: 0 0 30px rgba(255,69,0,0.8);
+      transform:scale(1.07);
+      box-shadow:0 0 30px rgba(255,69,0,1);
     }
 
-    /* Teaser */
+    /* ===== Teaser ===== */
     .teaser {
-      padding: 100px 20px; text-align: center;
+      padding:100px 20px; text-align:center;
+      background:linear-gradient(135deg,#141414,#0d0d0d);
+      opacity:0; transform:translateY(40px); transition:all 1s ease;
     }
+    .teaser.visible { opacity:1; transform:translateY(0); }
     .teaser img {
-      width: 300px; border-radius: 20px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 25px rgba(255,69,0,0.6);
+      width:320px; border-radius:18px; margin-bottom:25px;
+      box-shadow:0 0 25px rgba(255,69,0,0.7);
     }
     .teaser h2 {
-      font-size: 2.3rem; color: #ff4500;
-      text-shadow: 0 0 12px #ff4500;
-      animation: pulse 2s infinite alternate;
+      font-size:2.5rem; color:#ff4500;
+      text-shadow:0 0 20px #ff4500, 0 0 40px #ff6633;
+      animation:pulse 2s infinite alternate;
     }
     @keyframes pulse {
-      from { opacity: 0.7; transform: scale(0.95); }
-      to { opacity: 1; transform: scale(1.05); }
+      from{opacity:0.7; transform:scale(0.95);}
+      to{opacity:1; transform:scale(1.08);}
     }
 
-    /* Allocation */
-    .allocation { padding: 80px 20px; text-align: center; }
-    .allocation h2 { font-size: 2rem; margin-bottom: 30px; color: #ff4500; }
-    .alloc-visual { display: flex; justify-content: center; margin-bottom: 30px; }
+    /* ===== Allocation ===== */
+    .allocation { padding:90px 20px; text-align:center; }
+    .allocation h2 { font-size:2.3rem; margin-bottom:30px; color:#ff4500; }
+    .alloc-visual { display:flex; justify-content:center; margin-bottom:30px; }
     .alloc-cards {
-      display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap: 20px; max-width: 900px; margin: auto;
+      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:20px; max-width:900px; margin:auto;
     }
     .card {
-      background: rgba(30,30,30,0.7); padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 0 20px rgba(255,69,0,0.3);
-      transition: transform 0.3s;
+      background:rgba(30,30,30,0.7); padding:25px; border-radius:16px;
+      box-shadow:0 0 20px rgba(255,69,0,0.3);
+      transition:transform 0.3s;
     }
-    .card:hover { transform: translateY(-6px); }
-    .card h3 { color: #ff4500; margin-bottom: 10px; }
+    .card:hover { transform:translateY(-6px); }
+    .card h3 { color:#ff4500; margin-bottom:10px; font-size:1.5rem; }
 
-    /* Roadmap */
-    .roadmap { padding: 80px 20px; text-align: center; }
-    .roadmap h2 { font-size: 2rem; margin-bottom: 30px; color: #ff4500; }
-    .steps {
-      max-width: 700px; margin: auto; display: grid; gap: 25px;
-      text-align: left;
-    }
+    /* ===== Roadmap ===== */
+    .roadmap { padding:90px 20px; text-align:center; }
+    .roadmap h2 { font-size:2.3rem; margin-bottom:30px; color:#ff4500; }
+    .steps { max-width:700px; margin:auto; text-align:left; display:grid; gap:25px; }
     .step {
-      padding: 20px; border-left: 4px solid #ff4500;
-      background: rgba(30,30,30,0.7); border-radius: 12px;
-      box-shadow: 0 0 15px rgba(255,69,0,0.2);
-      opacity: 0; transform: translateY(40px);
-      transition: all 0.8s ease;
+      padding:22px; border-left:4px solid #ff4500;
+      background:rgba(30,30,30,0.7); border-radius:12px;
+      box-shadow:0 0 20px rgba(255,69,0,0.3);
+      opacity:0; transform:translateY(40px); transition:all 0.8s ease;
     }
-    .step.visible { opacity: 1; transform: translateY(0); }
+    .step.visible { opacity:1; transform:translateY(0); }
 
-    /* Modal */
+    /* ===== Modal ===== */
     .modal {
-      display: none; position: fixed; z-index: 3000; left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.7);
-      justify-content: center; align-items: center;
+      display:none; position:fixed; z-index:3000; left:0; top:0;
+      width:100%; height:100%; background:rgba(0,0,0,0.7);
+      justify-content:center; align-items:center;
     }
     .modal-content {
-      background: rgba(30,30,30,0.95); padding: 30px; border-radius: 16px;
-      text-align: center; width: 90%; max-width: 400px;
-      transform: scale(0.8); opacity: 0; transition: all 0.4s ease;
+      background:rgba(30,30,30,0.95); padding:30px; border-radius:16px;
+      text-align:center; width:90%; max-width:400px;
+      transform:scale(0.8); opacity:0; transition:all 0.4s ease;
     }
-    .modal.show .modal-content { transform: scale(1); opacity: 1; }
-    .modal-content h3 { margin-bottom: 15px; color: #ff4500; }
+    .modal.show .modal-content { transform:scale(1); opacity:1; }
+    .modal-content h3 { margin-bottom:15px; color:#ff4500; font-size:1.4rem; }
     .modal-content input {
-      width: 100%; padding: 12px; margin-bottom: 15px;
-      border: none; border-radius: 8px;
+      width:100%; padding:12px; margin-bottom:15px;
+      border:none; border-radius:8px;
     }
     .modal-content button {
-      padding: 10px 20px;
-      background: linear-gradient(135deg,#ff4500,#ff6347);
-      border: none; border-radius: 8px;
-      color: white; cursor: pointer;
-      box-shadow: 0 0 15px rgba(255,69,0,0.6);
-      transition: 0.3s;
-    }
-    .modal-content button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 25px rgba(255,69,0,0.8);
+      padding:12px 25px; background:linear-gradient(135deg,#ff4500,#ff6633);
+      border:none; border-radius:8px; color:white; cursor:pointer;
+      box-shadow:0 0 15px rgba(255,69,0,0.8);
+      font-weight:bold;
     }
 
-    /* Footer */
+    /* ===== Footer ===== */
     footer {
-      padding: 40px 20px; text-align: center; background: #141414;
+      padding:40px 20px; text-align:center; 
+      background:rgba(20,20,20,0.8); backdrop-filter:blur(8px);
+      box-shadow:0 -5px 20px rgba(255,69,0,0.3);
     }
     .socials a {
-      margin: 0 12px; font-size: 1.8rem; color: white; transition: 0.3s;
+      margin:0 12px; font-size:1.9rem; color:white; transition:0.3s;
     }
-    .socials a:hover { color: #ff4500; transform: scale(1.2); }
-    footer p { font-size: 0.9rem; color: #aaa; }
+    .socials a:hover { color:#ff4500; transform:scale(1.2); }
+    footer p { font-size:0.9rem; color:#aaa; margin-top:10px; }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .hero h1 { font-size: 2rem; }
-      .hero p { font-size: 1rem; }
-      .teaser img { width: 240px; }
+    /* ===== Particles Background ===== */
+    #particles {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      z-index:-1; background:#000;
+    }
+
+    /* ===== Responsive ===== */
+    @media(max-width:768px){
+      .hero h1{font-size:2.2rem;}
+      .hero p{font-size:1rem;}
+      .teaser img{width:240px;}
+      .teaser h2{font-size:2rem;}
     }
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
+  <div id="particles"></div>
 
   <!-- Header -->
   <header>
     <div class="logo">BROX</div>
-    <div class="menu-btn" onclick="toggleMenu()" id="menuBtn">☰</div>
+    <div class="menu-btn" id="menuBtn">☰</div>
   </header>
 
   <!-- Side Menu -->
   <div class="side-menu" id="sideMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#teaser" onclick="closeMenu()">Teaser</a>
-    <a href="#allocation" onclick="closeMenu()">Allocation</a>
-    <a href="#roadmap" onclick="closeMenu()">Roadmap</a>
-    <a href="#footer" onclick="closeMenu()">Contact</a>
+    <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#footer">Contact</a>
   </div>
 
   <!-- Hero -->
   <section class="hero" id="hero">
-    <div class="circle-container">
-      <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-    </div>
-    <h1>Welcome to BROX</h1>
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    <h1>🔥 Welcome to BROX 🔥</h1>
     <p>The meme revolution begins. Powered by community.</p>
     <button onclick="openModal()">Early Access</button>
   </section>
@@ -273,33 +254,33 @@
   </div>
 
   <script>
-    // Toggle Menu
-    function toggleMenu() {
-      const menu = document.getElementById("sideMenu");
-      const btn = document.getElementById("menuBtn");
-      menu.classList.toggle("open");
-      btn.textContent = menu.classList.contains("open") ? "✕" : "☰";
-    }
-    function closeMenu() {
-      const menu = document.getElementById("sideMenu");
-      const btn = document.getElementById("menuBtn");
-      menu.classList.remove("open");
-      btn.textContent = "☰";
-    }
+    // ===== Menu Toggle =====
+    const menuBtn=document.getElementById("menuBtn");
+    const sideMenu=document.getElementById("sideMenu");
+    menuBtn.onclick=function(){
+      sideMenu.classList.toggle("open");
+      menuBtn.textContent= sideMenu.classList.contains("open") ? "×" : "☰";
+    };
+    document.querySelectorAll(".side-menu a").forEach(link=>{
+      link.onclick=()=>{sideMenu.classList.remove("open"); menuBtn.textContent="☰";}
+    });
+    window.onclick=function(e){
+      if(e.target===sideMenu){sideMenu.classList.remove("open"); menuBtn.textContent="☰";}
+    };
 
-    // Modal
-    function openModal() {
-      const modal = document.getElementById("myModal");
-      modal.style.display = "flex";
+    // ===== Modal =====
+    function openModal(){
+      const modal=document.getElementById("myModal");
+      modal.style.display="flex";
       setTimeout(()=>modal.classList.add("show"),10);
     }
-    function closeModal() {
-      const modal = document.getElementById("myModal");
+    function closeModal(){
+      const modal=document.getElementById("myModal");
       modal.classList.remove("show");
       setTimeout(()=>modal.style.display="none",300);
     }
 
-    // Allocation Donut
+    // ===== Allocation Donut Chart =====
     const canvas=document.getElementById("allocChart");
     const ctx=canvas.getContext("2d");
     const data=[99,1]; const colors=["#ff4500","#333"];
@@ -328,7 +309,7 @@
     }
     animateChart();
 
-    // Scroll reveal
+    // ===== Scroll reveal =====
     function revealOnScroll(){
       document.querySelectorAll('.teaser,.step').forEach(el=>{
         const rect=el.getBoundingClientRect();
@@ -338,38 +319,34 @@
     window.addEventListener("scroll",revealOnScroll);
     revealOnScroll();
 
-    // Particles Background
-    const pCanvas=document.getElementById("particles");
-    const pCtx=pCanvas.getContext("2d");
-    let particles=[];
-    function resizeCanvas(){
-      pCanvas.width=window.innerWidth; pCanvas.height=window.innerHeight;
+    // ===== Particles Background =====
+    const particles=document.getElementById("particles");
+    const ctxP=particles.getContext("2d");
+    let w,h,stars=[];
+    function resize(){
+      w=particles.width=window.innerWidth;
+      h=particles.height=window.innerHeight;
+      stars=[];
+      for(let i=0;i<80;i++){
+        stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2,dx:(Math.random()-0.5),dy:(Math.random()-0.5)});
+      }
     }
-    window.addEventListener("resize",resizeCanvas);
-    resizeCanvas();
-    for(let i=0;i<80;i++){
-      particles.push({
-        x:Math.random()*pCanvas.width,
-        y:Math.random()*pCanvas.height,
-        r:Math.random()*2+1,
-        dx:(Math.random()-0.5)*0.5,
-        dy:(Math.random()-0.5)*0.5
+    function drawStars(){
+      ctxP.clearRect(0,0,w,h);
+      ctxP.fillStyle="#ff4500";
+      stars.forEach(s=>{
+        ctxP.beginPath();
+        ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);
+        ctxP.fill();
+        s.x+=s.dx; s.y+=s.dy;
+        if(s.x<0||s.x>w) s.dx*=-1;
+        if(s.y<0||s.y>h) s.dy*=-1;
       });
+      requestAnimationFrame(drawStars);
     }
-    function drawParticles(){
-      pCtx.clearRect(0,0,pCanvas.width,pCanvas.height);
-      pCtx.fillStyle="rgba(255,255,255,0.7)";
-      particles.forEach(p=>{
-        pCtx.beginPath();
-        pCtx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        pCtx.fill();
-        p.x+=p.dx; p.y+=p.dy;
-        if(p.x<0||p.x>pCanvas.width) p.dx*=-1;
-        if(p.y<0||p.y>pCanvas.height) p.dy*=-1;
-      });
-      requestAnimationFrame(drawParticles);
-    }
-    drawParticles();
+    window.onresize=resize;
+    resize();
+    drawStars();
   </script>
 </body>
 </html>
