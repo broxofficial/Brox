@@ -1,457 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BROX — Born in Fire (Pre-Launch)</title>
-
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BROX</title>
   <style>
-    :root{
-      --bg1:#05060a; --bg2:#071028;
-      --neon-c:#00f0c4; --neon-o:#ff6b35;
-      --muted:#98a3b2;
-      --card: rgba(255,255,255,0.03);
-      --glass: rgba(255,255,255,0.03);
-      --maxw:1100px;
-      --radius:14px;
-      --ease:cubic-bezier(.2,.9,.2,1);
+    /* خلفية بركانية */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(circle at center, #1a1a1a 60%, #000);
+      color: #fff;
+      overflow-x: hidden;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,Arial;color:#eafdf6;background:radial-gradient(1200px 600px at 10% 10%, rgba(0,240,196,0.04), transparent 10%), linear-gradient(180deg,var(--bg1),var(--bg2));-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%;height:auto}
 
-    /* Header */
-    header{position:fixed;inset-inline:0;top:0;z-index:1200;padding:12px 0;background:linear-gradient(90deg, rgba(0,0,0,0.55), rgba(0,0,0,0.18));backdrop-filter:blur(6px);border-bottom:1px solid rgba(255,255,255,0.02)}
-    .nav{max-width:var(--maxw);margin:0 auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{font-family:Orbitron,monospace;font-weight:900;letter-spacing:1px}
-    .buy-btn{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;font-weight:700;opacity:.85;cursor:not-allowed}
+    /* الهيدر */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+    }
 
-    /* Layout */
-    .container{max-width:var(--maxw);margin:0 auto;padding:0 16px}
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff4500;
+      text-shadow: 0 0 10px #ff0000;
+    }
 
-    /* Center area */
-    .hero-wrap{min-height:78vh;display:flex;align-items:center;justify-content:center;padding-top:70px;padding-bottom:40px}
-    .center-stage{display:flex;flex-direction:column;align-items:center;gap:18px;max-width:900px;width:100%}
+    .menu-btn {
+      font-size: 28px;
+      cursor: pointer;
+      color: #ff4500;
+      background: none;
+      border: none;
+    }
 
-    /* Logo (clickable image) */
-    .logo-outer{position:relative;display:inline-grid;place-items:center;cursor:pointer}
-    .glow-ring{position:absolute;inset:auto;left:50%;top:50%;transform:translate(-50%,-50%);width:420px;height:420px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(0,240,196,0.06), transparent 30%), conic-gradient(from 120deg, rgba(0,240,196,0.06), rgba(255,107,53,0.04));filter:blur(28px);z-index:-2;pointer-events:none;transition:transform .4s var(--ease)}
-    .logo-img{width:240px;border-radius:18px;box-shadow:0 24px 80px rgba(0,0,0,0.6);transition:transform .25s var(--ease), box-shadow .25s var(--ease)}
-    .logo-img:hover{transform:translateY(-8px) scale(1.02);box-shadow:0 40px 120px rgba(255,107,53,0.12)}
-    .coming-tag{font-family:Orbitron,monospace;color:var(--neon-o);font-weight:800;letter-spacing:1px}
+    /* القائمة المنبثقة */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: 0.4s ease;
+      z-index: 999;
+    }
 
-    /* Tokenomics + small controls row */
-    .info-row{display:flex;gap:28px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:6px}
-    .mini-card{background:var(--card);padding:12px 14px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);min-width:160px;text-align:center}
-    .mini-card strong{display:block;font-family:Orbitron,monospace;font-size:1.2rem}
+    .menu.active {
+      right: 0;
+    }
 
-    /* Main sections below */
-    .sections{display:grid;grid-template-columns:1fr 420px;gap:28px;margin-top:34px;align-items:start}
-    .left-col{min-height:260px}
-    .right-col{min-height:260px}
+    .menu a {
+      font-size: 28px;
+      margin: 15px 0;
+      color: #ff6347;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+      transition: 0.3s;
+    }
 
-    /* Tokenomics card (pie) */
-    .token-card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 18px 40px rgba(0,0,0,0.45)}
-    .pie-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
-    .pie-svg{width:260px;height:260px}
+    .menu a:hover {
+      color: #ffcc00;
+      text-shadow: 0 0 15px #ff3300;
+    }
 
-    /* Roadmap timeline */
-    .road-card{background:var(--card);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
-    .timeline{display:flex;flex-direction:column;gap:14px}
-    .timeline .step{display:flex;gap:12px;align-items:flex-start}
-    .timeline .dot{width:14px;height:14px;border-radius:50%;background:linear-gradient(90deg,var(--neon-c),var(--neon-o));box-shadow:0 12px 30px rgba(0,240,196,0.08);margin-top:6px}
+    /* صورة البركان */
+    .hero {
+      margin-top: 80px;
+      text-align: center;
+    }
 
-    /* Footer social icons at bottom */
-    footer{margin-top:48px;padding:26px 0;text-align:center}
-    .socials{display:flex;gap:12px;justify-content:center;align-items:center}
-    .social-btn{width:56px;height:56px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.08));border:1px solid rgba(255,255,255,0.03);transition:transform .18s}
-    .social-btn i{font-size:20px;color:#fff}
-    .social-btn:hover{transform:translateY(-6px);box-shadow:0 18px 50px rgba(0,0,0,0.45)}
+    .hero img {
+      width: 250px;
+      filter: drop-shadow(0 0 20px #ff3300);
+    }
 
-    /* Modal */
-    .overlay{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(2,4,6,0.75);backdrop-filter:blur(6px);z-index:2400;padding:20px}
-    .modal{width:100%;max-width:920px;background:linear-gradient(180deg, rgba(12,12,14,0.96), rgba(18,18,22,0.94));border-radius:12px;padding:18px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 30px 80px rgba(0,0,0,0.6)}
-    .modal-grid{display:grid;grid-template-columns:1fr 320px;gap:18px}
-    .modal-card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.03));padding:12px;border-radius:10px;cursor:pointer;border:1px solid rgba(255,255,255,0.02)}
-    .modal-detail{min-height:220px;padding:12px;border-radius:10px;background:rgba(0,0,0,0.35);border:1px solid rgba(255,255,255,0.02);overflow:auto}
+    /* Tokenomics */
+    .tokenomics {
+      text-align: center;
+      margin: 60px 20px;
+    }
 
-    /* utility */
-    h2.section-title{font-family:Orbitron,monospace;color:var(--neon-o);margin:0 0 10px}
-    p.muted{color:var(--muted);margin:0}
-    .center-small{text-align:center}
+    .circle {
+      width: 200px;
+      height: 200px;
+      margin: 20px auto;
+      border-radius: 50%;
+      background: conic-gradient(#ff3300 1%, #ffcc00 0 100%);
+      box-shadow: 0 0 25px #ff3300;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #111;
+      font-weight: bold;
+      font-size: 18px;
+    }
 
-    /* reveal */
-    [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .6s var(--ease), transform .6s var(--ease)}
-    [data-reveal].visible{opacity:1;transform:none}
+    /* Roadmap */
+    .roadmap {
+      margin: 60px 20px;
+      text-align: center;
+    }
 
-    /* responsive */
-    @media (max-width:980px){
-      .sections{grid-template-columns:1fr}
-      .pie-svg{width:220px;height:220px}
-      .glow-ring{width:320px;height:320px}
-      .logo-img{width:200px}
+    .roadmap h2 {
+      color: #ff6347;
+      text-shadow: 0 0 10px #ff3300;
+    }
+
+    .roadmap p {
+      margin: 10px 0;
+    }
+
+    /* أيقونات التواصل */
+    footer {
+      text-align: center;
+      padding: 20px;
+    }
+
+    footer a {
+      margin: 0 10px;
+      font-size: 28px;
+      color: #ff6347;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    footer a:hover {
+      color: #ffcc00;
+      text-shadow: 0 0 10px #ff3300;
     }
   </style>
 </head>
 <body>
+
   <header>
-    <div class="nav container" role="navigation" aria-label="Main">
-      <div class="brand">BROX</div>
-      <button class="buy-btn" title="Token not live yet">Buy (Coming Soon)</button>
-    </div>
+    <div class="logo">BROX</div>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
   </header>
 
-  <main class="container">
-    <div class="hero-wrap">
-      <div class="center-stage" role="main">
-        <!-- clickable image in center -->
-        <div class="logo-outer" id="logoTrigger" title="Click for BROX info" aria-haspopup="dialog">
-          <div class="glow-ring" aria-hidden="true"></div>
-          <img id="centerLogo" class="logo-img" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX mascot / logo">
-        </div>
-
-        <div class="coming center-small" data-reveal>
-          <div class="coming-tag">COMMUNITY • PRE-LAUNCH</div>
-          <h1 style="margin:10px 0;font-family:Orbitron,monospace;font-size:2rem">Born in Fire — <span style="background:linear-gradient(90deg,var(--neon-c),var(--neon-o));-webkit-background-clip:text;color:transparent">$BROX</span></h1>
-          <p class="muted">Token not live yet. Join official channels for verified launch updates, airdrops & priority access.</p>
-        </div>
-
-        <div class="info-row" data-reveal>
-          <div class="mini-card"><small class="muted">Status</small><strong>Pre-Launch</strong></div>
-          <div class="mini-card"><small class="muted">Community</small><strong id="communityCount">215K</strong></div>
-          <div class="mini-card"><small class="muted">Allocation</small><strong>99% / 1%</strong></div>
-        </div>
-
-        <!-- sections with tokenomics and roadmap -->
-        <div class="sections" style="width:100%" data-reveal>
-          <div class="left-col">
-            <div class="token-card">
-              <h2 class="section-title">Tokenomics</h2>
-              <p class="muted">Planned allocation. Final contract & audits will be published before any listing.</p>
-
-              <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin-top:12px">
-                <!-- Pie -->
-                <div class="pie-wrap" style="flex:0 0 280px">
-                  <svg class="pie-svg" viewBox="0 0 200 200" role="img" aria-label="Tokenomics pie chart">
-                    <defs>
-                      <linearGradient id="g1" x1="0%" x2="100%"><stop offset="0%" stop-color="#00f0c4"/><stop offset="100%" stop-color="#ff6b35"/></linearGradient>
-                    </defs>
-                    <circle cx="100" cy="100" r="72" fill="transparent" stroke="rgba(255,255,255,0.04)" stroke-width="16"></circle>
-
-                    <!-- arc animated -->
-                    <circle id="pieArc" cx="100" cy="100" r="72" fill="transparent" stroke="url(#g1)" stroke-width="16" stroke-linecap="round" transform="rotate(-90 100 100)" stroke-dasharray="0 452.4"></circle>
-
-                    <!-- inner ring -->
-                    <circle cx="100" cy="100" r="52" fill="transparent" stroke="rgba(255,255,255,0.02)" stroke-width="6"></circle>
-                  </svg>
-
-                  <div class="progress-center" style="position:relative;top:-200px;font-family:Orbitron,monospace;font-size:2rem;text-align:center;color:#fff">
-                    <div id="piePercent">0%</div>
-                    <div style="font-size:.9rem;color:var(--muted);margin-top:6px">Community</div>
-                  </div>
-                </div>
-
-                <!-- legend -->
-                <div style="flex:1;min-width:180px">
-                  <div style="display:flex;flex-direction:column;gap:10px">
-                    <div style="display:flex;align-items:center;gap:10px">
-                      <span style="width:16px;height:16px;border-radius:4px;background:linear-gradient(90deg,#ff6b35,#ff9f1c);display:inline-block"></span>
-                      <div><strong>Community</strong><div class="muted" style="font-size:.9rem">99% — Liquidity & rewards</div></div>
-                    </div>
-
-                    <div style="display:flex;align-items:center;gap:10px">
-                      <span style="width:16px;height:16px;border-radius:4px;background:#ffd166;display:inline-block"></span>
-                      <div><strong>Team</strong><div class="muted" style="font-size:.9rem">1% — vesting & contributors</div></div>
-                    </div>
-
-                    <p class="muted" style="margin-top:10px">All final numbers will be confirmed via governance. No launch or buy instructions will be published without verified contract & audits.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- roadmap card below tokenomics -->
-            <div class="road-card" style="margin-top:18px">
-              <h2 class="section-title">Roadmap (Phases)</h2>
-              <div class="timeline">
-                <div class="step"><div class="dot" aria-hidden="true"></div><div><strong>Phase 1 — Community</strong><div class="muted">Set up channels, rewards planning, airdrop structure.</div></div></div>
-                <div class="step"><div class="dot" aria-hidden="true"></div><div><strong>Phase 2 — Audit & Beta</strong><div class="muted">Smart contract audits, closed beta & community testing.</div></div></div>
-                <div class="step"><div class="dot" aria-hidden="true"></div><div><strong>Phase 3 — Launch</strong><div class="muted">Publish verified contract, liquidity steps & guides.</div></div></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="right-col">
-            <div class="token-card">
-              <h2 class="section-title">Quick Facts</h2>
-              <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
-                <li><strong>Supply:</strong> Community-led</li>
-                <li><strong>Team:</strong> 1% (vested)</li>
-                <li><strong>Liquidity:</strong> Community-controlled</li>
-                <li><strong>Audit:</strong> Planned before launch</li>
-                <li><strong>Channels:</strong> Official X / Telegram / Instagram / TikTok</li>
-              </ul>
-
-              <div style="margin-top:12px">
-                <button id="joinWait" style="background:linear-gradient(90deg,var(--neon-c),var(--neon-o));border:0;padding:10px 14px;border-radius:10px;font-weight:800;cursor:pointer">Join Waitlist</button>
-              </div>
-            </div>
-
-            <div class="token-card" style="margin-top:16px">
-              <h2 class="section-title">Security</h2>
-              <p class="muted">Security first — audits and verified contracts will be published prior to any public trading. Always follow official channels for announcements.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- small spacing -->
-        <div style="height:18px"></div>
-      </div>
-    </div>
-
-    <!-- footer / socials -->
-    <footer>
-      <div class="socials" role="group" aria-label="Social links">
-        <a class="social-btn" href="https://x.com/Brox__official" target="_blank" rel="noopener noreferrer" aria-label="X">
-          <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a class="social-btn" href="http://t.me/brox_offi" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
-          <i class="fa-brands fa-telegram"></i>
-        </a>
-        <a class="social-btn" href="https://www.instagram.com/brox__official?igsh=MWt5d2wyc2VwNjlpag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-          <i class="fa-brands fa-instagram"></i>
-        </a>
-        <a class="social-btn" href="https://www.tiktok.com/@brox__official?_t=ZS-8ztVaKe1B5x&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-          <i class="fa-brands fa-tiktok"></i>
-        </a>
-      </div>
-
-      <div style="margin-top:12px;color:var(--muted);font-size:.95rem">© <span id="year"></span> BROX — Pre-Launch. Informational only; token not live yet.</div>
-    </footer>
-  </main>
-
-  <!-- Modal (triggered by center image) -->
-  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document" aria-labelledby="modalTitle">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-        <div>
-          <div id="modalTitle" style="font-family:Orbitron,monospace;color:var(--neon-o);font-size:1.05rem">BROX — Quick Menu</div>
-          <div style="color:var(--muted);margin-top:6px">Core info & official links</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <a class="social-btn" href="https://x.com/Brox__official" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>
-          <button id="closeModal" class="social-btn" title="Close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
-        </div>
-      </div>
-
-      <div style="height:12px"></div>
-      <div class="modal-grid">
-        <div style="display:flex;flex-direction:column;gap:12px">
-          <div class="modal-card" data-panel="p-about" tabindex="0"><strong>About</strong><div class="muted" style="font-size:.95rem">Community-first token, focused on fair distribution & active rewards.</div></div>
-          <div class="modal-card" data-panel="p-token" tabindex="0"><strong>Tokenomics</strong><div class="muted" style="font-size:.95rem">Community 99% • Team 1% — final numbers via governance + audits.</div></div>
-          <div class="modal-card" data-panel="p-comm" tabindex="0"><strong>Community</strong><div class="muted" style="font-size:.95rem">Join official channels for airdrops, governance & updates.</div></div>
-        </div>
-
-        <div class="modal-detail" id="modalDetail" aria-live="polite">
-          <div id="p-about" style="display:none">
-            <h3 style="margin:0 0 8px;color:var(--neon-c)">About BROX</h3>
-            <p class="muted">BROX is a community-led token designed for fair opportunities, transparency, and active-holder incentives. The project is pre-launch; verified contracts and audits will be published prior to any trading activity.</p>
-          </div>
-
-          <div id="p-token" style="display:none">
-            <h3 style="margin:0 0 8px;color:var(--neon-c)">Tokenomics</h3>
-            <p class="muted"><strong>Community 99%</strong> • <strong>Team 1%</strong>. Liquidity & listing decisions will be community-governed. Full transparency and audits are committed before launch.</p>
-          </div>
-
-          <div id="p-comm" style="display:none">
-            <h3 style="margin:0 0 8px;color:var(--neon-c)">Community</h3>
-            <p class="muted">Follow official channels for announcements. Active contributors receive priority access in phased launches and airdrops.</p>
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-top:14px;display:flex;gap:10px;justify-content:flex-end">
-        <button id="waitlistModalBtn" style="background:linear-gradient(90deg,var(--neon-c),var(--neon-o));border:0;padding:10px 14px;border-radius:10px;font-weight:800;color:#071017;cursor:pointer">Join Waitlist</button>
-        <button id="modalCloseX" style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:10px;color:#fff">Close</button>
-      </div>
-    </div>
+  <!-- القائمة -->
+  <div class="menu" id="menu">
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#how" onclick="toggleMenu()">How to Buy</a>
+    <a href="#tokenomics" onclick="toggleMenu()">Tokenomics</a>
+    <a href="#roadmap" onclick="toggleMenu()">Roadmap</a>
   </div>
 
-  <!-- Waitlist small overlay -->
-  <div id="waitOverlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true" style="display:none;align-items:center;justify-content:center">
-    <div class="modal" role="document">
-      <div style="font-family:Orbitron,monospace;color:var(--neon-o);font-size:1.05rem;margin-bottom:8px">Join Waitlist</div>
-      <p class="muted" style="margin:0 0 10px">Enter your email to receive verified launch instructions.</p>
-      <form id="waitForm" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <input id="waitEmail" type="email" placeholder="you@example.com" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:#fff;min-width:220px">
-        <button type="submit" style="background:linear-gradient(90deg,var(--neon-c),var(--neon-o));border:0;padding:10px 14px;border-radius:10px;font-weight:800;color:#071017;cursor:pointer">Join</button>
-        <button type="button" id="waitClose" style="background:transparent;border:1px solid rgba(255,255,255,0.06);padding:8px 12px;border-radius:8px;color:#fff">Close</button>
-      </form>
-      <div id="waitMsg" style="margin-top:10px;color:var(--muted);display:none"></div>
-    </div>
-  </div>
+  <!-- صورة -->
+  <section class="hero" id="home">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX">
+    <h1>Welcome to BROX</h1>
+  </section>
+
+  <!-- Tokenomics -->
+  <section class="tokenomics" id="tokenomics">
+    <h2>Tokenomics</h2>
+    <div class="circle">1% Team<br>99% Community</div>
+  </section>
+
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <h2>Roadmap</h2>
+    <p>🔥 Phase 1: Launch</p>
+    <p>🔥 Phase 2: Community Growth</p>
+    <p>🔥 Phase 3: Listings</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <a href="https://x.com" target="_blank">X</a>
+    <a href="https://t.me" target="_blank">Telegram</a>
+    <a href="https://www.instagram.com/brox__official" target="_blank">Instagram</a>
+    <a href="https://www.tiktok.com/@brox__official" target="_blank">TikTok</a>
+  </footer>
 
   <script>
-    // Set year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Image fallback if missing
-    (function(){
-      const fallback = 'https://i.ibb.co/4tBkQ8y/brox-mascot.png';
-      const img = document.getElementById('centerLogo');
-      img.addEventListener('error', ()=>{ img.src = fallback; img.alt = 'BROX (fallback)'; });
-    })();
-
-    // Reveal on scroll
-    (function(){
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(en=>{
-          if(en.isIntersecting){ en.target.classList.add('visible'); io.unobserve(en.target); }
-        });
-      },{threshold:0.12});
-      document.querySelectorAll('[data-reveal]').forEach(el=>io.observe(el));
-    })();
-
-    // Community counter (visual)
-    (function(){
-      const el = document.getElementById('communityCount');
-      if(!el) return;
-      let n = 215;
-      el.textContent = n + 'K';
-      setInterval(()=>{ n += Math.floor(Math.random()*2); el.textContent = n + 'K'; }, 9000);
-    })();
-
-    // Animate pie arc to 99%
-    (function(){
-      const arc = document.getElementById('pieArc');
-      const pct = document.getElementById('piePercent');
-      if(!arc || !pct) return;
-      const r = 72;
-      const circ = 2 * Math.PI * r;
-      const target = 99;
-      let current = 0;
-      arc.style.strokeDasharray = '0 ' + circ;
-      const step = setInterval(()=>{
-        current++;
-        if(current > target){ clearInterval(step); return; }
-        const filled = (current/100) * circ;
-        arc.setAttribute('stroke-dasharray', filled + ' ' + (circ - filled));
-        pct.textContent = current + '%';
-      }, 10);
-    })();
-
-    // Modal logic (center image opens modal)
-    (function(){
-      const overlay = document.getElementById('overlay');
-      const trigger = document.getElementById('logoTrigger');
-      const close = document.getElementById('closeModal');
-      const modalCloseX = document.getElementById('modalCloseX');
-      const waitlistBtn = document.getElementById('waitlistModalBtn');
-
-      let lastFocus = null;
-      const panels = ['p-about','p-token','p-comm'];
-
-      function openModal(){
-        lastFocus = document.activeElement;
-        overlay.style.display = 'flex';
-        overlay.setAttribute('aria-hidden','false');
-        showPanel('p-about');
-        document.body.style.overflow = 'hidden';
-        document.addEventListener('keydown', onKey);
-        setTimeout(()=>{ overlay.querySelector('button, [href], input')?.focus(); }, 60);
-      }
-      function closeModal(){
-        overlay.style.display = 'none';
-        overlay.setAttribute('aria-hidden','true');
-        panels.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
-        document.body.style.overflow = '';
-        lastFocus?.focus();
-        document.removeEventListener('keydown', onKey);
-      }
-      function showPanel(id){
-        panels.forEach(pid=>{ const el=document.getElementById(pid); if(el) el.style.display = (pid===id)?'block':'none'; });
-      }
-      function onKey(e){
-        if(e.key === 'Escape') closeModal();
-        if(e.key === 'Tab' && overlay.style.display === 'flex'){
-          const focusable = overlay.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-          if(focusable.length === 0) return;
-          const first = focusable[0], last = focusable[focusable.length-1];
-          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-        }
-      }
-
-      trigger.addEventListener('click', openModal);
-      close.addEventListener('click', closeModal);
-      modalCloseX.addEventListener('click', closeModal);
-      overlay.addEventListener('click', (e)=>{ if(e.target === overlay) closeModal(); });
-
-      // Panel selection inside modal
-      document.querySelectorAll('.modal-card').forEach(card=>{
-        card.addEventListener('click', ()=>{ const p = card.getAttribute('data-panel'); if(p) showPanel(p); });
-        card.addEventListener('keypress', (e)=>{ if(e.key==='Enter' || e.key===' ') { const p = card.getAttribute('data-panel'); if(p) showPanel(p); }});
-      });
-
-      // Waitlist shortcut
-      waitlistBtn.addEventListener('click', ()=>{ openWait(); });
-    })();
-
-    // Waitlist overlay logic
-    (function(){
-      const openWaitBtn = document.getElementById('joinWait');
-      const waitOverlay = document.getElementById('waitOverlay');
-      const waitClose = document.getElementById('waitClose');
-      const waitForm = document.getElementById('waitForm');
-      const waitMsg = document.getElementById('waitMsg');
-
-      function openWait(){ waitOverlay.style.display = 'flex'; waitOverlay.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; }
-      function closeWait(){ waitOverlay.style.display = 'none'; waitOverlay.setAttribute('aria-hidden','true'); document.body.style.overflow=''; waitMsg.style.display='none'; }
-
-      openWaitBtn?.addEventListener('click', openWait);
-      waitClose?.addEventListener('click', closeWait);
-      waitOverlay?.addEventListener('click', (e)=>{ if(e.target === waitOverlay) closeWait(); });
-
-      waitForm?.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const v = document.getElementById('waitEmail').value.trim();
-        if(!v || !/.+@.+\..+/.test(v)){ waitMsg.style.display='block'; waitMsg.textContent='Enter a valid email.'; return; }
-        try{
-          const key = 'brox_waitlist_v1'; const arr = JSON.parse(localStorage.getItem(key) || '[]');
-          if(!arr.includes(v)){ arr.push(v); localStorage.setItem(key, JSON.stringify(arr)); waitMsg.textContent='Added to waitlist (saved locally).'; }
-          else waitMsg.textContent='You are already on the waitlist.';
-          waitMsg.style.display='block';
-          setTimeout(()=>{ window.location.href = `mailto:contact@brox.io?subject=Waitlist Signup&body=Please add this email to waitlist: ${encodeURIComponent(v)}`; }, 700);
-          document.getElementById('waitEmail').value = '';
-        }catch(err){ waitMsg.style.display='block'; waitMsg.textContent='Could not save — try again.'; }
-      });
-    })();
-
-    // Subscribe (small)
-    (function(){
-      const form = document.getElementById('subscribeForm');
-      const input = document.getElementById('emailInput');
-      const msg = document.getElementById('subscribeMsg');
-      if(!form) return;
-      form.addEventListener('submit', (e)=>{
-        e.preventDefault();
-        const v = input.value.trim();
-        if(!v || !/.+@.+\..+/.test(v)){ msg.style.display='block'; msg.textContent='Please enter a valid email.'; return;}
-        try{
-          const key = 'brox_subs_v1'; const arr = JSON.parse(localStorage.getItem(key) || '[]');
-          if(!arr.includes(v)){ arr.push(v); localStorage.setItem(key, JSON.stringify(arr)); msg.textContent='Subscribed (saved locally).'; }
-          else msg.textContent='You are already subscribed.';
-          msg.style.display='block';
-          setTimeout(()=>{ window.location.href = `mailto:contact@brox.io?subject=Subscribe&body=Please add this email to updates: ${encodeURIComponent(v)}`; }, 700);
-          input.value = '';
-        }catch(err){ msg.style.display='block'; msg.textContent='Could not save — try again.'; }
-      });
-    })();
+    function toggleMenu() {
+      document.getElementById("menu").classList.toggle("active");
+    }
   </script>
 </body>
 </html>
