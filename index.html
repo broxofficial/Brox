@@ -6,12 +6,10 @@
 <title>BROX — Official</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  /* ===== Reset & Base ===== */
   *{margin:0;padding:0;box-sizing:border-box;}
   body{font-family:'Segoe UI',Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6;}
   a{text-decoration:none;color:inherit;}
 
-  /* ===== Header ===== */
   header{
     position:fixed;top:0;left:0;width:100%;
     display:flex;justify-content:space-between;align-items:center;
@@ -22,7 +20,6 @@
   .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
   .menu-btn{font-size:2rem;cursor:pointer;transition:.3s;}
 
-  /* ===== Side Menu ===== */
   .side-menu{
     position:fixed;top:0;right:-280px;height:100%;width:260px;
     background:rgba(15,15,15,0.97);backdrop-filter:blur(15px);
@@ -36,7 +33,6 @@
   }
   .side-menu a:hover{background:linear-gradient(135deg,#ff4500,#ff6633);border-radius:8px;}
 
-  /* ===== Hero ===== */
   .hero{
     height:100vh;display:flex;flex-direction:column;justify-content:center;
     align-items:center;text-align:center;padding-top:100px;position:relative;
@@ -58,7 +54,6 @@
   }
   .hero button:hover{transform:scale(1.08);box-shadow:0 0 40px rgba(255,69,0,1);}
 
-  /* ===== Teaser ===== */
   .teaser{
     padding:120px 20px;text-align:center;
     background:linear-gradient(135deg,#141414,#0d0d0d);
@@ -73,7 +68,6 @@
   }
   @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.1)}}
 
-  /* ===== Allocation ===== */
   .allocation{padding:100px 20px;text-align:center;}
   .allocation h2{font-size:2.5rem;margin-bottom:40px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
   .alloc-visual{display:flex;justify-content:center;margin-bottom:40px;}
@@ -88,7 +82,6 @@
   .card:hover{transform:translateY(-8px);}
   .card h3{color:#ff4500;margin-bottom:12px;font-size:1.7rem;}
 
-  /* ===== Roadmap ===== */
   .roadmap{padding:100px 20px;text-align:center;}
   .roadmap h2{font-size:2.5rem;margin-bottom:35px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
   .steps{max-width:750px;margin:auto;text-align:left;display:grid;gap:28px;}
@@ -100,7 +93,6 @@
   }
   .step.visible{opacity:1;transform:translateY(0);}
 
-  /* ===== Modal ===== */
   .modal{
     display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
     background:rgba(0,0,0,0.75);justify-content:center;align-items:center;
@@ -128,7 +120,6 @@
   }
   .modal-content button:hover{transform:scale(1.05);box-shadow:0 0 30px #ff4500;}
 
-  /* ===== Footer ===== */
   footer{
     padding:45px 20px;text-align:center;
     background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
@@ -140,10 +131,8 @@
   .socials a:hover{color:#ff4500;transform:scale(1.25);}
   footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
 
-  /* ===== Background Particles ===== */
   #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
 
-  /* ===== Responsive ===== */
   @media(max-width:768px){
     .hero h1{font-size:2.4rem;}
     .hero p{font-size:1rem;}
@@ -155,13 +144,11 @@
 <body>
 <canvas id="particles"></canvas>
 
-<!-- Header -->
 <header>
   <div class="logo">BROX</div>
   <div class="menu-btn" id="menuBtn">☰</div>
 </header>
 
-<!-- Side Menu -->
 <div class="side-menu" id="sideMenu">
   <a href="#hero">Home</a>
   <a href="#teaser">Teaser</a>
@@ -170,7 +157,6 @@
   <a href="#footer">Contact</a>
 </div>
 
-<!-- Hero -->
 <section class="hero" id="hero">
   <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
   <h1>🔥 Welcome to BROX 🔥</h1>
@@ -178,13 +164,11 @@
   <button onclick="openModal()">Early Access</button>
 </section>
 
-<!-- Teaser -->
 <section class="teaser" id="teaser">
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
   <h2>🚀 Coming Soon...</h2>
 </section>
 
-<!-- Allocation -->
 <section class="allocation" id="allocation">
   <h2>Token Allocation</h2>
   <div class="alloc-visual"><canvas id="allocChart" width="250" height="250"></canvas></div>
@@ -194,7 +178,6 @@
   </div>
 </section>
 
-<!-- Roadmap -->
 <section class="roadmap" id="roadmap">
   <h2>Roadmap</h2>
   <div class="steps">
@@ -205,7 +188,6 @@
   </div>
 </section>
 
-<!-- Footer -->
 <footer id="footer">
   <div class="socials">
     <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
@@ -216,7 +198,6 @@
   <p>© 2025 BROX. All Rights Reserved.</p>
 </footer>
 
-<!-- Modal -->
 <div class="modal" id="myModal" onclick="closeModal(event)">
   <div class="modal-content">
     <h3>Get Notified on Launch 🚀</h3>
@@ -252,7 +233,7 @@
   // ===== Modal =====
   function openModal(){
     const modal = document.getElementById("myModal");
-    modal.style.display="flex";
+    modal.style.display = "flex";
     setTimeout(()=>modal.classList.add("show"),10);
   }
   function closeModal(event){
@@ -279,4 +260,9 @@
     ctx.beginPath();ctx.arc(125,125,70,0,2*Math.PI);
     ctx.fillStyle="#141414";ctx.fill();
     ctx.fillStyle="#fff";ctx.font="20px Arial";ctx.textAlign="center";
-    ctx.fillText("99
+    ctx.fillText("99% / 1%",125,130);
+  }
+  (function animate(){if(currentPercent<100){currentPercent++;drawChart(currentPercent);requestAnimationFrame(animate);}})();
+
+  // ===== Scroll reveal =====
+  function
