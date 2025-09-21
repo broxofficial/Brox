@@ -1,512 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BROX — Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#070707; --accent:#ff4500; --accent2:#ff6633; --muted:#bfbfbf;
-      --glass-strong: rgba(255,255,255,0.06); --radius-md:12px; --ease:cubic-bezier(.2,.9,.2,1);
-    }
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%}
-    body{
-      font-family: "Segoe UI", Roboto, Arial, sans-serif;
-      background: radial-gradient(1000px 500px at 10% 10%, rgba(255,69,0,0.03), transparent),
-                  radial-gradient(800px 400px at 90% 90%, rgba(255,102,51,0.02), transparent),
-                  var(--bg);
-      color:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      overflow-x:hidden; line-height:1.6;
-    }
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block;height:auto}
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{font-family:'Segoe UI',Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6;}
+    a{text-decoration:none;color:inherit;}
 
-    /* Header */
+    /* ===== Header ===== */
     header{
-      position:fixed;left:0;top:0;width:100%;
-      padding:18px 40px;display:flex;align-items:center;justify-content:space-between;
-      background:linear-gradient(180deg, rgba(0,0,0,0.60), rgba(0,0,0,0.32));
-      backdrop-filter: blur(10px);border-bottom:1px solid rgba(255,69,0,0.08);z-index:1200;transition:all .35s var(--ease);
+      position:fixed;top:0;left:0;width:100%;
+      display:flex;justify-content:space-between;align-items:center;
+      padding:18px 40px;z-index:1000;
+      background:rgba(0,0,0,0.55);backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,69,0,0.4);
     }
-    header.shrink{padding:10px 20px}
-    .logo{font-weight:800;color:var(--accent);font-size:1.45rem}
-    .nav-actions{display:flex;gap:12px;align-items:center}
-    /* menu button fixed top-right as you required */
+    .logo{font-size:2rem;font-weight:bold;color:#ff4500;text-shadow:0 0 20px #ff4500;}
     .menu-btn{
-      background:transparent;border:none;color:#fff;font-size:1.8rem;
-      cursor:pointer;padding:8px 10px;border-radius:10px;position:fixed;top:18px;right:40px;z-index:2500;
+      font-size:2rem;cursor:pointer;transition:.3s;
+      position:fixed;top:18px;right:40px;z-index:2500;
     }
-    .menu-btn:focus{outline:3px solid rgba(255,69,0,0.12)}
 
-    /* Drawer (side menu) */
-    .overlay{
-      position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1150;display:none;opacity:0;transition:opacity .25s;
+    /* ===== Side Menu ===== */
+    .side-menu{
+      position:fixed;top:70px;right:-280px;
+      height:calc(100% - 70px);width:260px;
+      background:rgba(15,15,15,0.97);backdrop-filter:blur(15px);
+      padding-top:20px;transition:.35s;z-index:2000;
+      box-shadow:-5px 0 25px rgba(255,69,0,0.4);
     }
-    .overlay.open{display:block;opacity:1}
-    .drawer{
-      position:fixed;top:70px;right:-320px;height:calc(100% - 70px);width:320px;max-width:86%;
-      background:linear-gradient(180deg,#0c0c0c,#131313);box-shadow:-20px 0 60px rgba(0,0,0,0.6);
-      z-index:1160;padding:20px;border-left:1px solid rgba(255,69,0,0.05);display:flex;flex-direction:column;gap:8px;border-radius:0 12px 12px 0;transition:right .35s var(--ease);
+    .side-menu.open{right:0;}
+    .side-menu a{
+      display:block;padding:20px 28px;font-size:1.2rem;
+      transition:.25s;color:#fff;font-weight:500;
     }
-    .drawer.open{right:0}
-    .drawer .close{position:absolute;right:12px;top:12px;border:none;background:transparent;color:#fff;font-size:1.6rem;cursor:pointer}
-    .drawer nav{display:flex;flex-direction:column;gap:8px;margin-top:6px}
-    .drawer a{display:block;padding:12px 14px;border-radius:10px;color:#fff;font-weight:600;transition:all .18s var(--ease)}
-    .drawer a:hover{background:linear-gradient(90deg,var(--accent),var(--accent2));transform:translateX(-4px)}
-    .drawer .help{margin-top:auto;padding:12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,69,0,0.06),transparent);font-size:.95rem;color:var(--muted)}
+    .side-menu a:hover{background:linear-gradient(135deg,#ff4500,#ff6633);border-radius:8px;}
 
-    /* Main spacing */
-    main{padding-top:100px}
-
-    /* Hero */
-    .hero{height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-inline:20px;position:relative}
-    .hero-inner{max-width:980px}
-    .hero img{width:200px;height:200px;border-radius:50%;object-fit:cover;box-shadow:0 12px 80px rgba(255,69,0,0.12)}
-    .hero h1{margin-top:22px;font-size:3rem;color:var(--accent)}
-    .hero p{margin-top:12px;font-size:1.05rem;color:var(--muted);max-width:720px;margin-left:auto;margin-right:auto}
-    .cta-row{margin-top:28px;display:flex;gap:14px;justify-content:center;align-items:center}
-    .btn{padding:12px 26px;border-radius:999px;border:none;font-weight:700;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent2));color:#fff}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 20px;border-radius:14px}
-
-    /* Sections */
-    section{padding:100px 18px}
-    .teaser{background:linear-gradient(135deg,#141414,#0d0d0d);text-align:center;border-radius:16px;margin:24px auto;max-width:1100px}
-    .teaser img{width:340px;border-radius:16px;margin:auto;box-shadow:0 10px 60px rgba(255,69,0,0.06)}
-    .teaser h2{font-size:2.4rem;margin-top:18px;color:var(--accent)}
-    .teaser p{color:var(--muted);margin-top:10px}
-
-    .allocation{text-align:center}
-    .alloc-visual{display:flex;justify-content:center;gap:20px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
-    .alloc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:900px;margin:0 auto}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:22px;border-radius:var(--radius-md);box-shadow:0 8px 30px rgba(0,0,0,0.6);border:1px solid rgba(255,69,0,0.04)}
-    .card h3{color:var(--accent);font-size:1.8rem;margin-bottom:6px}
-    .card p{color:var(--muted)}
-    .legend{display:flex;gap:12px;align-items:center;margin-left:6px;flex-direction:column}
-
-    .roadmap .steps{max-width:820px;margin:0 auto;display:grid;gap:20px}
-    .step{padding:18px;border-left:4px solid var(--accent);background:var(--glass-strong);border-radius:12px;color:var(--muted)}
-
-    /* Footer */
-    footer{padding:40px 18px;background:linear-gradient(180deg, rgba(0,0,0,0.5), rgba(0,0,0,0.6));text-align:center}
-    .socials{display:flex;justify-content:center;gap:18px}
-    .socials a{font-size:1.6rem;color:#fff;transition:transform .2s}
-    .socials a:hover{transform:translateY(-6px);color:var(--accent)}
-
-    /* Window manager (desktop only mostly) */
-    .window{
-      position:fixed;width:520px;max-width:94%;height:340px;min-width:260px;min-height:140px;background:linear-gradient(180deg,#0f0f0f,#0b0b0b);border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,0.7);border:1px solid rgba(255,69,0,0.04);overflow:hidden;z-index:1400;display:flex;flex-direction:column;
+    /* ===== Hero ===== */
+    .hero{
+      height:100vh;display:flex;flex-direction:column;justify-content:center;
+      align-items:center;text-align:center;padding-top:100px;position:relative;
     }
-    .win-titlebar{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));cursor:grab}
-    .win-titlebar:active{cursor:grabbing}
-    .win-title{font-weight:700;color:var(--accent)}
-    .win-controls{display:flex;gap:8px}
-    .win-controls button{width:36px;height:32px;border-radius:8px;border:none;background:transparent;color:#fff;cursor:pointer}
-    .win-body{padding:12px;overflow:auto;color:var(--muted);flex:1}
-    .resize-handle{position:absolute;right:6px;bottom:6px;width:18px;height:18px;cursor:se-resize;opacity:.6}
-    .window.minimized{display:none}
-
-    /* Taskbar */
-    .taskbar{position:fixed;left:50%;transform:translateX(-50%);bottom:12px;display:flex;gap:8px;padding:8px;border-radius:999px;background:rgba(0,0,0,0.4);backdrop-filter: blur(6px);z-index:1500}
-    .taskbar button{background:transparent;border:none;padding:8px 12px;color:#fff;border-radius:10px;cursor:pointer}
-    .taskbar button.active{background:linear-gradient(90deg,var(--accent),var(--accent2));box-shadow:0 8px 20px rgba(255,69,0,0.12)}
-
-    /* Modal full-screen fallback for mobile windows */
-    .mobile-modal{position:fixed;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0.9),rgba(0,0,0,0.95));z-index:1600;display:none;align-items:flex-start;padding-top:60px;overflow:auto}
-    .mobile-modal .card{width:100%;padding:20px;background:linear-gradient(180deg,#121212,#0d0d0d);border-radius:0 0 0 0;min-height:100vh}
-
-    /* Toast */
-    .toast{position:fixed;right:20px;bottom:24px;background:linear-gradient(90deg,var(--accent),var(--accent2));padding:10px 16px;border-radius:12px;color:#fff;box-shadow:0 12px 40px rgba(255,69,0,0.12);z-index:1500;display:none}
-
-    /* Responsive adjustments */
-    @media (max-width:900px){
-      header{padding:12px 18px}
-      .hero img{width:160px;height:160px}
-      .window{width:88%;height:60vh;left:6%;top:12%}
-      .drawer{width:86%}
+    .hero img{
+      width:200px;height:200px;border-radius:50%;
+      box-shadow:0 0 60px rgba(255,69,0,1),0 0 100px rgba(255,100,0,0.6);
+      animation:float 4s ease-in-out infinite;
     }
-    @media (max-width:600px){
-      .menu-btn{right:16px;top:12px}
-      /* On small screens, drawer becomes full-height overlay */
-      .drawer{top:0;right:0;height:100%;width:100%;border-radius:0;padding-top:70px}
-      .drawer.open{right:0}
-      /* windows not shown as floating on small screens */
-      .window{display:none}
-      .mobile-modal{display:flex}
-      .alloc-visual{flex-direction:column}
-      section{padding:64px 12px}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+    .hero h1{margin-top:28px;font-size:3.5rem;text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;}
+    .hero p{max-width:650px;margin-top:15px;font-size:1.25rem;color:#ccc;}
+    .hero button{
+      margin-top:35px;padding:16px 40px;border:none;border-radius:50px;
+      background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
+      font-size:1.1rem;font-weight:bold;cursor:pointer;
+      box-shadow:0 0 25px rgba(255,69,0,0.9);
+      transition:.3s;
     }
-    /* focus outlines */
-    :focus{outline:none}
-    a:focus,button:focus,input:focus{outline:3px solid rgba(255,69,0,0.12);outline-offset:4px;border-radius:8px}
+    .hero button:hover{transform:scale(1.08);box-shadow:0 0 40px rgba(255,69,0,1);}
+
+    /* ===== Teaser ===== */
+    .teaser{
+      padding:120px 20px;text-align:center;
+      background:linear-gradient(135deg,#141414,#0d0d0d);
+      opacity:0;transform:translateY(50px);transition:all 1s ease;
+    }
+    .teaser.visible{opacity:1;transform:translateY(0);}
+    .teaser img{width:340px;border-radius:22px;margin-bottom:28px;box-shadow:0 0 35px rgba(255,69,0,0.8);}
+    .teaser h2{
+      font-size:2.8rem;color:#ff4500;
+      text-shadow:0 0 25px #ff4500,0 0 45px #ff6633;
+      animation:pulse 2s infinite alternate;
+    }
+    @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.1)}}
+
+    /* ===== Allocation ===== */
+    .allocation{padding:100px 20px;text-align:center;}
+    .allocation h2{font-size:2.5rem;margin-bottom:40px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
+    .alloc-visual{display:flex;justify-content:center;margin-bottom:40px;}
+    .alloc-cards{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:25px;max-width:950px;margin:auto;
+    }
+    .card{
+      background:rgba(30,30,30,0.8);padding:28px;border-radius:18px;
+      box-shadow:0 0 25px rgba(255,69,0,0.4);transition:.3s;
+    }
+    .card:hover{transform:translateY(-8px);}
+    .card h3{color:#ff4500;margin-bottom:12px;font-size:1.7rem;}
+
+    /* ===== Roadmap ===== */
+    .roadmap{padding:100px 20px;text-align:center;}
+    .roadmap h2{font-size:2.5rem;margin-bottom:35px;color:#ff4500;text-shadow:0 0 20px #ff4500;}
+    .steps{max-width:750px;margin:auto;text-align:left;display:grid;gap:28px;}
+    .step{
+      padding:25px;border-left:5px solid #ff4500;
+      background:rgba(35,35,35,0.8);border-radius:14px;
+      box-shadow:0 0 25px rgba(255,69,0,0.4);
+      opacity:0;transform:translateY(50px);transition:.9s ease;
+    }
+    .step.visible{opacity:1;transform:translateY(0);}
+
+    /* ===== Modal ===== */
+    .modal{
+      display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.75);justify-content:center;align-items:center;
+    }
+    .modal-content{
+      background:rgba(25,25,25,0.95);padding:35px;border-radius:18px;
+      text-align:center;width:90%;max-width:420px;
+      transform:scale(.8);opacity:0;transition:.4s;
+      box-shadow:0 0 35px rgba(255,69,0,0.8);
+      backdrop-filter:blur(8px);
+    }
+    .modal.show .modal-content{transform:scale(1);opacity:1;}
+    .modal-content h3{margin-bottom:18px;color:#ff4500;font-size:1.5rem;}
+    .modal-content input{
+      width:100%;padding:14px;margin-bottom:18px;border:none;border-radius:10px;
+      background:rgba(0,0,0,0.3);color:#fff;text-align:center;
+    }
+    .modal-content input:focus{outline:none;box-shadow:0 0 12px #ff4500;}
+    .modal-content button{
+      padding:14px 28px;border:none;border-radius:10px;
+      background:linear-gradient(135deg,#ff4500,#ff6633);color:#fff;
+      cursor:pointer;font-weight:bold;
+      box-shadow:0 0 20px rgba(255,69,0,0.9);
+      transition:.3s;
+    }
+    .modal-content button:hover{transform:scale(1.05);box-shadow:0 0 30px #ff4500;}
+
+    /* ===== Footer ===== */
+    footer{
+      padding:45px 20px;text-align:center;
+      background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
+      box-shadow:0 -6px 25px rgba(255,69,0,0.4);
+    }
+    .socials a{margin:0 14px;font-size:2rem;color:#fff;transition:.3s;}
+    .socials a:hover{color:#ff4500;transform:scale(1.25);}
+    footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
+
+    /* ===== Background Particles ===== */
+    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
+
+    @media(max-width:768px){
+      .hero h1{font-size:2.4rem;}
+      .hero p{font-size:1rem;}
+      .teaser img{width:250px;}
+      .teaser h2{font-size:2.2rem;}
+    }
   </style>
 </head>
 <body>
-  <!-- Particles canvas -->
-  <canvas id="particles" aria-hidden="true" style="position:fixed;inset:0;z-index:-1"></canvas>
-
+  <canvas id="particles"></canvas>
   <!-- Header -->
-  <header id="siteHeader">
+  <header>
     <div class="logo">BROX</div>
-    <div class="nav-actions">
-      <!-- Menu button (fixed) -->
-      <button class="menu-btn" id="menuBtn" aria-controls="siteDrawer" aria-expanded="false" aria-label="Open menu">☰</button>
-      <!-- Only two helpful window openers (no duplicates) -->
-      <button class="btn secondary" id="openHeroWin" title="Open Hero Window">Open Hero Window</button>
-      <button class="btn secondary" id="openAllocWin" title="Open Allocation Window">Open Allocation Window</button>
-    </div>
+    <div class="menu-btn" id="menuBtn">☰</div>
   </header>
-
-  <!-- Drawer & overlay -->
-  <div id="drawerOverlay" class="overlay" tabindex="-1" aria-hidden="true"></div>
-  <aside id="siteDrawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
-    <button class="close" id="closeDrawer" aria-label="Close menu">&times;</button>
-    <h3 id="drawerTitle" style="color:var(--accent);margin-bottom:8px;font-size:1.1rem">Menu</h3>
-    <nav role="navigation" aria-label="Page links">
-      <!-- Only original navigation links (no "Open X" extras) -->
-      <a href="#hero">Home</a>
-      <a href="#teaser">Teaser</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
-    </nav>
-    <div class="help">Follow our socials below. Sign up for early access using the button in the hero.</div>
-  </aside>
-
-  <!-- Main content -->
-  <main id="main" tabindex="-1">
-    <!-- Hero -->
-    <section class="hero" id="hero" aria-labelledby="heroTitle">
-      <div class="hero-inner">
-        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox" onerror="this.style.opacity=0.85">
-        <h1 id="heroTitle">🔥 Welcome to BROX 🔥</h1>
-        <p>The meme revolution begins. Powered by community.</p>
-        <div class="cta-row">
-          <button class="btn" id="openModalBtn">Early Access</button>
-          <a class="btn secondary" href="#teaser">Explore</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Teaser -->
-    <section class="teaser" id="teaser" aria-labelledby="teaserTitle">
-      <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon" onerror="this.style.opacity=0.85">
-      <h2 id="teaserTitle">🚀 Coming Soon...</h2>
-      <p>Stay tuned for community drops, viral campaigns and more. Follow our socials below.</p>
-    </section>
-
-    <!-- Allocation -->
-    <section class="allocation" id="allocation" aria-labelledby="allocTitle">
-      <h2 id="allocTitle">Token Allocation</h2>
-      <div class="alloc-visual">
-        <canvas id="allocChart" width="260" height="260" aria-hidden="true"></canvas>
-        <div class="legend" aria-hidden="true">
-          <div class="item"><span class="swatch" style="background:var(--accent);display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px"></span>Community <strong style="margin-left:6px;color:#fff">99%</strong></div>
-          <div class="item"><span class="swatch" style="background:#333;display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:8px"></span>Team & Holders <strong style="margin-left:6px;color:#fff">1%</strong></div>
-        </div>
-      </div>
-      <div class="alloc-cards">
-        <div class="card"><h3>99%</h3><p>Community</p></div>
-        <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
-      </div>
-    </section>
-
-    <!-- Roadmap -->
-    <section class="roadmap" id="roadmap" aria-labelledby="roadTitle">
-      <h2 id="roadTitle">Roadmap</h2>
-      <div class="steps">
-        <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
-        <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-        <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
-        <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer" aria-labelledby="footerTitle">
-      <div id="footerTitle" style="display:none">Footer</div>
-      <div class="socials" role="list">
-        <a role="listitem" href="https://www.instagram.com/brox__official" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-        <a role="listitem" href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
-        <a role="listitem" href="https://x.com/brox" target="_blank" rel="noopener" aria-label="X/Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-        <a role="listitem" href="https://t.me/brox" target="_blank" rel="noopener" aria-label="Telegram"><i class="fab fa-telegram"></i></a>
-      </div>
-      <p style="margin-top:14px;color:var(--muted)">© 2025 BROX. All Rights Reserved.</p>
-    </footer>
-  </main>
-
-  <!-- Early access modal (keeps original flow) -->
-  <div class="modal" id="emailModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true" style="display:none;position:fixed;inset:0;align-items:center;justify-content:center;z-index:1300;background:linear-gradient(180deg, rgba(0,0,0,0.65), rgba(0,0,0,0.65));padding:20px">
-    <div class="modal-card" role="document" style="width:100%;max-width:480px;background:linear-gradient(180deg,#121212,#0d0d0d);padding:22px;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,0.7)">
-      <h3 id="modalTitle" style="color:var(--accent)">Get Notified on Launch 🚀</h3>
-      <p class="small" style="color:var(--muted)">Enter your email to receive early access updates.</p>
-      <input id="emailInput" type="email" placeholder="Enter your email" aria-label="Email address" style="width:100%;padding:12px;margin-top:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:#fff" />
-      <div style="margin-top:12px;display:flex;gap:8px">
-        <button class="btn" id="submitEmail">Submit</button>
-        <button class="btn secondary" id="closeModal">Close</button>
-      </div>
-      <p id="emailHint" class="small" style="margin-top:8px;color:var(--muted)"></p>
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#footer">Contact</a>
+  </div>
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
+    <h1>🔥 Welcome to BROX 🔥</h1>
+    <p>The meme revolution begins. Powered by community.</p>
+    <button onclick="openModal()">Early Access</button>
+  </section>
+  <!-- Teaser -->
+  <section class="teaser" id="teaser">
+    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
+    <h2>🚀 Coming Soon...</h2>
+  </section>
+  <!-- Allocation -->
+  <section class="allocation" id="allocation">
+    <h2>Token Allocation</h2>
+    <div class="alloc-visual"><canvas id="allocChart" width="250" height="250"></canvas></div>
+    <div class="alloc-cards">
+      <div class="card"><h3>99%</h3><p>Community</p></div>
+      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
+    </div>
+  </section>
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
+    <h2>Roadmap</h2>
+    <div class="steps">
+      <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
+      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
+      <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
+      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
+    </div>
+  </section>
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="socials">
+      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
+    </div>
+    <p>© 2025 BROX. All Rights Reserved.</p>
+  </footer>
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <h3>Get Notified on Launch 🚀</h3>
+      <input type="email" placeholder="Enter your email">
+      <button onclick="closeModal()">Submit</button>
     </div>
   </div>
 
-  <!-- Mobile modal used to show "windows" on small screens -->
-  <div class="mobile-modal" id="mobileModal" style="display:none"><div class="card" id="mobileModalCard"></div></div>
-
-  <!-- Taskbar -->
-  <div class="taskbar" id="taskbar" aria-hidden="false"></div>
-
-  <!-- Window template -->
-  <template id="winTpl">
-    <div class="window" role="dialog" aria-modal="false" tabindex="0">
-      <div class="win-titlebar" tabindex="0">
-        <div class="win-title">Window</div>
-        <div class="win-controls">
-          <button class="min-btn" title="Minimize" aria-label="Minimize">━</button>
-          <button class="max-btn" title="Maximize" aria-label="Maximize">☐</button>
-          <button class="close-btn" title="Close" aria-label="Close">✕</button>
-        </div>
-      </div>
-      <div class="win-body">Content</div>
-      <div class="resize-handle" aria-hidden="true"></div>
-    </div>
-  </template>
-
-  <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true">Sent</div>
-
   <script>
-    // Short utilities
-    const $ = s => document.querySelector(s);
-    const $$ = s => Array.from(document.querySelectorAll(s));
+    // ===== Menu =====
+    const menuBtn=document.getElementById("menuBtn");
+    const sideMenu=document.getElementById("sideMenu");
 
-    /* Drawer behavior (no extra "Open X" entries) */
-    const menuBtn = $('#menuBtn');
-    const drawer = $('#siteDrawer');
-    const overlay = $('#drawerOverlay');
-    const closeDrawerBtn = $('#closeDrawer');
+    menuBtn.onclick=()=>{
+      sideMenu.classList.toggle("open");
+      menuBtn.textContent=sideMenu.classList.contains("open")?"×":"☰";
+    };
 
-    function openDrawer(){ drawer.classList.add('open'); overlay.classList.add('open'); drawer.setAttribute('aria-hidden','false'); menuBtn.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
-    function closeDrawer(){ drawer.classList.remove('open'); overlay.classList.remove('open'); drawer.setAttribute('aria-hidden','true'); menuBtn.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
-    menuBtn.addEventListener('click', ()=> drawer.classList.contains('open')?closeDrawer():openDrawer());
-    closeDrawerBtn && closeDrawerBtn.addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ if(drawer.classList.contains('open')) closeDrawer(); } });
-
-    /* Modal (email) - unchanged flow */
-    const emailModal = $('#emailModal');
-    const openModalBtn = $('#openModalBtn');
-    const closeModalBtn = $('#closeModal');
-    const submitEmailBtn = $('#submitEmail');
-    const emailInput = $('#emailInput');
-    const emailHint = $('#emailHint');
-    const toast = $('#toast');
-
-    function showModal(){ emailModal.style.display='flex'; emailModal.setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; setTimeout(()=>emailInput.focus(),60); document.addEventListener('keydown', modalKeyHandler); }
-    function closeModal(){ emailModal.style.display='none'; emailModal.setAttribute('aria-hidden','true'); document.body.style.overflow=''; openModalBtn && openModalBtn.focus(); document.removeEventListener('keydown', modalKeyHandler); }
-    openModalBtn && openModalBtn.addEventListener('click', showModal);
-    closeModalBtn && closeModalBtn.addEventListener('click', closeModal);
-
-    function modalKeyHandler(e){
-      if(e.key==='Escape') closeModal();
-      if(e.key==='Tab'){
-        const focusable = Array.from(emailModal.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])')).filter(el=>el.offsetParent!==null);
-        if(focusable.length){
-          const first = focusable[0], last = focusable[focusable.length-1];
-          if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
-          else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
-        }
-      }
-    }
-    function validateEmail(email){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email); }
-    submitEmailBtn && submitEmailBtn.addEventListener('click', ()=>{
-      const v = emailInput.value.trim();
-      if(!validateEmail(v)){ emailHint.textContent = 'Please enter a valid email.'; emailInput.focus(); return; }
-      emailHint.textContent = ''; closeModal(); showToast('Thanks! Your email is registered for launch notifications.'); emailInput.value='';
+    document.querySelectorAll(".side-menu a").forEach(link=>{
+      link.onclick=()=>{
+        sideMenu.classList.remove("open");
+        menuBtn.textContent="☰";
+      };
     });
-    function showToast(msg){ toast.textContent = msg; toast.style.display='block'; setTimeout(()=>{ toast.style.display='none'; }, 3500); }
 
-    /* Smooth internal links and close drawer on click */
-    $$('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', (e)=>{
-        const href = a.getAttribute('href');
-        if(href && href.length>1){
-          const target = document.querySelector(href);
-          if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
-          if(drawer.classList.contains('open')) closeDrawer();
-        }
+    // ===== Modal =====
+    const modal=document.getElementById("myModal");
+    function openModal(){ 
+      modal.style.display="flex";
+      setTimeout(()=>modal.classList.add("show"),10);
+    }
+    function closeModal(){
+      modal.classList.remove("show");
+      setTimeout(()=>modal.style.display="none",300);
+    }
+
+    // ===== Chart =====
+    const canvas=document.getElementById("allocChart"),ctx=canvas.getContext("2d");
+    const data=[99,1],colors=["#ff4500","#333"];let currentPercent=0;
+    function drawChart(percent){
+      ctx.clearRect(0,0,250,250);
+      let start=-Math.PI/2,remaining=(percent/100)*2*Math.PI;
+      for(let i=0;i<data.length;i++){
+        const slice=(data[i]/100)*2*Math.PI;
+        const draw=Math.min(slice,remaining);
+        ctx.beginPath();ctx.moveTo(125,125);
+        ctx.arc(125,125,120,start,start+draw);ctx.closePath();
+        ctx.fillStyle=colors[i];ctx.fill();
+        start+=slice;remaining-=draw;if(remaining<=0)break;
+      }
+      ctx.beginPath();ctx.arc(125,125,70,0,2*Math.PI);
+      ctx.fillStyle="#141414";ctx.fill();
+      ctx.fillStyle="#fff";ctx.font="20px Arial";ctx.textAlign="center";
+      ctx.fillText("99% / 1%",125,130);
+    }
+    (function animate(){if(currentPercent<100){currentPercent++;drawChart(currentPercent);requestAnimationFrame(animate);}})();
+
+    // ===== Scroll reveal =====
+    function revealOnScroll(){
+      document.querySelectorAll('.teaser,.step').forEach(el=>{
+        if(el.getBoundingClientRect().top<window.innerHeight-50){el.classList.add('visible');}
       });
-    });
-
-    /* Allocation donut */
-    (function(){
-      const canvas = $('#allocChart'); if(!canvas) return;
-      const ctx = canvas.getContext('2d'); const W = canvas.width, H = canvas.height;
-      const cx = W/2, cy = H/2, r = Math.min(W,H)/2 - 14;
-      const data = [{v:99,color:getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#ff4500'},{v:1,color:'#333'}];
-      let progress = 0;
-      function draw(p){
-        ctx.clearRect(0,0,W,H);
-        const total = data.reduce((s,d)=>s+d.v,0); let start = -Math.PI/2;
-        data.forEach(d=>{
-          const angle = (d.v/total) * Math.PI * 2; const end = start + angle * (p/100);
-          ctx.beginPath(); ctx.moveTo(cx,cy); ctx.arc(cx,cy,r,start,end); ctx.closePath(); ctx.fillStyle = d.color; ctx.fill();
-          start += angle;
-        });
-        ctx.beginPath(); ctx.arc(cx,cy,r*0.58,0,Math.PI*2); ctx.fillStyle = getComputedStyle(document.body).backgroundColor || '#141414'; ctx.fill();
-        ctx.fillStyle = '#fff'; ctx.font = '18px Arial'; ctx.textAlign = 'center'; ctx.fillText('99% / 1%', cx, cy+8);
-      }
-      function step(){ progress += 3; if(progress>100) progress=100; draw(progress); if(progress<100) requestAnimationFrame(step); }
-      step();
-    })();
-
-    /* Particles */
-    (function(){
-      const canvas = $('#particles'); if(!canvas) return;
-      const ctx = canvas.getContext('2d'); let w=innerWidth,h=innerHeight,stars=[];
-      function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight; init(); }
-      function init(){ stars=[]; const count = Math.max(30, Math.floor((w*h)/60000)*18); for(let i=0;i<count;i++){ stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6+0.3,vx:(Math.random()-0.5)*0.25,vy:(Math.random()-0.5)*0.25,alpha:Math.random()*0.6+0.2}); } }
-      function draw(){ ctx.clearRect(0,0,w,h); for(const s of stars){ ctx.beginPath(); ctx.fillStyle = `rgba(255,69,0,${s.alpha})`; ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill(); s.x+=s.vx; s.y+=s.vy; if(s.x<-10) s.x=w+10; if(s.x>w+10) s.x=-10; if(s.y<-10) s.y=h+10; if(s.y>h+10) s.y=-10; } requestAnimationFrame(draw); }
-      window.addEventListener('resize', resize); resize(); draw();
-    })();
-
-    /* WINDOW MANAGER but NO duplicate "open X" entries and mobile fallback */
-    const tpl = document.querySelector('#winTpl');
-    const taskbar = $('#taskbar');
-    let zTop = 1400;
-    let winCounter = 0;
-    const windows = new Map(); // id => {el, state}
-
-    function createWindow({id=null,title='Window',content='',width=520,height=340,left=80,top=80}){
-      id = id || `win-${++winCounter}`;
-      // if exists, focus instead of duplicating
-      if(windows.has(id)){ focusWindow(id); return windows.get(id).el; }
-
-      // Mobile fallback: on narrow screens open a full-screen modal instead of floating window
-      if(window.innerWidth <= 600){
-        const mobileModal = $('#mobileModal'); const card = $('#mobileModalCard');
-        card.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><strong style="color:var(--accent)">${title}</strong><button id="mobileCloseBtn" style="background:none;border:none;color:#fff;font-size:20px">✕</button></div><div style="margin-top:12px;color:var(--muted)">${typeof content==='string'?content:content.innerHTML}</div>`;
-        mobileModal.style.display = 'flex';
-        document.getElementById('mobileCloseBtn').addEventListener('click', ()=> mobileModal.style.display='none');
-        return null;
-      }
-
-      const node = tpl.content.firstElementChild.cloneNode(true);
-      node.style.width = width + 'px'; node.style.height = height + 'px';
-      node.style.left = (left + (winCounter*12)) + 'px'; node.style.top = (top + (winCounter*8)) + 'px';
-      node.dataset.winId = id;
-      node.querySelector('.win-title').textContent = title;
-      const body = node.querySelector('.win-body');
-      if(typeof content === 'string') body.innerHTML = content; else body.innerHTML = '', content instanceof Element && body.appendChild(content);
-      document.body.appendChild(node);
-      node.style.zIndex = ++zTop;
-      windows.set(id, {el:node, state:{minimized:false,maximized:false,lastRect:null}});
-      wireWindow(node,id);
-      addTaskbarEntry(id,title);
-      focusWindow(id);
-      winCounter++;
-      return node;
     }
+    window.addEventListener("scroll",revealOnScroll);revealOnScroll();
 
-    function wireWindow(node,id){
-      const titlebar = node.querySelector('.win-titlebar');
-      const closeBtn = node.querySelector('.close-btn');
-      const minBtn = node.querySelector('.min-btn');
-      const maxBtn = node.querySelector('.max-btn');
-      const resizeHandle = node.querySelector('.resize-handle');
-
-      node.addEventListener('mousedown', ()=> focusWindow(id) );
-      node.addEventListener('click', ()=> focusWindow(id) );
-
-      closeBtn.addEventListener('click', ()=> removeWindow(id) );
-      minBtn.addEventListener('click', ()=> toggleMinimize(id,true) );
-      maxBtn.addEventListener('click', ()=> toggleMaximize(id) );
-
-      // dragging
-      let drag = null;
-      titlebar.addEventListener('pointerdown', (e)=>{
-        e.preventDefault(); titlebar.setPointerCapture(e.pointerId); focusWindow(id);
-        const rect = node.getBoundingClientRect();
-        drag = {startX:e.clientX,startY:e.clientY,origLeft:rect.left,origTop:rect.top,pointerId:e.pointerId};
-        node.style.transition='none';
-      });
-      titlebar.addEventListener('pointermove', (e)=>{ if(!drag||drag.pointerId!==e.pointerId) return; const dx=e.clientX-drag.startX, dy=e.clientY-drag.startY; let nx=drag.origLeft+dx, ny=drag.origTop+dy; const vw=window.innerWidth,vh=window.innerHeight; nx = Math.max(-20, Math.min(nx, vw-60)); ny = Math.max(8, Math.min(ny, vh-60)); node.style.left=nx+'px'; node.style.top=ny+'px'; });
-      titlebar.addEventListener('pointerup', (e)=>{ if(!drag) return; titlebar.releasePointerCapture(drag.pointerId); drag=null; node.style.removeProperty('transition'); });
-
-      // resize
-      let resizing = null;
-      resizeHandle.addEventListener('pointerdown', (e)=>{ e.preventDefault(); resizeHandle.setPointerCapture(e.pointerId); const rect=node.getBoundingClientRect(); resizing={startX:e.clientX,startY:e.clientY,origW:rect.width,origH:rect.height,pointerId:e.pointerId}; });
-      resizeHandle.addEventListener('pointermove', (e)=>{ if(!resizing||resizing.pointerId!==e.pointerId) return; const dx=e.clientX-resizing.startX, dy=e.clientY-resizing.startY; const nw=Math.max(260,resizing.origW+dx), nh=Math.max(140,resizing.origH+dy); node.style.width=nw+'px'; node.style.height=nh+'px'; });
-      resizeHandle.addEventListener('pointerup', (e)=>{ if(!resizing) return; resizeHandle.releasePointerCapture(resizing.pointerId); resizing=null; });
-
-      titlebar.addEventListener('dblclick', ()=> toggleMaximize(id) );
-      node.addEventListener('keydown', (e)=>{ if(e.key==='Escape') removeWindow(id); });
-    }
-
-    function focusWindow(id){
-      const rec = windows.get(id); if(!rec) return;
-      rec.el.style.zIndex = ++zTop;
-      windows.forEach((v)=> v.el.classList.remove('focused'));
-      rec.el.classList.add('focused');
-      if(rec.state.minimized) toggleMinimize(id,false);
-    }
-    function removeWindow(id){
-      const rec = windows.get(id); if(!rec) return;
-      rec.el.remove(); removeTaskbarEntry(id); windows.delete(id);
-    }
-    function toggleMinimize(id,toMinimize=true){
-      const rec = windows.get(id); if(!rec) return;
-      if(toMinimize){ rec.el.classList.add('minimized'); rec.state.minimized=true; const btn=taskbar.querySelector(`[data-winid="${id}"]`); btn && btn.classList.remove('active'); }
-      else { rec.el.classList.remove('minimized'); rec.state.minimized=false; focusWindow(id); const btn=taskbar.querySelector(`[data-winid="${id}"]`); btn && btn.classList.add('active'); }
-    }
-    function toggleMaximize(id){
-      const rec = windows.get(id); if(!rec) return; const el=rec.el;
-      if(!rec.state.maximized){ const rect=el.getBoundingClientRect(); rec.state.lastRect={left:rect.left,top:rect.top,width:rect.width,height:rect.height}; el.style.left='20px'; el.style.top='20px'; el.style.width=Math.max(window.innerWidth-40,300)+'px'; el.style.height=Math.max(window.innerHeight-100,240)+'px'; rec.state.maximized=true; }
-      else { const r = rec.state.lastRect || {left:80,top:80,width:520,height:340}; el.style.left=r.left+'px'; el.style.top=r.top+'px'; el.style.width=r.width+'px'; el.style.height=r.height+'px'; rec.state.maximized=false; }
-      focusWindow(id);
-    }
-    function addTaskbarEntry(id,title){
-      const btn = document.createElement('button'); btn.textContent = title; btn.dataset.winid = id; btn.title = title;
-      btn.addEventListener('click', ()=>{ const rec=windows.get(id); if(!rec) return; if(rec.state.minimized) toggleMinimize(id,false); focusWindow(id); });
-      taskbar.appendChild(btn);
-    }
-    function removeTaskbarEntry(id){ const btn = taskbar.querySelector(`[data-winid="${id}"]`); btn && btn.remove(); }
-
-    /* Create window from section (cloned) */
-    function winFromSection(sectionSelector, winId, winTitle){
-      const sec = document.querySelector(sectionSelector);
-      if(!sec) return null;
-      const content = document.createElement('div');
-      // clone textual content safely (no external scripts executed)
-      content.innerHTML = `<div style="font-weight:700;margin-bottom:8px;color:var(--accent)">${winTitle}</div><div style="color:var(--muted)">${sec.innerHTML}</div>`;
-      return createWindow({id:winId,title:winTitle,content:content,width:560,height:420,left:100,top:90});
-    }
-
-    // header buttons — only two (no duplicates)
-    $('#openHeroWin').addEventListener('click', ()=> winFromSection('#hero','heroWin','Hero — BROX'));
-    $('#openAllocWin').addEventListener('click', ()=> winFromSection('#allocation','allocWin','Allocation — BROX'));
-
-    // keyboard shortcuts: Alt+1 -> hero, Alt+3 -> allocation, Ctrl/Cmd+W close top window
-    document.addEventListener('keydown', (e)=>{
-      if((e.ctrlKey||e.metaKey) && e.key.toLowerCase()==='w'){ e.preventDefault(); let topWin=null, topZ=-Infinity; windows.forEach((v,k)=>{ const z = parseInt(v.el.style.zIndex)||0; if(z>topZ){ topZ=z; topWin=k; } }); if(topWin) removeWindow(topWin); }
-      if(e.altKey && !e.shiftKey){
-        if(e.key==='1'){ winFromSection('#hero','heroWin','Hero — BROX'); }
-        if(e.key==='3'){ winFromSection('#allocation','allocWin','Allocation — BROX'); }
-      }
-    });
-
-    // init ARIA flags
-    drawer.setAttribute('aria-hidden','true'); overlay.setAttribute('aria-hidden','true'); emailModal && emailModal.setAttribute('aria-hidden','true');
-
-    // small UX: reveal on scroll
-    const teaser = document.querySelector('.teaser'); const steps = Array.from(document.querySelectorAll('.step'));
-    function onScroll(){ if(window.scrollY>40) document.querySelector('header').classList.add('shrink'); else document.querySelector('header').classList.remove('shrink');
-      if(teaser && teaser.getBoundingClientRect().top < window.innerHeight - 120) teaser.classList.add('visible');
-      steps.forEach(s=>{ if(s.getBoundingClientRect().top < window.innerHeight - 100) s.classList.add('visible'); });
-    }
-    window.addEventListener('scroll', onScroll, {passive:true}); onScroll();
-
-    // avoid JS errors on missing images
-    window.addEventListener('error',(ev)=>{ if(ev && ev.target && ev.target.tagName==='IMG') return true; }, true);
+    // ===== Particles =====
+    const particles=document.getElementById("particles"),ctxP=particles.getContext("2d");let w,h,stars=[];
+    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];for(let i=0;i<100;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
+    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#ff4500";stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});requestAnimationFrame(draw);}
+    window.onresize=resize;resize();draw();
   </script>
 </body>
 </html>
