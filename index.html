@@ -1,220 +1,217 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Brox Official</title>
-  <script src="https://kit.fontawesome.com/4f53c2f8c7.js" crossorigin="anonymous"></script>
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* إعدادات عامة */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: Arial, sans-serif;
       background: #0d0d0d;
-      color: #fff;
+      color: white;
       overflow-x: hidden;
     }
-    a { text-decoration: none; color: inherit; }header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background: rgba(0,0,0,0.85);
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(8px);
-}
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.menu-btn { font-size: 2rem; cursor: pointer; }
+    a { text-decoration: none; color: inherit; }
 
-.side-menu {
-  position: fixed;
-  right: -250px;
-  top: 0;
-  height: 100%;
-  width: 250px;
-  background: #111;
-  transition: 0.3s;
-  padding-top: 80px;
-  z-index: 2000;
-}
-.side-menu a {
-  display: block;
-  padding: 15px 25px;
-  font-size: 1.2rem;
-  color: #fff;
-  transition: 0.2s;
-}
-.side-menu a:hover { background: #ff4500; }
-.side-menu.open { right: 0; }
+    /* رأس الصفحة */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 30px;
+      background: rgba(0, 0, 0, 0.85);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #ff4500;
+    }
+    .menu-btn {
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
 
-.hero {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  padding-top: 80px;
-  position: relative;
-  overflow: hidden;
-}
-.hero::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle,#ff450055 10%,transparent 60%),
-              radial-gradient(circle,#ff880055 10%,transparent 60%);
-  background-size: 400px 400px;
-  animation: moveBg 15s linear infinite;
-  z-index: 0;
-}
-@keyframes moveBg {
-  from { transform: translate(0,0) rotate(0deg); }
-  to { transform: translate(50px,50px) rotate(360deg); }
-}
-.hero-content { position: relative; z-index: 1; }
-.circle-container {
-  width: 280px;
-  height: 280px;
-  border: 4px solid #ff4500;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 0 40px rgba(255,69,0,0.7);
-  animation: pulse 3s infinite;
-}
-.circle-container img {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-}
-@keyframes pulse {
-  0%,100% { box-shadow: 0 0 30px rgba(255,69,0,0.6); }
-  50% { box-shadow: 0 0 70px rgba(255,69,0,1); }
-}
-.hero h1 {
-  margin-top: 25px;
-  font-size: 3rem;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.hero p { max-width: 500px; margin: 15px auto; color: #ccc; }
-.cta { margin-top: 20px; }
-.cta a {
-  display: inline-block;
-  margin: 10px;
-  padding: 12px 25px;
-  border-radius: 30px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  color: #fff;
-  background: linear-gradient(45deg,#ff4500,#ff8800);
-  box-shadow: 0 0 20px rgba(255,69,0,0.5);
-  transition: 0.3s;
-}
-.cta a:hover { transform: scale(1.1); }
+    /* القائمة الجانبية */
+    .side-menu {
+      position: fixed;
+      right: -250px;
+      top: 0;
+      height: 100%;
+      width: 250px;
+      background: #1a1a1a;
+      transition: 0.3s;
+      padding-top: 60px;
+      z-index: 2000;
+    }
+    .side-menu a {
+      display: block;
+      padding: 15px 25px;
+      font-size: 1.2rem;
+      color: white;
+      transition: 0.2s;
+    }
+    .side-menu a:hover {
+      background: #ff4500;
+    }
+    .side-menu.open {
+      right: 0;
+    }
 
-.allocation {
-  padding: 80px 20px;
-  background: #141414;
-  text-align: center;
-}
-.allocation h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #ff4500;
-}
-.alloc-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 20px;
-  max-width: 900px;
-  margin: auto;
-}
-.card {
-  background: #1f1f1f;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(255,69,0,0.3);
-  transition: transform 0.3s;
-}
-.card:hover { transform: translateY(-8px); }
-.card h3 { color: #ff4500; margin-bottom: 10px; }
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .circle-container {
+      position: relative;
+      width: 280px;
+      height: 280px;
+      border: 4px solid #ff4500;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      animation: rotate 20s linear infinite;
+    }
+    .circle-container img {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      animation: rotate 20s linear infinite reverse;
+    }
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
-.roadmap {
-  padding: 80px 20px;
-  background: #0d0d0d;
-  text-align: center;
-}
-.roadmap h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #ff4500;
-}
-.steps {
-  max-width: 700px;
-  margin: auto;
-  text-align: left;
-}
-.step {
-  margin-bottom: 20px;
-  padding: 15px;
-  border-left: 4px solid #ff4500;
-  background: #1a1a1a;
-  border-radius: 8px;
-}
+    /* Allocation Section */
+    .allocation {
+      padding: 80px 20px;
+      background: #141414;
+      text-align: center;
+    }
+    .allocation h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #ff4500;
+    }
+    .alloc-visual {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+    .alloc-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    .card {
+      background: #1f1f1f;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.3);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-8px);
+    }
+    .card h3 {
+      color: #ff4500;
+      margin-bottom: 10px;
+    }
 
-footer {
-  padding: 30px 20px;
-  text-align: center;
-  background: #141414;
-}
-.socials a {
-  margin: 0 12px;
-  font-size: 1.6rem;
-  transition: 0.3s;
-  color: white;
-}
-.socials a:hover { color: #ff4500; transform: scale(1.2); }
-footer p { font-size: 0.9rem; color: #aaa; }
+    /* Roadmap */
+    .roadmap {
+      padding: 80px 20px;
+      background: #0d0d0d;
+      text-align: center;
+    }
+    .roadmap h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #ff4500;
+    }
+    .steps {
+      max-width: 700px;
+      margin: auto;
+      text-align: left;
+    }
+    .step {
+      margin-bottom: 20px;
+      padding: 15px;
+      border-left: 4px solid #ff4500;
+      background: #1a1a1a;
+      border-radius: 8px;
+    }
 
+    /* Footer */
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      background: #141414;
+    }
+    .socials {
+      margin-bottom: 15px;
+    }
+    .socials a {
+      margin: 0 12px;
+      font-size: 1.6rem;
+      transition: 0.3s;
+      color: white;
+    }
+    .socials a:hover { color: #ff4500; }
+    footer p { font-size: 0.9rem; color: #aaa; }
   </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
     <div class="logo">BROX</div>
     <div class="menu-btn" onclick="toggleMenu()">☰</div>
-  </header>  <div class="side-menu" id="sideMenu">
-    <a href="#hero" onclick="closeMenu()">Home</a>
-    <a href="#allocation" onclick="closeMenu()">Allocation</a>
-    <a href="#roadmap" onclick="closeMenu()">Roadmap</a>
-    <a href="#footer" onclick="closeMenu()">Contact</a>
-  </div>  <section class="hero" id="hero">
-    <div class="hero-content">
-      <div class="circle-container">
-        <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-      </div>
-      <h1>Welcome to BROX</h1>
-      <p>The meme revolution begins. Powered by community & trust.</p>
-      <div class="cta">
-        <a href="https://t.me/brox__official" target="_blank">🚀 Join Telegram</a>
-        <a href="#" target="_blank">💰 Buy BROX</a>
-      </div>
+  </header>
+
+  <!-- Side Menu -->
+  <div class="side-menu" id="sideMenu">
+    <a href="#hero">Home</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#footer">Contact</a>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="circle-container">
+      <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
     </div>
-  </section>  <section class="allocation" id="allocation">
+    <h1 style="margin-top: 25px; font-size: 2.5rem;">Welcome to BROX</h1>
+    <p style="max-width: 500px; margin-top: 10px;">The meme revolution begins. Powered by community.</p>
+  </section>
+
+  <!-- Allocation Section -->
+  <section class="allocation" id="allocation">
     <h2>Token Allocation</h2>
+    <div class="alloc-visual">
+      <canvas id="allocChart" width="250" height="250"></canvas>
+    </div>
     <div class="alloc-cards">
       <div class="card">
         <h3>99%</h3>
@@ -225,7 +222,10 @@ footer p { font-size: 0.9rem; color: #aaa; }
         <p>Team & Holders</p>
       </div>
     </div>
-  </section>  <section class="roadmap" id="roadmap">
+  </section>
+
+  <!-- Roadmap -->
+  <section class="roadmap" id="roadmap">
     <h2>Roadmap</h2>
     <div class="steps">
       <div class="step"><strong>Phase 1:</strong> Launch social presence & build community</div>
@@ -233,29 +233,54 @@ footer p { font-size: 0.9rem; color: #aaa; }
       <div class="step"><strong>Phase 3:</strong> CEX / DEX Listings</div>
       <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
     </div>
-  </section>  <footer id="footer">
+  </section>
+
+  <!-- Footer -->
+  <footer id="footer">
     <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-telegram"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://x.com/brox" target="_blank"><i class="fab fa-x-twitter"></i></a>
+      <a href="https://t.me/brox" target="_blank"><i class="fab fa-telegram"></i></a>
+      <a href="https://discord.gg/brox" target="_blank"><i class="fab fa-discord"></i></a>
+      <a href="https://github.com/brox" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://medium.com/@brox" target="_blank"><i class="fab fa-medium"></i></a>
     </div>
     <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>  <script>
+  </footer>
+
+  <script>
     function toggleMenu() {
       document.getElementById("sideMenu").classList.toggle("open");
     }
-    function closeMenu() {
-      document.getElementById("sideMenu").classList.remove("open");
-    }
-    document.addEventListener("click", function(e) {
-      if (!document.getElementById("sideMenu").contains(e.target) && !document.querySelector(".menu-btn").contains(e.target)) {
-        closeMenu();
-      }
+
+    // Allocation Pie Chart
+    const canvas = document.getElementById("allocChart");
+    const ctx = canvas.getContext("2d");
+
+    const data = [99, 1];
+    const colors = ["#ff4500", "#444"];
+    let startAngle = -0.5 * Math.PI;
+
+    data.forEach((val, i) => {
+      const sliceAngle = (val / 100) * (2 * Math.PI);
+      ctx.beginPath();
+      ctx.moveTo(125, 125);
+      ctx.arc(125, 125, 120, startAngle, startAngle + sliceAngle);
+      ctx.closePath();
+      ctx.fillStyle = colors[i];
+      ctx.fill();
+      startAngle += sliceAngle;
     });
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") closeMenu();
-    });
-  </script></body>
+
+    // دائرة داخلية (Donut Effect)
+    ctx.beginPath();
+    ctx.arc(125, 125, 70, 0, 2 * Math.PI);
+    ctx.fillStyle = "#141414";
+    ctx.fill();
+
+    ctx.fillStyle = "#fff";
+    ctx.font = "20px Arial";
+    ctx.textAlign = "center";
+    ctx.fillText("99% / 1%", 125, 130);
+  </script>
+</body>
 </html>
