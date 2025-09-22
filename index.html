@@ -4,18 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
-
-  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-  <!-- Chart.js for tokenomics pie (kept but optional) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
-
   <style>
-    /* ---------- base (kept look of original) ---------- */
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
     a{text-decoration:none;color:inherit}
+    h2{color:#00f5ff;margin-bottom:16px;text-align:center}
+    section{padding:80px 20px}
+    /* Header */
     header{
       position:fixed;top:0;left:0;width:100%;
       height:70px;display:flex;align-items:center;justify-content:space-between;
@@ -25,8 +21,7 @@
     .logo{display:flex;align-items:center;gap:12px}
     .logo img{width:52px;height:52px;border-radius:50%}
     .logo h1{font-size:1.25rem;color:#00f5ff}
-
-    /* menu button (original preserved) */
+    /* Menu */
     .menu-btn{
       font-size:1.8rem;cursor:pointer;
       position:fixed;top:16px;right:22px;z-index:1300;
@@ -34,97 +29,65 @@
       display:flex;align-items:center;justify-content:center;
       background:rgba(0,245,255,0.15);
       border:1px solid rgba(0,245,255,0.6);
-      color:#00f5ff;
-      transition:transform .18s,background .18s;
+      color:#00f5ff;transition:.18s;
     }
     .menu-btn:hover{background:rgba(0,245,255,0.25)}
-
     .side-menu{
-      position:fixed;top:70px;right:-240px;
-      width:240px;height:calc(100% - 70px);
-      background:rgba(12,12,12,0.95);
-      padding-top:20px;padding-bottom:30px;
+      position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);
+      background:rgba(12,12,12,0.95);padding:20px 18px 30px;
       box-shadow:-4px 0 18px rgba(0,245,255,0.05);
-      transition:right .28s ease-in-out;
-      z-index:1250;border-left:1px solid rgba(255,255,255,0.05);
+      transition:right .28s ease-in-out;z-index:1250;
+      border-left:1px solid rgba(255,255,255,0.05);
     }
     .side-menu.open{right:0}
-    .side-menu .inner{display:flex;flex-direction:column;gap:6px;padding:12px 18px}
     .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
     .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
-
-    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:background .25s}
+    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
     .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
-
-    /* hero (kept original layout/look) */
+    /* Hero */
     .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
-    .hero .logoBig{width:160px;height:160px;border-radius:50%;object-fit:cover}
-    .hero h1{font-size:3rem;color:#00f5ff;text-shadow:0 0 16px #00f5ff66}
+    .hero .logoBig{width:160px;height:160px;border-radius:50%}
+    .hero h1{font-size:3rem;color:#00f5ff}
     .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-    .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer;transition:transform .18s}
-    .cta:hover{transform:translateY(-3px);box-shadow:0 0 20px #00f5ff44}
-
-    /* sections (preserve original spacing) */
-    section{padding:80px 20px}
+    .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+    /* Teaser */
     .teaser{text-align:center}
     .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
-    .allocation{text-align:center}
-
-    /* original circular svg kept and will be animated by JS */
-    .circle-wrapper { width: 220px; height: 220px; margin: 40px auto 0; position: relative; }
-    .circle-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
-    .circle-bg { fill: none; stroke: #222; stroke-width: 14; }
-    .circle-progress { fill: none; stroke: url(#gradient99); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 622; stroke-dashoffset: 6; transition: stroke-dashoffset 1.8s ease-out; }
-    .circle-1 { fill: none; stroke: #ff0077; stroke-width: 14; stroke-linecap: round; stroke-dasharray: 622; stroke-dashoffset: 616; transition: stroke-dashoffset 1.8s ease-out; }
-
-    /* roadmap original */
+    /* Allocation Circle */
+    .circle-wrapper{width:260px;height:260px;margin:40px auto 0;position:relative}
+    .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
+    .circle-bg{fill:none;stroke:#222;stroke-width:18}
+    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:18;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s}
+    .circle-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+    .circle-label h3{color:#00f5ff;font-size:1.6rem}
+    .circle-label p{color:#ccc;font-size:0.9rem;margin-top:4px}
+    /* Roadmap */
     .roadmap{background:#0c0c0c;padding-bottom:100px}
-    .roadmap h2{font-size:2.2rem;color:#00f5ff;margin-bottom:20px;text-align:center}
-    .timeline{position:relative;margin:0 auto;max-width:900px;padding-left:40px}
+    .roadmap h2{font-size:2.2rem;margin-bottom:20px}
+    .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
     .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
-    .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:all .5s}
+    .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
     .timeline .item.visible{opacity:1;transform:none}
     .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
-
-    /* trust / audit styles */
-    .grid-3 { display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch; }
-    .card { background: rgba(255,255,255,0.02); padding:18px;border-radius:12px; }
-    .card h3{margin-bottom:8px;color:#00f5ff}
-    .muted{color:#cfefff99}
-
-    /* tokenomics chart wrapper */
-    .chart-wrap{max-width:520px;margin:20px auto;text-align:center}
-    canvas{max-width:100%;display:block;margin:0 auto}
-
-    /* faq */
-    .faq .q{margin-bottom:12px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,0.02)}
-
-    /* footer (keep original look + social icons) */
+    /* FAQ */
+    .faq{max-width:800px;margin:0 auto;text-align:left}
+    .faq h3{color:#00f5ff;margin-top:18px}
+    .faq p{color:#ccc;margin-bottom:12px}
+    /* Footer */
     footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
     .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-    .socials a{font-size:1.5rem;color:#cfefff;transition:color .18s}
+    .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
     .socials a:hover{color:#00f5ff}
     footer p{color:#aaa}
-
-    /* modal keep original */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:opacity .2s}
+    /* Modal */
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
     .modal.show{opacity:1;pointer-events:auto}
-    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:520px;width:92%;position:relative}
-    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer;color:#00f5ff}
-    .modal input{width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff;border:1px solid #222}
-    .modal .cta{margin-top:14px;padding:10px 14px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
-
-    /* small screens */
-    @media (max-width:720px){
-      .timeline{padding-left:18px}
-      .hero h1{font-size:2rem}
-      section{padding:56px 14px}
-    }
+    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
+    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
   </style>
 </head>
 <body>
-
-  <!-- ========== Header (kept original appearance) ========== -->
+  <!-- Header -->
   <header>
     <div class="logo">
       <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo">
@@ -132,43 +95,33 @@
     </div>
     <button id="menuBtn" class="menu-btn">☰</button>
   </header>
-
-  <!-- side menu (preserved) - NOTE: Team link REMOVED -->
+  <!-- Side Menu -->
   <div id="sideMenu" class="side-menu">
-    <div class="inner">
-      <a href="#hero">Home</a>
-      <a href="#teaser">Teaser</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#trust">Trust</a>
-      <a href="#faq">FAQ</a>
-      <a href="#footer">Contact</a>
-    </div>
+    <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
+    <a href="#footer">Contact</a>
   </div>
   <div id="menuOverlay" class="menu-overlay"></div>
-
-  <!-- ========== HERO (preserved content + slight polish) ========== -->
+  <!-- Hero -->
   <section id="hero" class="hero">
     <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
     <h1>🔥 Welcome to BROX 🔥</h1>
     <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
     <button class="cta" onclick="openModal()">Early Access</button>
-    <div style="margin-top:8px;color:#ffd8c5;font-weight:700">BROX — Born from lava, fueled by memes</div>
   </section>
-
-  <!-- ========== TEASER (preserved) ========== -->
+  <!-- Teaser -->
   <section id="teaser" class="teaser">
-    <h2 style="color:#00f5ff">🚀 Coming Soon...</h2>
+    <h2>🚀 Coming Soon...</h2>
     <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
   </section>
-
-  <!-- ========== ALLOCATION (preserved circle + added token center) ========== -->
+  <!-- Allocation -->
   <section id="allocation" class="allocation">
-    <h2 style="color:#00f5ff">Token Allocation</h2>
-    <p>99% Community / 1% Team</p>
-
-    <div class="circle-wrapper" aria-hidden="true">
-      <svg class="circle-svg" viewBox="0 0 220 220" id="allocationSVG">
+    <h2>Token Allocation</h2>
+    <div class="circle-wrapper">
+      <svg class="circle-svg" viewBox="0 0 220 220">
         <defs>
           <linearGradient id="gradient99" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stop-color="#00f5ff"/>
@@ -176,113 +129,58 @@
           </linearGradient>
         </defs>
         <circle class="circle-bg" cx="110" cy="110" r="99"/>
-        <circle id="circleProg" class="circle-progress" cx="110" cy="110" r="99"/>
-        <circle id="circleSmall" class="circle-1" cx="110" cy="110" r="99"/>
-        <!-- center text -->
-        <g transform="translate(110,110)">
-          <text id="centerText" text-anchor="middle" dy="6" font-size="20" fill="#ffd8c5" style="font-weight:800">99%</text>
-        </g>
+        <circle class="circle-progress" cx="110" cy="110" r="99"/>
       </svg>
-    </div>
-
-    <!-- tokenomics pie (non-invasive, optional) -->
-    <div class="chart-wrap" style="margin-top:18px">
-      <canvas id="tokenPie" width="400" height="400"></canvas>
-      <div style="margin-top:10px;color:#cfefff">Supply: <strong id="totalSupplyText">1,000,000,000 BROX</strong></div>
-    </div>
-  </section>
-
-  <!-- ========== TRUST SECTION (NEW): proofs, lock, burn, audit placeholder ========== -->
-  <section id="trust" class="trust">
-    <h2 style="color:#00f5ff">🔒 Trust & Transparency</h2>
-
-    <div class="grid-3" style="margin-top:18px">
-      <div class="card">
-        <h3>Liquidity Lock</h3>
-        <p class="muted">Liquidity will be locked on launch. You can verify the lock here:</p>
-        <div class="proofs-row">
-          <a href="https://unicrypt.network" target="_blank" rel="noopener">
-            <i class="fa-solid fa-lock"></i> View on Unicrypt
-          </a>
-          <a href="https://www.team.finance" target="_blank" rel="noopener">
-            <i class="fa-solid fa-shield-halved"></i> Team.Finance
-          </a>
-        </div>
-        <p style="margin-top:10px;color:#d6f7ff;font-weight:700">Status: <span id="liquidityStatus">Planned (will lock on launch)</span></p>
-      </div>
-
-      <div class="card">
-        <h3>Burn Proof</h3>
-        <p class="muted">We burn tokens periodically. Latest burn TX is shown — click to view on Etherscan (placeholder).</p>
-        <div class="proofs-row">
-          <a id="burnTxLink" href="https://etherscan.io/" target="_blank" rel="noopener"><i class="fa-solid fa-fire"></i> View Burn TX</a>
-        </div>
-        <div style="margin-top:12px;font-weight:800;color:#ffd8c5">Total Burned: <span id="burnCounter">0</span> BROX</div>
-        <button class="cta" style="margin-top:10px" onclick="simulateBurn()">Simulate Burn +100k</button>
-      </div>
-
-      <div class="card">
-        <h3>Audit</h3>
-        <p class="muted">Security audit status (placeholder). We'll link the audit report here when ready.</p>
-        <div class="proofs-row">
-          <a href="https://www.certik.com" target="_blank" rel="noopener"><i class="fa-solid fa-search"></i> Audit Provider (example)</a>
-        </div>
-        <p style="margin-top:10px;color:#d6f7ff;font-weight:700">Status: <span id="auditStatus">Pending</span></p>
+      <div class="circle-label">
+        <h3>99% / 1%</h3>
+        <p>Community & Team</p>
       </div>
     </div>
   </section>
-
-  <!-- ========== ROADMAP (kept and extended) ========== -->
+  <!-- Roadmap -->
   <section id="roadmap" class="roadmap">
     <h2>Roadmap</h2>
     <div class="timeline">
-      <div class="item"><h3>Phase 1 — Eruption</h3><p>Launch socials, website, token contract, lock liquidity and first Meme War.</p></div>
-      <div class="item"><h3>Phase 2 — Lava Flow</h3><p>Weekly meme contests, small airdrops, NFT Lava Faces planning.</p></div>
-      <div class="item"><h3>Phase 3 — Tremor</h3><p>Audit completion, listings on DEX, influencer pushes, community events.</p></div>
-      <div class="item"><h3>Phase 4 — Domination</h3><p>Major burns, merch, mini-games, governance & DAO-lite for meme drops.</p></div>
-      <div class="item"><h3>Beyond</h3><p>Keep the community alive with events & cross-meme collaborations.</p></div>
+      <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
+      <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
+      <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
+      <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
     </div>
   </section>
-
-  <!-- ========== FAQ (preserved, updated to remove Discord/Reddit) ========== -->
-  <section id="faq" class="faq">
-    <h2 style="color:#00f5ff">❓ Frequently Asked</h2>
-    <div class="faq" style="margin-top:14px">
-      <div class="q"><strong>Is BROX a rugpull?</strong><br><span class="muted">No — liquidity will be locked on launch and team tokens are vested. Always verify the TX links shown above.</span></div>
-      <div class="q"><strong>Is this financial advice?</strong><br><span class="muted">No. BROX is a meme coin. Do your own research (DYOR).</span></div>
-      <div class="q"><strong>Where can I join the community?</strong><br><span class="muted">Use the links in the footer (Telegram / X / Instagram / TikTok).</span></div>
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <h3>What is BROX?</h3>
+      <p>BROX is a meme coin built by the community for the community.</p>
+      <h3>Where can I join the community?</h3>
+      <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
+      <h3>Is BROX safe?</h3>
+      <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
     </div>
   </section>
-
-  <!-- ========== FOOTER (preserve + social links only) ========== -->
+  <!-- Footer -->
   <footer id="footer">
     <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official" target="_blank" rel="noopener" aria-label="X / Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/brox_official" target="_blank" rel="noopener" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+      <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
     </div>
     <p>&copy; 2025 BROX. All Rights Reserved.</p>
   </footer>
-
-  <!-- ========== Modal (preserved behavior) ========== -->
-  <div id="modal" class="modal" aria-hidden="true">
+  <!-- Modal -->
+  <div id="modal" class="modal">
     <div class="card">
       <button class="close-btn" onclick="closeModal()">✖</button>
       <h2 style="color:#00f5ff">Get Notified</h2>
       <p>Enter your email to join early access.</p>
-      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff;border:1px solid #222">
-      <div style="display:flex;gap:10px;margin-top:14px;align-items:center">
-        <button class="cta" onclick="submitEmail()">Submit</button>
-        <button class="cta" style="background:linear-gradient(135deg,#ff7a33,#ff2a2a);color:#fff;border:none" onclick="downloadMemePack()">Download Meme Pack</button>
-      </div>
-      <p style="margin-top:10px;color:#9fdff5;font-size:0.9rem">We won't spam. Just launch updates & meme drops.</p>
+      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
+      <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
     </div>
   </div>
-
-  <!-- ========== Scripts: preserve original menu/modal/timeline + tokenomics + trust logic ========== -->
+  <!-- Script -->
   <script>
-    /* ---------- Preserve original menu & modal behavior ---------- */
     const menuBtn=document.getElementById("menuBtn");
     const sideMenu=document.getElementById("sideMenu");
     const menuOverlay=document.getElementById("menuOverlay");
@@ -294,107 +192,22 @@
     menuBtn.addEventListener("click",()=>toggleMenu());
     menuOverlay.addEventListener("click",()=>toggleMenu(false));
     document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
-
-    // modal functions (preserved)
+    // Modal
     const modal=document.getElementById("modal");
-    function openModal(){ modal.classList.add("show"); modal.setAttribute('aria-hidden','false'); }
-    function closeModal(){ modal.classList.remove("show"); modal.setAttribute('aria-hidden','true'); }
+    function openModal(){modal.classList.add("show")}
+    function closeModal(){modal.classList.remove("show")}
     function submitEmail(){
       const email=document.getElementById("emailInput").value.trim();
-      if(!email){ alert("Enter email"); return; }
-      alert("Thanks — " + email + " — You're on the BROX early list.");
+      if(!email){alert("Enter email");return}
+      alert("Thanks: "+email);
       closeModal();
     }
-
-    /* ---------- Roadmap reveal (preserved) ---------- */
+    // Roadmap reveal
     const items=document.querySelectorAll('.timeline .item');
     const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add('visible');
-      });
-    },{threshold:0.18});
+      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+    },{threshold:0.2});
     items.forEach(i=>obs.observe(i));
-
-    /* ---------- Tokenomics: Chart.js pie (non-invasive) ---------- */
-    (function initTokenomics(){
-      const ctxEl = document.getElementById('tokenPie');
-      if(!ctxEl) return;
-      const ctx = ctxEl.getContext('2d');
-      const data = {
-        labels: ['Community (99%)','Team (1%)'],
-        datasets: [{
-          data: [99,1],
-          backgroundColor: ['#00f5ff','#ff0077'],
-          hoverOffset: 8
-        }]
-      };
-      new Chart(ctx, {
-        type: 'doughnut',
-        data,
-        options: {
-          plugins:{legend:{position:'bottom',labels:{color:'#cfefff'}}},
-          maintainAspectRatio:true,
-          cutout: '55%',
-        }
-      });
-
-      // animate circle
-      const prog = document.getElementById('circleProg');
-      const small = document.getElementById('circleSmall');
-      const centerText = document.getElementById('centerText');
-      if(prog && small && centerText){
-        const C = 2 * Math.PI * 99;
-        prog.style.strokeDasharray = C;
-        small.style.strokeDasharray = C;
-        const communityPercent = 99;
-        const smallPercent = 1;
-        const off = Math.max(0, C * (1 - communityPercent/100));
-        const off1 = Math.max(0, C * (1 - smallPercent/100));
-        setTimeout(()=>{ prog.style.strokeDashoffset = off; small.style.strokeDashoffset = off1; centerText.textContent = communityPercent + '%'; }, 120);
-      }
-    })();
-
-    /* ---------- Burn counter + simulate function ---------- */
-    let burnedTotal = 0;
-    const burnEl = document.getElementById('burnCounter');
-    const burnTxLink = document.getElementById('burnTxLink');
-    if(burnEl) burnEl.textContent = burnedTotal.toLocaleString();
-    function simulateBurn(){
-      burnedTotal += 100000;
-      if(burnEl) burnEl.textContent = burnedTotal.toLocaleString();
-      if(burnTxLink){ burnTxLink.href = 'https://etherscan.io/tx/0x' + Math.random().toString(36).substring(2,12); burnTxLink.target='_blank'; }
-    }
-
-    /* ---------- Liquidity & Audit status operations (placeholders) ---------- */
-    const liquidityStatusEl = document.getElementById('liquidityStatus');
-    const auditStatusEl = document.getElementById('auditStatus');
-    if(liquidityStatusEl) liquidityStatusEl.textContent = 'Planned (will lock on launch)';
-    if(auditStatusEl) auditStatusEl.textContent = 'Pending';
-
-    /* ---------- Meme Pack download (creates small txt file) ---------- */
-    function downloadMemePack(){
-      const lines = [
-        "BROX MEME PACK",
-        "",
-        "Slogans:",
-        "- BROX: We don't HODL, we ERUPT.",
-        "- Born from lava, fueled by memes.",
-        "",
-        "Sticker ideas: BROX laughing, BROX on pizza, BROX burning charts.",
-        "",
-        "Replace the placeholders with your PNG/GIF files.",
-      ];
-      const blob = new Blob([lines.join('\n')],{type:'text/plain'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'BROX-meme-pack.txt';
-      document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    }
-
-    /* ---------- Accessibility ---------- */
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeModal(); });
-
   </script>
-
 </body>
 </html>
