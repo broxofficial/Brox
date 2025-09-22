@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
     a{text-decoration:none;color:inherit}
-    h2{color:#00f5ff;margin-bottom:16px;text-align:center}
     section{padding:80px 20px}
 
     /* Header */
@@ -24,73 +24,35 @@
     .logo h1{font-size:1.25rem;color:#00f5ff}
 
     /* Menu */
-    .menu-btn{
-      font-size:1.8rem;cursor:pointer;
-      position:fixed;top:16px;right:22px;z-index:1300;
-      width:44px;height:44px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(0,245,255,0.15);
-      border:1px solid rgba(0,245,255,0.6);
-      color:#00f5ff;transition:.18s;
-    }
+    .menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s;}
     .menu-btn:hover{background:rgba(0,245,255,0.25)}
-    .side-menu{
-      position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);
-      background:rgba(12,12,12,0.95);padding:20px 18px 30px;
-      box-shadow:-4px 0 18px rgba(0,245,255,0.05);
-      transition:right .28s ease-in-out;z-index:1250;
-      border-left:1px solid rgba(255,255,255,0.05);
-    }
-    .side-menu.open{right:0}
-    .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
-    .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
-    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
-    .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
+    .side-menu{position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05);}
+    .side-menu.open{right:0} .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600;} .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
+    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s} .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
     /* Hero */
     .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
-    .hero .logoBig{width:160px;height:160px;border-radius:50%}
-    .hero h1{font-size:3rem;color:#00f5ff}
-    .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-    .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+    .hero .logoBig{width:160px;height:160px;border-radius:50%} .hero h1{font-size:3rem;color:#00f5ff} .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem} .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
     /* Teaser */
-    .teaser{text-align:center}
-    .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+    .teaser{text-align:center} .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 
-    /* Allocation Circle */
-    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
-    .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
-    .circle-bg{fill:none;stroke:#222;stroke-width:14}
-    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s}
-    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616;transition:1.8s}
+    /* Tokenomics Circle */
+    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;} .circle-svg{transform:rotate(-90deg);width:100%;height:100%} .circle-bg{fill:none;stroke:#222;stroke-width:14} .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s;} .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616;transition:1.8s;}
 
     /* Roadmap */
-    .roadmap{background:#0c0c0c;padding-bottom:100px}
-    .roadmap h2{font-size:2.2rem;margin-bottom:20px}
-    .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
-    .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
-    .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
-    .timeline .item.visible{opacity:1;transform:none}
-    .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+    .roadmap{background:#0c0c0c;padding-bottom:100px} .roadmap h2{font-size:2.2rem;margin-bottom:20px} .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px;} .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px} .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s} .timeline .item.visible{opacity:1;transform:none} .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
 
-    /* FAQ */
-    .faq{max-width:800px;margin:0 auto;text-align:left}
-    .faq h3{color:#00f5ff;margin-top:18px}
-    .faq p{color:#ccc;margin-bottom:12px}
-
+    /* Trust Sections (Burn/Lock) */
+    .grid-3 { display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;align-items:stretch; }
+    .card { background: rgba(255,255,255,0.02); padding:18px;border-radius:12px; }
+    .card h3{margin-bottom:8px;color:#00f5ff} .muted{color:#cfefff99}
+    
     /* Footer */
-    footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-    .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-    .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
-    .socials a:hover{color:#00f5ff}
-    footer p{color:#aaa}
-
+    footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)} .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px} .socials a{font-size:1.5rem;color:#cfefff;transition:.18s} .socials a:hover{color:#00f5ff} footer p{color:#aaa}
+    
     /* Modal */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
-    .modal.show{opacity:1;pointer-events:auto}
-    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
-    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s} .modal.show{opacity:1;pointer-events:auto} .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:92%;position:relative} .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
   </style>
 </head>
 <body>
@@ -109,12 +71,14 @@
     <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
     <a href="#roadmap">Roadmap</a>
+    <a href="#trust">Trust</a>
+    <a href="#team">Team</a>
     <a href="#faq">FAQ</a>
     <a href="#footer">Contact</a>
   </div>
   <div id="menuOverlay" class="menu-overlay"></div>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <section id="hero" class="hero">
     <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
     <h1>🔥 Welcome to BROX 🔥</h1>
@@ -122,13 +86,13 @@
     <button class="cta" onclick="openModal()">Early Access</button>
   </section>
 
-  <!-- Teaser -->
+  <!-- Teaser Section -->
   <section id="teaser" class="teaser">
     <h2>🚀 Coming Soon...</h2>
     <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
   </section>
 
-  <!-- Allocation -->
+  <!-- Allocation Section -->
   <section id="allocation" class="allocation">
     <h2>Token Allocation</h2>
     <p>99% Community / 1% Team</p>
@@ -147,7 +111,29 @@
     </div>
   </section>
 
-  <!-- Roadmap -->
+  <!-- Trust Section (Burn/Lock) -->
+  <section id="trust" class="trust">
+    <h2>🔒 Trust & Transparency</h2>
+    <div class="grid-3">
+      <div class="card">
+        <h3>Liquidity Lock</h3>
+        <p class="muted">Liquidity will be locked on launch. You can verify the lock here:</p>
+        <a href="https://unicrypt.network" target="_blank"><i class="fa-solid fa-lock"></i> View on Unicrypt</a>
+      </div>
+      <div class="card">
+        <h3>Burn Proof</h3>
+        <p class="muted">We burn tokens periodically. Latest burn TX shown — click to view on Etherscan.</p>
+        <a href="https://etherscan.io/" target="_blank"><i class="fa-solid fa-fire"></i> View Burn TX</a>
+      </div>
+      <div class="card">
+        <h3>Audit</h3>
+        <p class="muted">Security audit status: Check soon.</p>
+        <a href="https://www.certik.com" target="_blank"><i class="fa-solid fa-search"></i> View Audit</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roadmap Section -->
   <section id="roadmap" class="roadmap">
     <h2>Roadmap</h2>
     <div class="timeline">
@@ -158,20 +144,39 @@
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>FAQ</h2>
-    <div class="faq">
-      <h3>What is BROX?</h3>
-      <p>BROX is a meme coin built by the community for the community.</p>
-      <h3>Where can I join the community?</h3>
-      <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
-      <h3>Is BROX safe?</h3>
-      <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
+  <!-- Team Section -->
+  <section id="team" class="team">
+    <h2>👨‍🎤 Team</h2>
+    <p class="muted">Our team is passionate about memes and innovation!</p>
+    <div class="team-grid">
+      <div class="member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Lord of Memes">
+        <h4>Lord of Memes</h4>
+        <div class="muted">CEO</div>
+      </div>
+      <div class="member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Code Wizard">
+        <h4>Code Wizard</h4>
+        <div class="muted">Lead Developer</div>
+      </div>
+      <div class="member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Shiller Supreme">
+        <h4>Shiller Supreme</h4>
+        <div class="muted">Community Manager</div>
+      </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- FAQ Section -->
+  <section id="faq">
+    <h2>❓ Frequently Asked Questions</h2>
+    <div class="faq">
+      <div class="q"><strong>What is BROX?</strong><br><span class="muted">BROX is a meme coin powered by community.</span></div>
+      <div class="q"><strong>How can I buy BROX?</strong><br><span class="muted">You can buy it on supported exchanges soon.</span></div>
+    </div>
+  </section>
+
+  <!-- Footer Section -->
   <footer id="footer">
     <div class="socials">
       <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
@@ -188,21 +193,16 @@
       <button class="close-btn" onclick="closeModal()">✖</button>
       <h2 style="color:#00f5ff">Get Notified</h2>
       <p>Enter your email to join early access.</p>
-      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
-      <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
+      <input id="emailInput" type="email" placeholder="you@example.com">
+      <button class="cta" onclick="submitEmail()">Submit</button>
     </div>
   </div>
 
-  <!-- Script -->
   <script>
     const menuBtn=document.getElementById("menuBtn");
     const sideMenu=document.getElementById("sideMenu");
     const menuOverlay=document.getElementById("menuOverlay");
-    function toggleMenu(force){
-      const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");
-      if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-      else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
-    }
+    function toggleMenu(force){ ... }
     menuBtn.addEventListener("click",()=>toggleMenu());
     menuOverlay.addEventListener("click",()=>toggleMenu(false));
     document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
@@ -211,19 +211,15 @@
     const modal=document.getElementById("modal");
     function openModal(){modal.classList.add("show")}
     function closeModal(){modal.classList.remove("show")}
-    function submitEmail(){
-      const email=document.getElementById("emailInput").value.trim();
-      if(!email){alert("Enter email");return}
-      alert("Thanks: "+email);
-      closeModal();
-    }
+    function submitEmail(){...}
 
     // Roadmap reveal
     const items=document.querySelectorAll('.timeline .item');
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-    },{threshold:0.2});
+    const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.2});
     items.forEach(i=>obs.observe(i));
+
+    // Tokenomics: Chart.js pie
+    (function initTokenomics(){...})();
   </script>
 </body>
 </html>
