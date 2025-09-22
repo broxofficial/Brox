@@ -1,500 +1,282 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BROX — Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brox - Meme Coin Revolution</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    /* ---------- Reset / Base ---------- */
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      font-family:'Segoe UI',Arial,sans-serif;
-      background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden;
-      --accent1:#00f5ff;--accent2:#00c3cc;--lava1:#ff5a00;--lava2:#ff2a2a;--lavaGlow: #ff6a33;
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #0a0a0a;
+      color: #f1f1f1;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(90deg,#ff4d4d,#ff8800);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+    }
+    header a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+    .hero {
+      text-align: center;
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero h1 {
+      font-family: 'Press Start 2P', cursive;
+      font-size: 2.5rem;
+      color: #ff4d4d;
+    }
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.2rem;
+      color: #ccc;
+    }
+    .btn-primary {
+      background: #ff4d4d;
+      border: none;
+      padding: 1rem 2rem;
+      margin-top: 2rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      transform: scale(1.1) rotate(-2deg);
+    }
+    section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #ff8800;
+    }
+    .card {
+      background: #1a1a1a;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 1rem 0;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255,70,70,0.6);
+    }
+    .tokenomics canvas {
+      max-width: 500px;
+      margin: auto;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+      gap: 2rem;
+    }
+    .team-member {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .team-member:hover {
+      transform: translateY(-5px) rotate(1deg);
+    }
+    .team-member img {
+      width: 80px;
+      border-radius: 50%;
+    }
+    .timeline {
+      border-left: 2px solid #ff4d4d;
+      padding-left: 1rem;
+    }
+    .timeline div {
+      margin: 1.5rem 0;
+    }
+    .faq-item {
+      background: #1a1a1a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin: 1rem 0;
+      transition: background 0.2s;
+    }
+    .faq-item:hover {
+      background: #222;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #111;
+      color: #aaa;
+      margin-top: 4rem;
+    }
+    .community a {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 1rem 1.5rem;
+      background: #ff4d4d;
+      border-radius: 10px;
+      text-decoration: none;
+      color: white;
+      font-weight: 600;
+      transition: transform 0.2s ease;
+    }
+    .community a:hover {
+      transform: scale(1.1);
     }
 
-    /* ---------- Header / Menu ---------- */
-    header{
-      position:fixed;top:0;left:0;width:100%;
-      height:70px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
-      border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200;
+    /* Emoji rain effect */
+    .emoji {
+      position: fixed;
+      top: -50px;
+      font-size: 2rem;
+      pointer-events: none;
+      animation: fall linear forwards;
     }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:52px;height:52px;border-radius:50%;object-fit:cover}
-    .logo h1{font-size:1.25rem;color:var(--accent1);text-shadow:0 0 8px var(--accent1)66}
-
-    .menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:var(--accent1);transition:transform .18s,background .18s}
-    .menu-btn:hover{background:rgba(0,245,255,0.25);box-shadow:0 0 10px var(--accent1)66}
-
-    .side-menu{position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding-top:20px;padding-bottom:30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
-    .side-menu.open{right:0}
-    .side-menu .inner{display:flex;flex-direction:column;gap:6px;padding:12px 18px}
-    .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
-    .side-menu a:hover{background:rgba(0,245,255,0.1);color:var(--accent1)}
-
-    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:background .25s}
-    .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
-
-    /* ---------- Lava animated background ---------- */
-    body::before{
-      content:"";position:fixed;inset:0;z-index:-2;
-      background:
-        radial-gradient(600px 300px at 10% 10%, rgba(255,90,0,0.06), transparent 10%),
-        radial-gradient(500px 260px at 90% 70%, rgba(255,40,40,0.04), transparent 10%),
-        linear-gradient(180deg,#0b0b0b 0%, #0d0d0d 50%, #070707 100%);
-      mix-blend-mode:screen;opacity:0.95;pointer-events:none;
-      animation:lavaShimmer 12s linear infinite;
-    }
-    @keyframes lavaShimmer{
-      0%{transform:translate3d(0,0,0)}
-      50%{transform:translate3d(-6%,3%,0)}
-      100%{transform:translate3d(0,0,0)}
-    }
-    /* small floating embers */
-    .ember{position:fixed;z-index:-1;pointer-events:none;filter:blur(.6px)}
-    .ember i{display:block;width:8px;height:8px;border-radius:50%;background:radial-gradient(circle,#ffb052,#ff2a2a);opacity:.12;box-shadow:0 0 8px #ff7a33}
-    /* generate several embers positions via inline elements */
-
-    /* ---------- Hero ---------- */
-    .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;position:relative;overflow:hidden}
-    .hero .logoBig{width:170px;height:170px;border-radius:50%;animation:breath 4s ease-in-out infinite;box-shadow:0 0 48px rgba(255,90,0,0.12);object-fit:cover}
-    @keyframes breath{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
-    .hero h1{font-size:3rem;color:var(--accent1);text-shadow:0 0 22px var(--accent1)aa}
-    .hero p{max-width:760px;color:#cfefffbb;font-size:1.1rem}
-    .hero .subline{color:#ffd6c7;font-size:0.95rem;margin-top:-4px}
-    .cta-row{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:12px;flex-wrap:wrap}
-    .cta{padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#001;font-weight:700;border:none;cursor:pointer;transition:transform .18s,box-shadow .18s}
-    .cta.secondary{background:transparent;border:1px solid rgba(255,255,255,0.05);color:#fff}
-    .cta:hover{transform:translateY(-3px);box-shadow:0 0 24px var(--accent1)55}
-
-    /* countdown pill */
-    .countdown{margin-top:6px;padding:10px 14px;border-radius:999px;background:linear-gradient(90deg,rgba(255,90,0,0.12),rgba(255,40,40,0.05));color:#ffd8c5;font-weight:700;display:inline-block;box-shadow:0 0 20px rgba(255,90,0,0.06)}
-
-    /* ---------- sections ---------- */
-    section{padding:80px 20px}
-    .teaser{text-align:center}
-    .teaser img{max-width:320px;border-radius:14px;margin-top:14px;box-shadow:0 0 25px #ff330033}
-    .allocation{text-align:center}
-
-    /* ---------- Tokenomics circle ---------- */
-    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
-    .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
-    .circle-bg{fill:none;stroke:#222;stroke-width:14}
-    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:stroke-dashoffset 1.6s ease-out}
-    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:stroke-dashoffset 1.6s ease-out}
-    .token-stats{display:flex;gap:18px;justify-content:center;margin-top:14px;flex-wrap:wrap}
-    .stat{background:rgba(255,255,255,0.02);padding:10px 12px;border-radius:10px;min-width:140px}
-
-    /* badges */
-    .badges{display:flex;gap:10px;justify-content:center;margin-top:16px}
-    .badge{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.03);font-weight:700;color:#fff;border:1px solid rgba(255,255,255,0.03)}
-
-    /* Download Meme Pack */
-    .download-btn{margin-top:14px;padding:10px 16px;border-radius:10px;background:linear-gradient(90deg,var(--lava1),var(--lava2));border:none;color:#111;font-weight:800;cursor:pointer;box-shadow:0 8px 30px rgba(255,90,0,0.12)}
-
-    /* ---------- Roadmap ---------- */
-    .roadmap{background:#0c0c0c;padding-bottom:100px}
-    .roadmap h2{font-size:2.2rem;color:var(--accent1);margin-bottom:20px;text-align:center}
-    .timeline{position:relative;margin:0 auto;max-width:800px;padding-left:40px}
-    .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(var(--accent1),var(--accent2));border-radius:2px}
-    .timeline .item{position:relative;margin:24px 0;padding:18px 22px;background:rgba(255,255,255,0.02);border-radius:12px;opacity:0;transform:translateY(20px) scale(.98);transition:all .6s}
-    .timeline .item.visible{opacity:1;transform:none;box-shadow:0 10px 30px rgba(0,0,0,0.45)}
-    .timeline .item::before{content:'';position:absolute;left:-34px;top:20px;width:34px;height:34px;background:linear-gradient(45deg,var(--lava1),var(--lava2));border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;box-shadow:0 6px 22px rgba(255,90,0,0.12)}
-    .timeline .item.erupt::after{content:'💥';position:absolute;right:16px;top:-8px;font-size:28px;transform:scale(0);animation:burst .7s ease forwards}
-    @keyframes burst{0%{transform:scale(0)}60%{transform:scale(1.08)}100%{transform:scale(1)}}
-
-    /* ---------- footer ---------- */
-    footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-    .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-    .socials a{font-size:1.5rem;color:#cfefff;transition:color .18s,transform .18s}
-    .socials a:hover{color:var(--accent1);transform:scale(1.18)}
-    footer p{color:#aaa}
-
-    /* ---------- modal ---------- */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:opacity .2s}
-    .modal.show{opacity:1;pointer-events:auto}
-    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:520px;width:94%;position:relative;box-shadow:0 0 25px rgba(255,90,0,0.06)}
-    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer;color:var(--accent1)}
-    .modal input{width:100%;padding:12px 14px;margin-top:10px;border-radius:8px;background:#111;color:#fff;border:1px solid #2b2b2b;outline:none;transition:border .2s}
-    .modal input:focus{border:1px solid var(--accent1);box-shadow:0 0 12px var(--accent1)44}
-
-    /* small responsive */
-    @media (max-width:780px){
-      .hero h1{font-size:2.2rem}
-      .hero p{padding:0 14px}
-      .timeline{padding-left:20px}
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- embers (decorative) -->
-  <div class="ember" style="left:8%;top:20%;--s:1;opacity:.9"><i></i></div>
-  <div class="ember" style="left:40%;top:10%;--s:.7;opacity:.6"><i></i></div>
-  <div class="ember" style="left:70%;top:30%;--s:1.2;opacity:.5"><i></i></div>
-  <div class="ember" style="left:85%;top:60%;--s:.8;opacity:.35"><i></i></div>
-
-  <header>
-    <div class="logo">
-      <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo">
-      <h1>BROX</h1>
-    </div>
-    <button id="menuBtn" class="menu-btn">☰</button>
+  <header class="animate__animated animate__fadeInDown">
+    <div>🚀 Brox</div>
+    <nav>
+      <a href="#proofs">Proofs</a>
+      <a href="#tokenomics">Tokenomics</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#team">Team</a>
+      <a href="#community">Community</a>
+    </nav>
   </header>
 
-  <div id="sideMenu" class="side-menu">
-    <div class="inner">
-      <a href="#hero">Home</a>
-      <a href="#teaser">Teaser</a>
-      <a href="#allocation">Allocation</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#footer">Contact</a>
-    </div>
-  </div>
-  <div id="menuOverlay" class="menu-overlay"></div>
-
-  <!-- HERO -->
-  <section id="hero" class="hero">
-    <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
-    <h1>🔥 BROX — Eruption of Memes</h1>
-    <p>The lava meme revolution. Community-first. No rugpulls — just eruptions and laughs.</p>
-    <div class="subline">Born from lava. Fueled by memes. Join the Lava Army.</div>
-
-    <div class="cta-row">
-      <button class="cta" onclick="openModal()">Early Access</button>
-      <a class="cta secondary" href="https://t.me/brox_official" target="_blank" rel="noopener">Join the Lava Army 🚀</a>
-      <div class="countdown" id="countdown">Countdown: --d --:--:--</div>
-    </div>
+  <section class="hero animate__animated animate__zoomIn">
+    <h1>Brox Meme Coin</h1>
+    <p>The coin that turns chaos into laughs and memes into gains.</p>
+    <button id="buyBtn" class="btn-primary animate__animated animate__pulse animate__infinite">Buy $BROX Now</button>
   </section>
 
-  <!-- TEASER + mini-game -->
-  <section id="teaser" class="teaser">
-    <h2 style="color:var(--accent1)">🚀 Coming Soon… Eruption Pending</h2>
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
-    <div style="margin-top:18px">
-      <button class="download-btn" onclick="downloadMemePack()">Download Meme Pack</button>
-    </div>
-
-    <!-- Mini-game: BROX Jump -->
-    <div style="margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:8px">
-      <div style="color:#ffd8c5;font-weight:800">Play: BROX Jump — Click/tap to jump the dip</div>
-      <canvas id="game" width="720" height="120" style="max-width:100%;background:linear-gradient(180deg,#191919,#0c0c0c);border-radius:10px;box-shadow:0 10px 30px rgba(255,90,0,0.04)"></canvas>
-      <div style="color:#ccc;font-size:0.9rem">Score: <span id="score">0</span></div>
-    </div>
+  <section id="proofs" class="proofs animate__animated animate__fadeInUp">
+    <h2>🔒 Transparency & Proofs</h2>
+    <div class="card">Liquidity Locked ✅ <br><a href="#">[View Proof on XYZ]</a></div>
+    <div class="card">🔥 Burned Supply: <span id="burned">12,345,678</span> $BROX <br><a href="#">[Burn Transaction]</a></div>
+    <div class="card">🛡️ Audit: <a href="#">Pending / Coming Soon</a></div>
   </section>
 
-  <!-- ALLOCATION / Tokenomics -->
-  <section id="allocation" class="allocation">
-    <h2 style="color:var(--accent1)">Token Allocation</h2>
-    <p style="color:#ffd8c5;font-weight:700;margin-top:6px">99% Community / 1% Team</p>
-
-    <div class="circle-wrapper" aria-hidden="true">
-      <svg class="circle-svg" viewBox="0 0 220 220">
-        <defs>
-          <linearGradient id="gradient99" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#ffcf5b"/>
-            <stop offset="50%" stop-color="#ff7a33"/>
-            <stop offset="100%" stop-color="#ff2a2a"/>
-          </linearGradient>
-        </defs>
-        <circle class="circle-bg" cx="110" cy="110" r="99"/>
-        <circle id="prog" class="circle-progress" cx="110" cy="110" r="99"/>
-        <circle id="prog1" class="circle-1" cx="110" cy="110" r="99"/>
-        <!-- center label -->
-        <g transform="translate(110,110)">
-          <text id="centerPercent" text-anchor="middle" dy="6" font-size="20" fill="#ffd8c5" style="font-weight:800">99%</text>
-        </g>
-      </svg>
-    </div>
-
-    <div class="token-stats">
-      <div class="stat"><strong>Supply:</strong><br>1,000,000,000 BROX</div>
-      <div class="stat"><strong>Community:</strong><br>50% airdrops & rewards</div>
-      <div class="stat"><strong>Burn:</strong><br>30% (periodic)</div>
-    </div>
-
-    <div class="badges" style="margin-top:12px">
-      <div class="badge">Liquidity Locked ✅</div>
-      <div class="badge">Team Vesting ✅</div>
-      <div class="badge" id="txBadge">Last Burn TX: <span style="font-family:monospace;color:#ffcf5b">—</span></div>
-    </div>
+  <section id="tokenomics" class="tokenomics animate__animated animate__fadeInUp">
+    <h2>📊 Tokenomics</h2>
+    <canvas id="tokenomicsChart"></canvas>
   </section>
 
-  <!-- ROADMAP -->
-  <section id="roadmap" class="roadmap">
-    <h2>Roadmap — The Eruption Plan</h2>
+  <section id="roadmap" class="roadmap animate__animated animate__fadeInUp">
+    <h2>🗺️ Roadmap</h2>
     <div class="timeline">
-      <div class="item" data-ico="🔥"><h3>Phase 1 — Eruption</h3><p>Launch token, lock liquidity, open community channels, first Meme War.</p></div>
-      <div class="item" data-ico="🌋"><h3>Phase 2 — Lava Flow</h3><p>Weekly challenges, NFT Lava Faces, mini-games & merch mockups.</p></div>
-      <div class="item" data-ico="🚀"><h3>Phase 3 — Global Tremor</h3><p>Influencer pushes, CEX / DEX listings, partnerships & cross-meme events.</p></div>
-      <div class="item" data-ico="👑"><h3>Phase 4 — Meme Domination</h3><p>Mass burn event, community governance for meme drops, cultural takeover.</p></div>
+      <div><strong>Q1:</strong> Launch + Meme Campaign</div>
+      <div><strong>Q2:</strong> Listing on DEX + Liquidity Lock</div>
+      <div><strong>Q3:</strong> Audit + First Partnerships</div>
+      <div><strong>Q4:</strong> CEX Listings + Global Meme Domination</div>
     </div>
   </section>
 
-  <footer id="footer">
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/brox_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>
-    </div>
-    <p>&copy; 2025 BROX. All Rights Reserved.</p>
-  </footer>
-
-  <!-- modal (same behavior preserved) -->
-  <div id="modal" class="modal" aria-hidden="true">
-    <div class="card">
-      <button class="close-btn" onclick="closeModal()">✖</button>
-      <h2 style="color:var(--accent1)">Get Notified</h2>
-      <p>Enter your email to join early access.</p>
-      <input id="emailInput" type="email" placeholder="you@example.com" />
-      <div style="display:flex;gap:10px;margin-top:14px;align-items:center">
-        <button class="cta" onclick="submitEmail()">Submit</button>
-        <button class="cta secondary" onclick="downloadMemePack()">Download Meme Pack</button>
+  <section id="team" class="team animate__animated animate__fadeInUp">
+    <h2>👨‍🎤 The Brox Team</h2>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Meme 1">
+        <h3>Lord of Memes</h3>
+        <p>CEO / Visionary</p>
+      </div>
+      <div class="team-member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Meme 2">
+        <h3>Code Wizard</h3>
+        <p>Lead Dev</p>
+      </div>
+      <div class="team-member">
+        <img src="https://i.imgur.com/0y8Ftya.png" alt="Meme 3">
+        <h3>Shiller Supreme</h3>
+        <p>Community Boss</p>
       </div>
     </div>
-  </div>
+  </section>
+
+  <section id="faq" class="faq animate__animated animate__fadeInUp">
+    <h2>❓ FAQ</h2>
+    <div class="faq-item"><strong>Is liquidity locked?</strong><br>✅ Yes, 100% liquidity is locked for security.</div>
+    <div class="faq-item"><strong>Is team doxxed?</strong><br>🚧 Semi-doxxed. We show our memes before our faces 😎</div>
+    <div class="faq-item"><strong>Why Brox?</strong><br>Because memes rule the internet, and Brox rules memes.</div>
+  </section>
+
+  <section id="community" class="community animate__animated animate__fadeInUp">
+    <h2>📢 Join the Community</h2>
+    <a href="#">Telegram</a>
+    <a href="#">Twitter</a>
+    <a href="#">Discord</a>
+  </section>
+
+  <footer>
+    © 2025 Brox Meme Coin. All Rights Reserved.
+  </footer>
+
+  <!-- Sound effect -->
+  <audio id="buySound" src="https://www.myinstants.com/media/sounds/anime-wow-sound-effect.mp3" preload="auto"></audio>
 
   <script>
-    /* ----------------- Config -----------------
-       Change LAUNCH_DATE to desired date/time (ISO)
-       Example timezone is Africa/Algiers (UTC+1)
-    -------------------------------------------- */
-    const LAUNCH_DATE = '2025-10-01T20:00:00+01:00'; // adjust as needed
-    const LAUNCH = new Date(LAUNCH_DATE);
-
-    /* ---------- Menu behavior (preserved) ---------- */
-    const menuBtn=document.getElementById("menuBtn");
-    const sideMenu=document.getElementById("sideMenu");
-    const menuOverlay=document.getElementById("menuOverlay");
-    function toggleMenu(force){
-      const open=(typeof force==="boolean")?force:!sideMenu.classList.contains("open");
-      if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-      else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
-    }
-    menuBtn.addEventListener("click",()=>toggleMenu());
-    menuOverlay.addEventListener("click",()=>toggleMenu(false));
-    document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
-
-    /* ---------- Modal (preserved) ---------- */
-    const modal=document.getElementById("modal");
-    function openModal(){modal.classList.add("show");modal.setAttribute('aria-hidden','false')}
-    function closeModal(){modal.classList.remove("show");modal.setAttribute('aria-hidden','true')}
-    function submitEmail(){
-      const email=document.getElementById("emailInput").value.trim();
-      if(!email){alert("Enter email");return}
-      // placeholder: replace with real submission endpoint if available
-      alert("Thanks — " + email + "\nYou are now on the BROX early list.");
-      closeModal();
-    }
-
-    /* ---------- Countdown ---------- */
-    const countdownEl = document.getElementById('countdown');
-    function updateCountdown(){
-      const now = new Date();
-      const diff = LAUNCH - now;
-      if(diff <= 0){countdownEl.textContent = "BROX has erupted! 🔥";return}
-      const d = Math.floor(diff / (1000*60*60*24));
-      const h = String(Math.floor((diff/(1000*60*60))%24)).padStart(2,'0');
-      const m = String(Math.floor((diff/(1000*60))%60)).padStart(2,'0');
-      const s = String(Math.floor((diff/1000)%60)).padStart(2,'0');
-      countdownEl.textContent = `${d}d ${h}:${m}:${s} to Eruption`;
-    }
-    updateCountdown();
-    setInterval(updateCountdown,1000);
-
-    /* ---------- Tokenomics circle animation ---------- */
-    const prog = document.getElementById('prog');
-    const prog1 = document.getElementById('prog1');
-    const centerPercent = document.getElementById('centerPercent');
-    const CIRC = 2 * Math.PI * 99; // r=99 -> circumference ~622
-    prog.style.strokeDasharray = CIRC;
-    prog1.style.strokeDasharray = CIRC;
-
-    // show community = 99%
-    const communityPercent = 99;
-    const smallPercent = 1;
-    function animateTokenCircles(){
-      const off = Math.max(0, CIRC * (1 - communityPercent/100));
-      const off1 = Math.max(0, CIRC * (1 - smallPercent/100));
-      // animate by transitioning strokeDashoffset
-      prog.style.strokeDashoffset = CIRC;
-      prog1.style.strokeDashoffset = CIRC;
-      // small timeout to allow CSS transition
-      setTimeout(()=>{ prog.style.strokeDashoffset = off; prog1.style.strokeDashoffset = off1; centerPercent.textContent = communityPercent + "%"; }, 80);
-    }
-    animateTokenCircles();
-
-    /* show a placeholder TX hash (in real life replace with real hash) */
-    document.getElementById('txBadge').querySelector('span').textContent = '0xabc...12345';
-
-    /* ---------- Roadmap reveal with eruption effect ---------- */
-    const items = document.querySelectorAll('.timeline .item');
-    const obs = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('visible');
-          // add eruption emoji on reveal once
-          if(!e.target.dataset.revealed){
-            e.target.dataset.revealed = '1';
-            e.target.classList.add('erupt');
-            setTimeout(()=>e.target.classList.remove('erupt'),900);
-          }
-        }
-      });
-    },{threshold:0.18});
-    items.forEach(i=>obs.observe(i));
-
-    /* ---------- Download Meme Pack (creates a simple .txt file on the fly) ---------- */
-    function downloadMemePack(){
-      const lines = [
-        "BROX MEME PACK — ready-to-share templates",
-        "",
-        "SLOGANS:",
-        "1) We don't HODL... we ERUPT. 🌋",
-        "2) BROX: Melt the FUD, roast the dips.",
-        "",
-        "MEME CAPTIONS:",
-        "- BROX ate my dip and laughed.",
-        "- When BROX erupts, charts go to toast.",
-        "- BR0X>HYPE",
-        "",
-        "STICKER IDEAS:",
-        "1) BROX laughing with pizza",
-        "2) BROX spitting tiny lava GIF",
-        "",
-        "IMAGE PLACEHOLDERS:",
-        "Replace with your images: Picsart_25-09-20_12-05-00-500.png",
-        "and images/Picsart_25-09-21_10-14-23-094.png",
-        "",
-        "Use these captions on X / Telegram / Instagram & tag @Brox__official"
-      ];
-      const blob = new Blob([lines.join("\n")],{type:'text/plain;charset=utf-8'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'BROX-meme-pack.txt';
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-    }
-
-    /* ---------- Simple BROX Jump game (lightweight) ---------- */
-    (() => {
-      const canvas = document.getElementById('game');
-      if(!canvas) return;
-      const ctx = canvas.getContext('2d');
-      let W = canvas.width, H = canvas.height;
-      // scale for high-DPI
-      function resizeCanvas(){
-        const ratio = window.devicePixelRatio || 1;
-        const cssW = canvas.clientWidth;
-        canvas.width = cssW * ratio;
-        canvas.height = 120 * ratio;
-        ctx.scale(ratio, ratio);
+    // Chart.js Tokenomics
+    const ctx = document.getElementById('tokenomicsChart');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Community (70%)', 'Team (10%)', 'Liquidity (15%)', 'Burn (5%)'],
+        datasets: [{
+          data: [70, 10, 15, 5],
+          backgroundColor: ['#ff4d4d','#ff8800','#ffaa00','#333']
+        }]
       }
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-
-      let player = {x:60,y:80,w:18,h:18,vy:0,gravity:0.9,jump:-12,onGround:true};
-      let obstacles = [];
-      let spawnTimer = 0;
-      let score = 0;
-      let running = true;
-
-      function spawnObstacle(){ obstacles.push({x:720,y:88,w:20,h:24,speed:3 + Math.min(6, score/10)}); }
-
-      function update(){
-        if(!running) return;
-        // player physics
-        player.vy += player.gravity;
-        player.y += player.vy;
-        if(player.y >= 80){ player.y = 80; player.vy = 0; player.onGround = true; }
-
-        // obstacles
-        spawnTimer--;
-        if(spawnTimer <= 0){ spawnTimer = 60 + Math.floor(Math.random()*60); spawnObstacle(); }
-        for(let i=obstacles.length-1;i>=0;i--){
-          obstacles[i].x -= obstacles[i].speed;
-          if(obstacles[i].x < -50) { obstacles.splice(i,1); score++; document.getElementById('score').textContent = score; }
-          // collision
-          if( obstacles[i].x < player.x + player.w &&
-              obstacles[i].x + obstacles[i].w > player.x &&
-              obstacles[i].y < player.y + player.h &&
-              obstacles[i].y + obstacles[i].h > player.y ){
-            // hit
-            running = false;
-            splash();
-          }
-        }
-      }
-
-      function draw(){
-        // clear
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        // ground
-        ctx.fillStyle = '#151515';
-        ctx.fillRect(0,100,720,20);
-
-        // player (BROX block)
-        ctx.fillStyle = '#ff7a33';
-        ctx.fillRect(player.x, player.y, player.w, player.h);
-        // face (eyes)
-        ctx.fillStyle = '#141414';
-        ctx.fillRect(player.x+3, player.y+4, 4,4);
-        ctx.fillRect(player.x+11, player.y+4, 4,4);
-
-        // obstacles
-        ctx.fillStyle = '#333';
-        obstacles.forEach(o=>{
-          ctx.fillRect(o.x, o.y, o.w, o.h);
-        });
-
-        if(!running){
-          ctx.fillStyle = 'rgba(0,0,0,0.6)';
-          ctx.fillRect(0,0,720,120);
-          ctx.fillStyle = '#ffd8c5';
-          ctx.font = '18px Segoe UI, Arial';
-          ctx.fillText('Game Over — click to restart', 240, 60);
-        }
-      }
-
-      function loop(){
-        update(); draw();
-        requestAnimationFrame(loop);
-      }
-      loop();
-
-      // interaction
-      canvas.addEventListener('click', ()=>{
-        if(!running){ // restart
-          obstacles = []; score = 0; document.getElementById('score').textContent = score; running = true; spawnTimer = 40;
-          player.y = 80; player.vy = 0; player.onGround = true;
-          return;
-        }
-        if(player.onGround){ player.vy = player.jump; player.onGround = false; }
-      });
-    })();
-
-    /* ---------- Ember subtle animation (small performance-friendly) ---------- */
-    document.querySelectorAll('.ember').forEach((el, idx) => {
-      const dur = 10 + idx * 4;
-      el.style.animation = `emberFloat ${dur}s linear infinite`;
-      el.querySelector('i').style.opacity = el.style.opacity || 0.6;
     });
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes emberFloat {
-        0%{transform:translateY(0) scale(.9);opacity:.9}
-        50%{transform:translateY(-18px) scale(1.1);opacity:.6}
-        100%{transform:translateY(0) scale(.95);opacity:.9}
-      }`;
-    document.head.appendChild(style);
 
+    // Emoji Rain
+    const emojis = ["😂","🚀","🔥","💎","🤣","🐒"];
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.classList.add("emoji");
+      emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * 100 + "vw";
+      emoji.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(emoji);
+      setTimeout(() => {
+        emoji.remove();
+      }, 8000);
+    }
+    setInterval(createEmoji, 500);
+
+    // Play sound on Buy button click
+    const buyBtn = document.getElementById("buyBtn");
+    const buySound = document.getElementById("buySound");
+    buyBtn.addEventListener("click", () => {
+      buySound.currentTime = 0;
+      buySound.play();
+    });
   </script>
+
 </body>
 </html>
