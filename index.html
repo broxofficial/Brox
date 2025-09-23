@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,30 +10,94 @@
 body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 h2{color:#00f5ff;margin-bottom:16px;text-align:center}
-section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200} .logo{display:flex;align-items:center;gap:12px} .logo img{width:52px;height:52px;border-radius:50%} .logo h1{font-size:1.25rem;color:#00f5ff}
+section{padding:80px 20px}
 
-/* Menu */ .menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s} .menu-btn:hover{background:rgba(0,245,255,0.25)} .side-menu{position:fixed;top:70px;right:-260px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)} .side-menu.open{right:0} .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600} .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff} .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s} .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
+/* Header */
+header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:52px;height:52px;border-radius:50%}
+.logo h1{font-size:1.25rem;color:#00f5ff}
 
-/* Hero */ .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px} .hero .logoBig{width:160px;height:160px;border-radius:50%} .hero h1{font-size:3rem;color:#00f5ff} .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem} .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+/* Menu */
+.menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
+.menu-btn:hover{background:rgba(0,245,255,0.25)}
+.side-menu{position:fixed;top:70px;right:-260px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
+.side-menu.open{right:0}
+.side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
+.side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
+.menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
+.menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
-/* Teaser */ .teaser{text-align:center} .teaser img{max-width:320px;border-radius:14px;margin-top:14px} .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
+/* Hero */
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero .logoBig{width:160px;height:160px;border-radius:50%}
+.hero h1{font-size:3rem;color:#00f5ff}
+.hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
+.cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
-/* Modern Countdown */ .countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px} .countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center} .countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff} .countdown-box small{color:#aaa;font-size:0.8rem}
+/* Teaser */
+.teaser{text-align:center}
+.teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+.status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* Allocation Donut / .allocation{text-align:center} .donut-wrapper{width:260px;height:260px;margin:40px auto 0;position:relative} .donut-svg{width:100%;height:100%;transform-origin:50% 50%;transform:rotate(-90deg);animation:rotateDonut 12s linear infinite} @keyframes rotateDonut{ 0%{transform:rotate(-90deg)} 100%{transform:rotate(270deg)} } .donut-bg{fill:none;stroke:#222;stroke-width:22} .slice-community{fill:none;stroke:#00f5ff;stroke-width:22;stroke-linecap:butt} .slice-airdrop{fill:none;stroke:#00ff77;stroke-width:22;stroke-linecap:butt} .slice-team{fill:none;stroke:#ff66ff;stroke-width:22;stroke-linecap:butt} .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6} / override inline colors so all allocation headings match the site's blue */ .allocation-details h3{color:#00f5ff}
+/* Modern Countdown */
+.countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
+.countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
+.countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
+.countdown-box small{color:#aaa;font-size:0.8rem}
 
-/* Roadmap */ .roadmap{background:#0c0c0c;padding-bottom:100px} .roadmap h2{font-size:2.2rem;margin-bottom:20px} .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px} .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px} .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s} .timeline .item.visible{opacity:1;transform:none} .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+/* Allocation Donut */
+.allocation{text-align:center}
+.donut-wrapper{width:260px;height:260px;margin:40px auto 0;position:relative}
+.donut-svg{width:100%;height:100%;transform-origin:50% 50%;transform-box:fill-box;transform:rotate(-90deg);animation:rotateDonut 12s linear infinite}
+@keyframes rotateDonut{
+  0%{transform:rotate(-90deg)}
+  100%{transform:rotate(270deg)}
+}
+.donut-bg{fill:none;stroke:#222;stroke-width:22}
+.slice-community{fill:none;stroke:#00f5ff;stroke-width:22;stroke-linecap:butt}
+.slice-airdrop{fill:none;stroke:#00ff77;stroke-width:22;stroke-linecap:butt}
+.slice-team{fill:none;stroke:#ff66ff;stroke-width:22;stroke-linecap:butt}
+.allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
+/* ensured allocation headings use site blue */
+.allocation-details h3{color:#00f5ff}
 
-/* FAQ */ .faq{max-width:800px;margin:0 auto;text-align:left} .faq h3{color:#00f5ff;margin-top:18px} .faq p{color:#ccc;margin-bottom:12px}
+/* Roadmap */
+.roadmap{background:#0c0c0c;padding-bottom:100px}
+.roadmap h2{font-size:2.2rem;margin-bottom:20px}
+.timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
+.timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
+.timeline .item.visible{opacity:1;transform:none}
+.timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
 
-/* Footer */ footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)} .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px} .socials a{font-size:1.5rem;color:#cfefff;transition:.18s} .socials a:hover{color:#00f5ff} footer p{color:#aaa}
+/* FAQ */
+.faq{max-width:800px;margin:0 auto;text-align:left}
+.faq h3{color:#00f5ff;margin-top:18px}
+.faq p{color:#ccc;margin-bottom:12px}
 
-/* Modal */ .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s} .modal.show{opacity:1;pointer-events:auto} .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative} .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer} .modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
+/* Footer */
+footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+.socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
+.socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
+.socials a:hover{color:#00f5ff}
+footer p{color:#aaa}
 
-/* small UX helpers */ .side-menu a:active{transform:translateY(1px)}
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
+.modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
+.modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
 
-/* Responsive */ @media(max-width:480px){ .hero h1{font-size:2rem} .cta{padding:10px 20px} .timeline{padding-left:20px} .donut-wrapper{width:220px;height:220px} } </style>
-
+/* Responsive */
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .cta{padding:10px 20px}
+  .timeline{padding-left:20px}
+  .donut-wrapper{width:220px;height:220px}
+}
+</style>
 </head>
 <body>
 <header>
@@ -41,7 +106,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <h1>BROX</h1>
   </div>
   <button id="menuBtn" class="menu-btn" aria-expanded="false" aria-controls="sideMenu">☰</button>
-</header><div id="sideMenu" class="side-menu" aria-hidden="true">
+</header>
+
+<div id="sideMenu" class="side-menu" aria-hidden="true">
   <a href="#hero">Home</a>
   <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
@@ -49,35 +116,48 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
   <a href="#faq">FAQ</a>
   <a href="#footer">Contact</a>
 </div>
-<div id="menuOverlay" class="menu-overlay" aria-hidden="true"></div><section id="hero" class="hero">
+<div id="menuOverlay" class="menu-overlay" aria-hidden="true"></div>
+
+<section id="hero" class="hero">
   <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to BROX 🔥</h1>
   <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
   <button class="cta" onclick="openModal()">Early Access</button>
-</section><section id="teaser" class="teaser">
+</section>
+
+<section id="teaser" class="teaser">
   <h2>🚀 Coming Soon...</h2>
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-  </div>  <!-- Modern countdown -->  <div class="countdown-container" id="countdown">
+  </div>
+
+  <!-- Modern countdown -->
+  <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
     <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
     <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
     <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
   </div>
-</section><section id="allocation" class="allocation">
+</section>
+
+<section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
-  <p>Community 94% • Airdrop 5% • Team 1%</p>  <div class="donut-wrapper">
+  <p>Community 94% • Airdrop 5% • Team 1%</p>
+
+  <div class="donut-wrapper" aria-hidden="false">
+    <!-- IMPORTANT: order of circles -> draw large (community) first, then smaller slices on top -->
     <svg class="donut-svg" viewBox="0 0 240 240" role="img" aria-label="Token allocation donut chart">
       <circle class="donut-bg" cx="120" cy="120" r="100"/>
-      <!-- slices: order ensures smaller slices are visible on top of larger ones -->
+      <circle class="slice-community" cx="120" cy="120" r="100"/>
       <circle class="slice-airdrop" cx="120" cy="120" r="100"/>
       <circle class="slice-team" cx="120" cy="120" r="100"/>
-      <circle class="slice-community" cx="120" cy="120" r="100"/>
     </svg>
-  </div>  <div class="allocation-details">
+  </div>
+
+  <div class="allocation-details">
     <h3>94% Community</h3>
     <p>Allocated for community rewards, events, and liquidity incentives.</p>
     <h3>5% Airdrop</h3>
@@ -85,7 +165,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <h3>1% Team</h3>
     <p>Reserved for continuity and small core team allocation.</p>
   </div>
-</section><section id="roadmap" class="roadmap">
+</section>
+
+<section id="roadmap" class="roadmap">
   <h2>Roadmap</h2>
   <div class="timeline">
     <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
@@ -93,7 +175,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
     <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
   </div>
-</section><section id="faq">
+</section>
+
+<section id="faq">
   <h2>FAQ</h2>
   <div class="faq">
     <h3>What is BROX?</h3>
@@ -103,7 +187,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <h3>Is BROX safe?</h3>
     <p>Yes. Allocation is transparent (94% Community, 5% Airdrop, 1% Team).</p>
   </div>
-</section><footer id="footer">
+</section>
+
+<footer id="footer">
   <div class="socials">
     <a href="https://www.instagram.com/brox__official" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
     <a href="https://www.tiktok.com/@brox__official" target="_blank" rel="noopener"><i class="fa-brands fa-tiktok"></i></a>
@@ -111,7 +197,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <a href="https://t.me/brox_official" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>
   </div>
   <p>&copy; 2025 BROX. All Rights Reserved.</p>
-</footer><div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
+</footer>
+
+<div id="modal" class="modal" role="dialog" aria-modal="true" aria-hidden="true">
   <div class="card">
     <button class="close-btn" onclick="closeModal()" aria-label="Close">✖</button>
     <h2 style="color:#00f5ff">Get Notified</h2>
@@ -120,7 +208,9 @@ section{padding:80px 20px}/* Header */ header{position:fixed;top:0;left:0;width:
     <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
     <div id="modalMessage" class="message" aria-live="polite"></div>
   </div>
-</div><script>
+</div>
+
+<script>
 // --- Menu (open/close + close on link click + accessibility) ---
 const menuBtn = document.getElementById('menuBtn');
 const sideMenu = document.getElementById('sideMenu');
@@ -216,7 +306,7 @@ items.forEach(it => {
   }
 });
 
-// --- Donut with 3 distinct segments (fixed dash calculations + stacking) ---
+// --- Donut with 3 distinct segments (fixed stacking + transform-box for rotation) ---
 (function(){
   const r = 100;
   const circ = 2 * Math.PI * r; // circumference
@@ -225,25 +315,28 @@ items.forEach(it => {
   const lenA = circ * pAirdrop;
   const lenT = circ * pTeam;
 
-  // Select slices in the same order as they are in the DOM
+  // Select slices in DOM order (community drawn first, then airdrop, then team)
+  const cComm = document.querySelector('.slice-community');
   const cAir = document.querySelector('.slice-airdrop');
   const cTeam = document.querySelector('.slice-team');
-  const cComm = document.querySelector('.slice-community');
 
-  // Use dasharray as [segmentLength, remainingLength] so each circle shows a single segment
+  // Guard if elements missing
+  if(!cComm || !cAir || !cTeam) return;
+
+  // Ensure stroke dash arrays show only the segment length then the gap
   cComm.style.strokeDasharray = `${lenC} ${Math.max(0, circ - lenC)}`;
   cAir.style.strokeDasharray = `${lenA} ${Math.max(0, circ - lenA)}`;
   cTeam.style.strokeDasharray = `${lenT} ${Math.max(0, circ - lenT)}`;
 
-  // Offsets: position each segment so they don't overlap
-  // community will start at 0, airdrop starts after community, team after community+airdrop
-  cComm.style.strokeDashoffset = '0';
+  // Offsets position each segment sequentially around the circle
+  cComm.style.strokeDashoffset = `${0}`;
   cAir.style.strokeDashoffset = `${-lenC}`;
   cTeam.style.strokeDashoffset = `${-(lenC + lenA)}`;
 
-  // Ensure strokes are rendered crisply (avoid subpixel issues)
-  [cComm, cAir, cTeam, cAir, cTeam].forEach(c => {
-    if(c) c.style.vectorEffect = 'non-scaling-stroke';
+  // Improve rendering stability
+  [cComm, cAir, cTeam].forEach(c => {
+    c.style.vectorEffect = 'non-scaling-stroke';
+    c.style.transition = 'stroke-dasharray .6s, stroke-dashoffset .6s';
   });
 })();
 
@@ -270,5 +363,6 @@ function updateCountdown(){
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
-</script></body>
+</script>
+</body>
 </html>
