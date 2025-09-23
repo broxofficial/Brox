@@ -45,7 +45,7 @@ header{
 .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 /* Hero */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero{Height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
@@ -55,21 +55,31 @@ header{
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* ---------- Modern Pie (donut) ---------- */
-/* The new pie replaces the previous SVG circle visualization visually.
-   It uses a conic-gradient for the slice colors and an inner hole to create a donut. */
-/* Allocation Circle */
+/* ---------- Modern Pie (donut) with rotation ---------- */
+/* The donut uses a conic-gradient for the slices.
+   The rotating layer (.pie-rotator) makes the entire donut spin continuously.
+   The inner .pie-donut keeps the initial rotation to position the slice visually. */
 .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;display:flex;align-items:center;justify-content:center}
+.pie-rotator{
+  width:220px;height:220px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  transform-origin:center center;
+  /* continuous rotation */
+  animation: spin 6s linear infinite;
+}
+@keyframes spin{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
 .pie-donut{
   width:220px;height:220px;border-radius:50%;
   /* 99% main color, 1% accent color (slice at end). */
   background: conic-gradient(#00f5ff 0% 99%, #ff0077 99% 100%);
   display:flex;align-items:center;justify-content:center;
   box-shadow: 0 6px 30px rgba(0,245,255,0.04), inset 0 -6px 18px rgba(0,0,0,0.6);
-  transition: transform .9s cubic-bezier(.2,.9,.2,1);
-  transform: rotate(-90deg); /* place the 1% at top-right (rotate as needed) */
+  transition: transform .3s cubic-bezier(.2,.9,.2,1);
+  transform: rotate(-90deg); /* initial positioning of slice */
 }
-.pie-donut:focus{outline:none}
 .pie-donut-inner{
   width:130px;height:130px;border-radius:50%;
   background:linear-gradient(180deg,#0b0b0b,#0f0f0f);
@@ -79,8 +89,8 @@ header{
 .pie-percent{font-weight:800;color:#cfefff;font-size:1.1rem}
 .pie-label{font-size:0.85rem;color:#9feeff;margin-top:6px}
 
-/* subtle hover pop on desktop */
-.pie-donut:hover{transform: scale(1.03) rotate(-90deg); box-shadow: 0 10px 40px rgba(0,245,255,0.07)}
+/* subtle hover pop on desktop: scaling the donut itself (does not stop rotation) */
+.pie-donut:hover{transform: rotate(-90deg) scale(1.03); box-shadow: 0 10px 40px rgba(0,245,255,0.07)}
 
 /* Allocation details left as-is */
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
@@ -127,6 +137,7 @@ header{
   .countdown-modern{gap:10px}
   .count-block{min-width:88px;padding:12px}
   .pie-donut{width:180px;height:180px}
+  .pie-rotator{width:180px;height:180px}
   .pie-donut-inner{width:100px;height:100px}
 }
 
@@ -149,7 +160,7 @@ footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px sol
 .socials a:hover{color:#00f5ff}
 footer p{color:#aaa}
 /* Modal */
-.modal{position:fixed;inset:0;Display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
 .modal.show{opacity:1;pointer-events:auto}
 .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
 .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
@@ -195,7 +206,7 @@ footer p{color:#aaa}
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
 
-  <!-- Modern horizontal rectangular countdown (replaces the old square countdown visually) -->
+  <!-- Modern horizontal rectangular countdown (replaces visual of the old countdown) -->
   <div class="countdown-modern" id="countdown-modern" aria-live="polite">
     <div class="count-block">
       <span class="count-value" id="cd-days">20</span>
@@ -221,13 +232,13 @@ footer p{color:#aaa}
   <h2>Token Allocation</h2>
   <p>99% Community / 1% Team</p>
   <div class="circle-wrapper" aria-hidden="false">
-    <!-- Modern donut pie using conic-gradient:
-         - The pie shows 99% in cyan (#00f5ff) and 1% in accent (#ff0077).
-         - Rotation places the 1% slice at the top-right (visual preference). -->
-    <div class="pie-donut" role="img" aria-label="Token allocation: 99 percent community, 1 percent team" tabindex="0">
-      <div class="pie-donut-inner" aria-hidden="true">
-        <div class="pie-percent">99% / 1%</div>
-        <div class="pie-label">Community / Team</div>
+    <!-- Rotating wrapper around the donut -->
+    <div class="pie-rotator" aria-hidden="false">
+      <div class="pie-donut" role="img" aria-label="Token allocation: 99 percent community, 1 percent team" tabindex="0">
+        <div class="pie-donut-inner" aria-hidden="true">
+          <div class="pie-percent">99% / 1%</div>
+          <div class="pie-label">Community / Team</div>
+        </div>
       </div>
     </div>
   </div>
@@ -320,10 +331,6 @@ const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
 },{threshold:0.2});
 items.forEach(i=>obs.observe(i));
-
-// ---------- Pie Donut Accessibility tweak (no JS needed for static slices) ----------
-// If you'd like the slice position adjusted you can rotate the .pie-donut with CSS transform
-// (already set to -90deg above so the 1% accent is visually distinct near the top-right).
 
 // ---------- Countdown (modern horizontal rectangular) ----------
 // Keep same behavior: 20 days from now
