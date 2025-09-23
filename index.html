@@ -1,203 +1,512 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <meta name="description" content="BROX — community-first memecoin. Join Telegram, get early access & catch the memes." />
+  <meta name="theme-color" content="#00f5ff" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{
-      font-family:Arial, sans-serif;
-      background:radial-gradient(circle at top,#0a0f1f,#000);
-      color:#e0f7ff;
-      line-height:1.6;
-      overflow-x:hidden
+    :root{
+      --bg-1:#0a0f1c;
+      --bg-2:#071019;
+      --muted:#bfe8ff;
+      --accent:#00f5ff;
+      --accent-2:#ff6600;
+      --glass: rgba(255,255,255,0.02);
+      --maxw:1150px;
+      --mono: "Segoe UI", Inter, Roboto, Arial, sans-serif;
     }
-    a{color:#00f5ff;text-decoration:none}
-    h1,h2,h3,h4{color:#00f5ff;margin-bottom:10px}
-    p{margin-bottom:15px}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:var(--mono);background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#eaf9ff;
+      -webkit-font-smoothing:antialiased;line-height:1.5;-webkit-tap-highlight-color:transparent;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* wrapper */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:14px}
 
     /* Header */
     header{
-      background:rgba(0,0,0,.7);
-      backdrop-filter:blur(8px);
-      position:fixed;top:0;left:0;right:0;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:15px 25px;z-index:1000;
-      border-bottom:1px solid rgba(0,245,255,.3)
+      position:sticky;top:0;z-index:80;
+      background:linear-gradient(180deg, rgba(2,6,10,0.75), rgba(2,6,10,0.48));
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(0,245,255,0.06);
     }
-    header h1{font-size:1.4rem;letter-spacing:1px}
-    nav ul{display:flex;list-style:none}
-    nav li{margin:0 12px}
-    nav a{font-weight:bold;transition:color .3s}
-    nav a:hover{color:#ff6600}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;max-width:var(--maxw);margin:auto}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#001;background:linear-gradient(135deg,var(--accent),#66f0ff);box-shadow:0 10px 40px rgba(0,245,255,0.06);font-family:monospace}
+    .brand-title{font-weight:800;font-size:1rem;color:var(--accent);margin-left:8px}
+    .brand-sub{font-size:0.78rem;color:var(--muted);margin-left:8px}
+    nav.links{display:flex;gap:16px;align-items:center}
+    nav.links a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px}
+    nav.links a:hover{color:#001;background:linear-gradient(90deg,var(--accent),#7fe5ff);padding:8px 12px}
+    .menu-btn{background:var(--glass);padding:8px;border-radius:10px;cursor:pointer;color:var(--accent);border:1px solid rgba(0,245,255,0.12)}
+
+    @media (max-width:980px){ nav.links{display:none} }
 
     /* Hero */
-    .hero{
-      padding:140px 20px 100px;text-align:center;
-      background:url('Picsart_25-09-20_12-05-00-500.png') no-repeat center/cover;
-      position:relative
-    }
-    .hero::after{
-      content:"";position:absolute;top:0;left:0;right:0;bottom:0;
-      background:rgba(0,0,0,.6)
-    }
-    .hero-content{position:relative;z-index:1;max-width:800px;margin:auto}
-    .hero h2{font-size:2.4rem;margin-bottom:15px}
-    .btn{
-      display:inline-block;background:#00f5ff;color:#000;
-      padding:10px 20px;border-radius:30px;font-weight:bold;transition:.3s
-    }
-    .btn:hover{background:#ff6600;color:#fff}
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:62px 18px}
+    .hero-left h1{font-size:42px;margin:0;color:var(--accent);text-shadow:0 10px 40px rgba(0,245,255,0.06)}
+    .hero-left p{margin:12px 0 18px;color:var(--muted);max-width:64ch}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .hero-right{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
+    .mascot{width:240px;height:240px;border-radius:999px;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 20%), linear-gradient(135deg,#e0fbff,#a5f0ff);box-shadow:0 30px 80px rgba(0,245,255,0.06), 0 6px 24px rgba(0,0,0,0.5);overflow:hidden}
+    .btn-get{background:linear-gradient(90deg,var(--accent),#67e0ff);color:#001;padding:10px 14px;border-radius:10px;font-weight:800;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(0,245,255,0.08)}
+    .pill{background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:700}
 
-    /* Sections */
-    section{padding:80px 20px;max-width:1000px;margin:auto}
-    .card{
-      background:rgba(0,0,0,.6);
-      border:1px solid rgba(0,245,255,.3);
-      border-radius:12px;padding:20px;margin-bottom:20px
-    }
+    /* small subscriber counter */
+    .sub-count{background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
 
-    /* Countdown */
-    .countdown{display:flex;justify-content:center;gap:20px;font-size:1.5rem;margin-top:20px}
-    .countdown div{
-      background:rgba(0,245,255,.1);
-      padding:15px 20px;border-radius:10px;
-      border:1px solid rgba(0,245,255,.3)
-    }
+    /* Teaser */
+    .teaser{margin:26px 18px;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));display:flex;gap:16px;align-items:center;justify-content:center}
+    .teaser .thumb{width:340px;border-radius:12px;cursor:pointer;box-shadow:0 18px 50px rgba(0,245,255,0.04)}
+    .teaser h2{font-size:2rem;color:var(--accent);margin:0}
+    .teaser p{color:var(--muted);margin:6px 0 0}
 
-    /* Token Allocation Circle */
-    .circle-container{
-      display:flex;justify-content:center;align-items:center;margin:40px 0
-    }
-    .circle{
-      width:200px;height:200px;border-radius:50%;
-      background:conic-gradient(#00f5ff 0% 99%, #ff6600 99% 100%);
-      display:flex;align-items:center;justify-content:center;
-      color:#fff;font-weight:bold;font-size:1.2rem;
-      animation:spin 6s linear infinite
-    }
-    @keyframes spin{100%{transform:rotate(360deg)}}
+    /* Info card (keeps project info) */
+    .info-card{max-width:900px;margin:18px auto;padding:18px;background:rgba(0,0,0,0.45);border:1px solid rgba(0,245,255,0.06);border-radius:12px;color:var(--muted)}
+    .info-card h4{color:var(--accent);margin-bottom:8px}
+
+    /* Allocation */
+    .section{padding:40px 18px}
+    .section h2{font-size:2rem;color:var(--accent);text-align:center;margin-bottom:12px}
+    .alloc-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+    .alloc-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .card{background:var(--glass);padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    .card h3{margin:0;color:var(--accent);font-size:1.2rem}
+    .card p{color:var(--muted);margin-top:8px;font-size:0.95rem}
+    .notes{margin-top:12px;color:#cfefff;background:transparent;padding:12px;border-radius:8px;text-align:center}
+
+    /* SINGLE rotating SVG circle */
+    .circle-rotator{width:220px;height:220px;margin:10px auto;display:grid;place-items:center;animation:spin 8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .circle-svg{width:220px;height:220px}
+    .circle-bg{fill:none;stroke:#071018;stroke-width:16}
+    .arc-main{fill:none;stroke:var(--accent);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset .9s ease}
+    .arc-tail{fill:none;stroke:var(--accent-2);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset .9s ease;filter:drop-shadow(0 6px 12px rgba(255,102,0,0.15))}
+    .alloc-caption{margin-top:8px;color:var(--muted);text-align:center;font-size:0.95rem}
 
     /* Roadmap */
-    .roadmap ul{list-style:none}
-    .roadmap li{margin:15px 0;padding-left:10px;border-left:3px solid #00f5ff}
+    .roadmap{max-width:900px;margin:18px auto;display:grid;gap:12px}
+    .fun-step{padding:14px;border-radius:12px;background:linear-gradient(180deg,#021e28,#022b36);border-left:6px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+    .fun-step strong{display:block;color:var(--accent);margin-bottom:8px}
+    .fun-step p{color:var(--muted);margin:0}
 
     /* Memes */
-    .memes-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
-    .memes-grid img{width:100%;border-radius:12px;border:2px solid rgba(0,245,255,.3)}
+    .memes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+    .meme{background:#02151b;padding:10px;border-radius:10px;text-align:center;cursor:pointer;overflow:hidden}
+    .meme img{width:100%;height:150px;object-fit:cover;border-radius:8px;display:block}
+    .meme p{color:var(--muted);font-size:0.9rem;margin:8px 0 0}
 
     /* Footer */
-    footer{text-align:center;padding:30px 20px;background:#000;border-top:1px solid rgba(0,245,255,.3)}
-    .socials a{margin:0 10px;font-size:1.4rem}
+    footer{padding:28px 18px;border-top:1px solid rgba(255,255,255,0.03);margin-top:18px;background:linear-gradient(180deg,#02060a,#021220)}
+    .socials{display:flex;gap:12px;justify-content:center;margin-bottom:12px}
+    .soc{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--glass);cursor:pointer}
+    .copyright{text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* Side menu (quarter width) */
+    .side-menu{position:fixed;top:0;right:-25vw;height:100%;width:25vw;max-width:360px;background:rgba(8,10,12,0.98);padding-top:80px;padding-left:18px;z-index:1300;transition:right .28s;box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
+    .side-menu.open{right:0}
+    .side-menu a{display:block;padding:14px 10px;font-size:1.05rem;color:var(--muted);border-radius:8px}
+    .side-menu a:hover{background:linear-gradient(90deg,var(--accent),#67e0ff);color:#001}
+
+    /* Modal & lightbox */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:14px}
+    .modal .box{background:linear-gradient(180deg,#04171d,#07232b);padding:16px;border-radius:12px;width:100%;max-width:520px;box-shadow:0 30px 80px rgba(0,0,0,0.8);position:relative}
+    .close{position:absolute;right:12px;top:12px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding:40px 14px}
+      .hero-right{order:-1}
+      .mascot{width:200px;height:200px}
+      .teaser .thumb{width:260px}
+      .alloc-grid{grid-template-columns:1fr}
+      .side-menu{width:70vw;right:-70vw}
+      .side-menu.open{right:0}
+    }
+
+    a:focus,button:focus,input:focus{outline:3px solid rgba(0,245,255,0.12);outline-offset:3px}
   </style>
 </head>
 <body>
-  <!-- Header -->
+  <!-- HEADER -->
   <header>
-    <h1>Brox</h1>
-    <nav>
-      <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#teaser">Teaser</a></li>
-        <li><a href="#allocation">Allocation</a></li>
-        <li><a href="#roadmap">Roadmap</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+    <div class="wrap nav" role="navigation" aria-label="Main Navigation">
+      <div class="brand" style="align-items:center">
+        <div class="logo" aria-hidden>Brox</div>
+        <div>
+          <div class="brand-title">Brox</div>
+          <div class="brand-sub">Born in Fun — Memes & Community</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="#teaser">Teaser</a>
+        <a href="#allocation">Allocation</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+        <a class="btn-get" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" style="text-decoration:none">Join Telegram 🚀</a>
+        <div style="width:12px"></div>
+        <div id="subCount" class="sub-count" title="Subscribers">0 subs</div>
+      </nav>
+
+      <button id="menuBtn" class="menu-btn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
   </header>
 
-  <!-- Hero -->
-  <section id="home" class="hero">
-    <div class="hero-content">
-      <h2>🔥 Welcome to BROX 🔥</h2>
-      <p>The meme revolution begins. Powered by community.</p>
-      <div class="countdown" id="countdown"></div>
-    </div>
-  </section>
+  <!-- SIDE MENU (quarter-screen) -->
+  <div id="sideMenu" class="side-menu" aria-hidden="true">
+    <button class="close" id="sideClose" aria-label="Close menu">✕</button>
+    <a href="#hero">Home</a>
+    <a href="#teaser">Teaser</a>
+    <a href="#allocation">Allocation</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#community">Community</a>
+    <a href="#contact">Contact</a>
+    <!-- Join Telegram intentionally removed from here per request -->
+  </div>
+  <div id="menuOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1299;display:none;background:rgba(0,0,0,0.35)"></div>
 
-  <!-- Teaser -->
-  <section id="teaser">
-    <h2>🚀 Coming Soon...</h2>
-    <p>BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</p>
-  </section>
+  <main class="wrap">
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">🔥 Welcome to BROX — Memes Fuel the Revolution</h1>
+        <p class="lead muted">BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</p>
 
-  <!-- Token Allocation -->
-  <section id="allocation">
-    <h2>💎 Token Allocation</h2>
-    <div class="circle-container">
-      <div class="circle">99% / 1%</div>
-    </div>
-    <div class="card">
-      <h3>99% Community</h3>
-      <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
-    </div>
-    <div class="card">
-      <h3>1% Team & Holders</h3>
-      <p>Reserved for long-term project continuity and small team allocation.</p>
-    </div>
-    <div class="card">
-      <h3>Notes</h3>
-      <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
-      <p><strong>Chain:</strong> Solana</p>
-    </div>
-  </section>
+        <div class="hero-cta">
+          <button class="btn-get" onclick="openSubscribe()">Get Early Access</button>
+          <a class="pill" href="#allocation">Token Allocation</a>
+        </div>
 
-  <!-- Roadmap -->
-  <section id="roadmap" class="roadmap">
-    <h2>🗺️ Roadmap</h2>
-    <ul>
-      <li><strong>Phase 1:</strong> Launch socials & build community</li>
-      <li><strong>Phase 2:</strong> Website launch & viral campaigns</li>
-      <li><strong>Phase 3:</strong> Listings on CEX / DEX</li>
-      <li><strong>Phase 4:</strong> Expansion & partnerships</li>
-    </ul>
-  </section>
+        <div style="margin-top:12px" class="status-row">
+          <!-- kept Chain here as Solana (per request) -->
+          <div class="pill">Chain: <strong style="margin-left:8px;color:#fff">Solana</strong></div>
+          <div class="pill">Audit: <strong style="margin-left:8px;color:#fff">Planned</strong></div>
+        </div>
 
-  <!-- Memes -->
-  <section id="memes">
-    <h2>😂 Community Memes</h2>
-    <div class="memes-grid">
-      <img src="Picsart_25-09-21_10-14-23-094.png" alt="Meme 1">
-      <img src="Picsart_25-09-20_12-05-00-500.png" alt="Meme 2">
+        <div style="margin-top:14px">
+          <div style="font-weight:800;margin-bottom:8px">Countdown to Launch</div>
+          <div class="countdown" aria-live="polite" id="countdownSmall" style="display:flex;gap:8px;align-items:center">
+            <div class="pill" id="cd-days">00d</div>
+            <div class="pill" id="cd-hours">00h</div>
+            <div class="pill" id="cd-mins">00m</div>
+            <div class="pill" id="cd-secs">00s</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-hidden>
+        <div class="mascot" id="mascotWrap">
+          <img id="mascotImg" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX mascot" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <!-- Total Supply removed as requested -->
+      </aside>
+    </section>
+
+    <!-- EXACT info block (kept) -->
+    <section class="info-card" aria-label="Project info">
+      <div style="font-weight:700">BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</div>
+
+      <h4 style="margin-top:12px">Token Allocation</h4>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <!-- Get Early Access kept in hero but NOT in allocation per request -->
+        <div class="pill">Status:</div>
+        <div style="font-weight:900;color:#fff;margin-left:6px">Pre-Launch</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <h4>99% Community</h4>
+        <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
+
+        <h4 style="margin-top:8px">1% Team & Holders</h4>
+        <p>Reserved for long-term project continuity and small team allocation.</p>
+
+        <h4 style="margin-top:8px">Notes</h4>
+        <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
+      </div>
+    </section>
+
+    <!-- TEASER -->
+    <section id="teaser" class="teaser">
+      <div style="text-align:center">
+        <img id="teaserImg" class="thumb" src="Picsart_25-09-21_10-14-23-094.png" alt="BROX teaser (click to enlarge)" style="margin:0 auto">
+        <h2 style="margin-top:12px">🚀 Coming Soon...</h2>
+        <p class="muted">Stay tuned — community rewards, airdrops and meme contests incoming.</p>
+      </div>
+    </section>
+
+    <!-- ALLOCATION (single rotating circle + caption) -->
+    <section id="allocation" class="section" aria-labelledby="allocTitle">
+      <h2 id="allocTitle">Token Allocation</h2>
+
+      <div class="alloc-grid">
+        <div class="card status-panel" aria-hidden>
+          <strong>Allocation Snapshot</strong>
+          <div style="margin-top:8px;color:var(--muted)">Clear & community-first distribution</div>
+
+          <!-- Single rotating SVG circle with 99% + 1% tail -->
+          <div class="circle-rotator" role="img" aria-label="Token allocation donut rotating">
+            <svg class="circle-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+              <g transform="rotate(-90 110 110)">
+                <circle class="circle-bg" cx="110" cy="110" r="88"></circle>
+                <circle id="arcMain" class="arc-main" cx="110" cy="110" r="88"></circle>
+                <circle id="arcTail" class="arc-tail" cx="110" cy="110" r="88"></circle>
+              </g>
+            </svg>
+          </div>
+
+          <div class="alloc-caption">Community 99% • Team & Holders 1%</div>
+        </div>
+
+        <div>
+          <div class="alloc-cards">
+            <div class="card">
+              <h3>99% Community</h3>
+              <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
+            </div>
+            <div class="card">
+              <h3>1% Team & Holders</h3>
+              <p>Reserved for long-term project continuity and a small team allocation.</p>
+            </div>
+          </div>
+
+          <div class="notes" role="note" aria-live="polite" style="margin-top:12px">
+            <strong>Notes:</strong> This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Roadmap (Meme Edition)</h2>
+      <div class="roadmap">
+        <div class="fun-step"><strong>Phase 1 — Make Noise</strong><p>Spam the feeds with dank memes and recruit the first 1,000 apes.</p></div>
+        <div class="fun-step"><strong>Phase 2 — Viral Mode</strong><p>Turn memes into momentum — contests, collabs, and meme raids.</p></div>
+        <div class="fun-step"><strong>Phase 3 — Moon Prep</strong><p>Smart contract audit, token launch plan, and listing moves.</p></div>
+        <div class="fun-step"><strong>Phase 4 — Apes Together</strong><p>Partnerships, community grants, and governance experiments (DAO jokes allowed).</p></div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY MEMES -->
+    <section id="community" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Community Memes</h2>
+      <p style="text-align:center;color:var(--muted);max-width:850px;margin:6px auto 12px">A wall for the funniest BROX submissions. Click to enlarge — send yours to our Telegram!</p>
+      <div class="memes" id="memesGrid" aria-live="polite">
+        <div class="meme" tabindex="0" data-src="Picsart_25-09-21_10-14-23-094.png"><img src="Picsart_25-09-21_10-14-23-094.png" alt="meme sample"><p>Official teaser meme</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>Submit yours</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>More memes soon</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="section" style="padding-top:12px">
+      <div class="socials" role="navigation" aria-label="Social links">
+        <a class="soc" href="https://www.instagram.com/brox__official" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="soc" href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a class="soc" href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener noreferrer" title="X"><i class="fab fa-x"></i></a>
+        <a class="soc" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" title="Telegram"><i class="fab fa-telegram"></i></a>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <div class="pill">Built for fun</div>
+        <div class="pill">Community-first</div>
+        <div class="pill">Memes &gt; Everything</div>
+      </div>
+
+      <div class="copyright">© <span id="year"></span> BROX. All Rights Reserved.</div>
+    </footer>
+  </main>
+
+  <!-- SUBSCRIBE MODAL -->
+  <div id="subscribeModal" class="modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="subTitle">
+      <button class="close" aria-label="close" onclick="closeSubscribe()">✕</button>
+      <h3 id="subTitle" style="color:var(--accent)">Get Early Access</h3>
+      <p style="color:var(--muted)">Subscribe for launch alerts, airdrop info and meme contest invites.</p>
+      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-top:12px;background:transparent;color:#eaf9ff">
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn-get" onclick="submitEmail()">Subscribe</button>
+        <button class="pill" onclick="closeSubscribe()">Cancel</button>
+      </div>
+      <div id="subMsg" style="margin-top:12px;color:var(--muted)"></div>
     </div>
-  </section>
+  </div>
 
-  <!-- Contact -->
-  <section id="contact">
-    <h2>Get Notified on Launch 🚀</h2>
-    <form>
-      <input type="email" placeholder="Enter your email" required style="padding:10px;border-radius:8px;border:none;margin-right:10px;"/>
-      <button class="btn" type="submit">Submit</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official"><i class="fab fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://t.me/brox_official"><i class="fab fa-telegram"></i></a>
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="modal" style="display:none" aria-hidden="true">
+    <div class="box" style="background:transparent;box-shadow:none;">
+      <button class="close" aria-label="close" onclick="closeLightbox()">✕</button>
+      <img id="lightboxImg" src="" alt="enlarged image" style="width:100%;max-width:860px;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.6)">
     </div>
-    <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>
+  </div>
 
-  <script>
-    // Countdown Timer
-    const countdown = document.getElementById("countdown");
-    const target = new Date("2025-12-31T23:59:59").getTime();
-    setInterval(()=>{
-      const now=new Date().getTime();
-      const diff=target-now;
-      if(diff<=0){countdown.innerHTML="Launched!";return;}
-      const d=Math.floor(diff/(1000*60*60*24));
-      const h=Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-      const m=Math.floor((diff%(1000*60*60))/(1000*60));
-      const s=Math.floor((diff%(1000*60))/1000);
-      countdown.innerHTML=`<div>${d}d</div><div>${h}h</div><div>${m}m</div><div>${s}s</div>`;
-    },1000);
-  </script>
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // menu
+  const menuBtn = document.getElementById('menuBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const sideClose = document.getElementById('sideClose');
+  const menuOverlay = document.getElementById('menuOverlay');
+  function openMenu(){ sideMenu.classList.add('open'); sideMenu.setAttribute('aria-hidden','false'); menuOverlay.style.display='block'; }
+  function closeMenu(){ sideMenu.classList.remove('open'); sideMenu.setAttribute('aria-hidden','true'); menuOverlay.style.display='none'; }
+  menuBtn.addEventListener('click', openMenu);
+  sideClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.side-menu a').forEach(a=> a.addEventListener('click', closeMenu));
+
+  // placeholder svg
+  function placeholderSVG(){
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#012028"/><text x="50%" y="50%" fill="#00f5ff" font-size="16" text-anchor="middle" dominant-baseline="middle">Image missing — add your file</text></svg>'
+    );
+  }
+
+  // mascot fallback
+  const mascotImg = document.getElementById('mascotImg');
+  if(mascotImg){
+    mascotImg.addEventListener('error', ()=> mascotImg.src = placeholderSVG());
+  }
+
+  // teaser lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const teaserImg = document.getElementById('teaserImg');
+  if(teaserImg){
+    teaserImg.addEventListener('click', ()=> {
+      lightboxImg.src = teaserImg.src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
+    });
+  }
+  function closeLightbox(){ lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; }
+
+  // subscribe modal + localStorage subscribers count
+  const subscribeModal = document.getElementById('subscribeModal');
+  function openSubscribe(){ subscribeModal.style.display='flex'; subscribeModal.setAttribute('aria-hidden','false'); document.getElementById('emailInput').focus(); }
+  function closeSubscribe(){ subscribeModal.style.display='none'; subscribeModal.setAttribute('aria-hidden','true'); document.getElementById('subMsg').textContent=''; }
+  function getSubscribers(){ return JSON.parse(localStorage.getItem('brox_subs_v1') || '[]'); }
+  function updateSubCountUI(){ const n = getSubscribers().length; document.getElementById('subCount').textContent = n + (n===1? ' sub':' subs'); }
+  updateSubCountUI();
+  function submitEmail(){
+    const email = document.getElementById('emailInput').value.trim();
+    const msg = document.getElementById('subMsg');
+    if(!email || !/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = 'Please enter a valid email.'; return; }
+    const key = 'brox_subs_v1';
+    const list = getSubscribers();
+    if(list.includes(email)){ msg.textContent = 'Already subscribed — thanks!'; document.getElementById('emailInput').value=''; return; }
+    list.push(email); localStorage.setItem(key, JSON.stringify(list));
+    msg.textContent = 'Subscribed! We will notify you.'; document.getElementById('emailInput').value='';
+    updateSubCountUI();
+  }
+
+  // countdown
+  const LAUNCH_DATE = new Date('2025-11-01T12:00:00Z');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = Math.max(0, LAUNCH_DATE - now);
+    const days = Math.floor(diff / (1000*60*60*24));
+    diff -= days * (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));
+    diff -= hours * (1000*60*60);
+    const mins = Math.floor(diff / (1000*60));
+    diff -= mins * (1000*60);
+    const secs = Math.floor(diff / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0') + 'd';
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0') + 'h';
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0') + 'm';
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0') + 's';
+  }
+  updateCountdown();
+  setInterval(updateCountdown,1000);
+
+  // allocation arcs (single rotating SVG)
+  (function(){
+    const arcMain = document.getElementById('arcMain');
+    const arcTail = document.getElementById('arcTail');
+    if(!arcMain || !arcTail) return;
+    const r = 88;
+    const circumference = 2 * Math.PI * r;
+    const pMain = 99;
+    const pTail = 1;
+
+    // set dasharray values
+    arcMain.setAttribute('stroke-dasharray', (circumference * pMain / 100) + ' ' + circumference);
+    arcTail.setAttribute('stroke-dasharray', (circumference * pTail / 100) + ' ' + circumference);
+
+    // position tail right after main (rotate tail by pMain*360deg)
+    const rotateDeg = 360 * (pMain / 100);
+    arcTail.setAttribute('transform', `rotate(${rotateDeg} 110 110)`);
+
+    // initial hidden state (dashoffset large), then animate to reveal
+    arcMain.style.strokeDashoffset = circumference;
+    arcTail.style.strokeDashoffset = circumference;
+    setTimeout(()=>{
+      arcMain.style.transition = 'stroke-dashoffset 900ms ease-out';
+      arcTail.style.transition = 'stroke-dashoffset 900ms ease-out';
+      arcMain.style.strokeDashoffset = circumference * (1 - pMain/100);
+      arcTail.style.strokeDashoffset = circumference * (1 - pTail/100);
+    }, 120);
+    // set colors
+    arcMain.style.stroke = 'url(#)'; // visual only; CSS stroke color via class (uses var(--accent))
+    arcTail.style.stroke = getComputedStyle(document.documentElement).getPropertyValue('--accent-2') || '#ff6600';
+    // For better color consistency, set inline style for arcMain too:
+    arcMain.style.stroke = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#00f5ff';
+  })();
+
+  // memes click to lightbox
+  document.querySelectorAll('.meme').forEach(m=>{
+    m.addEventListener('click', ()=> {
+      const src = m.dataset.src || m.querySelector('img').src;
+      if(!src) return;
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
+    });
+  });
+
+  // image fallback
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=> {
+      if(!img.dataset.fallback){ img.src = placeholderSVG(); img.dataset.fallback = '1'; }
+    });
+  });
+
+  // keyboard escape to close modals & menu
+  window.addEventListener('keydown', (e)=> {
+    if(e.key === 'Escape'){
+      closeSubscribe(); closeLightbox(); closeMenu();
+    }
+  });
+
+  // reveal roadmap items (small effect)
+  document.querySelectorAll('.fun-step').forEach((el,idx)=>{
+    setTimeout(()=> el.classList.add('visible'), 200 + idx*120);
+  });
+
+  // small particles background (optional subtle)
+  (function particles(){
+    const canvas=document.createElement('canvas');
+    canvas.id='particles'; canvas.style.position='fixed'; canvas.style.top=0; canvas.style.left=0;
+    canvas.style.width='100%'; canvas.style.height='100%'; canvas.style.zIndex='-1';
+    document.body.appendChild(canvas);
+    const ctx=canvas.getContext('2d'); let w,h,stars=[];
+    function resize(){ w=canvas.width=innerWidth; h=canvas.height=innerHeight; stars=[]; for(let i=0;i<80;i++){ stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.6,dx:(Math.random()-.5)/1.2,dy:(Math.random()-.5)/1.2}) } }
+    function draw(){ ctx.clearRect(0,0,w,h); ctx.fillStyle='#00f5ff'; stars.forEach(s=>{ ctx.globalAlpha=0.07; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,2*Math.PI); ctx.fill(); s.x+=s.dx; s.y+=s.dy; if(s.x<0||s.x>w) s.dx*=-1; if(s.y<0||s.y>h) s.dy*=-1; }); requestAnimationFrame(draw); }
+    window.addEventListener('resize', resize); resize(); draw();
+  })();
+</script>
 </body>
 </html>
