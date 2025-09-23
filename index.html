@@ -1,344 +1,77 @@
-<!doctype html>
-
-<html lang="ar" dir="rtl">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BROX — Official</title>
-  <meta name="description" content="BROX — عملة ميم مجتمعية. انضم إلى الانتظار المبكر، اعرف الخريطة الزمنية، وتابع التحديثات." />
-  <meta name="keywords" content="BROX, meme token, crypto, community, token" />
-  <meta name="theme-color" content="#0b0b0b" />  <!-- Open Graph / Twitter Cards -->  <meta property="og:title" content="BROX — Official" />
-  <meta property="og:description" content="BROX — عملة ميم مجتمعية. انضم إلى الانتظار المبكر واحصل على تحديثات المشروع." />
-  <meta property="og:image" content="/assets/og-image.png" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />  <!-- favicon placeholder -->  <link rel="icon" href="/assets/favicon.ico" />  <!-- Fonts (system-first for speed) -->  <style>
-    /* ====== Base reset & variables ====== */
-    :root{
-      --bg:#0b0b0b;
-      --card:#0f1720;
-      --accent:#ff6b6b;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.03);
-      --radius:14px;
-      --max-width:1100px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%;}
-    body{
-      margin:0;
-      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: radial-gradient(ellipse at 10% 10%, rgba(255,107,107,0.06), transparent 10%), var(--bg);
-      color: #e6eef8;
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-      line-height:1.45;
-      padding-bottom:60px;
-    }
-    a{color:inherit; text-decoration:none}
-
-    /* ====== Container ====== */
-    .container{max-width:var(--max-width); margin:0 auto; padding:28px}
-
-    /* ====== Header / Nav ====== */
-    header{
-      position:sticky; top:0; z-index:40; backdrop-filter: blur(6px);
-      background: linear-gradient(180deg, rgba(11,11,11,0.7), rgba(11,11,11,0.55));
-      border-bottom: 1px solid rgba(255,255,255,0.03);
-      box-shadow:0 6px 20px rgba(2,6,23,0.6);
-    }
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px}
-    .brand{display:flex; align-items:center; gap:12px}
-    .logo{
-      width:46px; height:46px; border-radius:10px; display:inline-grid; place-items:center;
-      background:linear-gradient(135deg,#ff7b7b,#ffb86b);
-      font-weight:800; color:#071022; font-size:18px;
-      box-shadow: 0 4px 12px rgba(255,107,107,0.12);
-    }
-    nav a{margin-inline:8px; color:var(--muted); font-weight:600}
-    .cta{background:var(--accent); color:#071022; padding:10px 16px; border-radius:10px; font-weight:700}
-    .socials{display:flex; gap:8px}
-    .icon{display:inline-flex; width:36px; height:36px; border-radius:8px; background:var(--glass); align-items:center; justify-content:center; color:var(--muted); font-weight:700}
-
-    /* Mobile menu */
-    .hamburger{display:none; width:40px; height:40px; border-radius:8px; background:var(--glass); align-items:center; justify-content:center}
-
-    /* ====== Hero ====== */
-    .hero{display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:center; padding:48px 0}
-    .hero-left h1{font-size:40px; margin:0 0 8px}
-    .hero-left p{color:var(--muted); margin:0 0 20px}
-    .hero-actions{display:flex; gap:12px; align-items:center}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px; border-radius:14px}
-
-    /* ====== Features / About ====== */
-    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-
-    /* ====== Roadmap (Timeline) ====== */
-    .timeline{margin-top:20px}
-    .timeline .step{display:flex; gap:14px; align-items:flex-start; margin-bottom:18px}
-    .dot{width:14px; height:14px; border-radius:50%; background:var(--accent); margin-top:6px}
-    .step h4{margin:0 0 6px}
-    .step p{margin:0; color:var(--muted)}
-
-    /* ====== Footer ====== */
-    footer{margin-top:36px; padding:32px 0; border-top:1px solid rgba(255,255,255,0.03)}
-
-    /* ====== Responsive ====== */
-    @media (max-width:980px){
-      .hero{grid-template-columns:1fr;}
-      nav a{display:none}
-      .hamburger{display:inline-flex}
-      .hero-left h1{font-size:32px}
-    }
-    @media (max-width:560px){
-      .container{padding:16px}
-      .logo{width:40px;height:40px;font-size:16px}
-      .cta{padding:10px 12px}
-      .grid-2{grid-template-columns:1fr}
-    }
-
-    /* ====== RTL tweaks when switched to EN (we will toggle dir) ====== */
-    html[lang="en"]{direction:ltr}
-    html[lang="en"] .logo{font-size:18px}
-
-    /* ====== Small utilities ====== */
-    .muted{color:var(--muted)}
-    .small{font-size:13px}
-    .pill{background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px}
-
-    /* ====== Timeline grid (visual) ====== */
-    .timeline-visual{position:relative; padding-left:28px}
-    .timeline-visual::before{content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--accent),rgba(255,107,107,0.2)); border-radius:4px}
-  </style></head>
+  <meta name="description" content="BROX — Community-driven meme token. Built for the people." />
+  <meta name="theme-color" content="#0b0b0b" />
+  <link rel="icon" href="Picsart_25-09-20_12-05-00-500.png" type="image/png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    * {margin:0; padding:0; box-sizing:border-box;}
+    body {font-family: Arial, sans-serif; background:#0b0b0b; color:#fff; line-height:1.6;}
+    header {position:fixed; top:0; left:0; width:100%; background:#111; display:flex; justify-content:space-between; align-items:center; padding:15px 30px; z-index:1000;}
+    header h1 {font-size:1.5rem;}
+    nav ul {display:flex; gap:20px; list-style:none;}
+    nav a {color:#fff; text-decoration:none; transition:0.3s;}
+    nav a:hover {color:#f0b90b;}
+    .hero {padding:120px 20px 80px; text-align:center;}
+    .hero img {max-width:220px; margin:20px auto; display:block;}
+    .hero h2 {font-size:2rem; margin:15px 0;}
+    .hero p {color:#ccc; margin-bottom:25px;}
+    .hero .cta {background:#f0b90b; color:#000; padding:12px 25px; border-radius:30px; text-decoration:none; font-weight:bold;}
+    section {padding:80px 20px; max-width:1000px; margin:auto;}
+    section h2 {text-align:center; font-size:1.8rem; margin-bottom:30px;}
+    .about, .why, .roadmap, .token {margin-bottom:80px;}
+    .roadmap ul {list-style:none;}
+    .roadmap li {margin:20px 0; padding:15px; border-left:3px solid #f0b90b; background:#1a1a1a;}
+    .socials {text-align:center; padding:40px 20px; background:#111;}
+    .socials a {margin:0 10px; color:#fff; font-size:1.5rem; transition:0.3s;}
+    .socials a:hover {color:#f0b90b;}
+    footer {text-align:center; padding:20px; background:#000; font-size:0.9rem; color:#777;}
+  </style>
+</head>
 <body>
   <header>
-    <div class="container nav">
-      <div class="brand">
-        <div class="logo">BRX</div>
-        <div>
-          <div style="font-weight:800">BROX</div>
-          <div class="small muted">Born in Fire — Pre‑Launch</div>
-        </div>
-      </div><nav aria-label="Primary navigation">
-    <a href="#about">عن المشروع</a>
-    <a href="#why">لماذا BROX؟</a>
-    <a href="#roadmap">خريطة الطريق</a>
-    <a href="#subscribe">التواصل</a>
-  </nav>
-
-  <div style="display:flex;gap:12px;align-items:center">
-    <div class="socials" aria-hidden>
-      <a class="icon" href="#" title="Telegram">tg</a>
-      <a class="icon" href="#" title="X">x</a>
-      <a class="icon" href="#" title="Discord">dc</a>
-    </div>
-    <button id="langToggle" class="pill small" aria-pressed="false">EN</button>
-    <button class="cta" onclick="window.location.href='#subscribe'">Get Early Access</button>
-    <button class="hamburger" onclick="toggleMobile()" aria-expanded="false">☰</button>
-  </div>
-</div>
-
-  </header>  <main class="container">
-    <!-- HERO -->
-    <section class="hero" id="home">
-      <div class="hero-left">
-        <h1>BROX — عملة ميم مجتمعية</h1>
-        <p class="muted">انضم للاشتراك المبكر. مشروع يركز على مجتمع نشط، شفافية في التوزيع، ورؤية للتوسع.</p><div class="hero-actions">
-      <button class="cta" onclick="window.location.href='#subscribe'">اشترك الآن</button>
-      <a class="pill small" href="#roadmap">شاهد الخريطة الزمنية</a>
-    </div>
-
-    <div style="margin-top:18px" class="card">
-      <strong>Status:</strong> Pre‑Launch &nbsp; <span class="small muted">| token allocation finalized</span>
-      <div style="margin-top:10px" class="timeline-visual">
-        <div class="step"><div class="dot"></div><div><h4>مرحلة التحضير — Q3 2025</h4><p class="muted">إنشاء الفريق، التصميم الأولي، صفحة الهبوط.</p></div></div>
-        <div class="step"><div class="dot"></div><div><h4>فتح الاشتراكات — Q4 2025</h4><p class="muted">قائمة للبريد والمكافآت للمشتركين المبكرين.</p></div></div>
-      </div>
-    </div>
-  </div>
-
-  <aside>
-    <div class="card">
-      <h3 style="margin:4px 0 12px">توزيع التوكن</h3>
-      <div class="grid-2">
-        <div>
-          <div class="small muted">Community</div>
-          <div style="font-weight:800; font-size:20px">70%</div>
-        </div>
-        <div>
-          <div class="small muted">Team & Advisors</div>
-          <div style="font-weight:800; font-size:20px">15%</div>
-        </div>
-        <div>
-          <div class="small muted">Liquidity</div>
-          <div style="font-weight:800; font-size:20px">10%</div>
-        </div>
-        <div>
-          <div class="small muted">Reserve</div>
-          <div style="font-weight:800; font-size:20px">5%</div>
-        </div>
-      </div>
-
-      <div style="margin-top:12px" class="muted small">ملاحظة: توزيع مبدئي ويمكن تحديثه بعد التصويت المجتمعي.</div>
-    </div>
-
-    <div style="margin-top:12px" class="card small muted">
-      <div><strong>Audit:</strong> Planned</div>
-      <div style="margin-top:8px"><strong>Chain:</strong> Ethereum (ERC‑20) — قابل للتحديث</div>
-    </div>
-  </aside>
-</section>
-
-<!-- About + Why -->
-<section id="about" style="margin-top:20px">
-  <div class="card">
-    <h2>عن المشروع</h2>
-    <p class="muted">BROX هو مشروع عملة ميم يهدف لبناء مجتمع نشط يقدم قيمة عبر الأحداث، المسابقات، وحوافز التفاعل. نركز على الشفافية في التوزيع وآلية نمو مرنة تعتمد على مساهمات المجتمع.</p>
-
-    <div style="margin-top:14px" class="grid-2">
-      <div>
-        <h3>الرؤية</h3>
-        <p class="muted">جعل المشاركة بالعملات الرقمية ممتعة وآمنة للمجتمعات الصغيرة والكبيرة على حد سواء.</p>
-      </div>
-      <div>
-        <h3>الفريق</h3>
-        <p class="muted">فريق ناشئ — مطورين، مصممين، ومدراء مجتمع. سيتم إضافة صفحات الفريق وروابط التحقق لاحقاً لتعزيز الثقة.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="why" style="margin-top:18px">
-  <div class="card">
-    <h2>لماذا BROX؟</h2>
-    <ul class="muted">
-      <li>تركيز قوي على بناء المجتمع</li>
-      <li>توزيع شفاف ومخصص للمجتمع</li>
-      <li>خريطة طريق قابلة للتحقق ومرتبطة بمواعيد تقريبية</li>
+    <h1>BROX</h1>
+    <nav>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#why">Why</a></li>
+        <li><a href="#roadmap">Roadmap</a></li>
+        <li><a href="#token">Token</a></li>
+      </ul>
+    </nav>
+  </header>  <section class="hero">
+    <img src="Picsart_25-09-21_10-14-23-094.png" alt="BROX Logo" />
+    <h2>Community-Driven Meme Token</h2>
+    <p>Built for the people, by the people.</p>
+    <a href="https://t.me/brox_official" class="cta">Join Telegram</a>
+  </section>  <section id="about" class="about">
+    <h2>About BROX</h2>
+    <p>BROX is a meme token created to unite a strong community around fun, culture, and decentralized growth. Our mission is to empower holders while keeping things exciting and community-driven.</p>
+  </section>  <section id="why" class="why">
+    <h2>Why BROX?</h2>
+    <p>BROX isn’t just another meme coin. It’s a movement — transparent, community-first, and built with long-term vision. We aim to grow beyond memes into real influence in the crypto space.</p>
+  </section>  <section id="roadmap" class="roadmap">
+    <h2>Roadmap</h2>
+    <ul>
+      <li><strong>Q4 2025:</strong> Official launch, community building, token distribution.</li>
+      <li><strong>Q1 2026:</strong> Marketing campaigns, CEX listings, partnerships.</li>
+      <li><strong>Q2 2026:</strong> Utility expansion, NFT integration, DAO setup.</li>
     </ul>
-  </div>
-</section>
-
-<!-- Roadmap -->
-<section id="roadmap" style="margin-top:18px">
-  <div class="card">
-    <h2>خريطة الطريق</h2>
-    <div class="timeline timeline-visual">
-      <div class="step"><div class="dot"></div><div><h4>Q3 2025 — إعداد البنية</h4><p class="muted">نموذج الموقع، تهيئة قنوات المجتمع، تحديد سياسة التوزيع.</p></div></div>
-      <div class="step"><div class="dot"></div><div><h4>Q4 2025 — Early Access & Airdrop</h4><p class="muted">انطلاقة الاشتراك المبكر وتوزيع جوائز للمجتمع المبكر.</p></div></div>
-      <div class="step"><div class="dot"></div><div><h4>Q1 2026 — Contract Audit & Launch</h4><p class="muted">تدقيق العقد الذكي ثم الإطلاق الرسمي.</p></div></div>
-      <div class="step"><div class="dot"></div><div><h4>Q2 2026 — Ecosystem Growth</h4><p class="muted">شراكات، حملات تسويق، وإطلاق ميزات المجتمع.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- Subscribe / Contact -->
-<section id="subscribe" style="margin-top:18px">
-  <div class="card">
-    <h2>اشترك لتصلك التحديثات</h2>
-    <p class="muted">لا نشارك بريدك مع طرف ثالث. سيتم إرسال تحديثات مهمة فقط.</p>
-
-    <form id="subscribeForm" onsubmit="handleSubscribe(event)" style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
-      <input id="email" type="email" required placeholder="بريدك الالكتروني" style="flex:1; min-width:180px; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit" />
-      <button class="cta" type="submit">اشترك</button>
-      <div id="subMsg" class="muted small" style="width:100%"></div>
-    </form>
-
-    <div style="margin-top:16px" class="muted small">
-      تواصل معنا: 
-      <a href="#" class="muted">Telegram</a> —
-      <a href="#" class="muted">X</a> —
-      <a href="#" class="muted">Discord</a>
-    </div>
-  </div>
-</section>
-
-<!-- Legal / Footer -->
-<footer>
-  <div class="grid-2">
-    <div>
-      <div style="font-weight:800">BROX</div>
-      <div class="muted small">© <span id="year"></span> BROX. كل الحقوق محفوظة.</div>
-    </div>
-    <div style="text-align:left">
-      <a href="#" class="muted small">Privacy Policy</a> &nbsp; • &nbsp; <a href="#" class="muted small">Terms</a>
-    </div>
-  </div>
-</footer>
-
-  </main>  <script>
-    // Insert year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple mobile nav toggle (shows/hides links for small view)
-    function toggleMobile(){
-      const nav = document.querySelector('header nav');
-      const btn = document.querySelector('.hamburger');
-      const expanded = btn.getAttribute('aria-expanded') === 'true';
-      btn.setAttribute('aria-expanded', String(!expanded));
-      if(window.innerWidth < 980){
-        if(nav.style.display === 'block') nav.style.display = '';
-        else nav.style.display = 'block';
-      }
-    }
-
-    // Language toggle (EN/AR) - toggles lang attribute and direction
-    const langToggle = document.getElementById('langToggle');
-    langToggle.addEventListener('click', ()=>{
-      const html = document.documentElement;
-      if(html.lang === 'ar'){
-        html.lang = 'en'; html.dir = 'ltr';
-        langToggle.textContent = 'AR';
-        langToggle.setAttribute('aria-pressed','true');
-        translateToEnglish();
-      } else {
-        html.lang = 'ar'; html.dir = 'rtl';
-        langToggle.textContent = 'EN';
-        langToggle.setAttribute('aria-pressed','false');
-        translateToArabic();
-      }
-    });
-
-    function translateToEnglish(){
-      document.querySelector('h1').textContent = 'BROX — Community Meme Token';
-      document.querySelector('#about h2').textContent = 'About the project';
-      document.querySelector('#why h2').textContent = 'Why BROX?';
-      document.querySelector('#roadmap h2').textContent = 'Roadmap';
-      document.querySelector('#subscribe h2').textContent = 'Subscribe for updates';
-      // small translations (not exhaustive but covers main content)
-      document.querySelector('.brand div strong')?.replaceWith();
-    }
-    function translateToArabic(){
-      document.querySelector('h1').textContent = 'BROX — عملة ميم مجتمعية';
-      document.querySelector('#about h2').textContent = 'عن المشروع';
-      document.querySelector('#why h2').textContent = 'لماذا BROX؟';
-      document.querySelector('#roadmap h2').textContent = 'خريطة الطريق';
-      document.querySelector('#subscribe h2').textContent = 'اشترك لتصلك التحديثات';
-    }
-
-    // Subscribe handler (no backend) - stores in localStorage and shows message
-    function handleSubscribe(e){
-      e.preventDefault();
-      const email = document.getElementById('email').value.trim();
-      const msg = document.getElementById('subMsg');
-      if(!email){ msg.textContent = 'أدخل بريد صالح'; return; }
-      // Basic email store (for demo only) - don't store sensitive info here in production
-      const list = JSON.parse(localStorage.getItem('brox_subs') || '[]');
-      if(list.includes(email)){
-        msg.textContent = 'تم الاشتراك سابقاً — شكراً!';
-      } else {
-        list.push(email);
-        localStorage.setItem('brox_subs', JSON.stringify(list));
-        msg.textContent = 'تم الاشتراك! سنرسل لك التحديثات.';
-      }
-      e.target.reset();
-    }
-
-    // Accessibility: focus outlines only when using keyboard
-    (function(){
-      function handleFirstTab(e){
-        if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
-      }
-      window.addEventListener('keydown', handleFirstTab);
-    })();
-  </script></body>
+  </section>  <section id="token" class="token">
+    <h2>Tokenomics</h2>
+    <p>Total Supply: 1,000,000,000 BROX</p>
+    <p>Allocation: 50% Community, 20% Marketing, 15% Development, 10% Liquidity, 5% Team</p>
+  </section>  <div class="socials">
+    <h2>Follow Us</h2>
+    <a href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
+    <a href="https://t.me/brox_official" target="_blank"><i class="fab fa-telegram"></i></a>
+    <a href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a>
+  </div>  <footer>
+    <p>© 2025 BROX. All Rights Reserved.</p>
+  </footer>
+</body>
 </html>
