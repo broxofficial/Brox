@@ -24,9 +24,23 @@ header{
 .logo h1{font-size:1.25rem;color:#00f5ff}
 
 /* Menu */
-.menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
+.menu-btn{
+  font-size:1.8rem;cursor:pointer;
+  position:fixed;top:16px;right:22px;z-index:1300;
+  width:44px;height:44px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(0,245,255,0.15);
+  border:1px solid rgba(0,245,255,0.6);
+  color:#00f5ff;transition:.18s;
+}
 .menu-btn:hover{background:rgba(0,245,255,0.25)}
-.side-menu{position:fixed;top:70px;right:-260px;width:240px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:22px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
+.side-menu{
+  position:fixed;top:70px;right:-260px;width:240px;height:calc(100% - 70px);
+  background:rgba(12,12,12,0.95);padding:22px 18px 30px;
+  box-shadow:-4px 0 18px rgba(0,245,255,0.05);
+  transition:right .28s ease-in-out;z-index:1250;
+  border-left:1px solid rgba(255,255,255,0.05);
+}
 .side-menu.open{right:0}
 .side-menu a{display:block;padding:12px;border-radius:8px;color:#e6f8ff;font-weight:600}
 .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
@@ -38,30 +52,38 @@ header{
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-.hero-buttons{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap;justify-content:center}
-.cta{padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+.cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
 /* Teaser */
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* Modern countdown boxes */
-.countdown-modern{display:flex;gap:18px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.1rem;flex-wrap:wrap;padding:0 12px}
-.count-block{background:#0f0f10;border:1px solid rgba(255,255,255,0.03);box-shadow:0 12px 30px rgba(0,0,0,0.6);padding:22px 26px;border-radius:18px;text-align:center;min-width:110px}
+/* Modern countdown boxes (like your screenshot) */
+.countdown-modern{
+  display:flex;gap:18px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.1rem;
+  flex-wrap:wrap;padding:0 12px;
+}
+.count-block{
+  background:#0f0f10;border:1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.6);
+  padding:22px 26px;border-radius:18px;text-align:center;min-width:110px;
+}
 .count-value{display:block;font-size:2.6rem;color:#fff;font-weight:900;letter-spacing:-0.02em}
 .count-label{display:block;margin-top:6px;font-size:0.95rem;color:#bfcfd6;font-weight:600}
 
-/* Allocation donut */
-.allocation{text-align:center}
+/* Allocation donut - rotating, 3 colored arcs, center empty */
+.allocation{padding-top:20px;text-align:center}
 .donut-wrap{width:300px;height:300px;margin:28px auto 6px;position:relative;display:flex;align-items:center;justify-content:center;transform-origin:center center;animation:donut-spin 12s linear infinite}
 @keyframes donut-spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 .donut-svg{width:100%;height:100%;transform:rotate(-90deg)}
 .donut-bg{fill:none;stroke:#0b0b0b;stroke-width:32}
-.donut-comm{fill:none;stroke:#00cfff;stroke-width:32}
-.donut-air{fill:none;stroke:#ff8a00;stroke-width:32}
-.donut-team{fill:none;stroke:#a020f0;stroke-width:32}
-.donut-center{position:absolute;width:150px;height:150px;border-radius:50%;background:linear-gradient(180deg,#0b0b0b,#0f0f0f);border:3px solid rgba(255,255,255,0.03)}
+.donut-comm{fill:none;stroke:#00cfff;stroke-width:32;stroke-linecap:butt;transition:stroke-dashoffset .9s ease}
+.donut-air{fill:none;stroke:#ff8a00;stroke-width:32;stroke-linecap:butt;transition:stroke-dashoffset .9s ease}
+.donut-team{fill:none;stroke:#a020f0;stroke-width:32;stroke-linecap:butt;transition:stroke-dashoffset .9s ease}
+.donut-center{position:absolute;width:150px;height:150px;border-radius:50%;background:linear-gradient(180deg,#0b0b0b,#0f0f0f);border:3px solid rgba(255,255,255,0.03);}
+
+/* Legend / cards like roadmap display */
 .alloc-cards{max-width:820px;margin:26px auto 40px;display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .alloc-card{background:rgba(255,255,255,0.02);padding:18px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
 .alloc-card h3{margin-bottom:8px}
@@ -72,6 +94,7 @@ header{
 
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
+.roadmap h2{font-size:2.2rem;margin-bottom:20px}
 .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
 .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
 .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
@@ -90,19 +113,39 @@ footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px sol
 .socials a:hover{color:#00f5ff}
 footer p{color:#aaa}
 
-/* Coming soon pulse */
-.coming-soon{display:inline-block;margin-top:12px;font-weight:800;color:#ffcf60;animation:comingPulse 1.6s ease-in-out infinite}
-@keyframes comingPulse{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-6px) scale(1.03)}100%{transform:translateY(0) scale(1)}}
+/* Coming soon pulse (enhanced) */
+.coming-soon{display:inline-block;margin-top:12px;font-weight:800;color:#ffcf60;text-shadow:0 6px 22px rgba(255,150,0,0.08);animation:comingPulse 1.6s ease-in-out infinite}
+@keyframes comingPulse{
+  0%{transform:translateY(0) scale(1);opacity:1}
+  50%{transform:translateY(-6px) scale(1.03);opacity:0.9}
+  100%{transform:translateY(0) scale(1);opacity:1}
+}
 
 /* Back to top */
-#backToTop{position:fixed;bottom:24px;right:22px;background:#00f5ff;border:none;border-radius:50%;width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:#071018;font-size:1.25rem;cursor:pointer;z-index:1400;opacity:0;transform:translateY(10px);transition:.28s}
+#backToTop{
+  position:fixed;bottom:24px;right:22px;background:#00f5ff;
+  border:none;border-radius:50%;width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  color:#071018;font-size:1.25rem;cursor:pointer;z-index:1400;opacity:0;transform:translateY(10px);
+  transition:.28s;
+}
 #backToTop.show{opacity:1;transform:none}
 
-@media(max-width:900px){.alloc-cards{grid-template-columns:1fr}}
+/* Responsive */
+@media(max-width:900px){
+  .alloc-cards{grid-template-columns:1fr}
+  .donut-wrap{width:260px;height:260px}
+}
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .ctа{padding:10px 20px}
+  .donut-wrap{width:220px;height:220px}
+  section{padding:60px 14px}
+}
 </style>
 </head>
 <body>
-
+<!-- Header (kept as original) -->
 <header>
   <div class="logo">
     <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
@@ -111,6 +154,7 @@ footer p{color:#aaa}
   <button id="menuBtn" class="menu-btn">☰</button>
 </header>
 
+<!-- Side Menu -->
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
   <a href="#teaser">Teaser</a>
@@ -121,16 +165,15 @@ footer p{color:#aaa}
 </div>
 <div id="menuOverlay" class="menu-overlay"></div>
 
+<!-- Hero (kept) -->
 <section id="hero" class="hero">
   <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to BROX 🔥</h1>
   <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-  <div class="hero-buttons">
-    <button class="cta" onclick="openModal()">Get Notified</button>
-    <button class="cta">Early Access</button>
-  </div>
+  <button class="cta" onclick="openModal()">Early Access</button>
 </section>
 
+<!-- Teaser (kept) -->
 <section id="teaser" class="teaser">
   <h2>🚀 Coming Soon...</h2>
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
@@ -139,34 +182,61 @@ footer p{color:#aaa}
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
-  <div class="countdown-modern" id="countdown-modern">
+
+  <!-- Modern countdown boxes -->
+  <div class="countdown-modern" id="countdown-modern" aria-live="polite">
     <div class="count-block"><span class="count-value" id="cd-days">20</span><span class="count-label">Days</span></div>
     <div class="count-block"><span class="count-value" id="cd-hours">00</span><span class="count-label">Hours</span></div>
     <div class="count-block"><span class="count-value" id="cd-minutes">00</span><span class="count-label">Minutes</span></div>
     <div class="count-block"><span class="count-value" id="cd-seconds">00</span><span class="count-label">Seconds</span></div>
   </div>
+
   <div style="text-align:center;margin-top:14px"><span class="coming-soon">Coming Soon 🔥</span></div>
 </section>
 
+<!-- Allocation (modified to rotating donut with 3 colors; center empty) -->
 <section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
   <p style="color:#cfefff99">Community 94% • Airdrop 5% • Team 1%</p>
-  <div class="donut-wrap">
-    <svg class="donut-svg" viewBox="0 0 220 220">
+
+  <div class="donut-wrap" role="img" aria-label="Token allocation donut: 94 percent community, 5 percent airdrop, 1 percent team">
+    <svg class="donut-svg" viewBox="0 0 220 220" preserveAspectRatio="xMidYMid meet">
+      <!-- background ring -->
       <circle class="donut-bg" cx="110" cy="110" r="88"></circle>
-      <circle class="donut-comm" cx="110" cy="110" r="88"></circle>
-      <circle class="donut-air" cx="110" cy="110" r="88"></circle>
-      <circle class="donut-team" cx="110" cy="110" r="88"></circle>
+
+      <!-- community arc (94%) -->
+      <!-- circumference = 2πr ≈ 552 (for r=88) -->
+      <!-- dash lengths computed in JS for accuracy; placeholder here for progressive rendering -->
+      <circle class="donut-comm" cx="110" cy="110" r="88" stroke-linecap="butt"></circle>
+
+      <!-- airdrop arc (5%) -->
+      <circle class="donut-air" cx="110" cy="110" r="88" stroke-linecap="butt"></circle>
+
+      <!-- team arc (1%) -->
+      <circle class="donut-team" cx="110" cy="110" r="88" stroke-linecap="butt"></circle>
     </svg>
-    <div class="donut-center"></div>
+
+    <div class="donut-center" aria-hidden="true"></div>
   </div>
-  <div class="alloc-cards">
-    <div class="alloc-card alloc-comm"><h3>94% Community</h3><p>Allocated for community rewards, events, and liquidity incentives.</p></div>
-    <div class="alloc-card alloc-air"><h3>5% Airdrop</h3><p>Reserved for early supporters and adoption campaigns.</p></div>
-    <div class="alloc-card alloc-team"><h3>1% Team</h3><p>Reserved for continuity and small core team allocation.</p></div>
+
+  <!-- Cards like roadmap -->
+  <div class="alloc-cards" aria-hidden="false">
+    <div class="alloc-card alloc-comm">
+      <h3>94% Community</h3>
+      <p>Allocated for community rewards, events, and liquidity incentives.</p>
+    </div>
+    <div class="alloc-card alloc-air">
+      <h3>5% Airdrop</h3>
+      <p>Reserved for early supporters and adoption campaigns.</p>
+    </div>
+    <div class="alloc-card alloc-team">
+      <h3>1% Team</h3>
+      <p>Reserved for continuity and small core team allocation.</p>
+    </div>
   </div>
 </section>
 
+<!-- Roadmap (kept) -->
 <section id="roadmap" class="roadmap">
   <h2>Roadmap</h2>
   <div class="timeline">
@@ -177,29 +247,31 @@ footer p{color:#aaa}
   </div>
 </section>
 
+<!-- FAQ (kept) -->
 <section id="faq">
   <h2>FAQ</h2>
   <div class="faq">
     <h3>What is BROX?</h3>
     <p>BROX is a meme coin built by the community for the community.</p>
     <h3>Where can I join the community?</h3>
-    <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
+    <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
     <h3>Is BROX safe?</h3>
     <p>Yes. Allocation is transparent (94% Community, 5% Airdrop, 1% Team).</p>
   </div>
 </section>
 
+<!-- Footer (kept) -->
 <footer id="footer">
   <div class="socials">
-    <a href="https://www.instagram.com/brox__official"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@brox__official"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://x.com/Brox__official"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://t.me/brox_official"><i class="fa-brands fa-telegram"></i></a>
+    <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
   </div>
   <p>&copy; 2025 BROX. All Rights Reserved.</p>
 </footer>
 
-<!-- Modal -->
+<!-- Modal (kept) -->
 <div id="modal" class="modal">
   <div class="card">
     <button class="close-btn" onclick="closeModal()">✖</button>
@@ -207,20 +279,132 @@ footer p{color:#aaa}
     <p>Enter your email to join early access.</p>
     <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
     <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
-    <div id="modalMessage"></div>
+    <div id="modalMessage" class="message"></div>
   </div>
 </div>
 
-<button id="backToTop">↑</button>
+<!-- Back to top -->
+<button id="backToTop" aria-label="Back to top">↑</button>
 
 <script>
-const menuBtn=document.getElementById('menuBtn'),sideMenu=document.getElementById('sideMenu'),menuOverlay=document.getElementById('menuOverlay');
-function openMenu(force){const s="boolean"==typeof force?force:!sideMenu.classList.contains("open");s?(sideMenu.classList.add("open"),menuOverlay.classList.add("visible"),menuBtn.textContent="✖"):(sideMenu.classList.remove("open"),menuOverlay.classList.remove("visible"),menuBtn.textContent="☰")}
-menuBtn.addEventListener("click",()=>openMenu()),menuOverlay.addEventListener("click",()=>openMenu(!1)),sideMenu.addEventListener("click",e=>{e.target.closest("a")&&openMenu(!1)});
-const modal=document.getElementById("modal"),modalMessage=document.getElementById("modalMessage");
-function openModal(){modal.classList.add("show"),modalMessage.textContent=""}
-function closeModal(){modal.classList.remove("show"),modalMessage.textContent=""}
-function submitEmail(){const e=document.getElementById("emailInput").value.trim();e?(modalMessage.textContent="Thanks! We'll notify you soon: "+e,document.getElementById("emailInput").value=""):modalMessage.textContent="Enter a valid email"}
-const items=document.querySelectorAll(".timeline .item"),obs=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.2});items.forEach(e=>obs.observe(e));
-(function(){const e=88,t=2*Math.PI*e,n=.94,a=.05,o=.01,c=document.querySelector(".
+// -------------------- Menu behavior --------------------
+const menuBtn = document.getElementById('menuBtn');
+const sideMenu = document.getElementById('sideMenu');
+const menuOverlay = document.getElementById('menuOverlay');
 
+function openMenu(force){
+  const shouldOpen = (typeof force === 'boolean') ? force : !sideMenu.classList.contains('open');
+  if(shouldOpen){
+    sideMenu.classList.add('open');
+    menuOverlay.classList.add('visible');
+    menuBtn.textContent = '✖';
+  } else {
+    sideMenu.classList.remove('open');
+    menuOverlay.classList.remove('visible');
+    menuBtn.textContent = '☰';
+  }
+}
+menuBtn.addEventListener('click', ()=> openMenu());
+menuOverlay.addEventListener('click', ()=> openMenu(false));
+
+// Ensure clicking any link inside sideMenu closes it (robust)
+sideMenu.addEventListener('click', (ev) => {
+  const a = ev.target.closest('a');
+  if(a){
+    // let browser handle the anchor navigation, then close menu
+    openMenu(false);
+  }
+});
+
+// -------------------- Modal --------------------
+const modal = document.getElementById('modal');
+const modalMessage = document.getElementById('modalMessage');
+function openModal(){ modal.classList.add('show'); modalMessage.textContent=''; }
+function closeModal(){ modal.classList.remove('show'); modalMessage.textContent=''; }
+function submitEmail(){
+  const email = document.getElementById('emailInput').value.trim();
+  if(!email){ modalMessage.textContent = "Enter a valid email"; return; }
+  modalMessage.textContent = "Thanks! We'll notify you soon: "+email;
+  document.getElementById('emailInput').value = '';
+}
+
+// -------------------- Roadmap reveal --------------------
+const items = document.querySelectorAll('.timeline .item');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
+},{threshold:0.2});
+items.forEach(i => obs.observe(i));
+
+// -------------------- Donut drawing (3 segments) --------------------
+// We'll compute stroke-dasharray/offset values so arcs represent 94%, 5%, 1%
+// using the same circle radius as in CSS (r = 88)
+(function drawDonut(){
+  const r = 88;
+  const circumference = 2 * Math.PI * r; // ~552
+  const pctComm = 0.94, pctAir = 0.05, pctTeam = 0.01;
+  const lenComm = circumference * pctComm;
+  const lenAir = circumference * pctAir;
+  const lenTeam = circumference * pctTeam;
+
+  const cComm = document.querySelector('.donut-comm');
+  const cAir = document.querySelector('.donut-air');
+  const cTeam = document.querySelector('.donut-team');
+
+  if(!cComm || !cAir || !cTeam) return;
+
+  // set full stroke dasharray such that each circle draws only its slice:
+  cComm.style.strokeDasharray = `${lenComm} ${circumference}`;
+  cComm.style.strokeDashoffset = 0;
+
+  cAir.style.strokeDasharray = `${lenAir} ${circumference}`;
+  // place airdrop after community
+  cAir.style.strokeDashoffset = -lenComm;
+
+  cTeam.style.strokeDasharray = `${lenTeam} ${circumference}`;
+  // place team after community + airdrop
+  cTeam.style.strokeDashoffset = -(lenComm + lenAir);
+})();
+
+// -------------------- Countdown (modern boxes) --------------------
+const countdownDate = new Date();
+countdownDate.setDate(countdownDate.getDate() + 20); // 20 days from now
+
+function updateCountdown(){
+  const now = Date.now();
+  const distance = countdownDate - now;
+  if(distance < 0){
+    document.getElementById('cd-days').textContent = '00';
+    document.getElementById('cd-hours').textContent = '00';
+    document.getElementById('cd-minutes').textContent = '00';
+    document.getElementById('cd-seconds').textContent = '00';
+    return;
+  }
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+
+  document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-minutes').textContent = String(minutes).padStart(2,'0');
+  document.getElementById('cd-seconds').textContent = String(seconds).padStart(2,'0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// -------------------- Back to top --------------------
+const backToTop = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+  if(window.scrollY > 280) backToTop.classList.add('show');
+  else backToTop.classList.remove('show');
+});
+backToTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+// -------------------- Accessibility / safety fallbacks --------------------
+// Keep previous allocation SVG script references (no-op if not present) to avoid breaking other code paths.
+try{
+  // placeholder to keep compatibility with older scripts
+}catch(e){/* ignore */}
+</script>
+</body>
+</html>
