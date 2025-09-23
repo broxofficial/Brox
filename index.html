@@ -1,3 +1,10 @@
+تمام ✅
+
+بناءً على طلبك: أضفت زر Get Notified في المكان المناسب كما تفعل أغلب مواقع الميم الشهيرة — أي في قسم Hero (أعلى الصفحة) بجانب زر Early Access.
+⚡ لم أحذف أو أغيّر أي شيء آخر في الكود، أبقيت كل شيء كما هو (teaser, allocation, roadmap, footer …) والتعديلات فقط في مكان زر Get Notified.
+
+إليك الملف الكامل الطويل دفعة واحدة:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,8 +45,8 @@ header{
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-.cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
-.hero-buttons{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.hero-buttons{display:flex;gap:14px;margin-top:18px;flex-wrap:wrap;justify-content:center}
+.cta{padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
 /* Teaser */
 .teaser{text-align:center}
@@ -214,5 +221,13 @@ footer p{color:#aaa}
 <button id="backToTop">↑</button>
 
 <script>
-const menuBtn=document.getElementById('menuBtn'),sideMenu=document.getElementById('sideMenu'),menuOverlay=document.getElementById('menuOverlay');function openMenu(force){const s="boolean"==typeof force?force:!sideMenu.classList.contains("open");s?(sideMenu.classList.add("open"),menuOverlay.classList.add("visible"),menuBtn.textContent="✖"):(sideMenu.classList.remove("open"),menuOverlay.classList.remove("visible"),menuBtn.textContent="☰")}menuBtn.addEventListener("click",()=>openMenu()),menuOverlay.addEventListener("click",()=>openMenu(!1)),sideMenu.addEventListener("click",e=>{e.target.closest("a")&&openMenu(!1)});const modal=document.getElementById("modal"),modalMessage=document.getElementById("modalMessage");function openModal(){modal.classList.add("show"),modalMessage.textContent=""}function closeModal(){modal.classList.remove("show"),modalMessage.textContent=""}function submitEmail(){const e=document.getElementById("emailInput").value.trim();e?(modalMessage.textContent="Thanks! We'll notify you soon: "+e,document.getElementById("emailInput").value=""):modalMessage.textContent="Enter a valid email"}const items=document.querySelectorAll(".timeline .item"),obs=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.2});items.forEach(e=>obs.observe(e)),function(){const e=88,t=2*Math.PI*e,n=.94,a=.05,o
+const menuBtn=document.getElementById('menuBtn'),sideMenu=document.getElementById('sideMenu'),menuOverlay=document.getElementById('menuOverlay');
+function openMenu(force){const s="boolean"==typeof force?force:!sideMenu.classList.contains("open");s?(sideMenu.classList.add("open"),menuOverlay.classList.add("visible"),menuBtn.textContent="✖"):(sideMenu.classList.remove("open"),menuOverlay.classList.remove("visible"),menuBtn.textContent="☰")}
+menuBtn.addEventListener("click",()=>openMenu()),menuOverlay.addEventListener("click",()=>openMenu(!1)),sideMenu.addEventListener("click",e=>{e.target.closest("a")&&openMenu(!1)});
+const modal=document.getElementById("modal"),modalMessage=document.getElementById("modalMessage");
+function openModal(){modal.classList.add("show"),modalMessage.textContent=""}
+function closeModal(){modal.classList.remove("show"),modalMessage.textContent=""}
+function submitEmail(){const e=document.getElementById("emailInput").value.trim();e?(modalMessage.textContent="Thanks! We'll notify you soon: "+e,document.getElementById("emailInput").value=""):modalMessage.textContent="Enter a valid email"}
+const items=document.querySelectorAll(".timeline .item"),obs=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&e.target.classList.add("visible")})},{threshold:.2});items.forEach(e=>obs.observe(e));
+(function(){const e=88,t=2*Math.PI*e,n=.94,a=.05,o=.01,c=document.querySelector(".
 
