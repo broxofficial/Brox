@@ -241,7 +241,17 @@ const obs=new IntersectionObserver(entries=>{
 items.forEach(i=>obs.observe(i));
 
 // Modern countdown
-const countdownDate=new Date();countdownDate.setDate(countdownDate.getDate()+20);
+let countdownDate;
+const storedDate = localStorage.getItem('countdownDate');
+
+if (storedDate) {
+  countdownDate = new Date(storedDate);
+} else {
+  countdownDate = new Date();
+  countdownDate.setDate(countdownDate.getDate() + 20);
+  localStorage.setItem('countdownDate', countdownDate.toISOString());
+}
+
 function updateCountdown(){
   const now=Date.now(), rem=countdownDate-now;
   if(rem<=0){
@@ -260,7 +270,8 @@ function updateCountdown(){
   document.getElementById("minutes").textContent=String(m).padStart(2,'0');
   document.getElementById("seconds").textContent=String(s).padStart(2,'0');
 }
-setInterval(updateCountdown,1000);updateCountdown();
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 </body>
 </html>
