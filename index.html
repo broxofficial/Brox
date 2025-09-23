@@ -1,285 +1,514 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta name="description" content="BROX — community-first memecoin. Join Telegram, get early access & catch the memes." />
+  <meta name="theme-color" content="#00f5ff" />
+  <meta name="robots" content="index,follow" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
-    /* ===== Reset & Base ===== */
-    *{margin:0;padding:0;box-sizing:border-box;}
-    body{font-family:'Segoe UI',Arial,sans-serif;background:#000;color:#fff;overflow-x:hidden;line-height:1.6;}
-    a{text-decoration:none;color:inherit;}
-    /* ===== Header ===== */
+    :root{
+      --bg-1:#0a0f1c;
+      --bg-2:#071019;
+      --muted:#bfe8ff;
+      --accent:#00f5ff;
+      --accent-2:#ff6600;
+      --glass: rgba(255,255,255,0.02);
+      --maxw:1150px;
+      --mono: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;font-family:var(--mono);background:linear-gradient(180deg,var(--bg-1),var(--bg-2));color:#eaf9ff;
+      -webkit-font-smoothing:antialiased;line-height:1.5;-webkit-tap-highlight-color:transparent;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Layout wrapper */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:14px}
+
+    /* Header */
     header{
-      position:fixed;top:0;left:0;width:100%;
-      display:flex;justify-content:space-between;align-items:center;
-      padding:18px 40px;z-index:1000;
-      background:rgba(0,0,0,0.55);backdrop-filter:blur(12px);
-      border-bottom:1px solid rgba(0,191,255,0.6);
+      position:sticky;top:0;z-index:60;
+      background:linear-gradient(180deg, rgba(2,6,10,0.72), rgba(2,6,10,0.5));
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(0,245,255,0.06);
     }
-    .logo{font-size:2rem;font-weight:bold;color:#00bfff;text-shadow:0 0 20px #00bfff;}
-    /* === menu-btn === */
-    .menu-btn{
-      font-size:2rem;
-      cursor:pointer;
-      transition:.3s;
-      z-index:1500;
-      color:#00bfff;
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;max-width:var(--maxw);margin:auto}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:12px;display:grid;place-items:center;font-weight:900;color:#001;background:linear-gradient(135deg,var(--accent),#66f0ff);box-shadow:0 10px 40px rgba(0,245,255,0.06);font-family:monospace}
+    .brand-title{font-weight:800;font-size:1rem;color:var(--accent);margin-left:8px}
+    .brand-sub{font-size:0.78rem;color:var(--muted);margin-left:8px}
+    nav.links{display:flex;gap:16px;align-items:center}
+    nav.links a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px}
+    nav.links a:hover{color:#001;background:linear-gradient(90deg,var(--accent),#7fe5ff);padding:8px 12px}
+    .menu-btn{background:var(--glass);padding:8px;border-radius:10px;cursor:pointer;color:var(--accent);border:1px solid rgba(0,245,255,0.12)}
+
+    @media (max-width:980px){ nav.links{display:none} }
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:62px 18px}
+    .hero-left h1{font-size:42px;margin:0;color:var(--accent);text-shadow:0 10px 40px rgba(0,245,255,0.06)}
+    .hero-left p{margin:12px 0 18px;color:var(--muted);max-width:64ch}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .hero-right{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
+    .mascot{width:240px;height:240px;border-radius:999px;display:grid;place-items:center;background:radial-gradient(circle at 30% 20%, rgba(255,255,255,0.03), transparent 20%), linear-gradient(135deg,#e0fbff,#a5f0ff);box-shadow:0 30px 80px rgba(0,245,255,0.06), 0 6px 24px rgba(0,0,0,0.5);overflow:hidden}
+    .btn-get{background:linear-gradient(90deg,var(--accent),#67e0ff);color:#001;padding:10px 14px;border-radius:10px;font-weight:800;border:none;cursor:pointer;box-shadow:0 10px 30px rgba(0,245,255,0.08)}
+    .pill{background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:700}
+
+    /* small subscriber counter */
+    .sub-count{background:rgba(0,0,0,0.35);padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);color:var(--muted);font-weight:700}
+
+    /* Teaser */
+    .teaser{margin:26px 18px;padding:22px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));display:flex;gap:16px;align-items:center;justify-content:center}
+    .teaser .thumb{width:340px;border-radius:12px;cursor:pointer;box-shadow:0 18px 50px rgba(0,245,255,0.04)}
+    .teaser h2{font-size:2rem;color:var(--accent);margin:0}
+    .teaser p{color:var(--muted);margin:6px 0 0}
+
+    /* Info card (the exact block you wanted) */
+    .info-card{max-width:900px;margin:18px auto;padding:18px;background:rgba(0,0,0,0.45);border:1px solid rgba(0,245,255,0.06);border-radius:12px;color:var(--muted)}
+    .info-card h4{color:var(--accent);margin-bottom:8px}
+
+    /* Allocation */
+    .section{padding:40px 18px}
+    .section h2{font-size:2rem;color:var(--accent);text-align:center;margin-bottom:12px}
+    .alloc-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+    .card{background:var(--glass);padding:16px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.6)}
+    .card h3{margin:0;color:var(--accent);font-size:1.2rem}
+    .card p{color:var(--muted);margin-top:8px;font-size:0.95rem}
+    .notes{margin-top:12px;color:#cfefff;background:transparent;padding:12px;border-radius:8px;text-align:center}
+
+    /* SINGLE rotating SVG circle */
+    .circle-rotator{width:220px;height:220px;margin:10px auto;display:grid;place-items:center;animation:spin 8s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .circle-svg{width:220px;height:220px}
+    .circle-bg{fill:none;stroke:#071018;stroke-width:16}
+    .arc-main{fill:none;stroke:var(--accent);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset .8s ease}
+    .arc-tail{fill:none;stroke:var(--accent-2);stroke-width:16;stroke-linecap:round;transition:stroke-dashoffset .8s ease;filter:drop-shadow(0 6px 12px rgba(255,102,0,0.15))}
+
+    .alloc-caption{margin-top:8px;color:var(--muted);text-align:center;font-size:0.95rem}
+
+    /* Roadmap */
+    .roadmap{max-width:900px;margin:18px auto;display:grid;gap:12px}
+    .fun-step{padding:14px;border-radius:12px;background:linear-gradient(180deg,#021e28,#022b36);border-left:6px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+    .fun-step strong{display:block;color:var(--accent);margin-bottom:8px}
+    .fun-step p{color:var(--muted);margin:0}
+
+    /* Memes */
+    .memes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:12px}
+    .meme{background:#02151b;padding:10px;border-radius:10px;text-align:center;cursor:pointer;overflow:hidden}
+    .meme img{width:100%;height:150px;object-fit:cover;border-radius:8px;display:block}
+    .meme p{color:var(--muted);font-size:0.9rem;margin:8px 0 0}
+
+    /* Footer */
+    footer{padding:28px 18px;border-top:1px solid rgba(255,255,255,0.03);margin-top:18px;background:linear-gradient(180deg,#02060a,#021220)}
+    .socials{display:flex;gap:12px;justify-content:center;margin-bottom:12px}
+    .soc{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--glass);cursor:pointer}
+    .copyright{text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* Side menu tweaks: quarter-screen width */
+    .side-menu{position:fixed;top:0;right:-25vw;height:100%;width:25vw;max-width:360px;background:rgba(8,10,12,0.98);padding-top:80px;padding-left:18px;z-index:1300;transition:right .28s;box-shadow:-20px 0 60px rgba(0,0,0,0.6)}
+    .side-menu.open{right:0}
+    .side-menu a{display:block;padding:14px 10px;font-size:1.05rem;color:var(--muted);border-radius:8px}
+    .side-menu a:hover{background:linear-gradient(90deg,var(--accent),#67e0ff);color:#001}
+
+    /* Modal */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:14px}
+    .modal .box{background:linear-gradient(180deg,#04171d,#07232b);padding:16px;border-radius:12px;width:100%;max-width:520px;box-shadow:0 30px 80px rgba(0,0,0,0.8);position:relative}
+    .close{position:absolute;right:12px;top:12px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+
+    /* Responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding:40px 14px}
+      .hero-right{order:-1}
+      .mascot{width:200px;height:200px}
+      .teaser .thumb{width:260px}
+      .alloc-grid{grid-template-columns:1fr}
+      .side-menu{width:70vw;right:-70vw}
+      .side-menu.open{right:0}
     }
-    /* ===== Overlay ===== */
-    .overlay{
-      position:fixed;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.5);z-index:1200;
-      display:none;
-    }
-    .overlay.show{display:block;}
-    /* ===== Side Menu ===== */
-    .side-menu{
-      position:fixed;
-      top:0;
-      right:-260px;
-      height:100%;
-      width:240px;
-      background:rgba(15,15,15,0.97);
-      backdrop-filter:blur(15px);
-      transition:.35s;
-      z-index:1300;
-      box-shadow:-5px 0 25px rgba(0,191,255,0.5);
-      padding-top:70px;
-    }
-    .side-menu.open{right:0;}
-    .side-menu a{
-      display:block;padding:18px 24px;font-size:1.1rem;
-      transition:.25s;color:#fff;font-weight:500;
-    }
-    .side-menu a:hover{background:linear-gradient(135deg,#00bfff,#1e90ff);border-radius:6px;}
-    /* زر إغلاق */
-    .close-btn{
-      position:absolute;
-      top:15px;
-      right:20px;
-      font-size:1.8rem;
-      cursor:pointer;
-      color:#fff;
-      transition:.3s;
-    }
-    .close-btn:hover{color:#00bfff;}
-    /* ===== Hero ===== */
-    .hero{height:100vh;display:flex;flex-direction:column;justify-content:center;
-      align-items:center;text-align:center;padding-top:100px;position:relative;}
-    .hero img{width:200px;height:200px;border-radius:50%;
-      box-shadow:0 0 60px rgba(0,191,255,1),0 0 100px rgba(30,144,255,0.6);
-      animation:float 4s ease-in-out infinite;}
-    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-    .hero h1{margin-top:28px;font-size:3.5rem;text-shadow:0 0 25px #00bfff,0 0 45px #1e90ff;}
-    .hero p{max-width:650px;margin-top:15px;font-size:1.25rem;color:#ccc;}
-    .hero button{margin-top:35px;padding:16px 40px;border:none;border-radius:50px;
-      background:linear-gradient(135deg,#00bfff,#1e90ff);color:#fff;
-      font-size:1.1rem;font-weight:bold;cursor:pointer;
-      box-shadow:0 0 25px rgba(0,191,255,0.9);transition:.3s;}
-    .hero button:hover{transform:scale(1.08);box-shadow:0 0 40px rgba(0,191,255,1);}
-    /* ===== Teaser ===== */
-    .teaser{padding:120px 20px;text-align:center;
-      background:linear-gradient(135deg,#141414,#0d0d0d);
-      opacity:0;transform:translateY(50px);transition:all 1s ease;}
-    .teaser.visible{opacity:1;transform:translateY(0);}
-    .teaser img{width:340px;border-radius:22px;margin-bottom:28px;
-      box-shadow:0 0 35px rgba(0,191,255,0.8);}
-    .teaser h2{font-size:2.8rem;color:#00bfff;
-      text-shadow:0 0 25px #00bfff,0 0 45px #1e90ff;
-      animation:pulse 2s infinite alternate;}
-    @keyframes pulse{from{opacity:.7;transform:scale(.95)}to{opacity:1;transform:scale(1.1)}}
-    /* ===== Allocation ===== */
-    .allocation{padding:100px 20px;text-align:center;}
-    .allocation h2{font-size:2.5rem;margin-bottom:40px;color:#00bfff;text-shadow:0 0 20px #00bfff;}
-    .alloc-visual{display:flex;justify-content:center;margin-bottom:40px;}
-    .alloc-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-      gap:25px;max-width:950px;margin:auto;}
-    .card{background:rgba(30,30,30,0.8);padding:28px;border-radius:18px;
-      box-shadow:0 0 25px rgba(0,191,255,0.4);transition:.3s;}
-    .card:hover{transform:translateY(-8px);}
-    .card h3{color:#00bfff;margin-bottom:12px;font-size:1.7rem;}
-    /* ===== Roadmap ===== */
-    .roadmap{padding:100px 20px;text-align:center;}
-    .roadmap h2{font-size:2.5rem;margin-bottom:35px;color:#00bfff;text-shadow:0 0 20px #00bfff;}
-    .steps{max-width:750px;margin:auto;text-align:left;display:grid;gap:28px;}
-    .step{padding:25px;border-left:5px solid #00bfff;
-      background:rgba(35,35,35,0.8);border-radius:14px;
-      box-shadow:0 0 25px rgba(0,191,255,0.4);
-      opacity:0;transform:translateY(50px);transition:.9s ease;}
-    .step.visible{opacity:1;transform:translateY(0);}
-    /* ===== Modal ===== */
-    .modal{display:none;position:fixed;z-index:3000;top:0;left:0;width:100%;height:100%;
-      background:rgba(0,0,0,0.75);justify-content:center;align-items:center;}
-    .modal-content{background:rgba(25,25,25,0.95);padding:35px;border-radius:18px;
-      text-align:center;width:90%;max-width:420px;transform:scale(.8);opacity:0;transition:.4s;
-      box-shadow:0 0 35px rgba(0,191,255,0.8);backdrop-filter:blur(8px);}
-    .modal.show .modal-content{transform:scale(1);opacity:1;}
-    .modal-content h3{margin-bottom:18px;color:#00bfff;font-size:1.5rem;}
-    .modal-content input{width:100%;padding:14px;margin-bottom:18px;border:none;border-radius:10px;
-      background:rgba(0,0,0,0.3);color:#fff;text-align:center;}
-    .modal-content input:focus{outline:none;box-shadow:0 0 12px #00bfff;}
-    .modal-content button{padding:14px 28px;border:none;border-radius:10px;
-      background:linear-gradient(135deg,#00bfff,#1e90ff);color:#fff;
-      cursor:pointer;font-weight:bold;
-      box-shadow:0 0 20px rgba(0,191,255,0.9);transition:.3s;}
-    .modal-content button:hover{transform:scale(1.05);box-shadow:0 0 30px #00bfff;}
-    /* ===== Footer ===== */
-    footer{padding:45px 20px;text-align:center;
-      background:rgba(20,20,20,0.85);backdrop-filter:blur(10px);
-      box-shadow:0 -6px 25px rgba(0,191,255,0.4);}
-    .socials a{margin:0 14px;font-size:2rem;color:#fff;transition:.3s;}
-    .socials a:hover{color:#00bfff;transform:scale(1.25);}
-    footer p{font-size:0.95rem;color:#aaa;margin-top:18px;}
-    /* ===== Background Particles ===== */
-    #particles{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;}
-    /* ===== Responsive ===== */
-    @media(max-width:768px){
-      .hero h1{font-size:2.4rem;}
-      .hero p{font-size:1rem;}
-      .teaser img{width:250px;}
-      .teaser h2{font-size:2.2rem;}
-    }
+
+    a:focus,button:focus,input:focus{outline:3px solid rgba(0,245,255,0.12);outline-offset:3px}
   </style>
 </head>
 <body>
-  <canvas id="particles"></canvas>
   <!-- Header -->
   <header>
-    <div class="logo">Brox</div>
-    <div class="menu-btn" id="menuBtn"><i class="fas fa-bars"></i></div>
+    <div class="wrap nav" role="navigation" aria-label="Main Navigation">
+      <div style="display:flex;align-items:center;">
+        <div class="logo" aria-hidden>BRX</div>
+        <div>
+          <div class="brand-title">Brox</div>
+          <div class="brand-sub">Born in Fun — Memes & Community</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="#teaser">Teaser</a>
+        <a href="#allocation">Allocation</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#community">Community</a>
+        <button class="btn-get" onclick="openSubscribe()">Get Early Access</button>
+        <div style="width:12px"></div>
+        <div id="subCount" class="sub-count" title="Subscribers">0 subs</div>
+      </nav>
+
+      <button id="menuBtn" class="menu-btn" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
   </header>
-  <!-- Overlay -->
-  <div class="overlay" id="overlay"></div>
+
   <!-- Side Menu -->
-  <div class="side-menu" id="sideMenu">
-    <div class="close-btn" id="closeBtn">&times;</div>
+  <div class="side-menu" id="sideMenu" aria-hidden="true">
+    <button class="close" id="sideClose" aria-label="Close menu">✕</button>
     <a href="#hero">Home</a>
     <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
     <a href="#roadmap">Roadmap</a>
-    <a href="#footer">Contact</a>
+    <a href="#community">Community</a>
+    <a href="#contact">Contact</a>
+    <!-- intentionally removed Join Telegram from menu as requested -->
   </div>
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="Brox">
-    <h1>🔥 Welcome to BROX 🔥</h1>
-    <p>The meme revolution begins. Powered by community.</p>
-    <button onclick="openModal()">Early Access</button>
-  </section>
-  <!-- Teaser -->
-  <section class="teaser" id="teaser">
-    <img src="Picsart_25-09-21_10-14-23-094.png" alt="Coming Soon">
-    <h2>🚀 Coming Soon...</h2>
-  </section>
-  <!-- Allocation -->
-  <section class="allocation" id="allocation">
-    <h2>Token Allocation</h2>
-    <div class="alloc-visual"><canvas id="allocChart" width="250" height="250"></canvas></div>
-    <div class="alloc-cards">
-      <div class="card"><h3>99%</h3><p>Community</p></div>
-      <div class="card"><h3>1%</h3><p>Team & Holders</p></div>
-    </div>
-  </section>
-  <!-- Roadmap -->
-  <section class="roadmap" id="roadmap">
-    <h2>Roadmap</h2>
-    <div class="steps">
-      <div class="step"><strong>Phase 1:</strong> Launch socials & build community</div>
-      <div class="step"><strong>Phase 2:</strong> Website launch & viral campaigns</div>
-      <div class="step"><strong>Phase 3:</strong> Listings on CEX / DEX</div>
-      <div class="step"><strong>Phase 4:</strong> Expansion & partnerships</div>
-    </div>
-  </section>
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fab fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official" target="_blank"><i class="fab fa-x-twitter"></i></a>
-      <a href="https://t.me/brox__official" target="_blank"><i class="fab fa-telegram"></i></a>
-    </div>
-    <p>© 2025 BROX. All Rights Reserved.</p>
-  </footer>
-  <!-- Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-content">
-      <h3>Get Notified on Launch 🚀</h3>
-      <input type="email" placeholder="Enter your email">
-      <button onclick="closeModal()">Submit</button>
+  <div id="menuOverlay" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:1299;display:none;background:rgba(0,0,0,0.35)"></div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section id="hero" class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">🔥 Welcome to BROX — Memes Fuel the Revolution</h1>
+        <p class="lead muted">BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</p>
+
+        <div class="hero-cta">
+          <button class="btn-get" onclick="openSubscribe()">Get Early Access</button>
+          <a class="pill" href="#allocation">Token Allocation</a>
+        </div>
+
+        <div style="margin-top:12px" class="status-row">
+          <div class="pill">Status: <strong style="margin-left:8px;color:#fff">Pre-Launch</strong></div>
+          <div class="pill">Audit: <strong style="margin-left:8px;color:#fff">Planned</strong></div>
+          <div class="pill">Chain: <strong style="margin-left:8px;color:#fff">Ethereum (ERC-20) - TBD</strong></div>
+        </div>
+
+        <div style="margin-top:14px">
+          <div style="font-weight:800;margin-bottom:8px">Countdown to Launch</div>
+          <div style="display:flex;gap:10px;align-items:center" aria-live="polite" id="countdownSmall">
+            <div class="pill" id="cd-days">00d</div>
+            <div class="pill" id="cd-hours">00h</div>
+            <div class="pill" id="cd-mins">00m</div>
+            <div class="pill" id="cd-secs">00s</div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-hidden>
+        <div class="mascot" id="mascotWrap">
+          <img id="mascotImg" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX mascot" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="pill">Total Supply: 1,000,000,000 BROX</div>
+      </aside>
+    </section>
+
+    <!-- EXACT info block you required -->
+    <section class="info-card" aria-label="Project info">
+      <div style="font-weight:700">BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</div>
+
+      <h4 style="margin-top:12px">Token Allocation</h4>
+
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <button class="btn-get" onclick="openSubscribe()">Get Early Access</button>
+        <div class="pill">Status:</div>
+        <div style="font-weight:900;color:#fff;margin-left:6px">Pre-Launch</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <strong>Audit:</strong> Planned. <strong>Chain:</strong> Ethereum (ERC-20) - TBD
+      </div>
+
+      <div style="margin-top:12px">
+        <h4>99% Community</h4>
+        <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
+
+        <h4 style="margin-top:8px">1% Team & Holders</h4>
+        <p>Reserved for long-term project continuity and small team allocation.</p>
+
+        <h4 style="margin-top:8px">Notes</h4>
+        <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
+      </div>
+    </section>
+
+    <!-- TEASER -->
+    <section id="teaser" class="teaser">
+      <div style="text-align:center">
+        <img id="teaserImg" class="thumb" src="Picsart_25-09-21_10-14-23-094.png" alt="BROX teaser (click to enlarge)" style="margin:0 auto">
+        <h2 style="margin-top:12px">🚀 Coming Soon...</h2>
+        <p class="muted">Stay tuned — community rewards, airdrops and meme contests incoming.</p>
+      </div>
+    </section>
+
+    <!-- ALLOCATION (single rotating circle + caption) -->
+    <section id="allocation" class="section" aria-labelledby="allocTitle">
+      <h2 id="allocTitle">Token Allocation</h2>
+
+      <div class="alloc-grid">
+        <div class="card status-panel" aria-hidden>
+          <strong>Allocation Snapshot</strong>
+          <div style="margin-top:8px;color:var(--muted)">Clear & community-first distribution</div>
+
+          <!-- Single rotating SVG circle with 99% + 1% tail -->
+          <div class="circle-rotator" role="img" aria-label="Token allocation donut rotating">
+            <svg class="circle-svg" viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+              <g transform="rotate(-90 110 110)">
+                <circle class="circle-bg" cx="110" cy="110" r="88"></circle>
+                <!-- main arc (99%) -->
+                <circle id="arcMain" class="arc-main" cx="110" cy="110" r="88" stroke="url(#gradMain)"></circle>
+                <!-- tail arc (1%) -->
+                <circle id="arcTail" class="arc-tail" cx="110" cy="110" r="88"></circle>
+              </g>
+              <defs>
+                <linearGradient id="gradMain" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="var(--accent)"/>
+                  <stop offset="100%" stop-color="#67e0ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+
+          <div class="alloc-caption">Community 99% • Team & Holders 1%</div>
+        </div>
+
+        <div>
+          <div class="alloc-cards">
+            <div class="card">
+              <h3>99% Community</h3>
+              <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
+            </div>
+            <div class="card">
+              <h3>1% Team & Holders</h3>
+              <p>Reserved for long-term project continuity and a small team allocation.</p>
+            </div>
+          </div>
+
+          <div class="notes" role="note" aria-live="polite" style="margin-top:12px">
+            <strong>Notes:</strong> This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section id="roadmap" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Roadmap (Meme Edition)</h2>
+      <div class="roadmap">
+        <div class="fun-step"><strong>Phase 1 — Make Noise</strong><p>Spam the feeds with dank memes and recruit the first 1,000 apes.</p></div>
+        <div class="fun-step"><strong>Phase 2 — Viral Mode</strong><p>Turn memes into momentum — contests, collabs, and meme raids.</p></div>
+        <div class="fun-step"><strong>Phase 3 — Moon Prep</strong><p>Smart contract audit, token launch plan, and listing moves.</p></div>
+        <div class="fun-step"><strong>Phase 4 — Apes Together</strong><p>Partnerships, community grants, and governance experiments (DAO jokes allowed).</p></div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY MEMES -->
+    <section id="community" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Community Memes</h2>
+      <p style="text-align:center;color:var(--muted);max-width:850px;margin:6px auto 12px">A wall for the funniest BROX submissions. Click to enlarge — send yours to our Telegram!</p>
+      <div class="memes" id="memesGrid" aria-live="polite">
+        <div class="meme" tabindex="0" data-src="Picsart_25-09-21_10-14-23-094.png"><img src="Picsart_25-09-21_10-14-23-094.png" alt="meme sample"><p>Official teaser meme</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>Submit yours</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>More memes soon</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="section" style="padding-top:12px">
+      <div class="socials" role="navigation" aria-label="Social links">
+        <a class="soc" href="https://www.instagram.com/brox__official" target="_blank" rel="noopener noreferrer" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a class="soc" href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok"><i class="fab fa-tiktok"></i></a>
+        <a class="soc" href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener noreferrer" title="X"><i class="fab fa-x"></i></a>
+        <a class="soc" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" title="Telegram"><i class="fab fa-telegram"></i></a>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <div class="pill">Built for fun</div>
+        <div class="pill">Community-first</div>
+        <div class="pill">Memes &gt; Everything</div>
+      </div>
+
+      <div class="copyright">© <span id="year"></span> BROX. All Rights Reserved.</div>
+    </footer>
+  </main>
+
+  <!-- SUBSCRIBE MODAL -->
+  <div id="subscribeModal" class="modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="subTitle">
+      <button class="close" aria-label="close" onclick="closeSubscribe()">✕</button>
+      <h3 id="subTitle" style="color:var(--accent)">Get Early Access</h3>
+      <p style="color:var(--muted)">Subscribe for launch alerts, airdrop info and meme contest invites.</p>
+      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-top:12px;background:transparent;color:#eaf9ff">
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="btn-get" onclick="submitEmail()">Subscribe</button>
+        <button class="pill" onclick="closeSubscribe()">Cancel</button>
+      </div>
+      <div id="subMsg" style="margin-top:12px;color:var(--muted)"></div>
     </div>
   </div>
-  <script>
-    // ===== Menu =====
-    const menuBtn=document.getElementById("menuBtn");
-    const sideMenu=document.getElementById("sideMenu");
-    const closeBtn=document.getElementById("closeBtn");
-    const overlay=document.getElementById("overlay");
-    menuBtn.onclick=()=>{
-      sideMenu.classList.add("open");
-      overlay.classList.add("show");
-    };
-    closeBtn.onclick=()=>{
-      sideMenu.classList.remove("open");
-      overlay.classList.remove("show");
-    };
-    overlay.onclick=()=>{
-      sideMenu.classList.remove("open");
-      overlay.classList.remove("show");
-    };
-    document.querySelectorAll(".side-menu a").forEach(link=>{
-      link.onclick=()=>{
-        sideMenu.classList.remove("open");
-        overlay.classList.remove("show");
-      };
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="modal" style="display:none" aria-hidden="true">
+    <div class="box" style="background:transparent;box-shadow:none;">
+      <button class="close" aria-label="close" onclick="closeLightbox()">✕</button>
+      <img id="lightboxImg" src="" alt="enlarged image" style="width:100%;max-width:860px;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.6)">
+    </div>
+  </div>
+
+<script>
+  // year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // menu open/close (quarter screen)
+  const menuBtn = document.getElementById('menuBtn');
+  const sideMenu = document.getElementById('sideMenu');
+  const sideClose = document.getElementById('sideClose');
+  const menuOverlay = document.getElementById('menuOverlay');
+
+  function openMenu(){ sideMenu.classList.add('open'); sideMenu.setAttribute('aria-hidden','false'); menuOverlay.style.display='block'; }
+  function closeMenu(){ sideMenu.classList.remove('open'); sideMenu.setAttribute('aria-hidden','true'); menuOverlay.style.display='none'; }
+  menuBtn.addEventListener('click', openMenu);
+  sideClose.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('click', closeMenu);
+  document.querySelectorAll('.side-menu a').forEach(a=> a.addEventListener('click', closeMenu));
+
+  // mascot image fallback
+  const mascotImg = document.getElementById('mascotImg');
+  function placeholderSVG(){
+    return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+      '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#012028"/><text x="50%" y="50%" fill="#00f5ff" font-size="16" text-anchor="middle" dominant-baseline="middle">Image missing — add your file</text></svg>'
+    );
+  }
+  mascotImg.addEventListener('error', ()=> mascotImg.src = placeholderSVG());
+
+  // teaser lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const teaserImg = document.getElementById('teaserImg');
+  if(teaserImg){
+    teaserImg.addEventListener('click', ()=> {
+      lightboxImg.src = teaserImg.src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
     });
-    // ===== Modal =====
-    const modal=document.getElementById("myModal");
-    function openModal(){ 
-      modal.style.display="flex";
-      setTimeout(()=>modal.classList.add("show"),10);
+  }
+  function closeLightbox(){ lightbox.style.display='none'; lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; }
+
+  // subscribe modal + localStorage subscribers count
+  const subscribeModal = document.getElementById('subscribeModal');
+  function openSubscribe(){ subscribeModal.style.display='flex'; subscribeModal.setAttribute('aria-hidden','false'); document.getElementById('emailInput').focus(); }
+  function closeSubscribe(){ subscribeModal.style.display='none'; subscribeModal.setAttribute('aria-hidden','true'); document.getElementById('subMsg').textContent=''; }
+  function getSubscribers(){ return JSON.parse(localStorage.getItem('brox_subs_v1') || '[]'); }
+  function updateSubCountUI(){ const n = getSubscribers().length; document.getElementById('subCount').textContent = n + (n===1? ' sub':' subs'); }
+  updateSubCountUI();
+  function submitEmail(){
+    const email = document.getElementById('emailInput').value.trim();
+    const msg = document.getElementById('subMsg');
+    if(!email || !/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = 'Please enter a valid email.'; return; }
+    const key = 'brox_subs_v1';
+    const list = getSubscribers();
+    if(list.includes(email)){ msg.textContent = 'Already subscribed — thanks!'; document.getElementById('emailInput').value=''; return; }
+    list.push(email); localStorage.setItem(key, JSON.stringify(list));
+    msg.textContent = 'Subscribed! We will notify you.'; document.getElementById('emailInput').value='';
+    updateSubCountUI();
+  }
+
+  // countdown (LAUNCH_DATE editable)
+  const LAUNCH_DATE = new Date('2025-11-01T12:00:00Z');
+  function updateCountdown(){
+    const now = new Date();
+    let diff = Math.max(0, LAUNCH_DATE - now);
+    const days = Math.floor(diff / (1000*60*60*24));
+    diff -= days * (1000*60*60*24);
+    const hours = Math.floor(diff / (1000*60*60));
+    diff -= hours * (1000*60*60);
+    const mins = Math.floor(diff / (1000*60));
+    diff -= mins * (1000*60);
+    const secs = Math.floor(diff / 1000);
+    document.getElementById('cd-days').textContent = String(days).padStart(2,'0') + 'd';
+    document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0') + 'h';
+    document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0') + 'm';
+    document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0') + 's';
+  }
+  updateCountdown();
+  setInterval(updateCountdown,1000);
+
+  // Allocation: single rotating SVG arc (99% + 1% tail)
+  (function drawSVGArcs(){
+    const arcMain = document.getElementById('arcMain');
+    const arcTail = document.getElementById('arcTail');
+    if(!arcMain || !arcTail) return;
+    const r = 88;
+    const circumference = 2 * Math.PI * r;
+    const p1 = 99; // main
+    const p2 = 1;  // tail
+
+    // set dasharray for segments
+    arcMain.setAttribute('stroke-dasharray', (circumference * p1 / 100) + ' ' + circumference);
+    arcMain.setAttribute('stroke-dashoffset', 0);
+    arcMain.setAttribute('stroke', 'url(#gradMain)');
+
+    arcTail.setAttribute('stroke-dasharray', (circumference * p2 / 100) + ' ' + circumference);
+    // rotate tail so it starts right after main arc. use transform attribute on arcTail's element group
+    // we rotate circle around center (110,110) by p1%*360 degrees
+    const rotateDeg = 360 * (p1 / 100);
+    // apply transform via attribute on element (requires resetting transform on parent group, so use wrapper)
+    // easiest: apply transform on arcTail element itself
+    arcTail.setAttribute('transform', `rotate(${rotateDeg} 110 110)`);
+
+    // subtle animation: draw arcs from 0 to final (stroke-dashoffset)
+    arcMain.style.strokeDashoffset = circumference;
+    arcTail.style.strokeDashoffset = circumference;
+    setTimeout(()=>{
+      arcMain.style.transition = 'stroke-dashoffset 900ms ease-out';
+      arcTail.style.transition = 'stroke-dashoffset 900ms ease-out';
+      // final offsets to reveal arcs (stroke-dashoffset to circumference * (1 - portion) )
+      arcMain.style.strokeDashoffset = circumference * (1 - p1/100);
+      arcTail.style.strokeDashoffset = circumference * (1 - p2/100);
+    }, 80);
+  })();
+
+  // memes click to lightbox
+  document.querySelectorAll('.meme').forEach(m=>{
+    m.addEventListener('click', ()=> {
+      const src = m.dataset.src || m.querySelector('img').src;
+      if(!src) return;
+      lightboxImg.src = src;
+      lightbox.style.display = 'flex';
+      lightbox.setAttribute('aria-hidden','false');
+    });
+  });
+
+  // image fallback for meme placeholders and teaser
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', ()=> {
+      if(!img.dataset.fallback){ img.src = placeholderSVG(); img.dataset.fallback = '1'; }
+    });
+  });
+
+  // keyboard escape closes modals & menu
+  window.addEventListener('keydown', (e)=> {
+    if(e.key === 'Escape'){
+      closeSubscribe();
+      closeLightbox();
+      closeMenu();
     }
-    function closeModal(){
-      modal.classList.remove("show");
-      setTimeout(()=>modal.style.display="none",300);
-    }
-    // ===== Chart =====
-    const canvas=document.getElementById("allocChart"),ctx=canvas.getContext("2d");
-    const data=[99,1],colors=["#00bfff","#1e90ff"];let currentPercent=0;
-    function drawChart(percent){
-      ctx.clearRect(0,0,250,250);
-      let start=-Math.PI/2,remaining=(percent/100)*2*Math.PI;
-      for(let i=0;i<data.length;i++){
-        const slice=(data[i]/100)*2*Math.PI;
-        const draw=Math.min(slice,remaining);
-        ctx.beginPath();ctx.moveTo(125,125);
-        ctx.arc(125,125,120,start,start+draw);ctx.closePath();
-        ctx.fillStyle=colors[i];ctx.fill();
-        start+=slice;remaining-=draw;if(remaining<=0)break;
-      }
-      ctx.beginPath();ctx.arc(125,125,70,0,2*Math.PI);
-      ctx.fillStyle="#141414";ctx.fill();
-      ctx.fillStyle="#fff";ctx.font="20px Arial";ctx.textAlign="center";
-      ctx.fillText("99% / 1%",125,130);
-    }
-    (function animate(){if(currentPercent<100){currentPercent++;drawChart(currentPercent);requestAnimationFrame(animate);}})();
-    // ===== Scroll reveal =====
-    function revealOnScroll(){
-      document.querySelectorAll('.teaser,.step').forEach(el=>{
-        if(el.getBoundingClientRect().top<window.innerHeight-50){el.classList.add('visible');}
-      });
-    }
-    window.addEventListener("scroll",revealOnScroll);revealOnScroll();
-    // ===== Particles =====
-    const particles=document.getElementById("particles"),ctxP=particles.getContext("2d");let w,h,stars=[];
-    function resize(){w=particles.width=innerWidth;h=particles.height=innerHeight;stars=[];
-      for(let i=0;i<100;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2,dx:(Math.random()-.5),dy:(Math.random()-.5)})}}
-    function draw(){ctxP.clearRect(0,0,w,h);ctxP.fillStyle="#00bfff";
-      stars.forEach(s=>{ctxP.beginPath();ctxP.arc(s.x,s.y,s.r,0,2*Math.PI);ctxP.fill();
-        s.x+=s.dx;s.y+=s.dy;if(s.x<0||s.x>w)s.dx*=-1;if(s.y<0||s.y>h)s.dy*=-1;});
-      requestAnimationFrame(draw);}
-    window.onresize=resize;resize();draw();
-  </script>
+  });
+
+  // small UX: reveal roadmap items on scroll
+  const steps = document.querySelectorAll('.fun-step');
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(ent=>{ if(ent.isIntersecting) ent.target.classList.add('visible'); })
+  }, {threshold:0.15});
+  steps.forEach(s=>obs.observe(s));
+</script>
 </body>
 </html>
