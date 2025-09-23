@@ -93,6 +93,36 @@ footer p{color:#aaa}
 .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
 .modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
 
+/* Scroll to Top Button */
+#scrollToTopBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed position */
+  bottom: 30px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button at the right */
+  z-index: 1100; /* Make sure it's on top */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Rounded button */
+  background: linear-gradient(135deg, #00f5ff, #00c3cc); /* Gradient background */
+  color: #001; /* Dark text/icon color */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem; /* Icon size */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 245, 255, 0.4); /* Subtle glow effect */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  background: linear-gradient(135deg, #00c3cc, #00f5ff); /* Reverse gradient on hover */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+
 /* Responsive */
 @media(max-width:480px){
   .hero h1{font-size:2rem}
@@ -100,6 +130,13 @@ footer p{color:#aaa}
   .timeline{padding-left:20px}
   .donut-wrapper{width:220px;height:220px}
   .donut-inner{width:120px;height:120px}
+  #scrollToTopBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
 }
 
 /* Animation Keyframes */
@@ -146,9 +183,9 @@ footer p{color:#aaa}
 
   <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+    <div class="countdown-box"><span>00</span><small>Hours</small></div>
+    <div class="countdown-box"><span>00</span><small>Mins</small></div>
+    <div class="countdown-box"><span>00</span><small>Secs</small></div>
   </div>
 </section>
 
@@ -213,6 +250,10 @@ footer p{color:#aaa}
   </div>
 </div>
 
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
 <script>
 // Menu
 const menuBtn=document.getElementById("menuBtn");
@@ -248,7 +289,7 @@ if (storedDate) {
   countdownDate = new Date(storedDate);
 } else {
   countdownDate = new Date();
-  countdownDate.setDate(countdownDate.getDate() + 20);
+  countdownDate.setDate(countdownDate.getDate() + 20); // 20 days from now
   localStorage.setItem('countdownDate', countdownDate.toISOString());
 }
 
@@ -272,6 +313,27 @@ function updateCountdown(){
 }
 setInterval(updateCountdown,1000);
 updateCountdown();
+
+
+// Scroll to Top Button Logic
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    scrollToTopBtn.style.display = "flex"; // Use flex to center the icon
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth' // Smooth scrolling
+  });
+}
 </script>
 </body>
 </html>
