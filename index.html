@@ -40,21 +40,21 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* Allocation Circle */
-.circle-wrapper{width:240px;height:240px;margin:40px auto 0;position:relative;display:flex;align-items:center;justify-content:center}
-.circle-svg{transform:rotate(-90deg);width:100%;height:100%}
-.circle-bg{fill:none;stroke:#222;stroke-width:18}
-.circle-community{fill:none;stroke:#00f5ff;stroke-width:18;stroke-linecap:round}
-.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:18;stroke-linecap:round}
-.circle-team{fill:none;stroke:#ff66ff;stroke-width:18;stroke-linecap:round}
+/* Modern Countdown */
+.countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
+.countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
+.countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
+.countdown-box small{color:#aaa;font-size:0.8rem}
 
-/* Allocation details */
+/* Allocation Donut */
+.allocation{text-align:center}
+.donut-wrapper{width:260px;height:260px;margin:40px auto 0;position:relative}
+.donut-svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut-bg{fill:none;stroke:#222;stroke-width:22}
+.slice-community{fill:none;stroke:#00f5ff;stroke-width:22;stroke-linecap:butt}
+.slice-airdrop{fill:none;stroke:#00ff77;stroke-width:22;stroke-linecap:butt}
+.slice-team{fill:none;stroke:#ff66ff;stroke-width:22;stroke-linecap:butt}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
-
-/* Countdown horizontal modern bar */
-.countdown{max-width:500px;margin:30px auto 0;background:#222;border-radius:12px;overflow:hidden;height:28px;position:relative;border:1px solid rgba(255,255,255,0.03)}
-.countdown-bar{height:100%;background:linear-gradient(90deg,#00f5ff,#00c3cc);transform-origin:left;transition:width 1s linear}
-.countdown-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;color:#cfefff99;pointer-events:none;font-size:0.95rem}
 
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
@@ -89,9 +89,7 @@ footer p{color:#aaa}
   .hero h1{font-size:2rem}
   .cta{padding:10px 20px}
   .timeline{padding-left:20px}
-  .circle-wrapper{width:200px;height:200px}
-  .circle-svg{width:200px;height:200px}
-  .countdown{max-width:320px;height:24px}
+  .donut-wrapper{width:220px;height:220px}
 }
 </style>
 </head>
@@ -131,22 +129,24 @@ footer p{color:#aaa}
   </div>
 
   <!-- Modern countdown -->
-  <div class="countdown" id="countdown">
-    <div class="countdown-bar" id="countdownBar"></div>
-    <div class="countdown-overlay" id="countdownOverlay">Loading...</div>
+  <div class="countdown-container" id="countdown">
+    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
   </div>
 </section>
 
 <section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
-  <p>94% Community / 5% Airdrop / 1% Team</p>
+  <p>Community 94% • Airdrop 5% • Team 1%</p>
 
-  <div class="circle-wrapper">
-    <svg class="circle-svg" viewBox="0 0 240 240">
-      <circle class="circle-bg" cx="120" cy="120" r="102"/>
-      <circle class="circle-community" cx="120" cy="120" r="102"/>
-      <circle class="circle-airdrop" cx="120" cy="120" r="102"/>
-      <circle class="circle-team" cx="120" cy="120" r="102"/>
+  <div class="donut-wrapper">
+    <svg class="donut-svg" viewBox="0 0 240 240">
+      <circle class="donut-bg" cx="120" cy="120" r="100"/>
+      <circle class="slice-community" cx="120" cy="120" r="100"/>
+      <circle class="slice-airdrop" cx="120" cy="120" r="100"/>
+      <circle class="slice-team" cx="120" cy="120" r="100"/>
     </svg>
   </div>
 
@@ -230,16 +230,16 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 items.forEach(i=>obs.observe(i));
 
-// Allocation donut with 3 distinct colors
+// Donut with 3 distinct segments
 (function(){
-  const r=102;
+  const r=100;
   const circ=2*Math.PI*r;
   const pCommunity=0.94, pAirdrop=0.05, pTeam=0.01;
   const lenC=circ*pCommunity, lenA=circ*pAirdrop, lenT=circ*pTeam;
 
-  const cComm=document.querySelector('.circle-community');
-  const cAir=document.querySelector('.circle-airdrop');
-  const cTeam=document.querySelector('.circle-team');
+  const cComm=document.querySelector('.slice-community');
+  const cAir=document.querySelector('.slice-airdrop');
+  const cTeam=document.querySelector('.slice-team');
 
   cComm.style.strokeDasharray=`${lenC} ${circ}`;
   cAir.style.strokeDasharray=`${lenA} ${circ}`;
@@ -250,23 +250,27 @@ items.forEach(i=>obs.observe(i));
   cTeam.style.strokeDashoffset=-(lenC+lenA);
 })();
 
-// Modern countdown bar
+// Modern countdown
 const countdownDate=new Date();countdownDate.setDate(countdownDate.getDate()+20);
-const totalDur=20*24*60*60*1000;
 function updateCountdown(){
   const now=Date.now(), rem=countdownDate-now;
-  const bar=document.getElementById('countdownBar');
-  const overlay=document.getElementById('countdownOverlay');
-  if(rem<=0){bar.style.width='0%';overlay.textContent='Launched!';return;}
-  const pct=(rem/totalDur)*100;bar.style.width=pct+'%';
+  if(rem<=0){
+    document.getElementById("days").textContent="00";
+    document.getElementById("hours").textContent="00";
+    document.getElementById("minutes").textContent="00";
+    document.getElementById("seconds").textContent="00";
+    return;
+  }
   const d=Math.floor(rem/(1000*60*60*24));
   const h=Math.floor((rem%(1000*60*60*24))/(1000*60*60));
   const m=Math.floor((rem%(1000*60*60))/(1000*60));
   const s=Math.floor((rem%(1000*60))/1000);
-  overlay.textContent=`${d}d ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  document.getElementById("days").textContent=String(d).padStart(2,'0');
+  document.getElementById("hours").textContent=String(h).padStart(2,'0');
+  document.getElementById("minutes").textContent=String(m).padStart(2,'0');
+  document.getElementById("seconds").textContent=String(s).padStart(2,'0');
 }
 setInterval(updateCountdown,1000);updateCountdown();
 </script>
 </body>
 </html>
-
