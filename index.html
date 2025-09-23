@@ -1,249 +1,503 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>BROX — Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta name="description" content="BROX — community-first memecoin. Join Telegram, get early access & catch the memes." />
+  <meta name="theme-color" content="#0ec5ff" />
+  <meta name="robots" content="index,follow" />
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
-    a{text-decoration:none;color:inherit}
-    h2{color:#00f5ff;margin-bottom:16px;text-align:center}
-    section{padding:80px 20px}
+    /* ========== VARIABLES (Sky-blue theme + warm accents) ========== */
+    :root{
+      --bg-1: #041826;
+      --bg-2: #062a3a;
+      --panel: rgba(255,255,255,0.04);
+      --glass: rgba(255,255,255,0.03);
+      --muted: #bfe8ff;
+      --accent: #0ec5ff; /* sky-blue */
+      --accent-2: #ff7a45; /* warm fire accent */
+      --maxw: 1150px;
+      --radius: 14px;
+      --mono: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--mono);
+      background: linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      color:#eaf9ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      -webkit-tap-highlight-color: transparent;
+    }
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
 
-    /* Header */
+    /* ===== Layout container ===== */
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:20px}
+
+    /* ===== Header ===== */
     header{
-      position:fixed;top:0;left:0;width:100%;
-      height:70px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
-      border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200;
+      position:sticky;top:0;z-index:60;
+      background:linear-gradient(180deg, rgba(2,18,28,0.6), rgba(2,18,28,0.4));
+      backdrop-filter: blur(8px);
+      border-bottom:1px solid rgba(255,255,255,0.03);
     }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:52px;height:52px;border-radius:50%}
-    .logo h1{font-size:1.25rem;color:#00f5ff}
-
-    /* Menu */
-    .menu-btn{
-      font-size:1.8rem;cursor:pointer;
-      position:fixed;top:16px;right:22px;z-index:1300;
-      width:44px;height:44px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(0,245,255,0.15);
-      border:1px solid rgba(0,245,255,0.6);
-      color:#00f5ff;transition:.18s;
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:58px;height:58px;border-radius:12px;
+      display:grid;place-items:center;font-weight:900;color:#012028;
+      background: linear-gradient(135deg,var(--accent), #79f0ff);
+      box-shadow: 0 8px 30px rgba(14,197,255,0.12);
+      font-family: monospace;
     }
-    .menu-btn:hover{background:rgba(0,245,255,0.25)}
-    .side-menu{
-      position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);
-      background:rgba(12,12,12,0.95);padding:20px 18px 30px;
-      box-shadow:-4px 0 18px rgba(0,245,255,0.05);
-      transition:right .28s ease-in-out;z-index:1250;
-      border-left:1px solid rgba(255,255,255,0.05);
+    .brand-title{font-weight:800;font-size:1.05rem}
+    .brand-sub{font-size:0.8rem;color:var(--muted)}
+
+    nav.links{display:flex;gap:18px;align-items:center}
+    nav.links a{color:var(--muted);font-weight:600;padding:8px;border-radius:8px}
+    nav.links a:hover{color:#012028;background:linear-gradient(90deg,var(--accent),#7fe5ff);padding:8px 12px}
+
+    .cta{background:linear-gradient(90deg,var(--accent),#67e0ff);color:#012028;padding:10px 14px;border-radius:12px;font-weight:800;box-shadow:0 8px 30px rgba(14,197,255,0.12)}
+    .small-pill{background:var(--glass);padding:6px 10px;border-radius:999px;color:var(--muted);font-weight:700}
+
+    /* hamburger for mobile */
+    .hamburger{display:none;background:var(--glass);padding:8px;border-radius:10px;cursor:pointer}
+    @media (max-width:980px){ nav.links{display:none}.hamburger{display:inline-flex} }
+
+    /* ===== Hero ===== */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:60px 18px}
+    .hero-left h1{font-size:44px;margin:0;color:var(--accent);text-shadow:0 12px 40px rgba(14,197,255,0.06)}
+    .hero-left p{margin:12px 0 18px;color:var(--muted);max-width:64ch}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+    .hero-right{display:flex;flex-direction:column;gap:14px;align-items:center;justify-content:center}
+
+    .mascot{
+      width:240px;height:240px;border-radius:999px;display:grid;place-items:center;
+      background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.06), transparent 20%), linear-gradient(135deg,#e0fbff, #a5f0ff);
+      box-shadow: 0 30px 80px rgba(14,197,255,0.08), 0 6px 24px rgba(0,0,0,0.4);
+      overflow:hidden;
     }
-    .side-menu.open{right:0}
-    .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
-    .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
-    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
-    .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
-    /* Hero */
-    .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
-    .hero .logoBig{width:160px;height:160px;border-radius:50%}
-    .hero h1{font-size:3rem;color:#00f5ff}
-    .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-    .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+    /* countdown */
+    .countdown{display:flex;gap:12px;align-items:center}
+    .countdown .box{background:rgba(255,255,255,0.03);padding:10px 14px;border-radius:10px;text-align:center;min-width:70px}
+    .countdown .num{font-weight:900;font-size:1.15rem;color:#fff}
 
-    /* Teaser */
-    .teaser{text-align:center}
-    .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
-    .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
+    /* badges */
+    .status-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
 
-    /* Allocation Circle */
-    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;animation:spin 18s linear infinite}
-    .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
-    .circle-bg{fill:none;stroke:#222;stroke-width:14}
-    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6}
-    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616}
-    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
+    /* ===== Teaser / Lightbox ===== */
+    .teaser{margin:32px 18px;padding:26px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));display:flex;gap:16px;align-items:center;justify-content:center}
+    .teaser .thumb{width:360px;border-radius:12px;cursor:pointer;box-shadow:0 18px 50px rgba(14,197,255,0.06)}
+    .teaser h2{font-size:2rem;color:var(--accent);margin:0}
+    .teaser p{color:var(--muted);margin:6px 0 0}
 
-    /* Roadmap */
-    .roadmap{background:#0c0c0c;padding-bottom:100px}
-    .roadmap h2{font-size:2.2rem;margin-bottom:20px}
-    .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
-    .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
-    .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
-    .timeline .item.visible{opacity:1;transform:none}
-    .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+    /* ===== Allocation ===== */
+    .section{padding:48px 18px}
+    .section h2{font-size:2.2rem;color:var(--accent);text-align:center;margin-bottom:20px}
+    .alloc-grid{display:grid;grid-template-columns:320px 1fr;gap:20px;align-items:start;max-width:1100px;margin:0 auto}
+    .alloc-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .card{background:var(--panel);padding:18px;border-radius:12px;box-shadow:0 10px 30px rgba(2,8,12,0.55)}
+    .card h3{margin:0;color:var(--accent);font-size:1.2rem}
+    .card p{color:var(--muted);margin-top:8px;font-size:0.95rem}
 
-    /* FAQ */
-    .faq{max-width:800px;margin:0 auto;text-align:left}
-    .faq h3{color:#00f5ff;margin-top:18px}
-    .faq p{color:#ccc;margin-bottom:12px}
+    .notes{margin-top:18px;color:#cfefff;background:transparent;padding:16px;border-radius:10px;text-align:center}
 
-    /* Footer */
-    footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-    .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-    .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
-    .socials a:hover{color:#00f5ff}
-    footer p{color:#aaa}
+    /* ===== Status ===== */
+    .status-panel{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));padding:18px;border-radius:12px;text-align:center}
+    .status-panel strong{display:block;font-size:1.15rem;color:#fff;margin-bottom:6px}
+    .status-panel .muted{color:var(--muted);font-size:0.95rem}
 
-    /* Modal */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
-    .modal.show{opacity:1;pointer-events:auto}
-    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
-    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
+    /* ===== Funny Roadmap ===== */
+    .roadmap{max-width:900px;margin:18px auto;display:grid;gap:12px}
+    .fun-step{padding:18px;border-radius:12px;background:linear-gradient(180deg,#042a35,#033441);border-left:6px solid var(--accent);box-shadow:0 10px 30px rgba(0,0,0,0.45)}
+    .fun-step strong{display:block;color:var(--accent);margin-bottom:8px}
+    .fun-step p{color:var(--muted);margin:0}
+
+    /* ===== Community Memes wall ===== */
+    .memes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-top:18px}
+    .meme{background:#02151b;padding:10px;border-radius:10px;text-align:center;cursor:pointer;overflow:hidden}
+    .meme img{width:100%;height:160px;object-fit:cover;border-radius:8px;display:block}
+    .meme p{color:var(--muted);font-size:0.9rem;margin:8px 0 0}
+
+    /* ===== Footer ===== */
+    footer{padding:30px 18px;border-top:1px solid rgba(255,255,255,0.03);margin-top:26px}
+    .socials{display:flex;gap:12px;justify-content:center;margin-bottom:12px}
+    .soc{width:44px;height:44px;border-radius:10px;display:grid;place-items:center;background:var(--glass);cursor:pointer}
+    .copyright{text-align:center;color:var(--muted);font-size:0.95rem}
+
+    /* ===== Modal / Lightbox ===== */
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9999;align-items:center;justify-content:center;padding:14px}
+    .modal .box{background:linear-gradient(180deg,#06171d,#07232b);padding:20px;border-radius:12px;width:100%;max-width:520px;box-shadow:0 30px 80px rgba(2,8,12,0.8);position:relative}
+    .close{position:absolute;right:12px;top:12px;background:transparent;border:none;color:var(--muted);font-size:18px;cursor:pointer}
+
+    /* responsive */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr; padding:40px 14px}
+      .hero-right{order:-1}
+      .mascot{width:200px;height:200px}
+      .teaser .thumb{width:260px}
+      .alloc-grid{grid-template-columns:1fr}
+    }
+
+    /* focus outline accessibility */
+    a:focus,button:focus,input:focus{outline:3px solid rgba(14,197,255,0.12);outline-offset:3px}
   </style>
 </head>
 <body>
-  <!-- Header -->
+
+  <!-- HEADER -->
   <header>
-    <div class="logo">
-      <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo">
-      <h1>BROX</h1>
+    <div class="wrap nav" role="navigation" aria-label="Main Navigation">
+      <div class="brand">
+        <div class="logo" aria-hidden>BRX</div>
+        <div>
+          <div class="brand-title">BROX</div>
+          <div class="brand-sub">Born in Fun — Memes & Community</div>
+        </div>
+      </div>
+
+      <nav class="links" aria-label="Primary">
+        <a href="#hero">Home</a>
+        <a href="#teaser">Teaser</a>
+        <a href="#allocation">Allocation</a>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contact">Contact</a>
+        <a class="cta" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer">Join Telegram 🚀</a>
+      </nav>
+
+      <button class="hamburger" id="openMenu" aria-label="Open menu">☰</button>
     </div>
-    <button id="menuBtn" class="menu-btn">☰</button>
   </header>
 
-  <!-- Side Menu -->
-  <div id="sideMenu" class="side-menu">
-    <a href="#hero">Home</a>
-    <a href="#teaser">Teaser</a>
-    <a href="#allocation">Allocation</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#faq">FAQ</a>
-    <a href="#footer">Contact</a>
-  </div>
-  <div id="menuOverlay" class="menu-overlay"></div>
-
-  <!-- Hero -->
-  <section id="hero" class="hero">
-    <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
-    <h1>🔥 Welcome to BROX 🔥</h1>
-    <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-    <button class="cta" onclick="openModal()">Early Access</button>
-  </section>
-
-  <!-- Teaser -->
-  <section id="teaser" class="teaser">
-    <h2>🚀 Coming Soon...</h2>
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
-    <!-- Status text -->
-    <div class="status-box">
-      <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-      <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-      <p><strong style="color:#00f5ff">Chain:</strong> Solana (SPL) - TBD</p>
-    </div>
-  </section>
-
-  <!-- Allocation -->
-  <section id="allocation" class="allocation">
-    <h2>Token Allocation</h2>
-    <p>99% Community / 1% Team</p>
-    <div class="circle-wrapper">
-      <svg class="circle-svg" viewBox="0 0 220 220">
-        <defs>
-          <linearGradient id="gradient99" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00f5ff"/>
-            <stop offset="100%" stop-color="#00c3cc"/>
-          </linearGradient>
-        </defs>
-        <circle class="circle-bg" cx="110" cy="110" r="99"/>
-        <circle class="circle-progress" cx="110" cy="110" r="99"/>
-        <circle class="circle-1" cx="110" cy="110" r="99"/>
-      </svg>
-    </div>
-
-    <div class="allocation-details">
-      <h3 style="color:#00f5ff;margin-top:18px">99% Community</h3>
-      <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
-
-      <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
-      <p>Reserved for long-term project continuity and small team allocation.</p>
-
-      <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
-      <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
-    </div>
-  </section>
-
-  <!-- Roadmap -->
-  <section id="roadmap" class="roadmap">
-    <h2>Roadmap</h2>
-    <div class="timeline">
-      <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
-      <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
-      <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
-      <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>FAQ</h2>
-    <div class="faq">
-      <h3>What is BROX?</h3>
-      <p>BROX is a meme coin built by the community for the community.</p>
-      <h3>Where can I join the community?</h3>
-      <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
-      <h3>Is BROX safe?</h3>
-      <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-    </div>
-    <p>&copy; 2025 BROX. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="modal" class="modal">
-    <div class="card">
-      <button class="close-btn" onclick="closeModal()">✖</button>
-      <h2 style="color:#00f5ff">Get Notified</h2>
-      <p>Enter your email to join early access.</p>
-      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
-      <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
-    </div>
+  <!-- MOBILE SIDE MENU (cloned links) -->
+  <div id="mobileMenu" style="position:fixed;top:0;right:-360px;height:100%;width:320px;background:linear-gradient(180deg,#02151b,#041e27);z-index:120;transition:right .28s;padding:80px 18px;">
+    <button id="closeMenu" class="close" aria-label="Close menu">✕</button>
+    <nav style="display:flex;flex-direction:column;gap:12px">
+      <a href="#hero">Home</a>
+      <a href="#teaser">Teaser</a>
+      <a href="#allocation">Allocation</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contact">Contact</a>
+      <a class="cta" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer">Join Telegram 🚀</a>
+    </nav>
   </div>
 
-  <!-- Script -->
-  <script>
-    const menuBtn=document.getElementById("menuBtn");
-    const sideMenu=document.getElementById("sideMenu");
-    const menuOverlay=document.getElementById("menuOverlay");
-    function toggleMenu(force){
-      const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");
-      if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-      else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
-    }
-    menuBtn.addEventListener("click",()=>toggleMenu());
-    menuOverlay.addEventListener("click",()=>toggleMenu(false));
-    document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
+  <!-- HERO -->
+  <main class="wrap">
+    <section id="hero" class="hero" aria-labelledby="heroTitle">
+      <div class="hero-left">
+        <h1 id="heroTitle">🔥 Welcome to BROX — Memes Fuel the Revolution</h1>
+        <p class="lead muted">BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent - the community leads the way.</p>
 
-    // Modal
-    const modal=document.getElementById("modal");
-    function openModal(){modal.classList.add("show")}
-    function closeModal(){modal.classList.remove("show")}
-    function submitEmail(){
-      const email=document.getElementById("emailInput").value.trim();
-      if(!email){alert("Enter email");return}
-      alert("Thanks: "+email);
-      closeModal();
-    }
+        <div class="hero-cta">
+          <button class="cta" onclick="openSubscribe()">Get Early Access</button>
+          <a class="small-pill" href="#allocation">Token Allocation</a>
+        </div>
 
-    // Roadmap reveal
-    const items=document.querySelectorAll('.timeline .item');
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-    },{threshold:0.2});
-    items.forEach(i=>obs.observe(i));
-  </script>
+        <div style="margin-top:18px" class="status-row">
+          <div class="small-pill">Status: <strong style="margin-left:8px;color:#fff">Pre-Launch</strong></div>
+          <div class="small-pill">Audit: <strong style="margin-left:8px;color:#fff">Planned</strong></div>
+          <div class="small-pill">Chain: <strong style="margin-left:8px;color:#fff">Solana</strong></div>
+        </div>
+
+        <div style="margin-top:18px">
+          <div style="font-weight:800;margin-bottom:8px">Countdown to Launch</div>
+          <div class="countdown" aria-live="polite" id="countdown">
+            <div class="box"><div class="num" id="cd-days">00</div><div style="font-size:12px;color:var(--muted)">Days</div></div>
+            <div class="box"><div class="num" id="cd-hours">00</div><div style="font-size:12px;color:var(--muted)">Hours</div></div>
+            <div class="box"><div class="num" id="cd-mins">00</div><div style="font-size:12px;color:var(--muted)">Mins</div></div>
+            <div class="box"><div class="num" id="cd-secs">00</div><div style="font-size:12px;color:var(--muted)">Secs</div></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-right" aria-hidden>
+        <div class="mascot" id="mascotWrap">
+          <!-- If user image exists, it will show; otherwise inline SVG mascot -->
+          <img id="mascotImg" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX mascot" style="width:100%;height:100%;object-fit:cover">
+        </div>
+        <div class="small-pill">Total Supply: 1,000,000,000 BROX</div>
+      </aside>
+    </section>
+
+    <!-- TEASER -->
+    <section id="teaser" class="teaser">
+      <div style="text-align:center">
+        <img id="teaserImg" class="thumb" src="Picsart_25-09-21_10-14-23-094.png" alt="BROX teaser (click to enlarge)" style="margin:0 auto">
+        <h2 style="margin-top:12px">🚀 Coming Soon...</h2>
+        <p class="muted">Stay tuned — community rewards, airdrops and meme contests incoming.</p>
+      </div>
+    </section>
+
+    <!-- ALLOCATION -->
+    <section id="allocation" class="section" aria-labelledby="allocTitle">
+      <h2 id="allocTitle">Token Allocation</h2>
+
+      <div class="alloc-grid">
+        <div class="card status-panel" aria-hidden>
+          <strong>Allocation Snapshot</strong>
+          <div style="margin-top:10px;color:var(--muted)">Clear & community-first distribution</div>
+          <canvas id="allocChart" width="280" height="280" style="margin-top:14px"></canvas>
+        </div>
+
+        <div>
+          <div class="alloc-cards">
+            <div class="card">
+              <h3>99% Community</h3>
+              <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
+            </div>
+            <div class="card">
+              <h3>1% Team & Holders</h3>
+              <p>Reserved for long-term project continuity and a small team allocation.</p>
+            </div>
+          </div>
+
+          <div class="notes" role="note" aria-live="polite">
+            <strong>Notes:</strong> This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNNY ROADMAP -->
+    <section id="roadmap" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Roadmap (Meme Edition)</h2>
+      <div class="roadmap">
+        <div class="fun-step"><strong>Phase 1 — Make Noise</strong><p>Spam the feeds with dank memes and recruit the first 1,000 apes.</p></div>
+        <div class="fun-step"><strong>Phase 2 — Viral Mode</strong><p>Turn memes into momentum — contests, collabs, and meme raids.</p></div>
+        <div class="fun-step"><strong>Phase 3 — Moon Prep</strong><p>Smart contract audit, token launch plan, and listing moves.</p></div>
+        <div class="fun-step"><strong>Phase 4 — Apes Together</strong><p>Partnerships, community grants, and governance experiments (DAO jokes allowed).</p></div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY MEMES -->
+    <section id="community" class="section">
+      <h2 style="text-align:center;color:var(--accent)">Community Memes</h2>
+      <p style="text-align:center;color:var(--muted);max-width:850px;margin:6px auto 18px">A wall for the funniest BROX submissions. Click to enlarge — send yours to our Telegram!</p>
+      <div class="memes" id="memesGrid" aria-live="polite">
+        <!-- sample placeholders; user can replace with community images -->
+        <div class="meme" tabindex="0" data-src="Picsart_25-09-21_10-14-23-094.png"><img src="Picsart_25-09-21_10-14-23-094.png" alt="meme sample"><p>Official teaser meme</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>Submit yours</p></div>
+        <div class="meme" tabindex="0" data-src=""><img src="" alt="placeholder" onerror="this.src=placeholderSVG()"><p>More memes soon</p></div>
+      </div>
+    </section>
+
+    <!-- CONTACT / FOOTER -->
+    <footer id="contact" class="section" style="padding-top:28px">
+      <div class="socials" role="navigation" aria-label="Social links">
+        <a class="soc" href="https://www.instagram.com/brox__official" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <!-- instagram svg -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5" stroke="#eaf9ff" stroke-opacity="0.9" stroke-width="1.2"/><circle cx="12" cy="12" r="3.2" stroke="#eaf9ff" stroke-opacity="0.9" stroke-width="1.2"/><circle cx="17.5" cy="6.5" r="0.7" fill="#eaf9ff"/></svg>
+        </a>
+
+        <a class="soc" href="https://www.tiktok.com/@brox__official?_t=ZS-8zuoUClUipA&_r=1" target="_blank" rel="noopener noreferrer" title="TikTok">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M12 6v6a3 3 0 1 0 3 -3" stroke="#eaf9ff" stroke-width="1.2" stroke-linecap="round"/></svg>
+        </a>
+
+        <a class="soc" href="https://x.com/Brox__official?t=qQZkwTKhwXwAWvC-bNNsng&s=09" target="_blank" rel="noopener noreferrer" title="X">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M20 6.5c-.6.3-1.2.6-1.8.8.7-.4 1.2-1 1.5-1.8-.6.4-1.3.7-2.1.9C16.8 5.5 15.8 5 14.7 5c-1.8 0-3.2 1.4-3.2 3.2 0 .3.05.6.15.9C8.6 9 6 7.7 4.3 5.6c-.4.7-.7 1.5-.7 2.3 0 1.6.8 3 2 3.8-.5 0-1-.15-1.4-.4v.04c0 2.2 1.5 4 3.6 4.4-.38.1-.8.15-1.2.15-.3 0-.6 0-.9-.08.6 1.8 2.3 3.1 4.3 3.1C7.7 19.5 9.7 20 11.8 20c3 0 5.2-2.5 5.2-5 0-.08 0-.14 0-.22.36-.24.68-.52.96-.84-.35.16-.72.28-1.1.34.4-.25.72-.64.88-1.1z" stroke="#eaf9ff" stroke-width="0.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <a class="soc" href="https://t.me/brox_official" target="_blank" rel="noopener noreferrer" title="Telegram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden><path d="M21 4L3 10l4.5 1.5L9 17l1.8-3.8L21 4z" stroke="#eaf9ff" stroke-width="0.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <div class="small-pill">Built for fun</div>
+        <div class="small-pill">Community-first</div>
+        <div class="small-pill">Memes > Everything</div>
+      </div>
+
+      <div class="copyright">© <span id="year"></span> BROX. All Rights Reserved.</div>
+    </footer>
+  </main>
+
+  <!-- MODALS -->
+  <div id="subscribeModal" class="modal" aria-hidden="true">
+    <div class="box" role="dialog" aria-modal="true" aria-labelledby="subTitle">
+      <button class="close" aria-label="close" onclick="closeSubscribe()">✕</button>
+      <h3 id="subTitle" style="color:var(--accent)">Get Early Access</h3>
+      <p style="color:var(--muted)">Subscribe for launch alerts, airdrop info and meme contest invites.</p>
+      <input id="email" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);margin-top:12px;background:transparent;color:#eaf9ff">
+      <div style="display:flex;gap:10px;margin-top:12px">
+        <button class="cta" onclick="submitEmail()">Subscribe</button>
+        <button class="small-pill" onclick="closeSubscribe()">Cancel</button>
+      </div>
+      <div id="subMsg" style="margin-top:12px;color:var(--muted)"></div>
+    </div>
+  </div>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" class="modal" style="display:none" aria-hidden="true">
+    <div class="box" style="background:transparent;box-shadow:none;">
+      <button class="close" aria-label="close" onclick="closeLightbox()">✕</button>
+      <img id="lightboxImg" src="" alt="enlarged image" style="width:100%;max-width:860px;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,0.6)">
+    </div>
+  </div>
+
+<script>
+/* =========================
+   Initialization & Helpers
+   ========================= */
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function placeholderSVG(){
+  return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400"><rect width="100%" height="100%" fill="#012028"/><text x="50%" y="50%" fill="#0ec5ff" font-size="16" text-anchor="middle" dominant-baseline="middle">Image missing — add your file</text></svg>'
+  );
+}
+
+/* =========================
+   Mobile menu
+   ========================= */
+const openMenu = document.getElementById('openMenu');
+const mobileMenu = document.getElementById('mobileMenu');
+const closeMenu = document.getElementById('closeMenu');
+openMenu && openMenu.addEventListener('click', ()=> mobileMenu.style.right = '0');
+closeMenu && closeMenu.addEventListener('click', ()=> mobileMenu.style.right = '-360px');
+document.querySelectorAll('#mobileMenu a').forEach(a=>a.addEventListener('click', ()=> mobileMenu.style.right = '-360px'));
+
+/* =========================
+   Mascot fallback
+   ========================= */
+const mascotImg = document.getElementById('mascotImg');
+mascotImg.addEventListener('error', ()=> mascotImg.src = placeholderSVG());
+
+/* =========================
+   Lightbox (teaser + memes)
+   ========================= */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+document.getElementById('teaserImg').addEventListener('click', ()=> {
+  lightboxImg.src = document.getElementById('teaserImg').src;
+  lightbox.style.display = 'flex';
+  lightbox.setAttribute('aria-hidden','false');
+});
+function closeLightbox(){ lightbox.style.display = 'none'; lightbox.setAttribute('aria-hidden','true'); lightboxImg.src=''; }
+
+// enable clicking on meme thumbnails to open lightbox
+document.querySelectorAll('.meme').forEach(m=>{
+  m.addEventListener('click', ()=> {
+    const src = m.dataset.src || m.querySelector('img').src;
+    if(!src) return;
+    lightboxImg.src = src;
+    lightbox.style.display = 'flex';
+    lightbox.setAttribute('aria-hidden','false');
+  });
+});
+
+/* =========================
+   Subscribe modal (localStorage demo)
+   ========================= */
+const subModal = document.getElementById('subscribeModal');
+function openSubscribe(){ subModal.style.display='flex'; subModal.setAttribute('aria-hidden','false'); document.getElementById('email').focus(); }
+function closeSubscribe(){ subModal.style.display='none'; subModal.setAttribute('aria-hidden','true'); document.getElementById('subMsg').textContent=''; }
+function submitEmail(){
+  const email = document.getElementById('email').value.trim();
+  const msg = document.getElementById('subMsg');
+  if(!email || !/^\S+@\S+\.\S+$/.test(email)){ msg.textContent = 'Please enter a valid email.'; return; }
+  const key = 'brox_subs_v1';
+  const list = JSON.parse(localStorage.getItem(key) || '[]');
+  if(list.includes(email)){ msg.textContent = 'Already subscribed — thanks!'; document.getElementById('email').value=''; return; }
+  list.push(email); localStorage.setItem(key, JSON.stringify(list));
+  msg.textContent = 'Subscribed! We will notify you.'; document.getElementById('email').value='';
+}
+
+/* =========================
+   Countdown timer
+   - Set LAUNCH_DATE to your desired UTC target
+   ========================= */
+/* Choose a launch date (UTC). Edit this date if you want a different target. */
+const LAUNCH_DATE = new Date('2025-11-01T12:00:00Z'); // example: Nov 1, 2025 12:00 UTC
+function updateCountdown(){
+  const now = new Date();
+  let diff = Math.max(0, LAUNCH_DATE - now);
+  const days = Math.floor(diff / (1000*60*60*24));
+  diff -= days * (1000*60*60*24);
+  const hours = Math.floor(diff / (1000*60*60));
+  diff -= hours * (1000*60*60);
+  const mins = Math.floor(diff / (1000*60));
+  diff -= mins * (1000*60);
+  const secs = Math.floor(diff / 1000);
+  document.getElementById('cd-days').textContent = String(days).padStart(2,'0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+}
+updateCountdown();
+setInterval(updateCountdown,1000);
+
+/* =========================
+   Allocation animated donut (canvas)
+   ========================= */
+(function drawAlloc(){
+  const c = document.getElementById('allocChart');
+  if(!c) return;
+  const ctx = c.getContext('2d'), center = c.width/2, r = Math.min(center-12,120);
+  const data = [99,1], colors = [getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#0ec5ff','#09303a'];
+  let progress = 0;
+  function frame(){
+    ctx.clearRect(0,0,c.width,c.height);
+    let p = Math.min(1, progress/60);
+    let angle = -Math.PI/2;
+    for(let i=0;i<data.length;i++){
+      const slice = (data[i]/100)*2*Math.PI;
+      const draw = slice * p;
+      ctx.beginPath(); ctx.moveTo(center,center);
+      ctx.arc(center,center,r, angle, angle+draw);
+      ctx.closePath(); ctx.fillStyle = colors[i] || '#0ec5ff'; ctx.fill();
+      angle += draw;
+    }
+    // inner circle
+    ctx.beginPath(); ctx.arc(center,center, r*0.58, 0, Math.PI*2); ctx.fillStyle = '#031a22'; ctx.fill();
+    // text
+    ctx.fillStyle = '#eaf9ff'; ctx.font = '18px sans-serif'; ctx.textAlign = 'center'; ctx.fillText('99% / 1%', center, center+6);
+    progress++; if(p<1) requestAnimationFrame(frame);
+  }
+  frame();
+})();
+
+/* =========================
+   Image fallback for any <img>
+   ========================= */
+document.querySelectorAll('img').forEach(img=>{
+  img.addEventListener('error', ()=> {
+    if(!img.dataset.fallback){
+      img.src = placeholderSVG();
+      img.dataset.fallback = '1';
+    }
+  });
+});
+
+/* =========================
+   Accessibility & keyboard controls
+   ========================= */
+window.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    closeSubscribe();
+    closeLightbox();
+    mobileMenu && (mobileMenu.style.right = '-360px');
+    lightbox.style.display = 'none';
+  }
+});
+
+/* =========================
+   Small UX: focusable meme boxes
+   ========================= */
+document.querySelectorAll('.meme').forEach(m=>{
+  m.addEventListener('keydown',(e)=>{ if(e.key === 'Enter') m.click(); });
+});
+
+/* =========================
+   End of script
+   ========================= */
+</script>
 </body>
 </html>
