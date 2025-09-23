@@ -60,11 +60,12 @@
     .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
     /* Allocation Circle */
-    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
+    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;animation:spin 18s linear infinite}
     .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
     .circle-bg{fill:none;stroke:#222;stroke-width:14}
-    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s}
-    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616;transition:1.8s}
+    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6}
+    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616}
+    @keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
     .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
 
     /* Roadmap */
@@ -132,7 +133,7 @@
     <div class="status-box">
       <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
       <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-      <p><strong style="color:#00f5ff">Chain:</strong> Ethereum (ERC-20) - TBD</p>
+      <p><strong style="color:#00f5ff">Chain:</strong> Solana (SPL) - TBD</p>
     </div>
   </section>
 
