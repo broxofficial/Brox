@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -11,11 +11,13 @@ body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-
 a{text-decoration:none;color:inherit}
 h2{color:#00f5ff;margin-bottom:16px;text-align:center}
 section{padding:80px 20px}
+
 /* Header */
 header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200}
 .logo{display:flex;align-items:center;gap:12px}
 .logo img{width:52px;height:52px;border-radius:50%}
 .logo h1{font-size:1.25rem;color:#00f5ff}
+
 /* Menu */
 .menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
 .menu-btn:hover{background:rgba(0,245,255,0.25)}
@@ -25,35 +27,33 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
 .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
+
 /* Hero */
 .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+
 /* Teaser */
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* Allocation Circle & Rotator */
-/* wrapper that rotates the whole donut */
-.pie-rotator{display:flex;align-items:center;justify-content:center;width:220px;height:220px;animation: spin 8s linear infinite}
-@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-.circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;display:flex;align-items:center;justify-content:center}
-.circle-svg{transform:rotate(-90deg);width:100%;height:100%} /* position start at top */
-.circle-bg{fill:none;stroke:#222;stroke-width:14}
-.circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .9s ease,stroke-dasharray .9s ease}
-.circle-team{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .9s ease,stroke-dasharray .9s ease}
-.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:14;stroke-linecap:round;transition:stroke-dashoffset .9s ease,stroke-dasharray .9s ease}
-/* center is intentionally empty (no text inside donut) */
+/* Allocation Circle */
+.circle-wrapper{width:240px;height:240px;margin:40px auto 0;position:relative;display:flex;align-items:center;justify-content:center}
+.circle-svg{transform:rotate(-90deg);width:100%;height:100%}
+.circle-bg{fill:none;stroke:#222;stroke-width:18}
+.circle-community{fill:none;stroke:#00f5ff;stroke-width:18;stroke-linecap:round}
+.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:18;stroke-linecap:round}
+.circle-team{fill:none;stroke:#ff66ff;stroke-width:18;stroke-linecap:round}
 
 /* Allocation details */
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
 
-/* Countdown horizontal bar (modern) */
+/* Countdown horizontal modern bar */
 .countdown{max-width:500px;margin:30px auto 0;background:#222;border-radius:12px;overflow:hidden;height:28px;position:relative;border:1px solid rgba(255,255,255,0.03)}
-.countdown-bar{height:100%;width:100%;background:linear-gradient(90deg,#00f5ff,#00c3cc);transform-origin:left;transition:width 1s linear}
+.countdown-bar{height:100%;background:linear-gradient(90deg,#00f5ff,#00c3cc);transform-origin:left;transition:width 1s linear}
 .countdown-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-weight:700;color:#cfefff99;pointer-events:none;font-size:0.95rem}
 
 /* Roadmap */
@@ -64,16 +64,19 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
 .timeline .item.visible{opacity:1;transform:none}
 .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+
 /* FAQ */
 .faq{max-width:800px;margin:0 auto;text-align:left}
 .faq h3{color:#00f5ff;margin-top:18px}
 .faq p{color:#ccc;margin-bottom:12px}
+
 /* Footer */
 footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
 .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
 .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
 .socials a:hover{color:#00f5ff}
 footer p{color:#aaa}
+
 /* Modal */
 .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
 .modal.show{opacity:1;pointer-events:auto}
@@ -86,9 +89,8 @@ footer p{color:#aaa}
   .hero h1{font-size:2rem}
   .cta{padding:10px 20px}
   .timeline{padding-left:20px}
-  .circle-wrapper{width:180px;height:180px}
-  .pie-rotator{width:180px;height:180px}
-  .circle-svg{width:180px;height:180px}
+  .circle-wrapper{width:200px;height:200px}
+  .circle-svg{width:200px;height:200px}
   .countdown{max-width:320px;height:24px}
 }
 </style>
@@ -128,46 +130,33 @@ footer p{color:#aaa}
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
 
-  <!-- Modern horizontal countdown bar -->
+  <!-- Modern countdown -->
   <div class="countdown" id="countdown">
-    <div class="countdown-bar" id="countdownBar" style="width:100%"></div>
-    <div class="countdown-overlay" id="countdownOverlay">20 Days · 00:00:00</div>
+    <div class="countdown-bar" id="countdownBar"></div>
+    <div class="countdown-overlay" id="countdownOverlay">Loading...</div>
   </div>
 </section>
 
 <section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
-  <p>94% Community / 1% Team / 5% Airdrop</p>
+  <p>94% Community / 5% Airdrop / 1% Team</p>
 
-  <div class="circle-wrapper" aria-hidden="false">
-    <!-- Rotating wrapper so the donut rotates -->
-    <div class="pie-rotator" aria-hidden="false">
-      <svg class="circle-svg" viewBox="0 0 220 220" role="img" aria-label="Token allocation donut: 94% community, 5% airdrop, 1% team">
-        <circle class="circle-bg" cx="110" cy="110" r="99"/>
-        <!-- community slice (94%) -->
-        <circle class="circle-community" cx="110" cy="110" r="99" stroke-linecap="round" />
-        <!-- airdrop slice (5%) - distinct color in the circle only -->
-        <circle class="circle-airdrop" cx="110" cy="110" r="99" stroke-linecap="round" />
-        <!-- team slice (1%) - same blue color as community -->
-        <circle class="circle-team" cx="110" cy="110" r="99" stroke-linecap="round" />
-      </svg>
-    </div>
+  <div class="circle-wrapper">
+    <svg class="circle-svg" viewBox="0 0 240 240">
+      <circle class="circle-bg" cx="120" cy="120" r="102"/>
+      <circle class="circle-community" cx="120" cy="120" r="102"/>
+      <circle class="circle-airdrop" cx="120" cy="120" r="102"/>
+      <circle class="circle-team" cx="120" cy="120" r="102"/>
+    </svg>
   </div>
 
   <div class="allocation-details">
     <h3 style="color:#00f5ff">94% Community</h3>
     <p>Allocated for community rewards, events, and liquidity incentives.</p>
-
-    <!-- Team label kept blue per request -->
-    <h3 style="color:#00f5ff">1% Team & Holders</h3>
-    <p>Reserved for long-term continuity and small team allocation.</p>
-
-    <!-- Airdrop label kept blue (like other labels) but the slice in the donut is a distinct color -->
-    <h3 style="color:#00f5ff">5% Airdrop</h3>
-    <p>Reserved for airdrops to reward early supporters and expand adoption. (ملاحظة: شريحة الـ5% في الدائرة مُميزة بلون خاص لتكون ظاهرة بشكل مستقل.)</p>
-
-    <h3 style="color:#00f5ff">Notes</h3>
-    <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
+    <h3 style="color:#00ff77">5% Airdrop</h3>
+    <p>Reserved for early supporters and adoption campaigns.</p>
+    <h3 style="color:#ff66ff">1% Team</h3>
+    <p>Reserved for continuity and small core team allocation.</p>
   </div>
 </section>
 
@@ -187,9 +176,9 @@ footer p{color:#aaa}
     <h3>What is BROX?</h3>
     <p>BROX is a meme coin built by the community for the community.</p>
     <h3>Where can I join the community?</h3>
-    <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
+    <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
     <h3>Is BROX safe?</h3>
-    <p>Yes. Allocation is transparent (94% Community, 1% Team, 5% Airdrop).</p>
+    <p>Yes. Allocation is transparent (94% Community, 5% Airdrop, 1% Team).</p>
   </div>
 </section>
 
@@ -219,20 +208,14 @@ footer p{color:#aaa}
 const menuBtn=document.getElementById("menuBtn");
 const sideMenu=document.getElementById("sideMenu");
 const menuOverlay=document.getElementById("menuOverlay");
-function toggleMenu(force){
-  const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");
-  if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-  else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
-}
-menuBtn.addEventListener("click",()=>toggleMenu());
-menuOverlay.addEventListener("click",()=>toggleMenu(false));
-document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
+menuBtn.addEventListener("click",()=>{sideMenu.classList.toggle("open");menuOverlay.classList.toggle("visible");menuBtn.textContent=sideMenu.classList.contains("open")?"✖":"☰"});
+menuOverlay.addEventListener("click",()=>{sideMenu.classList.remove("open");menuOverlay.classList.remove("visible");menuBtn.textContent="☰"});
 
 // Modal
 const modal=document.getElementById("modal");
 const modalMessage=document.getElementById("modalMessage");
 function openModal(){modal.classList.add("show");modalMessage.textContent='';}
-function closeModal(){modal.classList.remove("show");modalMessage.textContent='';}
+function closeModal(){modal.classList.remove("show");}
 function submitEmail(){
   const email=document.getElementById("emailInput").value.trim();
   if(!email){modalMessage.textContent="Enter a valid email";return;}
@@ -247,74 +230,43 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 items.forEach(i=>obs.observe(i));
 
-// Allocation: draw 3 segments correctly and ensure the airdrop slice has its own color.
-// No center text is rendered (center remains empty per your request).
-(function setupAllocationSlices(){
-  const radius = 99;
-  const circumference = 2 * Math.PI * radius;
+// Allocation donut with 3 distinct colors
+(function(){
+  const r=102;
+  const circ=2*Math.PI*r;
+  const pCommunity=0.94, pAirdrop=0.05, pTeam=0.01;
+  const lenC=circ*pCommunity, lenA=circ*pAirdrop, lenT=circ*pTeam;
 
-  const circleCommunity = document.querySelector('.circle-community');
-  const circleAirdrop = document.querySelector('.circle-airdrop');
-  const circleTeam = document.querySelector('.circle-team');
+  const cComm=document.querySelector('.circle-community');
+  const cAir=document.querySelector('.circle-airdrop');
+  const cTeam=document.querySelector('.circle-team');
 
-  if(!circleCommunity || !circleAirdrop || !circleTeam) return;
+  cComm.style.strokeDasharray=`${lenC} ${circ}`;
+  cAir.style.strokeDasharray=`${lenA} ${circ}`;
+  cTeam.style.strokeDasharray=`${lenT} ${circ}`;
 
-  // percentages
-  const pctCommunity = 0.94; // 94%
-  const pctAirdrop = 0.05;   // 5%
-  const pctTeam = 0.01;      // 1%
-
-  // lengths in px
-  const lenCommunity = circumference * pctCommunity;
-  const lenAirdrop = circumference * pctAirdrop;
-  const lenTeam = circumference * pctTeam;
-
-  // Apply dash arrays so each circle draws only its slice
-  circleCommunity.style.strokeDasharray = `${lenCommunity} ${circumference}`;
-  circleAirdrop.style.strokeDasharray = `${lenAirdrop} ${circumference}`;
-  circleTeam.style.strokeDasharray = `${lenTeam} ${circumference}`;
-
-  // Position slices sequentially:
-  // community at start (offset 0),
-  // airdrop starts after community (offset -lenCommunity),
-  // team starts after community + airdrop (offset -(lenCommunity+lenAirdrop))
-  circleCommunity.style.strokeDashoffset = 0;
-  circleAirdrop.style.strokeDashoffset = -lenCommunity;
-  circleTeam.style.strokeDashoffset = -(lenCommunity + lenAirdrop);
-
-  // Ensure stroke-linecaps render nicely; no text in center.
+  cComm.style.strokeDashoffset=0;
+  cAir.style.strokeDashoffset=-lenC;
+  cTeam.style.strokeDashoffset=-(lenC+lenA);
 })();
 
-// Countdown horizontal bar: show remaining time as width (so it's visible immediately).
-const countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 20); // 20 days from now
-const totalDuration = 20 * 24 * 60 * 60 * 1000; // 20 days in ms
-
-function updateCountdownBar(){
-  const now = Date.now();
-  const remaining = countdownDate - now;
-  const bar = document.getElementById('countdownBar');
-  const overlay = document.getElementById('countdownOverlay');
-
-  if(remaining <= 0){
-    bar.style.width = '0%';
-    overlay.textContent = 'Launched!';
-    return;
-  }
-
-  // show remaining portion so the bar is full at start and shrinks
-  const percentRemaining = Math.max(0, Math.min(100, (remaining / totalDuration) * 100));
-  bar.style.width = percentRemaining + '%';
-
-  // also update a textual overlay like "X Days · HH:MM:SS"
-  const days = Math.floor(remaining / (1000*60*60*24));
-  const hours = Math.floor((remaining % (1000*60*60*24)) / (1000*60*60));
-  const minutes = Math.floor((remaining % (1000*60*60)) / (1000*60));
-  const seconds = Math.floor((remaining % (1000*60)) / 1000);
-  overlay.textContent = `${days} Days · ${String(hours).padStart(2,'0')}:${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+// Modern countdown bar
+const countdownDate=new Date();countdownDate.setDate(countdownDate.getDate()+20);
+const totalDur=20*24*60*60*1000;
+function updateCountdown(){
+  const now=Date.now(), rem=countdownDate-now;
+  const bar=document.getElementById('countdownBar');
+  const overlay=document.getElementById('countdownOverlay');
+  if(rem<=0){bar.style.width='0%';overlay.textContent='Launched!';return;}
+  const pct=(rem/totalDur)*100;bar.style.width=pct+'%';
+  const d=Math.floor(rem/(1000*60*60*24));
+  const h=Math.floor((rem%(1000*60*60*24))/(1000*60*60));
+  const m=Math.floor((rem%(1000*60*60))/(1000*60));
+  const s=Math.floor((rem%(1000*60))/1000);
+  overlay.textContent=`${d}d ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
 }
-setInterval(updateCountdownBar, 1000);
-updateCountdownBar();
+setInterval(updateCountdown,1000);updateCountdown();
 </script>
 </body>
 </html>
+
