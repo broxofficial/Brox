@@ -95,108 +95,16 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
     margin: 10px 0;
 }
 
-/* NEW: Community Metrics & Countdown Section */
-.community-metrics {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
-    flex-wrap: wrap;
-    text-align: center;
-}
-.metrics-box {
-    background: #1a1a1a;
-    padding: 20px 25px;
-    border-radius: 12px;
-    min-width: 180px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-.metrics-box:hover {
-    transform: translateY(-5px);
-}
-.metrics-box h3 {
-    margin: 0 0 10px 0;
-    color: #00f5ff;
-    font-size: 1.2rem;
-}
-.metrics-box span {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-.countdown-box{
-    padding: 18px 14px;
-    border-radius: 12px;
-    min-width: 70px;
-    display: inline-block;
-    vertical-align: top;
-}
-.countdown-box span{
-    display: block;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #00f5ff;
-}
-.countdown-box small{
-    color: #aaa;
-    font-size: 0.8rem;
-}
-.countdown-container {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-}
-
-/* NEW: Contract Address Section */
-.contract-section {
-    max-width: 720px;
-    margin: 60px auto;
-    text-align: center;
-    padding: 20px;
-    border-radius: 15px;
-    background: #111;
-    border: 1px solid rgba(0, 245, 255, 0.1);
-}
-.contract-section p {
-    margin-bottom: 15px;
-    color: #aaa;
-}
-.contract-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.contract-box input {
-    background: #0d0d0d;
-    border: 1px solid rgba(0, 245, 255, 0.3);
-    color: #00f5ff;
-    padding: 10px 15px;
-    border-radius: 8px;
-    font-family: monospace;
-    flex-grow: 1;
-    max-width: 400px;
-    text-align: center;
-}
-.copy-btn {
-    background: #00f5ff;
-    color: #000;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s ease, transform 0.3s ease;
-}
-.copy-btn:hover {
-    background: #00c3cc;
-    transform: translateY(-2px);
-}
-
 /* Teaser */
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
+
+/* Modern Countdown */
+.countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
+.countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
+.countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
+.countdown-box small{color:#aaa;font-size:0.8rem}
 
 /* Allocation Donut (modern style) */
 .allocation{text-align:center}
@@ -244,8 +152,8 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 /* Footer */
 footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
 .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-.socials a{font-size:1.5rem;color:#cfefff;transition:.18s;transform: scale(1);}
-.socials a:hover{color:#00f5ff;transform: scale(1.1);}
+.socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
+.socials a:hover{color:#00f5ff}
 footer p{color:#aaa}
 
 /* Modal */
@@ -301,12 +209,6 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .metrics-box {
-    min-width: 150px;
-  }
-  .contract-box {
-    flex-direction: column;
-  }
 }
 
 /* Animation Keyframes */
@@ -327,7 +229,6 @@ footer p{color:#aaa}
 
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
-  <a href="#community">Community</a>
   <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
   <a href="#roadmap">Roadmap</a>
@@ -344,46 +245,24 @@ footer p{color:#aaa}
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3YjExcDlrN3FvN25rbm9sOTkwdzBmb3E2Z2ZlZXd2bnM0eXFpMW92bXl3OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lq0h92y0E4rW0a8hD6/giphy.gif" alt="A fun meme GIF for BROX" style="max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px;">
     <p>We're not just a coin, we're a vibe. Powered by the strongest community on Solana. The revolution is here, let's meme together!</p>
   </div>
-  <button class="cta" onclick="openModal()">Join the Hype Train!</button>
-</section>
-
-<section id="community" class="community-metrics">
-    <div class="metrics-box">
-        <h3>Telegram Members</h3>
-        <span>1,500+</span>
-    </div>
-    <div class="metrics-box">
-        <h3>X Followers</h3>
-        <span>1,000+</span>
-    </div>
-    <div class="metrics-box">
-        <h3>Total Supply</h3>
-        <span>1,000,000,000</span>
-    </div>
-</section>
-
-<section id="contract" class="contract-section">
-    <h2>BROX Contract Address</h2>
-    <p>Copy the contract address to buy BROX from a DEX.</p>
-    <div class="contract-box">
-        <input type="text" id="contractAddress" value="7Q2DkGgM6F3t...xyz" readonly>
-        <button class="copy-btn" onclick="copyAddress()">Copy</button>
-    </div>
+  <button class="cta" onclick="openModal()">Get on the Hype Train!</button>
 </section>
 
 <section id="teaser" class="teaser">
   <h2>🚀 To the Moon We Go!</h2>
-  <div class="countdown-container" id="countdown">
-    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
-  </div>
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+    <p><strong style="color:#00f5ff">Public Sale:</strong> Coming Soon</p>
+  </div>
+
+  <div class="countdown-container" id="countdown">
+    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
   </div>
 </section>
 
@@ -496,20 +375,6 @@ function submitEmail(){
   if(!email){modalMessage.textContent="Enter a valid email";return;}
   modalMessage.textContent="Thanks! We'll notify you soon: "+email;
   document.getElementById("emailInput").value='';
-}
-
-// NEW: Copy Contract Address Function
-function copyAddress() {
-    const addressInput = document.getElementById("contractAddress");
-    addressInput.select();
-    addressInput.setSelectionRange(0, 99999); // For mobile devices
-    navigator.clipboard.writeText(addressInput.value);
-    
-    const originalText = document.querySelector(".copy-btn").textContent;
-    document.querySelector(".copy-btn").textContent = "Copied!";
-    setTimeout(() => {
-        document.querySelector(".copy-btn").textContent = originalText;
-    }, 2000);
 }
 
 // Roadmap reveal
