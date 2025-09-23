@@ -35,21 +35,22 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+.cta:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,245,255,0.3); }
 
 /* NEW: BROX Text Styling for Lava/Glow Effect */
 .brox-effect {
-  font-family: 'Arial Black', sans-serif; /* A bold font for impact */
-  font-size: 5rem; /* Large size */
+  font-family: 'Arial Black', sans-serif;
+  font-size: 5rem;
   font-weight: 900;
   text-transform: uppercase;
-  color: #36454F; /* Basalt-like color (dark grayish) */
+  color: #36454F;
   text-shadow:
-    0 0 10px #00FF00,  /* Green glow (inner light) */
-    0 0 20px #00FF00,  /* Green glow (inner light) */
-    0 0 30px #FF0000,  /* Red glow (outer light) */
-    0 0 40px #FF0000,  /* Red glow (outer light) */
-    0 0 50px #8B0000;  /* Darker Red/Crimson (stronger outer lava) */
-  animation: brox-glow 2s ease-in-out infinite alternate; /* Pulsating glow effect */
+    0 0 10px #00FF00,
+    0 0 20px #00FF00,
+    0 0 30px #FF0000,
+    0 0 40px #FF0000,
+    0 0 50px #8B0000;
+  animation: brox-glow 2s ease-in-out infinite alternate;
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 1;
@@ -67,12 +68,12 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
   to {
     text-shadow:
-      0 0 12px #00FF00, /* Stronger green */
-      0 0 24px #00FF00, /* Stronger green */
-      0 0 36px #FF0000, /* Stronger red */
-      0 0 48px #FF0000, /* Stronger red */
-      0 0 60px #8B0000, /* Stronger dark red */
-      0 0 70px #FF4500; /* Additional orange-red for lava feel */
+      0 0 12px #00FF00,
+      0 0 24px #00FF00,
+      0 0 36px #FF0000,
+      0 0 48px #FF0000,
+      0 0 60px #8B0000,
+      0 0 70px #FF4500;
   }
 }
 
@@ -84,16 +85,90 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
     text-align: center;
     margin-top: 20px;
 }
-
 .hero-meme-content h1 {
     font-size: 2.5rem;
     color: #00f5ff;
 }
-
 .hero-meme-content p {
     max-width: 600px;
     font-size: 1.15rem;
     margin: 10px 0;
+}
+
+/* NEW: Live Data Section */
+.live-data {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+    flex-wrap: wrap;
+}
+.data-box {
+    background: #1a1a1a;
+    padding: 20px 25px;
+    border-radius: 12px;
+    text-align: center;
+    min-width: 180px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+.data-box:hover {
+    transform: translateY(-5px);
+}
+.data-box h3 {
+    margin: 0 0 10px 0;
+    color: #00f5ff;
+    font-size: 1.2rem;
+}
+.data-box span {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* NEW: Contract Address Section */
+.contract-section {
+    max-width: 720px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 20px;
+    border-radius: 15px;
+    background: #111;
+    border: 1px solid rgba(0, 245, 255, 0.1);
+}
+.contract-section p {
+    margin-bottom: 15px;
+    color: #aaa;
+}
+.contract-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.contract-box input {
+    background: #0d0d0d;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    color: #00f5ff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-family: monospace;
+    flex-grow: 1;
+    max-width: 400px;
+    text-align: center;
+}
+.copy-btn {
+    background: #00f5ff;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+.copy-btn:hover {
+    background: #00c3cc;
+    transform: translateY(-2px);
 }
 
 /* Teaser */
@@ -153,8 +228,8 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 /* Footer */
 footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
 .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-.socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
-.socials a:hover{color:#00f5ff}
+.socials a{font-size:1.5rem;color:#cfefff;transition:.18s;transform: scale(1);}
+.socials a:hover{color:#00f5ff;transform: scale(1.1);}
 footer p{color:#aaa}
 
 /* Modal */
@@ -210,6 +285,12 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
+  .data-box {
+    min-width: 150px;
+  }
+  .contract-box {
+    flex-direction: column;
+  }
 }
 
 /* Animation Keyframes */
@@ -230,6 +311,7 @@ footer p{color:#aaa}
 
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
+  <a href="#liveData">Live Data</a>
   <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
   <a href="#roadmap">Roadmap</a>
@@ -246,7 +328,31 @@ footer p{color:#aaa}
     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3YjExcDlrN3FvN25rbm9sOTkwdzBmb3E2Z2ZlZXd2bnM0eXFpMW92bXl3OCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Lq0h92y0E4rW0a8hD6/giphy.gif" alt="A fun meme GIF for BROX" style="max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px;">
     <p>We're not just a coin, we're a vibe. Powered by the strongest community on Solana. The revolution is here, let's meme together!</p>
   </div>
-  <button class="cta" onclick="openModal()">Get on the Hype Train!</button>
+  <button class="cta" onclick="openModal()">Join the Hype Train!</button>
+</section>
+
+<section id="liveData" class="live-data">
+    <div class="data-box">
+        <h3>Price</h3>
+        <span>$0.000123</span>
+    </div>
+    <div class="data-box">
+        <h3>Market Cap</h3>
+        <span>$12.3M</span>
+    </div>
+    <div class="data-box">
+        <h3>Holders</h3>
+        <span>1,500+</span>
+    </div>
+</section>
+
+<section id="contract" class="contract-section">
+    <h2>BROX Contract Address</h2>
+    <p>Copy the contract address to buy BROX from a DEX.</p>
+    <div class="contract-box">
+        <input type="text" id="contractAddress" value="7Q2DkGgM6F3t...xyz" readonly>
+        <button class="copy-btn" onclick="copyAddress()">Copy</button>
+    </div>
 </section>
 
 <section id="teaser" class="teaser">
@@ -375,6 +481,20 @@ function submitEmail(){
   if(!email){modalMessage.textContent="Enter a valid email";return;}
   modalMessage.textContent="Thanks! We'll notify you soon: "+email;
   document.getElementById("emailInput").value='';
+}
+
+// NEW: Copy Contract Address Function
+function copyAddress() {
+    const addressInput = document.getElementById("contractAddress");
+    addressInput.select();
+    addressInput.setSelectionRange(0, 99999); // For mobile devices
+    navigator.clipboard.writeText(addressInput.value);
+    
+    const originalText = document.querySelector(".copy-btn").textContent;
+    document.querySelector(".copy-btn").textContent = "Copied!";
+    setTimeout(() => {
+        document.querySelector(".copy-btn").textContent = originalText;
+    }, 2000);
 }
 
 // Roadmap reveal
