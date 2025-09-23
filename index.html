@@ -59,7 +59,7 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .slice-airdrop{fill:none;stroke:#00ff77;stroke-width:22;stroke-linecap:butt}
 .slice-team{fill:none;stroke:#ff66ff;stroke-width:22;stroke-linecap:butt}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
-.allocation-details h3{color:#00f5ff} /* جعل كل العناوين باللون الأزرق */
+.allocation-details h3{color:#00f5ff}
 
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
@@ -215,6 +215,14 @@ const sideMenu=document.getElementById("sideMenu");
 const menuOverlay=document.getElementById("menuOverlay");
 menuBtn.addEventListener("click",()=>{sideMenu.classList.toggle("open");menuOverlay.classList.toggle("visible");menuBtn.textContent=sideMenu.classList.contains("open")?"✖":"☰"});
 menuOverlay.addEventListener("click",()=>{sideMenu.classList.remove("open");menuOverlay.classList.remove("visible");menuBtn.textContent="☰"});
+// إغلاق القائمة عند الضغط على الروابط
+document.querySelectorAll('#sideMenu a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    sideMenu.classList.remove('open');
+    menuOverlay.classList.remove('visible');
+    menuBtn.textContent="☰";
+  });
+});
 
 // Modal
 const modal=document.getElementById("modal");
@@ -271,6 +279,4 @@ function updateCountdown(){
   const m=Math.floor((rem%(1000*60*60))/(1000*60));
   const s=Math.floor((rem%(1000*60))/1000);
   document.getElementById("days").textContent=String(d).padStart(2,'0');
-  document.getElementById("hours").textContent=String(h).padStart(2,'0');
-  document.getElementById("minutes").textContent=String(m).padStart(2,'0');
-  document.getElementById("
+  document.getElementById("hours
