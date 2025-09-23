@@ -58,9 +58,9 @@ header{
 .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
 .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
 .circle-bg{fill:none;stroke:#222;stroke-width:14}
-.circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
-.circle-team{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
-.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
+.circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:1.8s}
+.circle-team{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:1.8s}
+.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:14;stroke-linecap:round;transition:1.8s}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
 /* Countdown */
 .countdown{display:flex;gap:16px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.3rem}
@@ -150,11 +150,14 @@ footer p{color:#aaa}
   <h2>Token Allocation</h2>
   <p>94% Community / 1% Team / 5% Airdrop</p>
   <div class="circle-wrapper">
-    <svg class="circle-svg" viewBox="0 0 220 220">
+    <svg class="circle-svg" viewBox="0 0 220 220" aria-hidden="false" role="img" aria-label="Token allocation donut: 94 percent community, 5 percent airdrop, 1 percent team">
       <circle class="circle-bg" cx="110" cy="110" r="99"/>
-      <circle class="circle-community" cx="110" cy="110" r="99"/>
-      <circle class="circle-team" cx="110" cy="110" r="99"/>
-      <circle class="circle-airdrop" cx="110" cy="110" r="99"/>
+      <!-- community slice (94%) -->
+      <circle class="circle-community" cx="110" cy="110" r="99" stroke-linecap="round" />
+      <!-- airdrop slice (5%) - different color in the circle only -->
+      <circle class="circle-airdrop" cx="110" cy="110" r="99" stroke-linecap="round" />
+      <!-- team slice (1%) - same blue color as community in stroke -->
+      <circle class="circle-team" cx="110" cy="110" r="99" stroke-linecap="round" />
     </svg>
   </div>
   <div class="allocation-details">
@@ -162,8 +165,8 @@ footer p{color:#aaa}
     <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
     <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
     <p>Reserved for long-term project continuity and small team allocation.</p>
-    <h3 style="color:#00ff77;margin-top:18px">5% Airdrop</h3>
-    <p>Reserved for airdrops to reward early supporters and expand adoption.</p>
+    <h3 style="color:#00f5ff;margin-top:18px">5% Airdrop</h3>
+    <p>Reserved for airdrops to reward early supporters and expand adoption. (Note: in the donut the airdrop slice is shown in a distinct color to make it visually separate.)</p>
     <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
     <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
   </div>
@@ -249,30 +252,75 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 items.forEach(i=>obs.observe(i));
 
-// Allocation circle animation
-const radius = 99;
-const circumference = 2 * Math.PI * radius;
-const circleCommunity = document.querySelector('.circle-community');
-const circleTeam = document.querySelector('.circle-team');
-const circleAirdrop = document.querySelector('.circle-airdrop');
-circleCommunity.style.strokeDasharray = circumference;
-circleTeam.style.strokeDasharray = circumference;
-circleAirdrop.style.strokeDasharray = circumference;
-circleCommunity.style.strokeDashoffset = circumference;
-circleTeam.style.strokeDashoffset = circumference;
-circleAirdrop.style.strokeDashoffset = circumference;
+// Allocation circle (3 segments: 94% community, 5% airdrop, 1% team)
+// We compute lengths and apply stroke-dasharray + stroke-dashoffset so slices appear sequentially.
+// No text is placed inside the circle (center is empty per your request).
 
-setTimeout(()=>{
-  circleCommunity.style.strokeDashoffset = circumference * (1 - 0.94);
-  circleTeam.style.strokeDashoffset = circumference * (1 - 0.01);
-  circleAirdrop.style.strokeDashoffset = circumference * (1 - 0.05);
-},100);
+(function setupAllocationSlices(){
+  const radius = 99;
+  const circumference = 2 * Math.PI * radius;
 
-// Countdown 20 days
+  const circleCommunity = document.querySelector('.circle-community');
+  const circleAirdrop = document.querySelector('.circle-airdrop');
+  const circleTeam = document.querySelector('.circle-team');
+
+  // percentages
+  const pctCommunity = 0.94; // 94%
+  const pctAirdrop = 0.05;   // 5%
+  const pctTeam = 0.01;      // 1%
+
+  if(!circleCommunity || !circleAirdrop || !circleTeam) return;
+
+  // lengths in px
+  const lenCommunity = circumference * pctCommunity;
+  const lenAirdrop = circumference * pctAirdrop;
+  const lenTeam = circumference * pctTeam;
+
+  // Set stroke widths already via CSS; now assign dash arrays to draw EXACT slices.
+  // For each circle: dasharray = "<segmentLength> <circumference>" so only one dash (the segment) is drawn.
+  circleCommunity.style.strokeDasharray = `${lenCommunity} ${circumference}`;
+  circleAirdrop.style.strokeDasharray = `${lenAirdrop} ${circumference}`;
+  circleTeam.style.strokeDasharray = `${lenTeam} ${circumference}`;
+
+  // Start all hidden (offset large), then animate into place using transitions defined in CSS.
+  // We'll animate by setting strokeDashoffset to target offsets:
+  // community: start at 0 (top), airdrop: placed after community, team: placed after community + airdrop.
+  // We use negative offsets for subsequent slices so they follow the previous segment.
+  circleCommunity.style.strokeDashoffset = circumference; // hidden initially
+  circleAirdrop.style.strokeDashoffset = circumference;
+  circleTeam.style.strokeDashoffset = circumference;
+
+  // small timeout to trigger transition
+  setTimeout(()=>{
+    // community appears at start
+    circleCommunity.style.strokeDashoffset = 0;
+    // airdrop starts immediately after community (offset by length of community)
+    circleAirdrop.style.strokeDashoffset = -lenCommunity;
+    // team starts after community + airdrop
+    circleTeam.style.strokeDashoffset = -(lenCommunity + lenAirdrop);
+  }, 80);
+})();
+
+// Countdown 20 days (original)
 const countdownDate = new Date();
 countdownDate.setDate(countdownDate.getDate() + 20);
 
 function updateCountdown(){
   const now = new Date().getTime();
   const distance = countdownDate - now;
-  if(distance<0){document.getElementById("countdown").innerHTML="Launched!"; return
+  if(distance<0){document.getElementById("countdown").innerHTML="Launched!"; return;}
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+  document.getElementById("days").textContent=days;
+  document.getElementById("hours").textContent=hours.toString().padStart(2,'0');
+  document.getElementById("minutes").textContent=minutes.toString().padStart(2,'0');
+  document.getElementById("seconds").textContent=seconds.toString().padStart(2,'0');
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+</script>
+</body>
+</html>
+
