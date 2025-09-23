@@ -1,229 +1,344 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>BROX — Official</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
-    a{text-decoration:none;color:inherit}
-    h2{color:#00f5ff;margin-bottom:16px;text-align:center}
-    section{padding:80px 20px}
+  <meta name="description" content="BROX — عملة ميم مجتمعية. انضم إلى الانتظار المبكر، اعرف الخريطة الزمنية، وتابع التحديثات." />
+  <meta name="keywords" content="BROX, meme token, crypto, community, token" />
+  <meta name="theme-color" content="#0b0b0b" />  <!-- Open Graph / Twitter Cards -->  <meta property="og:title" content="BROX — Official" />
+  <meta property="og:description" content="BROX — عملة ميم مجتمعية. انضم إلى الانتظار المبكر واحصل على تحديثات المشروع." />
+  <meta property="og:image" content="/assets/og-image.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />  <!-- favicon placeholder -->  <link rel="icon" href="/assets/favicon.ico" />  <!-- Fonts (system-first for speed) -->  <style>
+    /* ====== Base reset & variables ====== */
+    :root{
+      --bg:#0b0b0b;
+      --card:#0f1720;
+      --accent:#ff6b6b;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.03);
+      --radius:14px;
+      --max-width:1100px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(ellipse at 10% 10%, rgba(255,107,107,0.06), transparent 10%), var(--bg);
+      color: #e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      padding-bottom:60px;
+    }
+    a{color:inherit; text-decoration:none}
 
-    /* Header */
+    /* ====== Container ====== */
+    .container{max-width:var(--max-width); margin:0 auto; padding:28px}
+
+    /* ====== Header / Nav ====== */
     header{
-      position:fixed;top:0;left:0;width:100%;
-      height:70px;display:flex;align-items:center;justify-content:space-between;
-      padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
-      border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200;
+      position:sticky; top:0; z-index:40; backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(11,11,11,0.7), rgba(11,11,11,0.55));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      box-shadow:0 6px 20px rgba(2,6,23,0.6);
     }
-    .logo{display:flex;align-items:center;gap:12px}
-    .logo img{width:52px;height:52px;border-radius:50%}
-    .logo h1{font-size:1.25rem;color:#00f5ff}
-
-    /* Menu */
-    .menu-btn{
-      font-size:1.8rem;cursor:pointer;
-      position:fixed;top:16px;right:22px;z-index:1300;
-      width:44px;height:44px;border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(0,245,255,0.15);
-      border:1px solid rgba(0,245,255,0.6);
-      color:#00f5ff;transition:.18s;
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:12px}
+    .brand{display:flex; align-items:center; gap:12px}
+    .logo{
+      width:46px; height:46px; border-radius:10px; display:inline-grid; place-items:center;
+      background:linear-gradient(135deg,#ff7b7b,#ffb86b);
+      font-weight:800; color:#071022; font-size:18px;
+      box-shadow: 0 4px 12px rgba(255,107,107,0.12);
     }
-    .menu-btn:hover{background:rgba(0,245,255,0.25)}
-    .side-menu{
-      position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);
-      background:rgba(12,12,12,0.95);padding:20px 18px 30px;
-      box-shadow:-4px 0 18px rgba(0,245,255,0.05);
-      transition:right .28s ease-in-out;z-index:1250;
-      border-left:1px solid rgba(255,255,255,0.05);
+    nav a{margin-inline:8px; color:var(--muted); font-weight:600}
+    .cta{background:var(--accent); color:#071022; padding:10px 16px; border-radius:10px; font-weight:700}
+    .socials{display:flex; gap:8px}
+    .icon{display:inline-flex; width:36px; height:36px; border-radius:8px; background:var(--glass); align-items:center; justify-content:center; color:var(--muted); font-weight:700}
+
+    /* Mobile menu */
+    .hamburger{display:none; width:40px; height:40px; border-radius:8px; background:var(--glass); align-items:center; justify-content:center}
+
+    /* ====== Hero ====== */
+    .hero{display:grid; grid-template-columns:1fr 420px; gap:28px; align-items:center; padding:48px 0}
+    .hero-left h1{font-size:40px; margin:0 0 8px}
+    .hero-left p{color:var(--muted); margin:0 0 20px}
+    .hero-actions{display:flex; gap:12px; align-items:center}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.02)); padding:18px; border-radius:14px}
+
+    /* ====== Features / About ====== */
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:18px}
+
+    /* ====== Roadmap (Timeline) ====== */
+    .timeline{margin-top:20px}
+    .timeline .step{display:flex; gap:14px; align-items:flex-start; margin-bottom:18px}
+    .dot{width:14px; height:14px; border-radius:50%; background:var(--accent); margin-top:6px}
+    .step h4{margin:0 0 6px}
+    .step p{margin:0; color:var(--muted)}
+
+    /* ====== Footer ====== */
+    footer{margin-top:36px; padding:32px 0; border-top:1px solid rgba(255,255,255,0.03)}
+
+    /* ====== Responsive ====== */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      nav a{display:none}
+      .hamburger{display:inline-flex}
+      .hero-left h1{font-size:32px}
     }
-    .side-menu.open{right:0}
-    .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
-    .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
-    .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
-    .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
+    @media (max-width:560px){
+      .container{padding:16px}
+      .logo{width:40px;height:40px;font-size:16px}
+      .cta{padding:10px 12px}
+      .grid-2{grid-template-columns:1fr}
+    }
 
-    /* Hero */
-    .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
-    .hero .logoBig{width:160px;height:160px;border-radius:50%}
-    .hero h1{font-size:3rem;color:#00f5ff}
-    .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
-    .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+    /* ====== RTL tweaks when switched to EN (we will toggle dir) ====== */
+    html[lang="en"]{direction:ltr}
+    html[lang="en"] .logo{font-size:18px}
 
-    /* Teaser */
-    .teaser{text-align:center}
-    .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+    /* ====== Small utilities ====== */
+    .muted{color:var(--muted)}
+    .small{font-size:13px}
+    .pill{background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px}
 
-    /* Allocation Circle */
-    .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
-    .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
-    .circle-bg{fill:none;stroke:#222;stroke-width:14}
-    .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s}
-    .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616;transition:1.8s}
-
-    /* Roadmap */
-    .roadmap{background:#0c0c0c;padding-bottom:100px}
-    .roadmap h2{font-size:2.2rem;margin-bottom:20px}
-    .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
-    .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
-    .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
-    .timeline .item.visible{opacity:1;transform:none}
-    .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
-
-    /* FAQ */
-    .faq{max-width:800px;margin:0 auto;text-align:left}
-    .faq h3{color:#00f5ff;margin-top:18px}
-    .faq p{color:#ccc;margin-bottom:12px}
-
-    /* Footer */
-    footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
-    .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
-    .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
-    .socials a:hover{color:#00f5ff}
-    footer p{color:#aaa}
-
-    /* Modal */
-    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
-    .modal.show{opacity:1;pointer-events:auto}
-    .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
-    .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
-  </style>
-</head>
+    /* ====== Timeline grid (visual) ====== */
+    .timeline-visual{position:relative; padding-left:28px}
+    .timeline-visual::before{content:""; position:absolute; left:6px; top:0; bottom:0; width:2px; background:linear-gradient(180deg,var(--accent),rgba(255,107,107,0.2)); border-radius:4px}
+  </style></head>
 <body>
-  <!-- Header -->
   <header>
-    <div class="logo">
-      <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo">
-      <h1>BROX</h1>
-    </div>
-    <button id="menuBtn" class="menu-btn">☰</button>
-  </header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo">BRX</div>
+        <div>
+          <div style="font-weight:800">BROX</div>
+          <div class="small muted">Born in Fire — Pre‑Launch</div>
+        </div>
+      </div><nav aria-label="Primary navigation">
+    <a href="#about">عن المشروع</a>
+    <a href="#why">لماذا BROX؟</a>
+    <a href="#roadmap">خريطة الطريق</a>
+    <a href="#subscribe">التواصل</a>
+  </nav>
 
-  <!-- Side Menu -->
-  <div id="sideMenu" class="side-menu">
-    <a href="#hero">Home</a>
-    <a href="#teaser">Teaser</a>
-    <a href="#allocation">Allocation</a>
-    <a href="#roadmap">Roadmap</a>
-    <a href="#faq">FAQ</a>
-    <a href="#footer">Contact</a>
+  <div style="display:flex;gap:12px;align-items:center">
+    <div class="socials" aria-hidden>
+      <a class="icon" href="#" title="Telegram">tg</a>
+      <a class="icon" href="#" title="X">x</a>
+      <a class="icon" href="#" title="Discord">dc</a>
+    </div>
+    <button id="langToggle" class="pill small" aria-pressed="false">EN</button>
+    <button class="cta" onclick="window.location.href='#subscribe'">Get Early Access</button>
+    <button class="hamburger" onclick="toggleMobile()" aria-expanded="false">☰</button>
   </div>
-  <div id="menuOverlay" class="menu-overlay"></div>
+</div>
 
-  <!-- Hero -->
-  <section id="hero" class="hero">
-    <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
-    <h1>🔥 Welcome to BROX 🔥</h1>
-    <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-    <button class="cta" onclick="openModal()">Early Access</button>
-  </section>
-
-  <!-- Teaser -->
-  <section id="teaser" class="teaser">
-    <h2>🚀 Coming Soon...</h2>
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
-  </section>
-
-  <!-- Allocation -->
-  <section id="allocation" class="allocation">
-    <h2>Token Allocation</h2>
-    <p>99% Community / 1% Team</p>
-    <div class="circle-wrapper">
-      <svg class="circle-svg" viewBox="0 0 220 220">
-        <defs>
-          <linearGradient id="gradient99" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="#00f5ff"/>
-            <stop offset="100%" stop-color="#00c3cc"/>
-          </linearGradient>
-        </defs>
-        <circle class="circle-bg" cx="110" cy="110" r="99"/>
-        <circle class="circle-progress" cx="110" cy="110" r="99"/>
-        <circle class="circle-1" cx="110" cy="110" r="99"/>
-      </svg>
+  </header>  <main class="container">
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-left">
+        <h1>BROX — عملة ميم مجتمعية</h1>
+        <p class="muted">انضم للاشتراك المبكر. مشروع يركز على مجتمع نشط، شفافية في التوزيع، ورؤية للتوسع.</p><div class="hero-actions">
+      <button class="cta" onclick="window.location.href='#subscribe'">اشترك الآن</button>
+      <a class="pill small" href="#roadmap">شاهد الخريطة الزمنية</a>
     </div>
-  </section>
 
-  <!-- Roadmap -->
-  <section id="roadmap" class="roadmap">
-    <h2>Roadmap</h2>
-    <div class="timeline">
-      <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
-      <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
-      <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
-      <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+    <div style="margin-top:18px" class="card">
+      <strong>Status:</strong> Pre‑Launch &nbsp; <span class="small muted">| token allocation finalized</span>
+      <div style="margin-top:10px" class="timeline-visual">
+        <div class="step"><div class="dot"></div><div><h4>مرحلة التحضير — Q3 2025</h4><p class="muted">إنشاء الفريق، التصميم الأولي، صفحة الهبوط.</p></div></div>
+        <div class="step"><div class="dot"></div><div><h4>فتح الاشتراكات — Q4 2025</h4><p class="muted">قائمة للبريد والمكافآت للمشتركين المبكرين.</p></div></div>
+      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <h2>FAQ</h2>
-    <div class="faq">
-      <h3>What is BROX?</h3>
-      <p>BROX is a meme coin built by the community for the community.</p>
-      <h3>Where can I join the community?</h3>
-      <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
-      <h3>Is BROX safe?</h3>
-      <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer id="footer">
-    <div class="socials">
-      <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-      <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-      <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-      <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
-    </div>
-    <p>&copy; 2025 BROX. All Rights Reserved.</p>
-  </footer>
-
-  <!-- Modal -->
-  <div id="modal" class="modal">
+  <aside>
     <div class="card">
-      <button class="close-btn" onclick="closeModal()">✖</button>
-      <h2 style="color:#00f5ff">Get Notified</h2>
-      <p>Enter your email to join early access.</p>
-      <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
-      <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
+      <h3 style="margin:4px 0 12px">توزيع التوكن</h3>
+      <div class="grid-2">
+        <div>
+          <div class="small muted">Community</div>
+          <div style="font-weight:800; font-size:20px">70%</div>
+        </div>
+        <div>
+          <div class="small muted">Team & Advisors</div>
+          <div style="font-weight:800; font-size:20px">15%</div>
+        </div>
+        <div>
+          <div class="small muted">Liquidity</div>
+          <div style="font-weight:800; font-size:20px">10%</div>
+        </div>
+        <div>
+          <div class="small muted">Reserve</div>
+          <div style="font-weight:800; font-size:20px">5%</div>
+        </div>
+      </div>
+
+      <div style="margin-top:12px" class="muted small">ملاحظة: توزيع مبدئي ويمكن تحديثه بعد التصويت المجتمعي.</div>
+    </div>
+
+    <div style="margin-top:12px" class="card small muted">
+      <div><strong>Audit:</strong> Planned</div>
+      <div style="margin-top:8px"><strong>Chain:</strong> Ethereum (ERC‑20) — قابل للتحديث</div>
+    </div>
+  </aside>
+</section>
+
+<!-- About + Why -->
+<section id="about" style="margin-top:20px">
+  <div class="card">
+    <h2>عن المشروع</h2>
+    <p class="muted">BROX هو مشروع عملة ميم يهدف لبناء مجتمع نشط يقدم قيمة عبر الأحداث، المسابقات، وحوافز التفاعل. نركز على الشفافية في التوزيع وآلية نمو مرنة تعتمد على مساهمات المجتمع.</p>
+
+    <div style="margin-top:14px" class="grid-2">
+      <div>
+        <h3>الرؤية</h3>
+        <p class="muted">جعل المشاركة بالعملات الرقمية ممتعة وآمنة للمجتمعات الصغيرة والكبيرة على حد سواء.</p>
+      </div>
+      <div>
+        <h3>الفريق</h3>
+        <p class="muted">فريق ناشئ — مطورين، مصممين، ومدراء مجتمع. سيتم إضافة صفحات الفريق وروابط التحقق لاحقاً لتعزيز الثقة.</p>
+      </div>
     </div>
   </div>
+</section>
 
-  <!-- Script -->
-  <script>
-    const menuBtn=document.getElementById("menuBtn");
-    const sideMenu=document.getElementById("sideMenu");
-    const menuOverlay=document.getElementById("menuOverlay");
-    function toggleMenu(force){
-      const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");
-      if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-      else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
+<section id="why" style="margin-top:18px">
+  <div class="card">
+    <h2>لماذا BROX؟</h2>
+    <ul class="muted">
+      <li>تركيز قوي على بناء المجتمع</li>
+      <li>توزيع شفاف ومخصص للمجتمع</li>
+      <li>خريطة طريق قابلة للتحقق ومرتبطة بمواعيد تقريبية</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Roadmap -->
+<section id="roadmap" style="margin-top:18px">
+  <div class="card">
+    <h2>خريطة الطريق</h2>
+    <div class="timeline timeline-visual">
+      <div class="step"><div class="dot"></div><div><h4>Q3 2025 — إعداد البنية</h4><p class="muted">نموذج الموقع، تهيئة قنوات المجتمع، تحديد سياسة التوزيع.</p></div></div>
+      <div class="step"><div class="dot"></div><div><h4>Q4 2025 — Early Access & Airdrop</h4><p class="muted">انطلاقة الاشتراك المبكر وتوزيع جوائز للمجتمع المبكر.</p></div></div>
+      <div class="step"><div class="dot"></div><div><h4>Q1 2026 — Contract Audit & Launch</h4><p class="muted">تدقيق العقد الذكي ثم الإطلاق الرسمي.</p></div></div>
+      <div class="step"><div class="dot"></div><div><h4>Q2 2026 — Ecosystem Growth</h4><p class="muted">شراكات، حملات تسويق، وإطلاق ميزات المجتمع.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Subscribe / Contact -->
+<section id="subscribe" style="margin-top:18px">
+  <div class="card">
+    <h2>اشترك لتصلك التحديثات</h2>
+    <p class="muted">لا نشارك بريدك مع طرف ثالث. سيتم إرسال تحديثات مهمة فقط.</p>
+
+    <form id="subscribeForm" onsubmit="handleSubscribe(event)" style="display:flex; gap:8px; margin-top:10px; flex-wrap:wrap">
+      <input id="email" type="email" required placeholder="بريدك الالكتروني" style="flex:1; min-width:180px; padding:10px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit" />
+      <button class="cta" type="submit">اشترك</button>
+      <div id="subMsg" class="muted small" style="width:100%"></div>
+    </form>
+
+    <div style="margin-top:16px" class="muted small">
+      تواصل معنا: 
+      <a href="#" class="muted">Telegram</a> —
+      <a href="#" class="muted">X</a> —
+      <a href="#" class="muted">Discord</a>
+    </div>
+  </div>
+</section>
+
+<!-- Legal / Footer -->
+<footer>
+  <div class="grid-2">
+    <div>
+      <div style="font-weight:800">BROX</div>
+      <div class="muted small">© <span id="year"></span> BROX. كل الحقوق محفوظة.</div>
+    </div>
+    <div style="text-align:left">
+      <a href="#" class="muted small">Privacy Policy</a> &nbsp; • &nbsp; <a href="#" class="muted small">Terms</a>
+    </div>
+  </div>
+</footer>
+
+  </main>  <script>
+    // Insert year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple mobile nav toggle (shows/hides links for small view)
+    function toggleMobile(){
+      const nav = document.querySelector('header nav');
+      const btn = document.querySelector('.hamburger');
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      if(window.innerWidth < 980){
+        if(nav.style.display === 'block') nav.style.display = '';
+        else nav.style.display = 'block';
+      }
     }
-    menuBtn.addEventListener("click",()=>toggleMenu());
-    menuOverlay.addEventListener("click",()=>toggleMenu(false));
-    document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
 
-    // Modal
-    const modal=document.getElementById("modal");
-    function openModal(){modal.classList.add("show")}
-    function closeModal(){modal.classList.remove("show")}
-    function submitEmail(){
-      const email=document.getElementById("emailInput").value.trim();
-      if(!email){alert("Enter email");return}
-      alert("Thanks: "+email);
-      closeModal();
+    // Language toggle (EN/AR) - toggles lang attribute and direction
+    const langToggle = document.getElementById('langToggle');
+    langToggle.addEventListener('click', ()=>{
+      const html = document.documentElement;
+      if(html.lang === 'ar'){
+        html.lang = 'en'; html.dir = 'ltr';
+        langToggle.textContent = 'AR';
+        langToggle.setAttribute('aria-pressed','true');
+        translateToEnglish();
+      } else {
+        html.lang = 'ar'; html.dir = 'rtl';
+        langToggle.textContent = 'EN';
+        langToggle.setAttribute('aria-pressed','false');
+        translateToArabic();
+      }
+    });
+
+    function translateToEnglish(){
+      document.querySelector('h1').textContent = 'BROX — Community Meme Token';
+      document.querySelector('#about h2').textContent = 'About the project';
+      document.querySelector('#why h2').textContent = 'Why BROX?';
+      document.querySelector('#roadmap h2').textContent = 'Roadmap';
+      document.querySelector('#subscribe h2').textContent = 'Subscribe for updates';
+      // small translations (not exhaustive but covers main content)
+      document.querySelector('.brand div strong')?.replaceWith();
+    }
+    function translateToArabic(){
+      document.querySelector('h1').textContent = 'BROX — عملة ميم مجتمعية';
+      document.querySelector('#about h2').textContent = 'عن المشروع';
+      document.querySelector('#why h2').textContent = 'لماذا BROX؟';
+      document.querySelector('#roadmap h2').textContent = 'خريطة الطريق';
+      document.querySelector('#subscribe h2').textContent = 'اشترك لتصلك التحديثات';
     }
 
-    // Roadmap reveal
-    const items=document.querySelectorAll('.timeline .item');
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-    },{threshold:0.2});
-    items.forEach(i=>obs.observe(i));
-  </script>
-</body>
+    // Subscribe handler (no backend) - stores in localStorage and shows message
+    function handleSubscribe(e){
+      e.preventDefault();
+      const email = document.getElementById('email').value.trim();
+      const msg = document.getElementById('subMsg');
+      if(!email){ msg.textContent = 'أدخل بريد صالح'; return; }
+      // Basic email store (for demo only) - don't store sensitive info here in production
+      const list = JSON.parse(localStorage.getItem('brox_subs') || '[]');
+      if(list.includes(email)){
+        msg.textContent = 'تم الاشتراك سابقاً — شكراً!';
+      } else {
+        list.push(email);
+        localStorage.setItem('brox_subs', JSON.stringify(list));
+        msg.textContent = 'تم الاشتراك! سنرسل لك التحديثات.';
+      }
+      e.target.reset();
+    }
+
+    // Accessibility: focus outlines only when using keyboard
+    (function(){
+      function handleFirstTab(e){
+        if(e.key === 'Tab') document.body.classList.add('user-is-tabbing');
+      }
+      window.addEventListener('keydown', handleFirstTab);
+    })();
+  </script></body>
 </html>
