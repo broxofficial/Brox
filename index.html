@@ -58,8 +58,13 @@ header{
 .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
 .circle-svg{transform:rotate(-90deg);width:100%;height:100%}
 .circle-bg{fill:none;stroke:#222;stroke-width:14}
-.circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
+.circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
+.circle-team{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
+/* Countdown */
+.countdown{display:flex;gap:16px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.3rem}
+.countdown div{background:rgba(0,245,255,0.15);padding:14px 18px;border-radius:12px;text-align:center;min-width:60px}
+.countdown div span{display:block;font-size:1.8rem;color:#00f5ff}
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
 .roadmap h2{font-size:2.2rem;margin-bottom:20px}
@@ -89,6 +94,7 @@ footer p{color:#aaa}
   .hero h1{font-size:2rem;}
   .cta{padding:10px 20px;}
   .timeline{padding-left:20px}
+  .countdown{flex-direction:column;gap:10px}
 }
 </style>
 </head>
@@ -128,7 +134,13 @@ footer p{color:#aaa}
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-    <p><strong style="color:#00f5ff">Chain:</strong> Ethereum (ERC-20) - TBD</p>
+    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+  </div>
+  <div class="countdown" id="countdown">
+    <div><span id="days">20</span>Days</div>
+    <div><span id="hours">00</span>Hrs</div>
+    <div><span id="minutes">00</span>Min</div>
+    <div><span id="seconds">00</span>Sec</div>
   </div>
 </section>
 
@@ -138,20 +150,15 @@ footer p{color:#aaa}
   <p>99% Community / 1% Team</p>
   <div class="circle-wrapper">
     <svg class="circle-svg" viewBox="0 0 220 220">
-      <defs>
-        <linearGradient id="gradient99" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#00f5ff"/>
-          <stop offset="100%" stop-color="#00c3cc"/>
-        </linearGradient>
-      </defs>
       <circle class="circle-bg" cx="110" cy="110" r="99"/>
-      <circle class="circle-progress" cx="110" cy="110" r="99"/>
+      <circle class="circle-community" cx="110" cy="110" r="99"/>
+      <circle class="circle-team" cx="110" cy="110" r="99"/>
     </svg>
   </div>
   <div class="allocation-details">
     <h3 style="color:#00f5ff;margin-top:18px">99% Community</h3>
     <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
-    <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
+    <h3 style="color:#ff0077;margin-top:18px">1% Team & Holders</h3>
     <p>Reserved for long-term project continuity and small team allocation.</p>
     <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
     <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
@@ -205,8 +212,8 @@ footer p{color:#aaa}
   </div>
 </div>
 
-<!-- Script -->
 <script>
+// Menu
 const menuBtn=document.getElementById("menuBtn");
 const sideMenu=document.getElementById("sideMenu");
 const menuOverlay=document.getElementById("menuOverlay");
@@ -239,12 +246,39 @@ const obs=new IntersectionObserver(entries=>{
 items.forEach(i=>obs.observe(i));
 
 // Allocation circle animation
-const circle=document.querySelector('.circle-progress');
-const radius=circle.r.baseVal.value;
-const circumference=2*Math.PI*radius;
-circle.style.strokeDasharray=circumference;
-const percent=99;
-circle.style.strokeDashoffset=circumference*(1-percent/100);
+const radius = 99;
+const circumference = 2 * Math.PI * radius;
+const circleCommunity = document.querySelector('.circle-community');
+const circleTeam = document.querySelector('.circle-team');
+circleCommunity.style.strokeDasharray = circumference;
+circleTeam.style.strokeDasharray = circumference;
+circleCommunity.style.strokeDashoffset = circumference;
+circleTeam.style.strokeDashoffset = circumference;
+
+setTimeout(()=>{
+  circleCommunity.style.strokeDashoffset = circumference * (1 - 0.99);
+  circleTeam.style.strokeDashoffset = circumference * (1 - 0.01);
+},100);
+
+// Countdown 20 days
+const countdownDate = new Date();
+countdownDate.setDate(countdownDate.getDate() + 20);
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const distance = countdownDate - now;
+  if(distance<0){document.getElementById("countdown").innerHTML="Launched!"; return;}
+  const days = Math.floor(distance/(1000*60*60*24));
+  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((distance%(1000*60))/1000);
+  document.getElementById("days").textContent=days;
+  document.getElementById("hours").textContent=hours.toString().padStart(2,'0');
+  document.getElementById("minutes").textContent=minutes.toString().padStart(2,'0');
+  document.getElementById("seconds").textContent=seconds.toString().padStart(2,'0');
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
 </script>
 </body>
 </html>
