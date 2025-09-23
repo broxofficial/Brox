@@ -12,33 +12,14 @@ a{text-decoration:none;color:inherit}
 h2{color:#00f5ff;margin-bottom:16px;text-align:center}
 section{padding:80px 20px}
 /* Header */
-header{
-  position:fixed;top:0;left:0;width:100%;
-  height:70px;display:flex;align-items:center;justify-content:space-between;
-  padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);
-  border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200;
-}
+header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200}
 .logo{display:flex;align-items:center;gap:12px}
 .logo img{width:52px;height:52px;border-radius:50%}
 .logo h1{font-size:1.25rem;color:#00f5ff}
 /* Menu */
-.menu-btn{
-  font-size:1.8rem;cursor:pointer;
-  position:fixed;top:16px;right:22px;z-index:1300;
-  width:44px;height:44px;border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(0,245,255,0.15);
-  border:1px solid rgba(0,245,255,0.6);
-  color:#00f5ff;transition:.18s;
-}
+.menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
 .menu-btn:hover{background:rgba(0,245,255,0.25)}
-.side-menu{
-  position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);
-  background:rgba(12,12,12,0.95);padding:20px 18px 30px;
-  box-shadow:-4px 0 18px rgba(0,245,255,0.05);
-  transition:right .28s ease-in-out;z-index:1250;
-  border-left:1px solid rgba(255,255,255,0.05);
-}
+.side-menu{position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
 .side-menu.open{right:0}
 .side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
 .side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
@@ -60,12 +41,11 @@ header{
 .circle-bg{fill:none;stroke:#222;stroke-width:14}
 .circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:1.8s}
 .circle-team{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;transition:1.8s}
-.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:14;stroke-linecap:round;transition:1.8s}
+.circle-airdrop{fill:none;stroke:#ff4081;stroke-width:14;stroke-linecap:round;transition:1.8s}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
-/* Countdown */
-.countdown{display:flex;gap:16px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.3rem}
-.countdown div{background:rgba(0,245,255,0.15);padding:14px 18px;border-radius:12px;text-align:center;min-width:60px}
-.countdown div span{display:block;font-size:1.8rem;color:#00f5ff}
+/* Countdown horizontal bar */
+.countdown{max-width:500px;margin:30px auto 0;background:#222;border-radius:12px;overflow:hidden;height:24px}
+.countdown-bar{height:100%;width:0;background:linear-gradient(90deg,#00f5ff,#00c3cc);transition:width 1s linear}
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
 .roadmap h2{font-size:2.2rem;margin-bottom:20px}
@@ -90,17 +70,14 @@ footer p{color:#aaa}
 .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
 .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
 .modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
-/* Responsive */
 @media(max-width:480px){
-  .hero h1{font-size:2rem;}
-  .cta{padding:10px 20px;}
+  .hero h1{font-size:2rem}
+  .cta{padding:10px 20px}
   .timeline{padding-left:20px}
-  .countdown{flex-direction:column;gap:10px}
 }
 </style>
 </head>
 <body>
-<!-- Header -->
 <header>
   <div class="logo">
     <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
@@ -108,8 +85,6 @@ footer p{color:#aaa}
   </div>
   <button id="menuBtn" class="menu-btn">☰</button>
 </header>
-
-<!-- Side Menu -->
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
   <a href="#teaser">Teaser</a>
@@ -119,16 +94,12 @@ footer p{color:#aaa}
   <a href="#footer">Contact</a>
 </div>
 <div id="menuOverlay" class="menu-overlay"></div>
-
-<!-- Hero -->
 <section id="hero" class="hero">
   <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to BROX 🔥</h1>
   <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
   <button class="cta" onclick="openModal()">Early Access</button>
 </section>
-
-<!-- Teaser -->
 <section id="teaser" class="teaser">
   <h2>🚀 Coming Soon...</h2>
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
@@ -137,189 +108,111 @@ footer p{color:#aaa}
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
-  <div class="countdown" id="countdown">
-    <div><span id="days">20</span>Days</div>
-    <div><span id="hours">00</span>Hrs</div>
-    <div><span id="minutes">00</span>Min</div>
-    <div><span id="seconds">00</span>Sec</div>
-  </div>
+  <div class="countdown"><div class="countdown-bar" id="countdownBar"></div></div>
 </section>
-
-<!-- Allocation -->
 <section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
   <p>94% Community / 1% Team / 5% Airdrop</p>
   <div class="circle-wrapper">
-    <svg class="circle-svg" viewBox="0 0 220 220" aria-hidden="false" role="img" aria-label="Token allocation donut: 94 percent community, 5 percent airdrop, 1 percent team">
+    <svg class="circle-svg" viewBox="0 0 220 220">
       <circle class="circle-bg" cx="110" cy="110" r="99"/>
-      <!-- community slice (94%) -->
-      <circle class="circle-community" cx="110" cy="110" r="99" stroke-linecap="round" />
-      <!-- airdrop slice (5%) - different color in the circle only -->
-      <circle class="circle-airdrop" cx="110" cy="110" r="99" stroke-linecap="round" />
-      <!-- team slice (1%) - same blue color as community in stroke -->
-      <circle class="circle-team" cx="110" cy="110" r="99" stroke-linecap="round" />
+      <circle class="circle-community" cx="110" cy="110" r="99"/>
+      <circle class="circle-airdrop" cx="110" cy="110" r="99"/>
+      <circle class="circle-team" cx="110" cy="110" r="99"/>
     </svg>
   </div>
   <div class="allocation-details">
-    <h3 style="color:#00f5ff;margin-top:18px">94% Community</h3>
-    <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
-    <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
-    <p>Reserved for long-term project continuity and small team allocation.</p>
-    <h3 style="color:#00f5ff;margin-top:18px">5% Airdrop</h3>
-    <p>Reserved for airdrops to reward early supporters and expand adoption. (Note: in the donut the airdrop slice is shown in a distinct color to make it visually separate.)</p>
-    <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
-    <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
+    <h3 style="color:#00f5ff">94% Community</h3>
+    <p>Allocated for community rewards, events, and liquidity incentives.</p>
+    <h3 style="color:#00f5ff">1% Team & Holders</h3>
+    <p>Reserved for long-term continuity.</p>
+    <h3 style="color:#00f5ff">5% Airdrop</h3>
+    <p>Rewarding early supporters with distinct slice color in the circle.</p>
   </div>
 </section>
-
-<!-- Roadmap -->
 <section id="roadmap" class="roadmap">
   <h2>Roadmap</h2>
   <div class="timeline">
     <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
     <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
     <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
-    <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+    <div class="item"><h3>Phase 4</h3><p>Partnerships and expansion.</p></div>
   </div>
 </section>
-
-<!-- FAQ -->
 <section id="faq">
   <h2>FAQ</h2>
   <div class="faq">
     <h3>What is BROX?</h3>
-    <p>BROX is a meme coin built by the community for the community.</p>
-    <h3>Where can I join the community?</h3>
-    <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
+    <p>BROX is a meme coin built by the community.</p>
+    <h3>Where can I join?</h3>
+    <p>Telegram, X, Instagram, TikTok.</p>
     <h3>Is BROX safe?</h3>
-    <p>Yes. Allocation is transparent (94% Community, 1% Team, 5% Airdrop).</p>
+    <p>Yes, transparent allocation.</p>
   </div>
 </section>
-
-<!-- Footer -->
 <footer id="footer">
   <div class="socials">
-    <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
-    <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="#"><i class="fa-brands fa-telegram"></i></a>
   </div>
   <p>&copy; 2025 BROX. All Rights Reserved.</p>
 </footer>
-
-<!-- Modal -->
 <div id="modal" class="modal">
   <div class="card">
     <button class="close-btn" onclick="closeModal()">✖</button>
     <h2 style="color:#00f5ff">Get Notified</h2>
-    <p>Enter your email to join early access.</p>
     <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
     <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
     <div id="modalMessage" class="message"></div>
   </div>
 </div>
-
 <script>
-// Menu
 const menuBtn=document.getElementById("menuBtn");
 const sideMenu=document.getElementById("sideMenu");
 const menuOverlay=document.getElementById("menuOverlay");
-function toggleMenu(force){
-  const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");
-  if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}
-  else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}
-}
+function toggleMenu(force){const open= typeof force==="boolean"?force:!sideMenu.classList.contains("open");if(open){sideMenu.classList.add("open");menuBtn.textContent="✖";menuOverlay.classList.add("visible")}else{sideMenu.classList.remove("open");menuBtn.textContent="☰";menuOverlay.classList.remove("visible")}}
 menuBtn.addEventListener("click",()=>toggleMenu());
 menuOverlay.addEventListener("click",()=>toggleMenu(false));
 document.querySelectorAll(".side-menu a").forEach(a=>a.addEventListener("click",()=>toggleMenu(false)));
-
-// Modal
 const modal=document.getElementById("modal");
 const modalMessage=document.getElementById("modalMessage");
-function openModal(){modal.classList.add("show");modalMessage.textContent='';}
-function closeModal(){modal.classList.remove("show");modalMessage.textContent='';}
-function submitEmail(){
-  const email=document.getElementById("emailInput").value.trim();
-  if(!email){modalMessage.textContent="Enter a valid email";return;}
-  modalMessage.textContent="Thanks! We'll notify you soon: "+email;
-  document.getElementById("emailInput").value='';
-}
-
-// Roadmap reveal
+function openModal(){modal.classList.add("show");modalMessage.textContent=''}
+function closeModal(){modal.classList.remove("show");modalMessage.textContent=''}
+function submitEmail(){const email=document.getElementById("emailInput").value.trim();if(!email){modalMessage.textContent="Enter a valid email";return;}modalMessage.textContent="Thanks! "+email;document.getElementById("emailInput").value=''}
 const items=document.querySelectorAll('.timeline .item');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
-},{threshold:0.2});
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.2});
 items.forEach(i=>obs.observe(i));
-
-// Allocation circle (3 segments: 94% community, 5% airdrop, 1% team)
-// We compute lengths and apply stroke-dasharray + stroke-dashoffset so slices appear sequentially.
-// No text is placed inside the circle (center is empty per your request).
-
+// Allocation slices
 (function setupAllocationSlices(){
-  const radius = 99;
-  const circumference = 2 * Math.PI * radius;
-
-  const circleCommunity = document.querySelector('.circle-community');
-  const circleAirdrop = document.querySelector('.circle-airdrop');
-  const circleTeam = document.querySelector('.circle-team');
-
-  // percentages
-  const pctCommunity = 0.94; // 94%
-  const pctAirdrop = 0.05;   // 5%
-  const pctTeam = 0.01;      // 1%
-
-  if(!circleCommunity || !circleAirdrop || !circleTeam) return;
-
-  // lengths in px
-  const lenCommunity = circumference * pctCommunity;
-  const lenAirdrop = circumference * pctAirdrop;
-  const lenTeam = circumference * pctTeam;
-
-  // Set stroke widths already via CSS; now assign dash arrays to draw EXACT slices.
-  // For each circle: dasharray = "<segmentLength> <circumference>" so only one dash (the segment) is drawn.
-  circleCommunity.style.strokeDasharray = `${lenCommunity} ${circumference}`;
-  circleAirdrop.style.strokeDasharray = `${lenAirdrop} ${circumference}`;
-  circleTeam.style.strokeDasharray = `${lenTeam} ${circumference}`;
-
-  // Start all hidden (offset large), then animate into place using transitions defined in CSS.
-  // We'll animate by setting strokeDashoffset to target offsets:
-  // community: start at 0 (top), airdrop: placed after community, team: placed after community + airdrop.
-  // We use negative offsets for subsequent slices so they follow the previous segment.
-  circleCommunity.style.strokeDashoffset = circumference; // hidden initially
-  circleAirdrop.style.strokeDashoffset = circumference;
-  circleTeam.style.strokeDashoffset = circumference;
-
-  // small timeout to trigger transition
+  const r=99;const circ=2*Math.PI*r;
+  const comm=0.94, air=0.05, team=0.01;
+  const lenComm=circ*comm,lenAir=circ*air,lenTeam=circ*team;
+  const cComm=document.querySelector('.circle-community');
+  const cAir=document.querySelector('.circle-airdrop');
+  const cTeam=document.querySelector('.circle-team');
+  [cComm,cAir,cTeam].forEach(c=>{c.style.strokeDasharray=`0 ${circ}`;c.style.strokeDashoffset=circ});
   setTimeout(()=>{
-    // community appears at start
-    circleCommunity.style.strokeDashoffset = 0;
-    // airdrop starts immediately after community (offset by length of community)
-    circleAirdrop.style.strokeDashoffset = -lenCommunity;
-    // team starts after community + airdrop
-    circleTeam.style.strokeDashoffset = -(lenCommunity + lenAirdrop);
-  }, 80);
+    cComm.style.strokeDasharray=`${lenComm} ${circ}`;
+    cComm.style.strokeDashoffset=0;
+    cAir.style.strokeDasharray=`${lenAir} ${circ}`;
+    cAir.style.strokeDashoffset=-lenComm;
+    cTeam.style.strokeDasharray=`${lenTeam} ${circ}`;
+    cTeam.style.strokeDashoffset=-(lenComm+lenAir);
+  },100);
 })();
-
-// Countdown 20 days (original)
-const countdownDate = new Date();
-countdownDate.setDate(countdownDate.getDate() + 20);
-
+// Countdown horizontal
+const countdownDate=new Date();countdownDate.setDate(countdownDate.getDate()+20);
 function updateCountdown(){
-  const now = new Date().getTime();
-  const distance = countdownDate - now;
-  if(distance<0){document.getElementById("countdown").innerHTML="Launched!"; return;}
-  const days = Math.floor(distance/(1000*60*60*24));
-  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-  const seconds = Math.floor((distance%(1000*60))/1000);
-  document.getElementById("days").textContent=days;
-  document.getElementById("hours").textContent=hours.toString().padStart(2,'0');
-  document.getElementById("minutes").textContent=minutes.toString().padStart(2,'0');
-  document.getElementById("seconds").textContent=seconds.toString().padStart(2,'0');
+  const now=new Date().getTime();
+  const dist=countdownDate-now;
+  const total=20*24*60*60*1000;
+  if(dist<=0){document.getElementById("countdownBar").style.width="100%";return;}
+  const percent=100-(dist/total*100);
+  document.getElementById("countdownBar").style.width=percent+"%";
 }
-setInterval(updateCountdown,1000);
-updateCountdown();
+setInterval(updateCountdown,1000);updateCountdown();
 </script>
 </body>
 </html>
