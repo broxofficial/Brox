@@ -45,7 +45,7 @@ header{
 .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 /* Hero */
-.hero{Height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
@@ -54,93 +54,18 @@ header{
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
-
-/* ---------- Modern Pie (donut) with rotation ---------- */
-/* The donut uses a conic-gradient for the slices.
-   The rotating layer (.pie-rotator) makes the entire donut spin continuously.
-   The inner .pie-donut keeps the initial rotation to position the slice visually. */
-.circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative;display:flex;align-items:center;justify-content:center}
-.pie-rotator{
-  width:220px;height:220px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  transform-origin:center center;
-  /* continuous rotation */
-  animation: spin 6s linear infinite;
-}
-@keyframes spin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
-}
-.pie-donut{
-  width:220px;height:220px;border-radius:50%;
-  /* 99% main color, 1% accent color (slice at end). */
-  background: conic-gradient(#00f5ff 0% 99%, #ff0077 99% 100%);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow: 0 6px 30px rgba(0,245,255,0.04), inset 0 -6px 18px rgba(0,0,0,0.6);
-  transition: transform .3s cubic-bezier(.2,.9,.2,1);
-  transform: rotate(-90deg); /* initial positioning of slice */
-}
-.pie-donut-inner{
-  width:130px;height:130px;border-radius:50%;
-  background:linear-gradient(180deg,#0b0b0b,#0f0f0f);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border:3px solid rgba(255,255,255,0.03);
-}
-.pie-percent{font-weight:800;color:#cfefff;font-size:1.1rem}
-.pie-label{font-size:0.85rem;color:#9feeff;margin-top:6px}
-
-/* subtle hover pop on desktop: scaling the donut itself (does not stop rotation) */
-.pie-donut:hover{transform: rotate(-90deg) scale(1.03); box-shadow: 0 10px 40px rgba(0,245,255,0.07)}
-
-/* Allocation details left as-is */
+/* Allocation Circle */
+.circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
+.circle-svg{transform:rotate(-90deg);width:100%;height:100%}
+.circle-bg{fill:none;stroke:#222;stroke-width:14}
+.circle-community{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
+.circle-team{fill:none;stroke:#00f5ff;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
+.circle-airdrop{fill:none;stroke:#00ff77;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:622;transition:1.8s}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
-
-/* ---------- Modern Horizontal Rectangular Countdown ---------- */
-.countdown-modern{
-  display:flex;
-  gap:12px;
-  justify-content:center;
-  align-items:center;
-  margin-top:22px;
-  flex-wrap:wrap;
-}
-.count-block{
-  min-width:120px;
-  padding:16px 18px;
-  border-radius:12px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border:1px solid rgba(255,255,255,0.03);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-  text-align:center;
-  font-weight:700;
-}
-.count-value{
-  display:block;
-  font-size:1.6rem;
-  margin-bottom:6px;
-  color:#00f5ff;
-  letter-spacing: -0.02em;
-}
-.count-label{
-  display:block;
-  font-size:0.85rem;
-  color:#cfefff99;
-  font-weight:600;
-}
-
-/* Responsive */
-@media(max-width:480px){
-  .hero h1{font-size:2rem;}
-  .cta{padding:10px 20px;}
-  .timeline{padding-left:20px}
-  .countdown{flex-direction:column;gap:10px}
-  .countdown-modern{gap:10px}
-  .count-block{min-width:88px;padding:12px}
-  .pie-donut{width:180px;height:180px}
-  .pie-rotator{width:180px;height:180px}
-  .pie-donut-inner{width:100px;height:100px}
-}
-
+/* Countdown */
+.countdown{display:flex;gap:16px;justify-content:center;margin-top:18px;font-weight:700;font-size:1.3rem}
+.countdown div{background:rgba(0,245,255,0.15);padding:14px 18px;border-radius:12px;text-align:center;min-width:60px}
+.countdown div span{display:block;font-size:1.8rem;color:#00f5ff}
 /* Roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
 .roadmap h2{font-size:2.2rem;margin-bottom:20px}
@@ -165,6 +90,13 @@ footer p{color:#aaa}
 .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
 .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
 .modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
+/* Responsive */
+@media(max-width:480px){
+  .hero h1{font-size:2rem;}
+  .cta{padding:10px 20px;}
+  .timeline{padding-left:20px}
+  .countdown{flex-direction:column;gap:10px}
+}
 </style>
 </head>
 <body>
@@ -205,48 +137,33 @@ footer p{color:#aaa}
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
     <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
-
-  <!-- Modern horizontal rectangular countdown (replaces visual of the old countdown) -->
-  <div class="countdown-modern" id="countdown-modern" aria-live="polite">
-    <div class="count-block">
-      <span class="count-value" id="cd-days">20</span>
-      <span class="count-label">Days</span>
-    </div>
-    <div class="count-block">
-      <span class="count-value" id="cd-hours">00</span>
-      <span class="count-label">Hours</span>
-    </div>
-    <div class="count-block">
-      <span class="count-value" id="cd-minutes">00</span>
-      <span class="count-label">Minutes</span>
-    </div>
-    <div class="count-block">
-      <span class="count-value" id="cd-seconds">00</span>
-      <span class="count-label">Seconds</span>
-    </div>
+  <div class="countdown" id="countdown">
+    <div><span id="days">20</span>Days</div>
+    <div><span id="hours">00</span>Hrs</div>
+    <div><span id="minutes">00</span>Min</div>
+    <div><span id="seconds">00</span>Sec</div>
   </div>
 </section>
 
 <!-- Allocation -->
 <section id="allocation" class="allocation">
   <h2>Token Allocation</h2>
-  <p>99% Community / 1% Team</p>
-  <div class="circle-wrapper" aria-hidden="false">
-    <!-- Rotating wrapper around the donut -->
-    <div class="pie-rotator" aria-hidden="false">
-      <div class="pie-donut" role="img" aria-label="Token allocation: 99 percent community, 1 percent team" tabindex="0">
-        <div class="pie-donut-inner" aria-hidden="true">
-          <div class="pie-percent">99% / 1%</div>
-          <div class="pie-label">Community / Team</div>
-        </div>
-      </div>
-    </div>
+  <p>94% Community / 1% Team / 5% Airdrop</p>
+  <div class="circle-wrapper">
+    <svg class="circle-svg" viewBox="0 0 220 220">
+      <circle class="circle-bg" cx="110" cy="110" r="99"/>
+      <circle class="circle-community" cx="110" cy="110" r="99"/>
+      <circle class="circle-team" cx="110" cy="110" r="99"/>
+      <circle class="circle-airdrop" cx="110" cy="110" r="99"/>
+    </svg>
   </div>
   <div class="allocation-details">
-    <h3 style="color:#00f5ff;margin-top:18px">99% Community</h3>
+    <h3 style="color:#00f5ff;margin-top:18px">94% Community</h3>
     <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
-    <h3 style="color:#ff0077;margin-top:18px">1% Team & Holders</h3>
+    <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
     <p>Reserved for long-term project continuity and small team allocation.</p>
+    <h3 style="color:#00ff77;margin-top:18px">5% Airdrop</h3>
+    <p>Reserved for airdrops to reward early supporters and expand adoption.</p>
     <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
     <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
   </div>
@@ -272,7 +189,7 @@ footer p{color:#aaa}
     <h3>Where can I join the community?</h3>
     <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
     <h3>Is BROX safe?</h3>
-    <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
+    <p>Yes. Allocation is transparent (94% Community, 1% Team, 5% Airdrop).</p>
   </div>
 </section>
 
@@ -332,56 +249,30 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:0.2});
 items.forEach(i=>obs.observe(i));
 
-// ---------- Countdown (modern horizontal rectangular) ----------
-// Keep same behavior: 20 days from now
+// Allocation circle animation
+const radius = 99;
+const circumference = 2 * Math.PI * radius;
+const circleCommunity = document.querySelector('.circle-community');
+const circleTeam = document.querySelector('.circle-team');
+const circleAirdrop = document.querySelector('.circle-airdrop');
+circleCommunity.style.strokeDasharray = circumference;
+circleTeam.style.strokeDasharray = circumference;
+circleAirdrop.style.strokeDasharray = circumference;
+circleCommunity.style.strokeDashoffset = circumference;
+circleTeam.style.strokeDashoffset = circumference;
+circleAirdrop.style.strokeDashoffset = circumference;
+
+setTimeout(()=>{
+  circleCommunity.style.strokeDashoffset = circumference * (1 - 0.94);
+  circleTeam.style.strokeDashoffset = circumference * (1 - 0.01);
+  circleAirdrop.style.strokeDashoffset = circumference * (1 - 0.05);
+},100);
+
+// Countdown 20 days
 const countdownDate = new Date();
 countdownDate.setDate(countdownDate.getDate() + 20);
 
-function updateModernCountdown(){
+function updateCountdown(){
   const now = new Date().getTime();
   const distance = countdownDate - now;
-  if(distance < 0){
-    // Replace the countdown with a launched message
-    const container = document.getElementById('countdown-modern');
-    container.innerHTML = '<div class="count-block" style="min-width:260px;"><span class="count-value" style="color:#9feeff">Launched!</span><span class="count-label">Check socials for details</span></div>';
-    return;
-  }
-  const days = Math.floor(distance/(1000*60*60*24));
-  const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-  const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
-  const seconds = Math.floor((distance%(1000*60))/1000);
-
-  // Update DOM (pad with zeros where appropriate)
-  document.getElementById('cd-days').textContent = days;
-  document.getElementById('cd-hours').textContent = hours.toString().padStart(2,'0');
-  document.getElementById('cd-minutes').textContent = minutes.toString().padStart(2,'0');
-  document.getElementById('cd-seconds').textContent = seconds.toString().padStart(2,'0');
-}
-setInterval(updateModernCountdown, 1000);
-updateModernCountdown();
-
-// Retain original allocation circle JS but neutralized since we use CSS donut.
-// (We keep these references so original code paths don't break if something else references them.)
-try{
-  const radiusEl = 99;
-  const circumference = 2 * Math.PI * radiusEl;
-  const circleCommunity = document.querySelector('.circle-community');
-  const circleTeam = document.querySelector('.circle-team');
-  if(circleCommunity && circleTeam){
-      circleCommunity.style.strokeDasharray = circumference;
-      circleTeam.style.strokeDasharray = circumference;
-      circleCommunity.style.strokeDashoffset = circumference;
-      circleTeam.style.strokeDashoffset = circumference;
-      setTimeout(()=>{
-        circleCommunity.style.strokeDashoffset = circumference * (1 - 0.99);
-        circleTeam.style.strokeDashoffset = circumference * (1 - 0.01);
-      },100);
-  }
-}catch(e){
-  // ignore - safe fallback if original elements are gone
-  // console.log('no svg circles present, using CSS donut instead');
-}
-
-</script>
-</body>
-</html>
+  if(distance<0){document.getElementById("countdown").innerHTML="Launched!"; return
