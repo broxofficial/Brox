@@ -183,9 +183,9 @@ footer p{color:#aaa}
 
   <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-    <div class="countdown-box"><span>00</span><small>Hours</small></div>
-    <div class="countdown-box"><span>00</span><small>Mins</small></div>
-    <div class="countdown-box"><span>00</span><small>Secs</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
   </div>
 </section>
 
@@ -250,6 +250,7 @@ footer p{color:#aaa}
   </div>
 </div>
 
+
 <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
   <i class="fas fa-arrow-up"></i>
 </button>
@@ -259,8 +260,27 @@ footer p{color:#aaa}
 const menuBtn=document.getElementById("menuBtn");
 const sideMenu=document.getElementById("sideMenu");
 const menuOverlay=document.getElementById("menuOverlay");
-menuBtn.addEventListener("click",()=>{sideMenu.classList.toggle("open");menuOverlay.classList.toggle("visible");menuBtn.textContent=sideMenu.classList.contains("open")?"✖":"☰"});
-menuOverlay.addEventListener("click",()=>{sideMenu.classList.remove("open");menuOverlay.classList.remove("visible");menuBtn.textContent="☰"});
+
+menuBtn.addEventListener("click",()=>{
+    sideMenu.classList.toggle("open");
+    menuOverlay.classList.toggle("visible");
+    menuBtn.textContent = sideMenu.classList.contains("open") ? "✖" : "☰";
+});
+menuOverlay.addEventListener("click",()=>{
+    sideMenu.classList.remove("open");
+    menuOverlay.classList.remove("visible");
+    menuBtn.textContent = "☰";
+});
+
+// Close side menu when a link is clicked
+const sideMenuLinks = document.querySelectorAll('#sideMenu a');
+sideMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        sideMenu.classList.remove('open');
+        menuOverlay.classList.remove('visible');
+        menuBtn.textContent = "☰";
+    });
+});
 
 // Modal
 const modal=document.getElementById("modal");
@@ -318,7 +338,7 @@ updateCountdown();
 // Scroll to Top Button Logic
 const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
-// When the user scrolls down 20px from the top of the document, show the button
+// When the user scrolls down 100px from the top of the document, show the button
 window.onscroll = function() {
   if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     scrollToTopBtn.style.display = "flex"; // Use flex to center the icon
