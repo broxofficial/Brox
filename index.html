@@ -95,34 +95,56 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
     margin: 10px 0;
 }
 
-/* NEW: Live Data Section */
-.live-data {
+/* NEW: Community Metrics & Countdown Section */
+.community-metrics {
     display: flex;
     justify-content: center;
     gap: 30px;
     margin-top: 50px;
     flex-wrap: wrap;
+    text-align: center;
 }
-.data-box {
+.metrics-box {
     background: #1a1a1a;
     padding: 20px 25px;
     border-radius: 12px;
-    text-align: center;
     min-width: 180px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
-.data-box:hover {
+.metrics-box:hover {
     transform: translateY(-5px);
 }
-.data-box h3 {
+.metrics-box h3 {
     margin: 0 0 10px 0;
     color: #00f5ff;
     font-size: 1.2rem;
 }
-.data-box span {
+.metrics-box span {
     font-size: 1.5rem;
     font-weight: 700;
+}
+.countdown-box{
+    padding: 18px 14px;
+    border-radius: 12px;
+    min-width: 70px;
+    display: inline-block;
+    vertical-align: top;
+}
+.countdown-box span{
+    display: block;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00f5ff;
+}
+.countdown-box small{
+    color: #aaa;
+    font-size: 0.8rem;
+}
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
 }
 
 /* NEW: Contract Address Section */
@@ -175,12 +197,6 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
-
-/* Modern Countdown */
-.countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
-.countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
-.countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
-.countdown-box small{color:#aaa;font-size:0.8rem}
 
 /* Allocation Donut (modern style) */
 .allocation{text-align:center}
@@ -285,7 +301,7 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .data-box {
+  .metrics-box {
     min-width: 150px;
   }
   .contract-box {
@@ -311,7 +327,7 @@ footer p{color:#aaa}
 
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
-  <a href="#liveData">Live Data</a>
+  <a href="#community">Community</a>
   <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
   <a href="#roadmap">Roadmap</a>
@@ -331,18 +347,18 @@ footer p{color:#aaa}
   <button class="cta" onclick="openModal()">Join the Hype Train!</button>
 </section>
 
-<section id="liveData" class="live-data">
-    <div class="data-box">
-        <h3>Price</h3>
-        <span>$0.000123</span>
-    </div>
-    <div class="data-box">
-        <h3>Market Cap</h3>
-        <span>$12.3M</span>
-    </div>
-    <div class="data-box">
-        <h3>Holders</h3>
+<section id="community" class="community-metrics">
+    <div class="metrics-box">
+        <h3>Telegram Members</h3>
         <span>1,500+</span>
+    </div>
+    <div class="metrics-box">
+        <h3>X Followers</h3>
+        <span>1,000+</span>
+    </div>
+    <div class="metrics-box">
+        <h3>Total Supply</h3>
+        <span>1,000,000,000</span>
     </div>
 </section>
 
@@ -357,18 +373,17 @@ footer p{color:#aaa}
 
 <section id="teaser" class="teaser">
   <h2>🚀 To the Moon We Go!</h2>
-  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
-  <div class="status-box">
-    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-  </div>
-
   <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
     <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
     <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
     <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+  </div>
+  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
+  <div class="status-box">
+    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
 </section>
 
