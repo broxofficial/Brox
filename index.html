@@ -57,6 +57,7 @@
     /* Teaser */
     .teaser{text-align:center}
     .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+    .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
     /* Allocation Circle */
     .circle-wrapper{width:220px;height:220px;margin:40px auto 0;position:relative}
@@ -64,10 +65,7 @@
     .circle-bg{fill:none;stroke:#222;stroke-width:14}
     .circle-progress{fill:none;stroke:url(#gradient99);stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:6;transition:1.8s}
     .circle-1{fill:none;stroke:#ff0077;stroke-width:14;stroke-linecap:round;stroke-dasharray:622;stroke-dashoffset:616;transition:1.8s}
-
-    /* Allocation Details */
     .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
-    .allocation-details h3{color:#00f5ff;margin-top:18px}
 
     /* Roadmap */
     .roadmap{background:#0c0c0c;padding-bottom:100px}
@@ -77,6 +75,11 @@
     .timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
     .timeline .item.visible{opacity:1;transform:none}
     .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+
+    /* FAQ */
+    .faq{max-width:800px;margin:0 auto;text-align:left}
+    .faq h3{color:#00f5ff;margin-top:18px}
+    .faq p{color:#ccc;margin-bottom:12px}
 
     /* Footer */
     footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
@@ -108,6 +111,7 @@
     <a href="#teaser">Teaser</a>
     <a href="#allocation">Allocation</a>
     <a href="#roadmap">Roadmap</a>
+    <a href="#faq">FAQ</a>
     <a href="#footer">Contact</a>
   </div>
   <div id="menuOverlay" class="menu-overlay"></div>
@@ -116,14 +120,20 @@
   <section id="hero" class="hero">
     <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo">
     <h1>🔥 Welcome to BROX 🔥</h1>
-    <p>BROX is community-first. Pre-launch status. Token distribution and roadmap are transparent — the community leads the way.</p>
-    <button class="cta" onclick="openModal()">Get Early Access</button>
+    <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
+    <button class="cta" onclick="openModal()">Early Access</button>
   </section>
 
   <!-- Teaser -->
   <section id="teaser" class="teaser">
     <h2>🚀 Coming Soon...</h2>
     <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" />
+    <!-- Status text -->
+    <div class="status-box">
+      <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+      <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+      <p><strong style="color:#00f5ff">Chain:</strong> Ethereum (ERC-20) - TBD</p>
+    </div>
   </section>
 
   <!-- Allocation -->
@@ -144,18 +154,14 @@
       </svg>
     </div>
 
-    <!-- النصوص الجديدة -->
     <div class="allocation-details">
-      <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-      <p><strong style="color:#00f5ff">Audit:</strong> Planned. <strong style="color:#00f5ff">Chain:</strong> Ethereum (ERC-20) - TBD</p>
-
-      <h3>99% Community</h3>
+      <h3 style="color:#00f5ff;margin-top:18px">99% Community</h3>
       <p>Allocated for community rewards, airdrops, events, and liquidity incentives.</p>
 
-      <h3>1% Team & Holders</h3>
+      <h3 style="color:#00f5ff;margin-top:18px">1% Team & Holders</h3>
       <p>Reserved for long-term project continuity and small team allocation.</p>
 
-      <h3>Notes</h3>
+      <h3 style="color:#00f5ff;margin-top:18px">Notes</h3>
       <p>This distribution is final per available info. Any changes will be announced publicly and subject to community votes where applicable.</p>
     </div>
   </section>
@@ -168,6 +174,19 @@
       <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
       <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
       <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <h3>What is BROX?</h3>
+      <p>BROX is a meme coin built by the community for the community.</p>
+      <h3>Where can I join the community?</h3>
+      <p><span class="muted">You can follow us on Telegram, X, Instagram, and TikTok.</span></p>
+      <h3>Is BROX safe?</h3>
+      <p>Yes. Allocation is transparent (99% Community, 1% Team).</p>
     </div>
   </section>
 
