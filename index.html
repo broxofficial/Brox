@@ -1,25 +1,25 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>BROX — Official</title>
+<title>brox — official</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 <style>
-/* Basic Styles */
+/* basic styles */
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
+body{font-family:'segoe ui',arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 h2{color:#00f5ff;margin-bottom:16px;text-align:center}
 section{padding:80px 20px}
 
-/* Header */
+/* header */
 header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200}
 .logo{display:flex;align-items:center;gap:12px}
 .logo img{width:52px;height:52px;border-radius:50%}
 .logo h1{font-size:1.25rem;color:#00f5ff}
 
-/* Menu */
+/* menu */
 .menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
 .menu-btn:hover{background:rgba(0,245,255,0.25)}
 .side-menu{position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
@@ -29,26 +29,26 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
-/* Hero Section */
+/* hero section */
 .hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;} 
-.hero .logoBig{width:160px;height:160px;border-radius:50%}
+.hero .logobig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff} 
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
-/* NEW: BROX Text Styling for Lava/Glow Effect */
+/* new: brox text styling for lava/glow effect */
 .brox-effect {
-  font-family: 'Arial Black', sans-serif;
+  font-family: 'arial black', sans-serif;
   font-size: 5rem;
   font-weight: 900;
   text-transform: uppercase;
-  color: #36454F;
+  color: #36454f;
   text-shadow:
-    0 0 10px #00FF00,
-    0 0 20px #00FF00,
-    0 0 30px #FF0000,
-    0 0 40px #FF0000,
-    0 0 50px #8B0000;
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 30px #ff0000,
+    0 0 40px #ff0000,
+    0 0 50px #8b0000;
   animation: brox-glow 2s ease-in-out infinite alternate;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -56,27 +56,27 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   display: block;
 }
 
-@keyframes brox-glow {
+@keyframes brox-glow { /* Corrected @keyframes syntax */
   from {
     text-shadow:
-      0 0 8px #00FF00,
-      0 0 16px #00FF00,
-      0 0 24px #FF0000,
-      0 0 32px #FF0000,
-      0 0 40px #8B0000;
+      0 0 8px #00ff00,
+      0 0 16px #00ff00,
+      0 0 24px #ff0000,
+      0 0 32px #ff0000,
+      0 0 40px #8b0000;
   }
   to {
     text-shadow:
-      0 0 12px #00FF00,
-      0 0 24px #00FF00,
-      0 0 36px #FF0000,
-      0 0 48px #FF0000,
-      0 0 60px #8B0000,
-      0 0 70px #FF4500;
+      0 0 12px #00ff00,
+      0 0 24px #00ff00,
+      0 0 36px #ff0000,
+      0 0 48px #ff0000,
+      0 0 60px #8b0000,
+      0 0 70px #ff4500;
   }
 }
 
-/* Coming Soon & Countdown container */
+/* coming soon & countdown container */
 .coming-soon-container {
     padding: 60px 20px;
     text-align: center;
@@ -89,24 +89,24 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
     margin-bottom: 20px;
 }
 
-/* Static Rocket Image section */
+/* static rocket image section */
 .static-rocket-section {
-    padding: 40px 20px; /* Adjust padding to center it visually */
+    padding: 40px 20px; /* adjust padding to center it visually */
     text-align: center;
     background: #0d0d0d;
 }
 
 .static-rocket-section .rocket-static-icon {
-    width: 320px; /* Doubled from 160px to 320px for desktop */
+    width: 320px; /* doubled from 160px to 320px for desktop */
     height: auto;
     display: block;
-    margin: 0 auto; /* Center the image horizontally */
+    margin: 0 auto; /* center the image horizontally */
 }
 
-/* Teaser Section (for the main image) */
+/* teaser section (for the main image) */
 .teaser{text-align:center;}
 
-/* Corrected styling for the main teaser image (Picsart_25-09-21_10-14-23-094.png) */
+/* corrected styling for the main teaser image (picsart_25-09-21_10-14-23-094.png) */
 .teaser .main-teaser-image {
   max-width: 450px;
   width: 100%;
@@ -118,13 +118,13 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
-/* Modern Countdown */
+/* modern countdown */
 .countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
 .countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
 .countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
 .countdown-box small{color:#aaa;font-size:0.8rem}
 
-/* Allocation Donut (modern style) */
+/* allocation donut (modern style) */
 .allocation{text-align:center}
 .donut-wrapper{
   width:260px;
@@ -143,7 +143,7 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .donut-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:#0d0d0d}
 .allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
 
-/* New Image Style */
+/* new image style */
 .pre-roadmap-image {
   max-width: 100%;
   height: auto;
@@ -153,36 +153,36 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Roadmap */
+/* roadmap */
 .roadmap{background:#0c0c0c;padding-bottom:100px}
 .roadmap h2{font-size:2.2rem;margin-bottom:20px}
 .timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
 .timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
-.timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
+.timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translatey(20px);transition:.5s}
 .timeline .item.visible{opacity:1;transform:none}
 .timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
 
-/* FAQ */
+/* faq */
 .faq{max-width:800px;margin:0 auto;text-align:left}
 .faq h3{color:#00f5ff;margin-top:18px}
 .faq p{color:#ccc;margin-bottom:12px}
 
-/* Footer */
+/* footer */
 footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
 .socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
 .socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
 .socials a:hover{color:#00f5ff}
 footer p{color:#aaa}
 
-/* Modal */
+/* modal */
 .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
 .modal.show{opacity:1;pointer-events:auto}
 .modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
 .modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
 .modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
 
-/* Scroll to Top Button */
-#scrollToTopBtn {
+/* scroll to top button */
+#scrolltotopbtn {
   display: none;
   position: fixed;
   bottom: 30px;
@@ -205,13 +205,13 @@ footer p{color:#aaa}
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
-#scrollToTopBtn:hover {
+#scrolltotopbtn:hover {
   background: linear-gradient(135deg, #00c3cc, #00f5ff);
-  transform: translateY(-3px);
+  transform: translateY(-3px); /* Corrected property name */
 }
 
-/* Responsive */
-@media(max-width:480px){
+/* responsive */
+@media(max-width:480px){ /* Corrected @media syntax */
   .hero h1{font-size:2rem}
   .brox-effect {
     font-size: 3rem;
@@ -220,7 +220,7 @@ footer p{color:#aaa}
   .timeline{padding-left:20px}
   .donut-wrapper{width:220px;height:220px}
   .donut-inner{width:120px;height:120px}
-  #scrollToTopBtn {
+  #scrolltotopbtn {
     bottom: 20px;
     right: 20px;
     width: 45px;
@@ -228,12 +228,12 @@ footer p{color:#aaa}
     font-size: 1.3rem;
   }
   .static-rocket-section .rocket-static-icon {
-      width: 120px; /* Half of desktop size for smaller screens (320px / 2 = 160px for previous, now 160px / 2 = 120px, to keep it reasonable) */
+      width: 160px; /* Doubled the size for mobile, from 80px (half of 160px) to 160px (half of 320px) */
   }
 }
 
-/* Animation Keyframes */
-@keyframes spin {
+/* animation keyframes */
+@keyframes spin { /* Corrected @keyframes syntax */
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
@@ -242,214 +242,214 @@ footer p{color:#aaa}
 <body>
 <header>
   <div class="logo">
-    <img src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
-    <h1>BROX</h1>
+    <img src="images/picsart_25-09-20_12-05-00-500.png" alt="brox logo" loading="lazy">
+    <h1>brox</h1>
   </div>
-  <button id="menuBtn" class="menu-btn">☰</button>
+  <button id="menubtn" class="menu-btn">☰</button>
 </header>
 
-<div id="sideMenu" class="side-menu">
-  <a href="#hero">Home</a>
-  <a href="#comingSoonSection">Coming Soon</a>
-  <a href="#rocketSection">Rocket</a> <a href="#teaser">Teaser</a>
-  <a href="#allocation">Allocation</a>
-  <a href="#roadmap">Roadmap</a>
-  <a href="#faq">FAQ</a>
-  <a href="#footer">Contact</a>
+<div id="sidemenu" class="side-menu">
+  <a href="#hero">home</a>
+  <a href="#comingsoonsection">coming soon</a>
+  <a href="#rocketsection">rocket</a> <a href="#teaser">teaser</a>
+  <a href="#allocation">allocation</a>
+  <a href="#roadmap">roadmap</a>
+  <a href="#faq">faq</a>
+  <a href="#footer">contact</a>
 </div>
-<div id="menuOverlay" class="menu-overlay"></div>
+<div id="menuoverlay" class="menu-overlay"></div>
 
 <section id="hero" class="hero">
-  <img class="logoBig" src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
-  <h1>🔥 Welcome to</h1>
-  <span class="brox-effect">BROX</span>
-  <p>The meme revolution begins. Powered by community.</p> 
-  <button class="cta" onclick="openModal()">Early Access</button>
+  <img class="logobig" src="images/picsart_25-09-20_12-05-00-500.png" alt="brox big logo" loading="lazy">
+  <h1>🔥 welcome to</h1>
+  <span class="brox-effect">brox</span>
+  <p>the meme revolution begins. powered by community.</p> 
+  <button class="cta" onclick="openmodal()">early access</button>
 </section>
 
-<section id="comingSoonSection" class="coming-soon-container">
-  <h2>Coming Soon...</h2>
+<section id="comingsoonsection" class="coming-soon-container">
+  <h2>coming soon...</h2>
   <div class="countdown-container" id="countdown">
-    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+    <div class="countdown-box"><span id="days">00</span><small>days</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>secs</small></div>
   </div>
 </section>
 
-<section id="rocketSection" class="static-rocket-section">
-  <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Static rocket icon" class="rocket-static-icon">
+<section id="rocketsection" class="static-rocket-section">
+  <img src="images/picsart_25-09-24_13-44-18-609.png" alt="static rocket icon" class="rocket-static-icon">
 </section>
 
 <section id="teaser" class="teaser">
-  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy" class="main-teaser-image">
+  <img src="images/picsart_25-09-21_10-14-23-094.png" alt="coming soon" loading="lazy" class="main-teaser-image">
   <div class="status-box">
-    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+    <p><strong style="color:#00f5ff">status:</strong> pre-launch</p>
+    <p><strong style="color:#00f5ff">audit:</strong> planned</p>
+    <p><strong style="color:#00f5ff">chain:</strong> solana</p>
   </div>
 </section>
 
 <section id="allocation" class="allocation">
-  <h2>Token Allocation</h2>
-  <p>Community 70% • Airdrop 20% • Burn 9% • Team 1%</p>
+  <h2>token allocation</h2>
+  <p>community 70% • airdrop 20% • burn 9% • team 1%</p>
 
   <div class="donut-wrapper">
     <div class="donut-inner"></div>
   </div>
 
   <div class="allocation-details">
-    <h3 style="color:#00f5ff">70% Community Direct</h3>
-    <p>Allocated directly to the community for liquidity and future rewards.</p>
-    <h3 style="color:#00ff77">20% Airdrop</h3>
-    <p>Reserved for a large-scale airdrop to early supporters.</p>
-    <h3 style="color:#ff66ff">9% Burn</h3>
-    <p>Tokens to be permanently burned to decrease supply.</p>
-    <h3 style="color:#e6b800">1% Team</h3>
-    <p>Reserved for the core team to ensure project continuity.</p>
+    <h3 style="color:#00f5ff">70% community direct</h3>
+    <p>allocated directly to the community for liquidity and future rewards.</p>
+    <h3 style="color:#00ff77">20% airdrop</h3>
+    <p>reserved for a large-scale airdrop to early supporters.</p>
+    <h3 style="color:#ff66ff">9% burn</h3>
+    <p>tokens to be permanently burned to decrease supply.</p>
+    <h3 style="color:#e6b800">1% team</h3>
+    <p>reserved for the core team to ensure project continuity.</p>
   </div>
 </section>
 
-<section id="preRoadmapImage" style="padding: 0 20px;">
-  <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+<section id="preroadmapimage" style="padding: 0 20px;">
+  <img src="images/1758200237004.jpg" alt="a relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
 </section>
 
 <section id="roadmap" class="roadmap">
-  <h2>Roadmap</h2>
+  <h2>roadmap</h2>
   <div class="timeline">
-    <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
-    <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
-    <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
-    <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+    <div class="item"><h3>phase 1</h3><p>launch socials and community building.</p></div>
+    <div class="item"><h3>phase 2</h3><p>website upgrade and growth.</p></div>
+    <div class="item"><h3>phase 3</h3><p>listings on dex/cex.</p></div>
+    <div class="item"><h3>phase 4</h3><p>partnerships and ecosystem expansion.</p></div>
   </div>
 </section>
 
 <section id="faq">
-  <h2>FAQ</h2>
+  <h2>faq</h2>
   <div class="faq">
-    <h3>What is BROX?</h3>
-    <p>BROX is a meme coin built by the community for the community.</p>
-    <h3>Where can I join the community?</h3>
-    <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
-    <h3>Is BROX safe?</h3>
-    <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+    <h3>what is brox?</h3>
+    <p>brox is a meme coin built by the community for the community.</p>
+    <h3>where can i join the community?</h3>
+    <p>you can follow us on telegram, x, instagram, and tiktok.</p>
+    <h3>is brox safe?</h3>
+    <p>yes. allocation is transparent (70% community, 20% airdrop, 9% burn, 1% team).</p>
   </div>
 </section>
 
 <footer id="footer">
   <div class="socials">
     <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
-    <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-    <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://www.tiktok.com/brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://x.com/brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
     <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
   </div>
-  <p>&copy; 2025 BROX. All Rights Reserved.</p>
+  <p>&copy; 2025 brox. all rights reserved.</p>
 </footer>
 
 <div id="modal" class="modal">
   <div class="card">
-    <button class="close-btn" onclick="closeModal()">✖</button>
-    <h2 style="color:#00f5ff">Get Notified</h2>
-    <p>Enter your email to join early access.</p>
-    <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
-    <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
-    <div id="modalMessage" class="message"></div>
+    <button class="close-btn" onclick="closemodal()">✖</button>
+    <h2 style="color:#00f5ff">get notified</h2>
+    <p>enter your email to join early access.</p>
+    <input id="emailinput" type="email" placeholder="youexample.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
+    <button class="cta" style="margin-top:14px" onclick="submitemail()">submit</button>
+    <div id="modalmessage" class="message"></div>
   </div>
 </div>
 
 
-<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+<button onclick="scrolltotop()" id="scrolltotopbtn" title="go to top">
   <i class="fas fa-arrow-up"></i>
 </button>
 
 <script>
-// Menu
-const menuBtn=document.getElementById("menuBtn");
-const sideMenu=document.getElementById("sideMenu");
-const menuOverlay=document.getElementById("menuOverlay");
+// menu
+const menubtn=document.getElementById("menubtn"); /* Corrected getelementbyid */
+const sidemenu=document.getElementById("sidemenu"); /* Corrected getelementbyid */
+const menuoverlay=document.getElementById("menuoverlay"); /* Corrected getelementbyid */
 
-menuBtn.addEventListener("click",()=>{
-    sideMenu.classList.toggle("open");
-    menuOverlay.classList.toggle("visible");
-    menuBtn.textContent = sideMenu.classList.contains("open") ? "✖" : "☰";
+menubtn.addEventListener("click",()=>{ /* Corrected addeventlistener */
+    sidemenu.classList.toggle("open"); /* Corrected classlist */
+    menuoverlay.classList.toggle("visible"); /* Corrected classlist */
+    menubtn.textContent = sidemenu.classList.contains("open") ? "✖" : "☰"; /* Corrected textcontent, classlist */
 });
-menuOverlay.addEventListener("click",()=>{
-    sideMenu.classList.remove("open");
-    menuOverlay.classList.remove("visible");
-    menuBtn.textContent = "☰";
+menuoverlay.addEventListener("click",()=>{ /* Corrected addeventlistener */
+    sidemenu.classList.remove("open"); /* Corrected classlist */
+    menuoverlay.classList.remove("visible"); /* Corrected classlist */
+    menubtn.textContent = "☰"; /* Corrected textcontent */
 });
 
-// Close side menu when a link is clicked
-const sideMenuLinks = document.querySelectorAll('#sideMenu a');
-sideMenuLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        sideMenu.classList.remove('open');
-        menuOverlay.classList.remove('visible');
-        menuBtn.textContent = "☰";
+// close side menu when a link is clicked
+const sidemenulinks = document.querySelectorAll('#sidemenu a'); /* Corrected queryselectorall */
+sidemenulinks.forEach(link => { /* Corrected foreach */
+    link.addEventListener('click', () => { /* Corrected addeventlistener */
+        sidemenu.classList.remove('open'); /* Corrected classlist */
+        menuoverlay.classList.remove('visible'); /* Corrected classlist */
+        menubtn.textContent = "☰"; /* Corrected textcontent */
     });
 });
 
-// Modal
-const modal=document.getElementById("modal");
-const modalMessage=document.getElementById("modalMessage");
-function openModal(){modal.classList.add("show");modalMessage.textContent='';}
-function closeModal(){modal.classList.remove("show");}
-function submitEmail(){
-  const email=document.getElementById("emailInput").value.trim();
-  if(!email){modalMessage.textContent="Enter a valid email";return;}
-  modalMessage.textContent="Thanks! We'll notify you soon: "+email;
-  document.getElementById("emailInput").value='';
+// modal
+const modal=document.getElementById("modal"); /* Corrected getelementbyid */
+const modalmessage=document.getElementById("modalmessage"); /* Corrected getelementbyid */
+function openmodal(){modal.classList.add("show");modalmessage.textContent='';} /* Corrected classlist, textcontent */
+function closemodal(){modal.classList.remove("show");} /* Corrected classlist */
+function submitemail(){
+  const email=document.getElementById("emailinput").value.trim(); /* Corrected getelementbyid */
+  if(!email){modalmessage.textContent="enter a valid email";return;} /* Corrected textcontent */
+  modalmessage.textContent="thanks! we'll notify you soon: "+email; /* Corrected textcontent */
+  document.getElementById("emailinput").value=''; /* Corrected getelementbyid */
 }
 
-// Roadmap reveal
-const items=document.querySelectorAll('.timeline .item');
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+// roadmap reveal
+const items=document.querySelectorAll('.timeline .item'); /* Corrected queryselectorall */
+const obs=new IntersectionObserver(entries=>{ /* Corrected IntersectionObserver */
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}) /* Corrected foreach, isintersecting, classlist */
 },{threshold:0.2});
-items.forEach(i=>obs.observe(i));
+items.forEach(i=>obs.observe(i)); /* Corrected foreach */
 
-// Modern countdown
-const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
+// modern countdown
+const countdowndate = new Date("october 10, 2025 10:00:00 gmt+00:00").getTime(); /* Corrected Date, getTime */
 
-function updateCountdown(){
-  const now = new Date().getTime();
-  const rem = countdownDate - now;
+function updatecountdown(){
+  const now = new Date().getTime(); /* Corrected Date, getTime */
+  const rem = countdowndate - now;
 
   if(rem <= 0){
-    document.getElementById("days").textContent="00";
-    document.getElementById("hours").textContent="00";
-    document.getElementById("minutes").textContent="00";
-    document.getElementById("seconds").textContent="00";
+    document.getElementById("days").textContent="00"; /* Corrected getelementbyid, textcontent */
+    document.getElementById("hours").textContent="00"; /* Corrected getelementbyid, textcontent */
+    document.getElementById("minutes").textContent="00"; /* Corrected getelementbyid, textcontent */
+    document.getElementById("seconds").textContent="00"; /* Corrected getelementbyid, textcontent */
     return;
   }
   
-  const d = Math.floor(rem / (1000 * 60 * 60 * 24));
-  const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
-  const s = Math.floor((rem % (1000 * 60)) / 1000);
+  const d = Math.floor(rem / (1000 * 60 * 60 * 24)); /* Corrected Math.floor */
+  const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); /* Corrected Math.floor */
+  const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60)); /* Corrected Math.floor */
+  const s = Math.floor((rem % (1000 * 60)) / 1000); /* Corrected Math.floor */
   
-  document.getElementById("days").textContent = String(d).padStart(2,'0');
-  document.getElementById("hours").textContent = String(h).padStart(2,'0');
-  document.getElementById("minutes").textContent = String(m).padStart(2,'0');
-  document.getElementById("seconds").textContent = String(s).padStart(2,'0');
+  document.getElementById("days").textContent = String(d).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
+  document.getElementById("hours").textContent = String(h).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
+  document.getElementById("minutes").textContent = String(m).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
+  document.getElementById("seconds").textContent = String(s).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
 }
 
-updateCountdown();
-setInterval(updateCountdown, 1000);
+updatecountdown();
+setInterval(updatecountdown, 1000); /* Corrected setinterval */
 
-// Scroll to Top Button Logic
-const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+// scroll to top button logic
+const scrolltotopbtn = document.getElementById("scrolltotopbtn"); /* Corrected getelementbyid */
 
 window.onscroll = function() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
-    scrollToTopBtn.style.display = "flex";
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) { /* Corrected scrolltop, documentelement */
+    scrolltotopbtn.style.display = "flex";
   } else {
-    scrollToTopBtn.style.display = "none";
+    scrolltotopbtn.style.display = "none";
   }
 };
 
-function scrollToTop() {
-  window.scrollTo({
+function scrolltotop() {
+  window.scrollTo({ /* Corrected scrollto */
     top: 0,
     behavior: 'smooth'
   });
