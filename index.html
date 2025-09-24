@@ -30,27 +30,26 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
 /* Hero */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;position:relative;overflow:hidden;}
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
-.hero h1{font-size:3rem;color:#00f5ff}
+.hero h1{font-size:3rem;color:#00f5ff} /* Original h1 style, keep for "Welcome to" */
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
-.cta:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(0,245,255,0.3); }
 
-/* BROX Text Styling for Lava/Glow Effect */
+/* NEW: BROX Text Styling for Lava/Glow Effect */
 .brox-effect {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 5rem;
+  font-family: 'Arial Black', sans-serif; /* A bold font for impact */
+  font-size: 5rem; /* Large size */
   font-weight: 900;
   text-transform: uppercase;
-  color: #36454F;
+  color: #36454F; /* Basalt-like color (dark grayish) */
   text-shadow:
-    0 0 10px #00FF00,
-    0 0 20px #00FF00,
-    0 0 30px #FF0000,
-    0 0 40px #FF0000,
-    0 0 50px #8B0000;
-  animation: brox-glow 2s ease-in-out infinite alternate;
+    0 0 10px #00FF00,  /* Green glow (inner light) */
+    0 0 20px #00FF00,  /* Green glow (inner light) */
+    0 0 30px #FF0000,  /* Red glow (outer light) */
+    0 0 40px #FF0000,  /* Red glow (outer light) */
+    0 0 50px #8B0000;  /* Darker Red/Crimson (stronger outer lava) */
+  animation: brox-glow 2s ease-in-out infinite alternate; /* Pulsating glow effect */
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 1;
@@ -68,31 +67,13 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
   to {
     text-shadow:
-      0 0 12px #00FF00,
-      0 0 24px #00FF00,
-      0 0 36px #FF0000,
-      0 0 48px #FF0000,
-      0 0 60px #8B0000,
-      0 0 70px #FF4500;
+      0 0 12px #00FF00, /* Stronger green */
+      0 0 24px #00FF00, /* Stronger green */
+      0 0 36px #FF0000, /* Stronger red */
+      0 0 48px #FF0000, /* Stronger red */
+      0 0 60px #8B0000, /* Stronger dark red */
+      0 0 70px #FF4500; /* Additional orange-red for lava feel */
   }
-}
-
-/* Hero section with meme style */
-.hero-meme-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    margin-top: 20px;
-}
-.hero-meme-content h1 {
-    font-size: 2.5rem;
-    color: #00f5ff;
-}
-.hero-meme-content p {
-    max-width: 600px;
-    font-size: 1.15rem;
-    margin: 10px 0;
 }
 
 /* Teaser */
@@ -192,27 +173,68 @@ footer p{color:#aaa}
   transform: translateY(-3px);
 }
 
-/* NEW: Loading Indicator for smooth transitions */
-.loading-indicator {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50px;
-    height: 50px;
-    border: 5px solid rgba(0, 245, 255, 0.2);
-    border-top-color: #00f5ff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    z-index: 1500;
-    display: none;
+/* NEW: Rocket Animation */
+.rocket-container {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: rocket-flight 8s ease-in-out infinite;
+  z-index: 100;
+}
+
+.rocket-container img {
+  width: 100%;
+  height: auto;
+  animation: shake 0.5s infinite;
+}
+
+/* NEW: "To the moon we go" text with movement */
+.moon-text {
+  position: absolute;
+  bottom: 10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 700;
+  text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
+  animation: text-float 4s ease-in-out infinite;
+  z-index: 110;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Animation Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rocket-flight {
+  0% { bottom: -20vh; }
+  50% { bottom: 150vh; }
+  100% { bottom: -20vh; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+@keyframes text-float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-10px); }
 }
 
 /* Responsive */
 @media(max-width:480px){
   .hero h1{font-size:2rem}
   .brox-effect {
-    font-size: 3rem;
+    font-size: 3rem; /* Adjust for smaller screens */
   }
   .cta{padding:10px 20px}
   .timeline{padding-left:20px}
@@ -225,12 +247,14 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-}
-
-/* Animation Keyframes */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  .moon-text {
+    font-size: 1rem;
+    bottom: 8vh;
+  }
+  .rocket-container {
+    width: 60px;
+    height: 60px;
+  }
 }
 </style>
 </head>
@@ -244,92 +268,92 @@ footer p{color:#aaa}
 </header>
 
 <div id="sideMenu" class="side-menu">
-  <a href="#hero" data-nav-link>Home</a>
-  <a href="#teaser" data-nav-link>Teaser</a>
-  <a href="#allocation" data-nav-link>Allocation</a>
-  <a href="#roadmap" data-nav-link>Roadmap</a>
-  <a href="#faq" data-nav-link>FAQ</a>
-  <a href="#footer" data-nav-link>Contact</a>
+  <a href="#hero">Home</a>
+  <a href="#teaser">Teaser</a>
+  <a href="#allocation">Allocation</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#faq">FAQ</a>
+  <a href="#footer">Contact</a>
 </div>
 <div id="menuOverlay" class="menu-overlay"></div>
 
-<main id="main-content">
-  <section id="hero" class="hero">
-    <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
-    <div class="hero-meme-content">
-      <h1>Welcome to the BROX fam! 🎉</h1>
-      <span class="brox-effect">BROX</span>
-      <p>We're not just a coin, we're a vibe. Powered by the strongest community on Solana. The revolution is here, let's meme together!</p>
-    </div>
-    <button class="cta" onclick="openModal()">Get on the Hype Train!</button>
-  </section>
+<section id="hero" class="hero">
+  <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
+  <h1>🔥 Welcome to</h1>
+  <span class="brox-effect">BROX</span>
+  <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
+  <button class="cta" onclick="openModal()">Early Access</button>
 
-  <section id="teaser" class="teaser">
-    <h2>🚀 To the Moon We Go!</h2>
-    <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
-    <div class="status-box">
-      <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-      <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-      <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-      <p><strong style="color:#00f5ff">Public Sale:</strong> Coming Soon</p>
-    </div>
+  <div class="rocket-container">
+    <img src="https://i.ibb.co/6HjXbB4/rocket.png" alt="Rocket" />
+  </div>
+  <div class="moon-text">
+    To the moon we go!
+  </div>
+</section>
 
-    <div class="countdown-container" id="countdown">
-      <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-      <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-      <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-      <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
-    </div>
-  </section>
+<section id="teaser" class="teaser">
+  <h2>🚀 Coming Soon...</h2>
+  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
+  <div class="status-box">
+    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+  </div>
 
-  <section id="allocation" class="allocation">
-    <h2>Token Allocation</h2>
-    <p>Community 70% • Airdrop 20% • Burn 9% • Team 1%</p>
+  <div class="countdown-container" id="countdown">
+    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+  </div>
+</section>
 
-    <div class="donut-wrapper">
-      <div class="donut-inner"></div>
-    </div>
+<section id="allocation" class="allocation">
+  <h2>Token Allocation</h2>
+  <p>Community 70% • Airdrop 20% • Burn 9% • Team 1%</p>
 
-    <div class="allocation-details">
-      <h3 style="color:#00f5ff">70% Community Direct</h3>
-      <p>Allocated directly to the community for liquidity and future rewards.</p>
-      <h3 style="color:#00ff77">20% Airdrop</h3>
-      <p>Reserved for a large-scale airdrop to early supporters.</p>
-      <h3 style="color:#ff66ff">9% Burn</h3>
-      <p>Tokens to be permanently burned to decrease supply.</p>
-      <h3 style="color:#e6b800">1% Team</h3>
-      <p>Reserved for the core team to ensure project continuity.</p>
-    </div>
-  </section>
+  <div class="donut-wrapper">
+    <div class="donut-inner"></div>
+  </div>
 
-  <section id="preRoadmapImage" style="padding: 0 20px;">
-    <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
-  </section>
+  <div class="allocation-details">
+    <h3 style="color:#00f5ff">70% Community Direct</h3>
+    <p>Allocated directly to the community for liquidity and future rewards.</p>
+    <h3 style="color:#00ff77">20% Airdrop</h3>
+    <p>Reserved for a large-scale airdrop to early supporters.</p>
+    <h3 style="color:#ff66ff">9% Burn</h3>
+    <p>Tokens to be permanently burned to decrease supply.</p>
+    <h3 style="color:#e6b800">1% Team</h3>
+    <p>Reserved for the core team to ensure project continuity.</p>
+  </div>
+</section>
 
-  <section id="roadmap" class="roadmap">
-    <h2>Roadmap</h2>
-    <div class="timeline">
-      <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
-      <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
-      <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
-      <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
-    </div>
-  </section>
+<section id="preRoadmapImage" style="padding: 0 20px;">
+  <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+</section>
 
-  <section id="faq">
-    <h2>FAQ</h2>
-    <div class="faq">
-      <h3>What is BROX?</h3>
-      <p>BROX is a meme coin built by the community for the community.</p>
-      <h3>Where can I join the community?</h3>
-      <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
-      <h3>Is BROX safe?</h3>
-      <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
-    </div>
-  </section>
-</main>
+<section id="roadmap" class="roadmap">
+  <h2>Roadmap</h2>
+  <div class="timeline">
+    <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
+    <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
+    <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
+    <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+  </div>
+</section>
 
-<div class="loading-indicator" id="loadingIndicator"></div>
+<section id="faq">
+  <h2>FAQ</h2>
+  <div class="faq">
+    <h3>What is BROX?</h3>
+    <p>BROX is a meme coin built by the community for the community.</p>
+    <h3>Where can I join the community?</h3>
+    <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
+    <h3>Is BROX safe?</h3>
+    <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+  </div>
+</section>
 
 <footer id="footer">
   <div class="socials">
@@ -404,6 +428,8 @@ const obs=new IntersectionObserver(entries=>{
 items.forEach(i=>obs.observe(i));
 
 // Modern countdown
+// Set a fixed countdown date to ensure synchronization across all users
+// You can change "October 10, 2025 10:00:00 GMT+00:00" to your desired date and time
 const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
 
 function updateCountdown(){
