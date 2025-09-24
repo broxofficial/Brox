@@ -30,26 +30,26 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
 /* Hero */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;position:relative;overflow:hidden;}
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
-.hero h1{font-size:3rem;color:#00f5ff}
+.hero h1{font-size:3rem;color:#00f5ff} /* Original h1 style, keep for "Welcome to" */
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
-/* BROX Text Styling for Lava/Glow Effect */
+/* NEW: BROX Text Styling for Lava/Glow Effect */
 .brox-effect {
-  font-family: 'Arial Black', sans-serif;
-  font-size: 5rem;
+  font-family: 'Arial Black', sans-serif; /* A bold font for impact */
+  font-size: 5rem; /* Large size */
   font-weight: 900;
   text-transform: uppercase;
-  color: #36454F;
+  color: #36454F; /* Basalt-like color (dark grayish) */
   text-shadow:
-    0 0 10px #00FF00,
-    0 0 20px #00FF00,
-    0 0 30px #FF0000,
-    0 0 40px #FF0000,
-    0 0 50px #8B0000;
-  animation: brox-glow 2s ease-in-out infinite alternate;
+    0 0 10px #00FF00,  /* Green glow (inner light) */
+    0 0 20px #00FF00,  /* Green glow (inner light) */
+    0 0 30px #FF0000,  /* Red glow (outer light) */
+    0 0 40px #FF0000,  /* Red glow (outer light) */
+    0 0 50px #8B0000;  /* Darker Red/Crimson (stronger outer lava) */
+  animation: brox-glow 2s ease-in-out infinite alternate; /* Pulsating glow effect */
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 1;
@@ -67,18 +67,24 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
   to {
     text-shadow:
-      0 0 12px #00FF00,
-      0 0 24px #00FF00,
-      0 0 36px #FF0000,
-      0 0 48px #FF0000,
-      0 0 60px #8B0000,
-      0 0 70px #FF4500;
+      0 0 12px #00FF00, /* Stronger green */
+      0 0 24px #00FF00, /* Stronger green */
+      0 0 36px #FF0000, /* Stronger red */
+      0 0 48px #FF0000, /* Stronger red */
+      0 0 60px #8B0000, /* Stronger dark red */
+      0 0 70px #FF4500; /* Additional orange-red for lava feel */
   }
 }
+
 
 /* Teaser */
 .teaser{text-align:center}
 .teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+.teaser-icon {
+  height: 1.2em; /* Adjust height to match line-height/font size */
+  vertical-align: middle; /* Align with text */
+  margin-right: 8px; /* Space between icon and text */
+}
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
 /* Modern Countdown */
@@ -173,65 +179,11 @@ footer p{color:#aaa}
   transform: translateY(-3px);
 }
 
-/* Rocket EMOJI Animation */
-.rocket-emoji {
-  position: absolute;
-  font-size: 5rem;
-  bottom: -20vh; /* Start from below the viewport */
-  left: 50%;
-  transform: translateX(-50%);
-  /* Animation properties for realistic flight */
-  animation: rocket-flight 10s ease-in-out infinite, shake 0.5s infinite;
-  animation-delay: 2s; /* Wait 2 seconds before the first flight */
-  z-index: 100;
-  text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000; /* Optional glow effect */
-}
-
-
-/* "To the moon we go" text - NO MOVEMENT */
-.moon-text {
-  position: absolute;
-  bottom: 10vh;
-  left: 50%;
-  transform: translateX(-50%); /* Keep it centered */
-  font-size: 1.5rem;
-  color: #fff;
-  font-weight: 700;
-  text-shadow: 0 0 10px #00f5ff, 0 0 20px #00f5ff;
-  z-index: 110;
-  text-align: center;
-  white-space: nowrap;
-  /* Removed animation: text-float */
-}
-
-/* Animation Keyframes */
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Realistic Rocket Animation: prepare, launch, disappear, reset */
-@keyframes rocket-flight {
-  0% { bottom: -20vh; opacity: 1; } /* Starts hidden below, visible */
-  10% { bottom: -15vh; opacity: 1; } /* Slight initial lift to "prepare" */
-  49% { bottom: 100vh; opacity: 1; } /* Flies up and exits screen */
-  50% { bottom: 100vh; opacity: 0; } /* Becomes invisible at top */
-  100% { bottom: -20vh; opacity: 0; } /* Resets to bottom while invisible */
-}
-
-/* Shake animation for the rocket */
-@keyframes shake {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  25% { transform: translateX(-50%) translateY(-2px); }
-  75% { transform: translateX(-50%) translateY(2px); }
-}
-
-
 /* Responsive */
 @media(max-width:480px){
   .hero h1{font-size:2rem}
   .brox-effect {
-    font-size: 3rem;
+    font-size: 3rem; /* Adjust for smaller screens */
   }
   .cta{padding:10px 20px}
   .timeline{padding-left:20px}
@@ -244,20 +196,19 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .moon-text {
-    font-size: 1rem;
-    bottom: 8vh;
-  }
-  .rocket-emoji {
-    font-size: 3rem;
-  }
+}
+
+/* Animation Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 </style>
 </head>
 <body>
 <header>
   <div class="logo">
-    <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
+    <img src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
     <h1>BROX</h1>
   </div>
   <button id="menuBtn" class="menu-btn">☰</button>
@@ -274,22 +225,15 @@ footer p{color:#aaa}
 <div id="menuOverlay" class="menu-overlay"></div>
 
 <section id="hero" class="hero">
-  <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
+  <img class="logoBig" src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to</h1>
   <span class="brox-effect">BROX</span>
   <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
   <button class="cta" onclick="openModal()">Early Access</button>
-
-  <div class="rocket-emoji">
-    🚀
-  </div>
-  <div class="moon-text">
-    To the moon we go!
-  </div>
 </section>
 
 <section id="teaser" class="teaser">
-  <h2>🚀 Coming Soon...</h2>
+  <h2><img src="images/Picsart_25-09-24_13-44-18-609.png" alt="coming soon icon" class="teaser-icon"> Coming Soon...</h2>
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
