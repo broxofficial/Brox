@@ -76,6 +76,18 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
 }
 
+/* NEW: How to buy text styles */
+#howtobuy h2 {
+    font-size: 2.5rem; /* حجم أكبر لـ "How to buy" */
+    margin-bottom: 5px; /* تقليل المسافة أسفل العنوان */
+}
+
+#howtobuy h3 {
+    font-size: 1.5rem; /* حجم أصغر لـ "Early Access" */
+    color: #ccc; /* لون مختلف لتمييزه */
+    margin-top: 5px; /* تقليل المسافة أعلى العنوان */
+}
+
 
 /* Teaser */
 .teaser{text-align:center}
@@ -238,6 +250,9 @@ footer p{color:#aaa}
   </div>
   <p style="text-align: center; font-size: 1.2rem; font-weight: bold; margin-top: 20px;">Coming soon 🚀</p>
   <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Coming soon" loading="lazy">
+  <button class="cta" onclick="openModal()" style="margin-top: 20px;">
+    Early Access
+  </button>
 </section>
 
 <section id="allocation" class="allocation">
