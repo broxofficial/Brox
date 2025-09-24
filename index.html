@@ -77,14 +77,58 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 }
 
 
-/* Teaser */
-.teaser{text-align:center}
-.teaser img{max-width:320px;border-radius:14px;margin-top:14px}
-.teaser-icon {
-  height: 1.2em; /* Adjust height to match line-height/font size */
-  vertical-align: middle; /* Align with text */
-  margin-right: 8px; /* Space between icon and text */
+/* Teaser Section */
+.teaser{text-align:center; overflow: hidden; position: relative;} /* Added overflow: hidden; position: relative; */
+.teaser h2 { margin-bottom: 0; } /* Adjust margin for direct image placement */
+
+/* Animated Rocket Image Container */
+.rocket-animation-container {
+    position: relative; /* Important for positioning the rocket */
+    width: 100%;
+    height: 100px; /* Adjust height as needed for visibility */
+    margin: 20px auto 30px auto; /* Centered with some vertical spacing */
+    overflow: hidden; /* Hide parts of rocket outside this container */
 }
+
+.rocket-animation-container img {
+    position: absolute;
+    bottom: -10%; /* Start slightly below the container */
+    left: 50%;
+    transform: translateX(-50%) scale(1); /* Initial scale and centering */
+    width: 80px; /* Initial size (original was around 52px for logo, let's make it bigger) */
+    height: auto;
+    animation: launchRocket 6s ease-out infinite; /* Animation duration and infinite loop */
+    opacity: 0; /* Start hidden */
+}
+
+@keyframes launchRocket {
+    0% {
+        bottom: -10%; /* Start off-screen below */
+        transform: translateX(-50%) scale(1); /* Original size */
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* Fade in */
+    }
+    20% {
+        bottom: 20%; /* Move up */
+        transform: translateX(-50%) scale(1.5); /* Grow to 1.5x */
+    }
+    50% {
+        bottom: 120%; /* Move off-screen above */
+        transform: translateX(-50%) scale(2); /* Grow to 2x */
+        opacity: 1;
+    }
+    60% {
+        opacity: 0; /* Fade out quickly as it disappears */
+    }
+    100% {
+        bottom: -10%; /* Reset position to start for next iteration */
+        transform: translateX(-50%) scale(1);
+        opacity: 0;
+    }
+}
+
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
 
 /* Modern Countdown */
@@ -196,6 +240,9 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
+  .rocket-animation-container img {
+      width: 60px; /* Smaller rocket on small screens */
+  }
 }
 
 /* Animation Keyframes */
@@ -233,7 +280,11 @@ footer p{color:#aaa}
 </section>
 
 <section id="teaser" class="teaser">
-  <h2><img src="images/Picsart_25-09-24_13-44-18-609.png" alt="coming soon icon" class="teaser-icon"> Coming Soon...</h2>
+  <h2>Coming Soon...</h2>
+  <div class="rocket-animation-container">
+    <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon">
+  </div>
+  
   <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
