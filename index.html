@@ -30,9 +30,9 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
 /* hero section */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;} 
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;}
 .hero .logobig{width:160px;height:160px;border-radius:50%}
-.hero h1{font-size:3rem;color:#00f5ff} 
+.hero h1{font-size:3rem;color:#00f5ff}
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
@@ -56,7 +56,7 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   display: block;
 }
 
-@keyframes brox-glow { /* Corrected @keyframes syntax */
+@keyframes brox-glow {
   from {
     text-shadow:
       0 0 8px #00ff00,
@@ -91,16 +91,16 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 
 /* static rocket image section */
 .static-rocket-section {
-    padding: 40px 20px; /* adjust padding to center it visually */
+    padding: 40px 20px;
     text-align: center;
     background: #0d0d0d;
 }
 
 .static-rocket-section .rocket-static-icon {
-    width: 320px; /* doubled from 160px to 320px for desktop */
+    width: 320px;
     height: auto;
     display: block;
-    margin: 0 auto; /* center the image horizontally */
+    margin: 0 auto;
 }
 
 /* teaser section (for the main image) */
@@ -207,11 +207,11 @@ footer p{color:#aaa}
 
 #scrolltotopbtn:hover {
   background: linear-gradient(135deg, #00c3cc, #00f5ff);
-  transform: translateY(-3px); /* Corrected property name */
+  transform: translateY(-3px);
 }
 
 /* responsive */
-@media(max-width:480px){ /* Corrected @media syntax */
+@media (max-width: 480px){
   .hero h1{font-size:2rem}
   .brox-effect {
     font-size: 3rem;
@@ -228,12 +228,12 @@ footer p{color:#aaa}
     font-size: 1.3rem;
   }
   .static-rocket-section .rocket-static-icon {
-      width: 160px; /* Doubled the size for mobile, from 80px (half of 160px) to 160px (half of 320px) */
+      width: 160px;
   }
 }
 
 /* animation keyframes */
-@keyframes spin { /* Corrected @keyframes syntax */
+@keyframes spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
@@ -263,7 +263,7 @@ footer p{color:#aaa}
   <img class="logobig" src="images/picsart_25-09-20_12-05-00-500.png" alt="brox big logo" loading="lazy">
   <h1>🔥 welcome to</h1>
   <span class="brox-effect">brox</span>
-  <p>the meme revolution begins. powered by community.</p> 
+  <p>the meme revolution begins. powered by community.</p>
   <button class="cta" onclick="openmodal()">early access</button>
 </section>
 
@@ -364,84 +364,98 @@ footer p{color:#aaa}
 
 <script>
 // menu
-const menubtn=document.getElementById("menubtn"); /* Corrected getelementbyid */
-const sidemenu=document.getElementById("sidemenu"); /* Corrected getelementbyid */
-const menuoverlay=document.getElementById("menuoverlay"); /* Corrected getelementbyid */
+const menubtn = document.getElementById("menubtn");
+const sidemenu = document.getElementById("sidemenu");
+const menuoverlay = document.getElementById("menuoverlay");
 
-menubtn.addEventListener("click",()=>{ /* Corrected addeventlistener */
-    sidemenu.classList.toggle("open"); /* Corrected classlist */
-    menuoverlay.classList.toggle("visible"); /* Corrected classlist */
-    menubtn.textContent = sidemenu.classList.contains("open") ? "✖" : "☰"; /* Corrected textcontent, classlist */
+menubtn.addEventListener("click", () => {
+    sidemenu.classList.toggle("open");
+    menuoverlay.classList.toggle("visible");
+    menubtn.textContent = sidemenu.classList.contains("open") ? "✖" : "☰";
 });
-menuoverlay.addEventListener("click",()=>{ /* Corrected addeventlistener */
-    sidemenu.classList.remove("open"); /* Corrected classlist */
-    menuoverlay.classList.remove("visible"); /* Corrected classlist */
-    menubtn.textContent = "☰"; /* Corrected textcontent */
+menuoverlay.addEventListener("click", () => {
+    sidemenu.classList.remove("open");
+    menuoverlay.classList.remove("visible");
+    menubtn.textContent = "☰";
 });
 
 // close side menu when a link is clicked
-const sidemenulinks = document.querySelectorAll('#sidemenu a'); /* Corrected queryselectorall */
-sidemenulinks.forEach(link => { /* Corrected foreach */
-    link.addEventListener('click', () => { /* Corrected addeventlistener */
-        sidemenu.classList.remove('open'); /* Corrected classlist */
-        menuoverlay.classList.remove('visible'); /* Corrected classlist */
-        menubtn.textContent = "☰"; /* Corrected textcontent */
+const sidemenulinks = document.querySelectorAll('#sidemenu a');
+sidemenulinks.forEach(link => {
+    link.addEventListener('click', () => {
+        sidemenu.classList.remove('open');
+        menuoverlay.classList.remove('visible');
+        menubtn.textContent = "☰";
     });
 });
 
 // modal
-const modal=document.getElementById("modal"); /* Corrected getelementbyid */
-const modalmessage=document.getElementById("modalmessage"); /* Corrected getelementbyid */
-function openmodal(){modal.classList.add("show");modalmessage.textContent='';} /* Corrected classlist, textcontent */
-function closemodal(){modal.classList.remove("show");} /* Corrected classlist */
-function submitemail(){
-  const email=document.getElementById("emailinput").value.trim(); /* Corrected getelementbyid */
-  if(!email){modalmessage.textContent="enter a valid email";return;} /* Corrected textcontent */
-  modalmessage.textContent="thanks! we'll notify you soon: "+email; /* Corrected textcontent */
-  document.getElementById("emailinput").value=''; /* Corrected getelementbyid */
+const modal = document.getElementById("modal");
+const modalmessage = document.getElementById("modalmessage");
+
+function openmodal() {
+  modal.classList.add("show");
+  modalmessage.textContent = '';
+}
+function closemodal() {
+  modal.classList.remove("show");
+}
+function submitemail() {
+  const email = document.getElementById("emailinput").value.trim();
+  if (!email) {
+    modalmessage.textContent = "enter a valid email";
+    return;
+  }
+  modalmessage.textContent = "thanks! we'll notify you soon: " + email;
+  document.getElementById("emailinput").value = '';
 }
 
-// roadmap reveal
-const items=document.querySelectorAll('.timeline .item'); /* Corrected queryselectorall */
-const obs=new IntersectionObserver(entries=>{ /* Corrected IntersectionObserver */
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}) /* Corrected foreach, isintersecting, classlist */
-},{threshold:0.2});
-items.forEach(i=>obs.observe(i)); /* Corrected foreach */
+// roadmap reveal on scroll
+const items = document.querySelectorAll('.timeline .item');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, {threshold: 0.2});
+
+items.forEach(item => observer.observe(item));
 
 // modern countdown
-const countdowndate = new Date("october 10, 2025 10:00:00 gmt+00:00").getTime(); /* Corrected Date, getTime */
+const countdowndate = new Date("october 10, 2025 10:00:00 gmt+00:00").getTime();
 
-function updatecountdown(){
-  const now = new Date().getTime(); /* Corrected Date, getTime */
+function updatecountdown() {
+  const now = new Date().getTime();
   const rem = countdowndate - now;
 
-  if(rem <= 0){
-    document.getElementById("days").textContent="00"; /* Corrected getelementbyid, textcontent */
-    document.getElementById("hours").textContent="00"; /* Corrected getelementbyid, textcontent */
-    document.getElementById("minutes").textContent="00"; /* Corrected getelementbyid, textcontent */
-    document.getElementById("seconds").textContent="00"; /* Corrected getelementbyid, textcontent */
+  if (rem <= 0) {
+    document.getElementById("days").textContent = "00";
+    document.getElementById("hours").textContent = "00";
+    document.getElementById("minutes").textContent = "00";
+    document.getElementById("seconds").textContent = "00";
     return;
   }
   
-  const d = Math.floor(rem / (1000 * 60 * 60 * 24)); /* Corrected Math.floor */
-  const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); /* Corrected Math.floor */
-  const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60)); /* Corrected Math.floor */
-  const s = Math.floor((rem % (1000 * 60)) / 1000); /* Corrected Math.floor */
+  const d = Math.floor(rem / (1000 * 60 * 60 * 24));
+  const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((rem % (1000 * 60)) / 1000);
   
-  document.getElementById("days").textContent = String(d).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
-  document.getElementById("hours").textContent = String(h).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
-  document.getElementById("minutes").textContent = String(m).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
-  document.getElementById("seconds").textContent = String(s).padStart(2,'0'); /* Corrected getelementbyid, textcontent, String, padstart */
+  document.getElementById("days").textContent = String(d).padStart(2, '0');
+  document.getElementById("hours").textContent = String(h).padStart(2, '0');
+  document.getElementById("minutes").textContent = String(m).padStart(2, '0');
+  document.getElementById("seconds").textContent = String(s).padStart(2, '0');
 }
 
 updatecountdown();
-setInterval(updatecountdown, 1000); /* Corrected setinterval */
+setInterval(updatecountdown, 1000);
 
 // scroll to top button logic
-const scrolltotopbtn = document.getElementById("scrolltotopbtn"); /* Corrected getelementbyid */
+const scrolltotopbtn = document.getElementById("scrolltotopbtn");
 
 window.onscroll = function() {
-  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) { /* Corrected scrolltop, documentelement */
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
     scrolltotopbtn.style.display = "flex";
   } else {
     scrolltotopbtn.style.display = "none";
@@ -449,7 +463,7 @@ window.onscroll = function() {
 };
 
 function scrolltotop() {
-  window.scrollTo({ /* Corrected scrollto */
+  window.scrollTo({
     top: 0,
     behavior: 'smooth'
   });
