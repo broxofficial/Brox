@@ -76,18 +76,6 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
 }
 
-/* NEW: How to buy text styles */
-#howtobuy h2 {
-    font-size: 2.5rem; /* حجم أكبر لـ "How to buy" */
-    margin-bottom: 5px; /* تقليل المسافة أسفل العنوان */
-}
-
-#howtobuy h3 {
-    font-size: 1.5rem; /* حجم أصغر لـ "Early Access" */
-    color: #ccc; /* لون مختلف لتمييزه */
-    margin-top: 5px; /* تقليل المسافة أعلى العنوان */
-}
-
 
 /* Teaser */
 .teaser{text-align:center}
@@ -223,7 +211,7 @@ footer p{color:#aaa}
 
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
-  <a href="#howtobuy">How to buy</a>
+  <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
   <a href="#roadmap">Roadmap</a>
   <a href="#faq">FAQ</a>
@@ -236,24 +224,24 @@ footer p{color:#aaa}
   <h1>🔥 Welcome to</h1>
   <span class="brox-effect">BROX</span>
   <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
+  <button class="cta" onclick="openModal()">Early Access</button>
 </section>
 
-<section id="howtobuy" class="teaser">
-  <h2>How to buy</h2>
-  <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Coming soon" loading="lazy">
-</section>
+<section id="teaser" class="teaser">
+  <h2>🚀 Coming Soon...</h2>
+  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
+  <div class="status-box">
+    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+  </div>
 
-<section id="earlyaccess" class="teaser">
-    <div class="countdown-container" id="countdown">
-      <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-      <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-      <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-      <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
-    </div>
-    <p style="text-align: center; font-size: 1.2rem; font-weight: bold; margin-top: 20px;">Coming soon 🚀</p>
-    <button class="cta" onclick="openModal()" style="margin-top: 20px;">
-        Early Access
-    </button>
+  <div class="countdown-container" id="countdown">
+    <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+    <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+    <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+    <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+  </div>
 </section>
 
 <section id="allocation" class="allocation">
@@ -425,3 +413,4 @@ function scrollToTop() {
 </script>
 </body>
 </html>
+
