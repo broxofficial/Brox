@@ -29,8 +29,8 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
-/* Hero */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+/* Hero Section */
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;} /* Added position:relative, overflow:hidden */
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
 .hero h1{font-size:3rem;color:#00f5ff} /* Original h1 style, keep for "Welcome to" */
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
@@ -76,55 +76,74 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
 }
 
-/* Teaser Section */
-.teaser{text-align:center; position: relative; padding-top: 100px; /* Adjust as needed to make space for rocket */ } /* Added position: relative for rocket positioning */
-.teaser h2 { margin-bottom: 0; position: relative; z-index: 10;} /* Ensure text is above rocket */
+/* Coming Soon & Countdown container */
+.coming-soon-container {
+    padding: 60px 20px; /* Space above and below */
+    text-align: center;
+    background: #0d0d0d; /* Match body background */
+    z-index: 5; /* Ensure it's above other elements if needed */
+    position: relative; /* For rocket positioning if we decide to contain it here */
+    overflow: hidden; /* To hide rocket before it flies or after */
+}
+.coming-soon-container h2 {
+    margin-bottom: 20px; /* Space below title */
+}
 
-/* Animated Rocket Image */
-.rocket-fly-icon {
-    position: fixed; /* Allow it to fly across the entire viewport */
-    top: 100vh; /* Start completely off-screen at the bottom */
+
+/* Animated Rocket Image (Fireworks-like) */
+.rocket-fireworks-icon {
+    position: absolute; /* Position within .coming-soon-container or body */
+    bottom: -150px; /* Start off-screen below the container */
     left: 50%;
-    transform: translateX(-50%) scale(1); /* Initial scale and centering */
-    width: 100px; /* A good starting size, twice the logo size */
+    transform: translateX(-50%) rotate(0deg); /* Initial position and rotation */
+    width: 80px; /* Starting size */
     height: auto;
-    animation: launchRocketFly 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; /* More dynamic easing */
-    z-index: 11; /* Ensure rocket is above content but below header/menu */
-    display: none; /* Hidden by default, shown by JS when animation is triggered */
+    opacity: 0;
+    z-index: 100; /* Ensure it's above other content */
+    /* animation will be added by JS to start on interaction/visibility */
 }
 
-@keyframes launchRocketFly {
-    0% {
-        top: 100vh; /* Start off-screen bottom */
-        transform: translateX(-50%) scale(1);
+@keyframes launchFireworksRocket {
+    0% { /* Paused state */
+        bottom: -150px; /* Start off-screen */
+        transform: translateX(-50%) rotate(0deg) scale(1);
         opacity: 0;
     }
-    10% {
-        top: calc(50vh + 100px); /* Start moving up, near the "Coming Soon" text */
-        opacity: 1; /* Fade in */
-        transform: translateX(-50%) scale(1.2); /* Slightly bigger */
-    }
-    30% {
-        top: 30vh; /* Mid-flight */
+    10% { /* Initial appearance, holding position */
+        bottom: 50px; /* Appears slightly above the bottom of its parent container */
+        transform: translateX(-50%) rotate(0deg) scale(1);
         opacity: 1;
-        transform: translateX(-50%) scale(1.5); /* Getting bigger */
     }
-    60% {
-        top: -20vh; /* Off-screen top */
-        opacity: 0; /* Fade out as it leaves */
-        transform: translateX(-50%) scale(2); /* Max size */
+    20% { /* Still holding, maybe a slight wobble */
+        bottom: 60px;
+        transform: translateX(-50%) rotate(5deg) scale(1.05);
+        opacity: 1;
     }
-    100% {
-        top: 100vh; /* Reset to start position for seamless loop */
-        opacity: 0;
-        transform: translateX(-50%) scale(1);
+    30% { /* Preparation for launch */
+        bottom: 50px;
+        transform: translateX(-50%) rotate(-5deg) scale(1);
+        opacity: 1;
+    }
+    40% { /* Start of explosive launch */
+        bottom: 80px;
+        transform: translateX(-50%) rotate(0deg) scale(1.1);
+        opacity: 1;
+        animation-timing-function: ease-out; /* Smooth start of launch */
+    }
+    100% { /* Rapid ascent, spiral, and disappearance */
+        bottom: 150vh; /* Fly completely off-screen upwards */
+        transform: translateX(-50%) rotate(720deg) scale(2.5); /* Spiral and grow */
+        opacity: 0; /* Fade out */
+        animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1); /* Very fast ease-out for rapid ascent */
     }
 }
 
+/* Teaser Section (for the main image) */
+.teaser{text-align:center;} /* Removed position: relative; overflow: hidden; as rocket is now handled differently */
 
 /* Corrected styling for the main teaser image (Picsart_25-09-21_10-14-23-094.png) */
 .teaser .main-teaser-image {
-  max-width: 380px; /* Increased max-width for better visibility, adjust as needed */
+  max-width: 450px; /* Increased max-width again for better visibility, adjust as needed */
   width: 100%; /* Ensure it's responsive */
   height: auto;
   border-radius: 14px;
@@ -243,8 +262,8 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .rocket-fly-icon {
-      width: 70px; /* Smaller rocket on small screens */
+  .rocket-fireworks-icon {
+      width: 60px; /* Smaller rocket on small screens */
   }
 }
 
@@ -266,6 +285,7 @@ footer p{color:#aaa}
 
 <div id="sideMenu" class="side-menu">
   <a href="#hero">Home</a>
+  <a href="#comingSoonSection">Coming Soon</a>
   <a href="#teaser">Teaser</a>
   <a href="#allocation">Allocation</a>
   <a href="#roadmap">Roadmap</a>
@@ -278,27 +298,26 @@ footer p{color:#aaa}
   <img class="logoBig" src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to</h1>
   <span class="brox-effect">BROX</span>
-  <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-  <button class="cta" onclick="openModal()">Early Access</button>
+  <p>The meme revolution begins. Powered by community.</p> <button class="cta" onclick="openModal()">Early Access</button>
 </section>
 
-<section id="teaser" class="teaser">
+<section id="comingSoonSection" class="coming-soon-container">
   <h2>Coming Soon...</h2>
-  <img id="rocketFlyIcon" src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon" class="rocket-fly-icon">
-  
-  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy" class="main-teaser-image">
-  
-  <div class="status-box">
-    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-  </div>
-
+  <img id="rocketFireworksIcon" src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon" class="rocket-fireworks-icon">
   <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
     <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
     <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
     <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+  </div>
+</section>
+
+<section id="teaser" class="teaser">
+  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy" class="main-teaser-image">
+  <div class="status-box">
+    <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+    <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+    <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
   </div>
 </section>
 
@@ -467,26 +486,40 @@ function scrollToTop() {
   });
 }
 
-// Rocket animation logic (to start it when section is visible)
-const rocketIcon = document.getElementById("rocketFlyIcon");
-const teaserSection = document.getElementById("teaser");
+// Rocket animation logic (Fireworks style)
+const rocketFireworksIcon = document.getElementById("rocketFireworksIcon");
+const comingSoonSection = document.getElementById("comingSoonSection");
 
-const rocketObserver = new IntersectionObserver(entries => {
+let rocketAnimationTimeout;
+
+const rocketFireworksObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            rocketIcon.style.display = "block"; // Show rocket
-            rocketIcon.style.animationPlayState = "running"; // Start animation
+            // Section is visible, start/restart animation
+            if (rocketAnimationTimeout) clearTimeout(rocketAnimationTimeout);
+            rocketFireworksIcon.style.display = "block";
+            rocketFireworksIcon.style.animation = "none"; // Reset animation
+            void rocketFireworksIcon.offsetWidth; // Trigger reflow to apply reset
+            rocketFireworksIcon.style.animation = "launchFireworksRocket 8s forwards"; // Start animation
+
+            // Set a timeout to loop the animation after it finishes
+            rocketAnimationTimeout = setTimeout(() => {
+                rocketFireworksIcon.style.display = "none"; // Hide after animation
+                // Then restart the observer, or just let the animation repeat if needed
+                // For "fireworks" style, it makes sense for it to disappear and then launch again.
+                // We'll let the observer handle re-triggering when the section comes into view again.
+            }, 8000); // Animation duration is 8s
+            
         } else {
-            rocketIcon.style.animationPlayState = "paused"; // Pause when off-screen
-            // You might want to reset its position here if you want it to restart
-            // every time it comes into view. For infinite loop across screen,
-            // pausing/resuming is fine.
+            // Section is not visible, stop animation and hide rocket
+            if (rocketAnimationTimeout) clearTimeout(rocketAnimationTimeout);
+            rocketFireworksIcon.style.animation = "none";
+            rocketFireworksIcon.style.display = "none";
         }
     });
-}, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+}, { threshold: 0.2 }); // Trigger when 20% of the section is visible
 
-rocketObserver.observe(teaserSection);
-
+rocketFireworksObserver.observe(comingSoonSection);
 </script>
 </body>
 </html>
