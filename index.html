@@ -1,15 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>BROX — Official</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+<style>
+/* Basic Styles */
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0d0d0d;color:#fff;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+h2{color:#00f5ff;margin-bottom:16px;text-align:center}
+section{padding:80px 20px}
+
+/* Header */
+header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(0,0,0,0.65);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,245,255,0.06);z-index:1200}
+.logo{display:flex;align-items:center;gap:12px}
+.logo img{width:52px;height:52px;border-radius:50%}
+.logo h1{font-size:1.25rem;color:#00f5ff}
+
+/* Menu */
+.menu-btn{font-size:1.8rem;cursor:pointer;position:fixed;top:16px;right:22px;z-index:1300;width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(0,245,255,0.15);border:1px solid rgba(0,245,255,0.6);color:#00f5ff;transition:.18s}
+.menu-btn:hover{background:rgba(0,245,255,0.25)}
+.side-menu{position:fixed;top:70px;right:-240px;width:220px;height:calc(100% - 70px);background:rgba(12,12,12,0.95);padding:20px 18px 30px;box-shadow:-4px 0 18px rgba(0,245,255,0.05);transition:right .28s ease-in-out;z-index:1250;border-left:1px solid rgba(255,255,255,0.05)}
+.side-menu.open{right:0}
+.side-menu a{display:block;padding:10px;border-radius:8px;color:#e6f8ff;font-weight:600}
+.side-menu a:hover{background:rgba(0,245,255,0.1);color:#00f5ff}
+.menu-overlay{position:fixed;top:70px;left:0;width:100%;height:calc(100% - 70px);z-index:1205;background:transparent;pointer-events:none;transition:.25s}
+.menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
+
+/* Hero */
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.hero .logoBig{width:160px;height:160px;border-radius:50%}
+.hero h1{font-size:3rem;color:#00f5ff} /* Original h1 style, keep for "Welcome to" */
+.hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
+.cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
+
+/* NEW: BROX Text Styling for Lava/Glow Effect */
+.brox-effect {
+  font-family: 'Arial Black', sans-serif; /* A bold font for impact */
+  font-size: 5rem; /* Large size */
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #36454F; /* Basalt-like color (dark grayish) */
+  text-shadow:
+    0 0 10px #00FF00,  /* Green glow (inner light) */
+    0 0 20px #00FF00,  /* Green glow (inner light) */
+    0 0 30px #FF0000,  /* Red glow (outer light) */
+    0 0 40px #FF0000,  /* Red glow (outer light) */
+    0 0 50px #8B0000;  /* Darker Red/Crimson (stronger outer lava) */
+  animation: brox-glow 2s ease-in-out infinite alternate; /* Pulsating glow effect */
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 1;
+  display: block;
+}
+
+@keyframes brox-glow {
+  from {
+    text-shadow:
+      0 0 8px #00FF00,
+      0 0 16px #00FF00,
+      0 0 24px #FF0000,
+      0 0 32px #FF0000,
+      0 0 40px #8B0000;
+  }
+  to {
+    text-shadow:
+      0 0 12px #00FF00, /* Stronger green */
+      0 0 24px #00FF00, /* Stronger green */
+      0 0 36px #FF0000, /* Stronger red */
+      0 0 48px #FF0000, /* Stronger red */
+      0 0 60px #8B0000, /* Stronger dark red */
+      0 0 70px #FF4500; /* Additional orange-red for lava feel */
+  }
+}
+
+/* NEW: How to buy text styles */
+#howtobuy h2 {
+    font-size: 2.5rem; /* حجم أكبر لـ "How to buy" */
+    margin-bottom: 5px; /* تقليل المسافة أسفل العنوان */
+}
+
+#howtobuy h3 {
+    font-size: 1.5rem; /* حجم أصغر لـ "Early Access" */
+    color: #ccc; /* لون مختلف لتمييزه */
+    margin-top: 5px; /* تقليل المسافة أعلى العنوان */
+}
+
+
+/* Teaser */
+.teaser{text-align:center}
+.teaser img{max-width:320px;border-radius:14px;margin-top:14px}
+.status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
+
+/* Modern Countdown */
+.countdown-container{display:flex;justify-content:center;gap:12px;margin-top:32px}
+.countdown-box{background:#1a1a1a;padding:18px 14px;border-radius:12px;min-width:70px;text-align:center}
+.countdown-box span{display:block;font-size:1.8rem;font-weight:700;color:#00f5ff}
+.countdown-box small{color:#aaa;font-size:0.8rem}
+
+/* Allocation Donut (modern style) */
+.allocation{text-align:center}
+.donut-wrapper{
+  width:260px;
+  height:260px;
+  margin:40px auto 0;
+  position:relative;
+  border-radius:50%;
+  background:conic-gradient(
+    #00f5ff 0% 70%,
+    #00ff77 70% 90%,
+    #ff66ff 90% 99%,
+    #e6b800 99% 100%
+  );
+  animation: spin 8s linear infinite;
+}
+.donut-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:140px;height:140px;border-radius:50%;background:#0d0d0d}
+.allocation-details{max-width:720px;margin:30px auto 0;text-align:left;color:#ccc;line-height:1.6}
+
+/* New Image Style */
+.pre-roadmap-image {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 60px auto 60px auto;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Roadmap */
+.roadmap{background:#0c0c0c;padding-bottom:100px}
+.roadmap h2{font-size:2.2rem;margin-bottom:20px}
+.timeline{position:relative;margin:0 auto;max-width:600px;padding-left:40px}
+.timeline::before{content:'';position:absolute;left:16px;top:0;width:4px;height:100%;background:linear-gradient(#00f5ff,#00c3cc);border-radius:2px}
+.timeline .item{position:relative;margin:24px 0;padding:16px 20px;background:rgba(255,255,255,0.02);border-radius:10px;opacity:0;transform:translateY(20px);transition:.5s}
+.timeline .item.visible{opacity:1;transform:none}
+.timeline .item::before{content:'';position:absolute;left:-26px;top:20px;width:14px;height:14px;background:#00f5ff;border-radius:50%;box-shadow:0 0 8px #00f5ff}
+
+/* FAQ */
+.faq{max-width:800px;margin:0 auto;text-align:left}
+.faq h3{color:#00f5ff;margin-top:18px}
+.faq p{color:#ccc;margin-bottom:12px}
+
+/* Footer */
+footer{padding:30px 20px;background:#0b0b0b;text-align:center;border-top:1px solid rgba(255,255,255,0.05)}
+.socials{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
+.socials a{font-size:1.5rem;color:#cfefff;transition:.18s}
+.socials a:hover{color:#00f5ff}
+footer p{color:#aaa}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:1400;opacity:0;pointer-events:none;transition:.2s}
+.modal.show{opacity:1;pointer-events:auto}
+.modal .card{background:#0b0b0b;padding:22px;border-radius:12px;max-width:480px;width:90%;position:relative}
+.modal .close-btn{position:absolute;top:14px;right:18px;font-size:1.2rem;cursor:pointer}
+.modal .message{margin-top:12px;color:#00f5ff;font-weight:600;text-align:center}
+
+/* Scroll to Top Button */
+#scrollToTopBtn {
+  display: none;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 1100;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00f5ff, #00c3cc);
+  color: #001;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 245, 255, 0.4);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+#scrollToTopBtn:hover {
+  background: linear-gradient(135deg, #00c3cc, #00f5ff);
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media(max-width:480px){
+  .hero h1{font-size:2rem}
+  .brox-effect {
+    font-size: 3rem; /* Adjust for smaller screens */
+  }
+  .cta{padding:10px 20px}
+  .timeline{padding-left:20px}
+  .donut-wrapper{width:220px;height:220px}
+  .donut-inner{width:120px;height:120px}
+  #scrollToTopBtn {
+    bottom: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+/* Animation Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">
+    <img src="Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
+    <h1>BROX</h1>
+  </div>
+  <button id="menuBtn" class="menu-btn">☰</button>
+</header>
+
+<div id="sideMenu" class="side-menu">
+  <a href="#hero">Home</a>
+  <a href="#howtobuy">How to buy</a>
+  <a href="#earlyaccess">Early Access</a>
+  <a href="#allocation">Allocation</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#faq">FAQ</a>
+  <a href="#footer">Contact</a>
+</div>
+<div id="menuOverlay" class="menu-overlay"></div>
+
+<section id="hero" class="hero">
+  <img class="logoBig" src="Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
+  <h1>🔥 Welcome to</h1>
+  <span class="brox-effect">BROX</span>
+  <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
+  <button class="cta" onclick="openModal()">Early Access</button>
+</section>
+
 <section id="howtobuy" class="teaser">
-    <h2>How to buy</h2>
-    <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Coming soon" loading="lazy">
+  <h2>How to buy</h2>
+  <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Coming soon" loading="lazy">
 </section>
 
 <section id="earlyaccess" class="teaser">
     <h2>Early Access</h2>
     <div class="countdown-container" id="countdown">
+      <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+      <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+      <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+      <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
     </div>
     <p style="text-align: center; font-size: 1.2rem; font-weight: bold; margin-top: 20px;">Coming soon 🚀</p>
-    
     <button class="cta" onclick="openModal()" style="margin-top: 20px;">
-        Early Access
+      Early Access
     </button>
 </section>
+
+
+<section id="allocation" class="allocation">
+  <h2>Token Allocation</h2>
+  <p>Community 70% • Airdrop 20% • Burn 9% • Team 1%</p>
+
+  <div class="donut-wrapper">
+    <div class="donut-inner"></div>
+  </div>
+
+  <div class="allocation-details">
+    <h3 style="color:#00f5ff">70% Community Direct</h3>
+    <p>Allocated directly to the community for liquidity and future rewards.</p>
+    <h3 style="color:#00ff77">20% Airdrop</h3>
+    <p>Reserved for a large-scale airdrop to early supporters.</p>
+    <h3 style="color:#ff66ff">9% Burn</h3>
+    <p>Tokens to be permanently burned to decrease supply.</p>
+    <h3 style="color:#e6b800">1% Team</h3>
+    <p>Reserved for the core team to ensure project continuity.</p>
+  </div>
+</section>
+
+<section id="preRoadmapImage" style="padding: 0 20px;">
+  <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+</section>
+
+<section id="roadmap" class="roadmap">
+  <h2>Roadmap</h2>
+  <div class="timeline">
+    <div class="item"><h3>Phase 1</h3><p>Launch socials and community building.</p></div>
+    <div class="item"><h3>Phase 2</h3><p>Website upgrade and growth.</p></div>
+    <div class="item"><h3>Phase 3</h3><p>Listings on DEX/CEX.</p></div>
+    <div class="item"><h3>Phase 4</h3><p>Partnerships and ecosystem expansion.</p></div>
+  </div>
+</section>
+
+<section id="faq">
+  <h2>FAQ</h2>
+  <div class="faq">
+    <h3>What is BROX?</h3>
+    <p>BROX is a meme coin built by the community for the community.</p>
+    <h3>Where can I join the community?</h3>
+    <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
+    <h3>Is BROX safe?</h3>
+    <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+  </div>
+</section>
+
+<footer id="footer">
+  <div class="socials">
+    <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+    <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+    <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+  </div>
+  <p>&copy; 2025 BROX. All Rights Reserved.</p>
+</footer>
+
+<div id="modal" class="modal">
+  <div class="card">
+    <button class="close-btn" onclick="closeModal()">✖</button>
+    <h2 style="color:#00f5ff">Get Notified</h2>
+    <p>Enter your email to join early access.</p>
+    <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
+    <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
+    <div id="modalMessage" class="message"></div>
+  </div>
+</div>
+
+
+<button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+// Menu
+const menuBtn=document.getElementById("menuBtn");
+const sideMenu=document.getElementById("sideMenu");
+const menuOverlay=document.getElementById("menuOverlay");
+
+menuBtn.addEventListener("click",()=>{
+    sideMenu.classList.toggle("open");
+    menuOverlay.classList.toggle("visible");
+    menuBtn.textContent = sideMenu.classList.contains("open") ? "✖" : "☰";
+});
+menuOverlay.addEventListener("click",()=>{
+    sideMenu.classList.remove("open");
+    menuOverlay.classList.remove("visible");
+    menuBtn.textContent = "☰";
+});
+
+// Close side menu when a link is clicked
+const sideMenuLinks = document.querySelectorAll('#sideMenu a');
+sideMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        sideMenu.classList.remove('open');
+        menuOverlay.classList.remove('visible');
+        menuBtn.textContent = "☰";
+    });
+});
+
+// Modal
+const modal=document.getElementById("modal");
+const modalMessage=document.getElementById("modalMessage");
+function openModal(){modal.classList.add("show");modalMessage.textContent='';}
+function closeModal(){modal.classList.remove("show");}
+function submitEmail(){
+  const email=document.getElementById("emailInput").value.trim();
+  if(!email){modalMessage.textContent="Enter a valid email";return;}
+  modalMessage.textContent="Thanks! We'll notify you soon: "+email;
+  document.getElementById("emailInput").value='';
+}
+
+// Roadmap reveal
+const items=document.querySelectorAll('.timeline .item');
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})
+},{threshold:0.2});
+items.forEach(i=>obs.observe(i));
+
+// Modern countdown
+// Set a fixed countdown date to ensure synchronization across all users
+// You can change "October 10, 2025 10:00:00 GMT+00:00" to your desired date and time
+const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
+
+function updateCountdown(){
+  const now = new Date().getTime();
+  const rem = countdownDate - now;
+
+  if(rem <= 0){
+    document.getElementById("days").textContent="00";
+    document.getElementById("hours").textContent="00";
+    document.getElementById("minutes").textContent="00";
+    document.getElementById("seconds").textContent="00";
+    return;
+  }
+  
+  const d = Math.floor(rem / (1000 * 60 * 60 * 24));
+  const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
+  const s = Math.floor((rem % (1000 * 60)) / 1000);
+  
+  document.getElementById("days").textContent = String(d).padStart(2,'0');
+  document.getElementById("hours").textContent = String(h).padStart(2,'0');
+  document.getElementById("minutes").textContent = String(m).padStart(2,'0');
+  document.getElementById("seconds").textContent = String(s).padStart(2,'0');
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
+
+// Scroll to Top Button Logic
+const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+window.onscroll = function() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    scrollToTopBtn.style.display = "flex";
+  } else {
+    scrollToTopBtn.style.display = "none";
+  }
+};
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+}
+</script>
+</body>
+</html>
