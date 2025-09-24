@@ -30,26 +30,26 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
 .menu-overlay.visible{background:rgba(0,0,0,0.3);pointer-events:auto}
 
 /* Hero Section */
-.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;} /* Added position:relative, overflow:hidden */
+.hero{height:100vh;padding-top:70px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px; position: relative; overflow: hidden;} 
 .hero .logoBig{width:160px;height:160px;border-radius:50%}
-.hero h1{font-size:3rem;color:#00f5ff} /* Original h1 style, keep for "Welcome to" */
+.hero h1{font-size:3rem;color:#00f5ff} 
 .hero p{max-width:720px;color:#cfefff99;font-size:1.15rem}
 .cta{margin-top:18px;padding:12px 28px;border-radius:999px;background:linear-gradient(135deg,#00f5ff,#00c3cc);color:#001;font-weight:700;border:none;cursor:pointer}
 
 /* NEW: BROX Text Styling for Lava/Glow Effect */
 .brox-effect {
-  font-family: 'Arial Black', sans-serif; /* A bold font for impact */
-  font-size: 5rem; /* Large size */
+  font-family: 'Arial Black', sans-serif;
+  font-size: 5rem;
   font-weight: 900;
   text-transform: uppercase;
-  color: #36454F; /* Basalt-like color (dark grayish) */
+  color: #36454F;
   text-shadow:
-    0 0 10px #00FF00,  /* Green glow (inner light) */
-    0 0 20px #00FF00,  /* Green glow (inner light) */
-    0 0 30px #FF0000,  /* Red glow (outer light) */
-    0 0 40px #FF0000,  /* Red glow (outer light) */
-    0 0 50px #8B0000;  /* Darker Red/Crimson (stronger outer lava) */
-  animation: brox-glow 2s ease-in-out infinite alternate; /* Pulsating glow effect */
+    0 0 10px #00FF00,
+    0 0 20px #00FF00,
+    0 0 30px #FF0000,
+    0 0 40px #FF0000,
+    0 0 50px #8B0000;
+  animation: brox-glow 2s ease-in-out infinite alternate;
   margin-top: 10px;
   margin-bottom: 20px;
   line-height: 1;
@@ -67,88 +67,49 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
   to {
     text-shadow:
-      0 0 12px #00FF00, /* Stronger green */
-      0 0 24px #00FF00, /* Stronger green */
-      0 0 36px #FF0000, /* Stronger red */
-      0 0 48px #FF0000, /* Stronger red */
-      0 0 60px #8B0000, /* Stronger dark red */
-      0 0 70px #FF4500; /* Additional orange-red for lava feel */
+      0 0 12px #00FF00,
+      0 0 24px #00FF00,
+      0 0 36px #FF0000,
+      0 0 48px #FF0000,
+      0 0 60px #8B0000,
+      0 0 70px #FF4500;
   }
 }
 
 /* Coming Soon & Countdown container */
 .coming-soon-container {
-    padding: 60px 20px; /* Space above and below */
+    padding: 60px 20px;
     text-align: center;
-    background: #0d0d0d; /* Match body background */
-    z-index: 5; /* Ensure it's above other elements if needed */
-    position: relative; /* For rocket positioning if we decide to contain it here */
-    overflow: hidden; /* To hide rocket before it flies or after */
+    background: #0d0d0d;
+    z-index: 5;
+    position: relative;
+    overflow: hidden;
 }
 .coming-soon-container h2 {
-    margin-bottom: 20px; /* Space below title */
+    margin-bottom: 20px;
 }
 
-
-/* Animated Rocket Image (Fireworks-like) */
-.rocket-fireworks-icon {
-    position: absolute; /* Position within .coming-soon-container or body */
-    bottom: -150px; /* Start off-screen below the container */
-    left: 50%;
-    transform: translateX(-50%) rotate(0deg); /* Initial position and rotation */
-    width: 80px; /* Starting size */
+/* Static Rocket Image */
+.rocket-static-icon {
+    width: 160px; /* Doubled from 80px to 160px */
     height: auto;
-    opacity: 0;
-    z-index: 100; /* Ensure it's above other content */
-    /* animation will be added by JS to start on interaction/visibility */
-}
-
-@keyframes launchFireworksRocket {
-    0% { /* Paused state */
-        bottom: -150px; /* Start off-screen */
-        transform: translateX(-50%) rotate(0deg) scale(1);
-        opacity: 0;
-    }
-    10% { /* Initial appearance, holding position */
-        bottom: 50px; /* Appears slightly above the bottom of its parent container */
-        transform: translateX(-50%) rotate(0deg) scale(1);
-        opacity: 1;
-    }
-    20% { /* Still holding, maybe a slight wobble */
-        bottom: 60px;
-        transform: translateX(-50%) rotate(5deg) scale(1.05);
-        opacity: 1;
-    }
-    30% { /* Preparation for launch */
-        bottom: 50px;
-        transform: translateX(-50%) rotate(-5deg) scale(1);
-        opacity: 1;
-    }
-    40% { /* Start of explosive launch */
-        bottom: 80px;
-        transform: translateX(-50%) rotate(0deg) scale(1.1);
-        opacity: 1;
-        animation-timing-function: ease-out; /* Smooth start of launch */
-    }
-    100% { /* Rapid ascent, spiral, and disappearance */
-        bottom: 150vh; /* Fly completely off-screen upwards */
-        transform: translateX(-50%) rotate(720deg) scale(2.5); /* Spiral and grow */
-        opacity: 0; /* Fade out */
-        animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1); /* Very fast ease-out for rapid ascent */
-    }
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Teaser Section (for the main image) */
-.teaser{text-align:center;} /* Removed position: relative; overflow: hidden; as rocket is now handled differently */
+.teaser{text-align:center;}
 
 /* Corrected styling for the main teaser image (Picsart_25-09-21_10-14-23-094.png) */
 .teaser .main-teaser-image {
-  max-width: 450px; /* Increased max-width again for better visibility, adjust as needed */
-  width: 100%; /* Ensure it's responsive */
+  max-width: 450px;
+  width: 100%;
   height: auto;
   border-radius: 14px;
-  margin-top: 30px; /* Space from the H2 or rocket */
-  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2); /* A subtle glow */
+  margin-top: 30px;
+  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2);
 }
 
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
@@ -249,7 +210,7 @@ footer p{color:#aaa}
 @media(max-width:480px){
   .hero h1{font-size:2rem}
   .brox-effect {
-    font-size: 3rem; /* Adjust for smaller screens */
+    font-size: 3rem;
   }
   .cta{padding:10px 20px}
   .timeline{padding-left:20px}
@@ -262,8 +223,8 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .rocket-fireworks-icon {
-      width: 60px; /* Smaller rocket on small screens */
+  .rocket-static-icon {
+      width: 80px; /* Adjusted for smaller screens, half of the desktop size */
   }
 }
 
@@ -298,18 +259,19 @@ footer p{color:#aaa}
   <img class="logoBig" src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX big logo" loading="lazy">
   <h1>🔥 Welcome to</h1>
   <span class="brox-effect">BROX</span>
-  <p>The meme revolution begins. Powered by community.</p> <button class="cta" onclick="openModal()">Early Access</button>
+  <p>The meme revolution begins. Powered by community.</p> 
+  <button class="cta" onclick="openModal()">Early Access</button>
 </section>
 
 <section id="comingSoonSection" class="coming-soon-container">
   <h2>Coming Soon...</h2>
-  <img id="rocketFireworksIcon" src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon" class="rocket-fireworks-icon">
   <div class="countdown-container" id="countdown">
     <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
     <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
     <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
     <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
   </div>
+  <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Static rocket icon" class="rocket-static-icon">
 </section>
 
 <section id="teaser" class="teaser">
@@ -485,41 +447,6 @@ function scrollToTop() {
     behavior: 'smooth'
   });
 }
-
-// Rocket animation logic (Fireworks style)
-const rocketFireworksIcon = document.getElementById("rocketFireworksIcon");
-const comingSoonSection = document.getElementById("comingSoonSection");
-
-let rocketAnimationTimeout;
-
-const rocketFireworksObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Section is visible, start/restart animation
-            if (rocketAnimationTimeout) clearTimeout(rocketAnimationTimeout);
-            rocketFireworksIcon.style.display = "block";
-            rocketFireworksIcon.style.animation = "none"; // Reset animation
-            void rocketFireworksIcon.offsetWidth; // Trigger reflow to apply reset
-            rocketFireworksIcon.style.animation = "launchFireworksRocket 8s forwards"; // Start animation
-
-            // Set a timeout to loop the animation after it finishes
-            rocketAnimationTimeout = setTimeout(() => {
-                rocketFireworksIcon.style.display = "none"; // Hide after animation
-                // Then restart the observer, or just let the animation repeat if needed
-                // For "fireworks" style, it makes sense for it to disappear and then launch again.
-                // We'll let the observer handle re-triggering when the section comes into view again.
-            }, 8000); // Animation duration is 8s
-            
-        } else {
-            // Section is not visible, stop animation and hide rocket
-            if (rocketAnimationTimeout) clearTimeout(rocketAnimationTimeout);
-            rocketFireworksIcon.style.animation = "none";
-            rocketFireworksIcon.style.display = "none";
-        }
-    });
-}, { threshold: 0.2 }); // Trigger when 20% of the section is visible
-
-rocketFireworksObserver.observe(comingSoonSection);
 </script>
 </body>
 </html>
