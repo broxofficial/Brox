@@ -76,57 +76,60 @@ header{position:fixed;top:0;left:0;width:100%;height:70px;display:flex;align-ite
   }
 }
 
-
 /* Teaser Section */
-.teaser{text-align:center; overflow: hidden; position: relative;} /* Added overflow: hidden; position: relative; */
-.teaser h2 { margin-bottom: 0; } /* Adjust margin for direct image placement */
+.teaser{text-align:center; position: relative; padding-top: 100px; /* Adjust as needed to make space for rocket */ } /* Added position: relative for rocket positioning */
+.teaser h2 { margin-bottom: 0; position: relative; z-index: 10;} /* Ensure text is above rocket */
 
-/* Animated Rocket Image Container */
-.rocket-animation-container {
-    position: relative; /* Important for positioning the rocket */
-    width: 100%;
-    height: 100px; /* Adjust height as needed for visibility */
-    margin: 20px auto 30px auto; /* Centered with some vertical spacing */
-    overflow: hidden; /* Hide parts of rocket outside this container */
-}
-
-.rocket-animation-container img {
-    position: absolute;
-    bottom: -10%; /* Start slightly below the container */
+/* Animated Rocket Image */
+.rocket-fly-icon {
+    position: fixed; /* Allow it to fly across the entire viewport */
+    top: 100vh; /* Start completely off-screen at the bottom */
     left: 50%;
     transform: translateX(-50%) scale(1); /* Initial scale and centering */
-    width: 80px; /* Initial size (original was around 52px for logo, let's make it bigger) */
+    width: 100px; /* A good starting size, twice the logo size */
     height: auto;
-    animation: launchRocket 6s ease-out infinite; /* Animation duration and infinite loop */
-    opacity: 0; /* Start hidden */
+    animation: launchRocketFly 8s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite; /* More dynamic easing */
+    z-index: 11; /* Ensure rocket is above content but below header/menu */
+    display: none; /* Hidden by default, shown by JS when animation is triggered */
 }
 
-@keyframes launchRocket {
+@keyframes launchRocketFly {
     0% {
-        bottom: -10%; /* Start off-screen below */
-        transform: translateX(-50%) scale(1); /* Original size */
-        opacity: 0;
-    }
-    10% {
-        opacity: 1; /* Fade in */
-    }
-    20% {
-        bottom: 20%; /* Move up */
-        transform: translateX(-50%) scale(1.5); /* Grow to 1.5x */
-    }
-    50% {
-        bottom: 120%; /* Move off-screen above */
-        transform: translateX(-50%) scale(2); /* Grow to 2x */
-        opacity: 1;
-    }
-    60% {
-        opacity: 0; /* Fade out quickly as it disappears */
-    }
-    100% {
-        bottom: -10%; /* Reset position to start for next iteration */
+        top: 100vh; /* Start off-screen bottom */
         transform: translateX(-50%) scale(1);
         opacity: 0;
     }
+    10% {
+        top: calc(50vh + 100px); /* Start moving up, near the "Coming Soon" text */
+        opacity: 1; /* Fade in */
+        transform: translateX(-50%) scale(1.2); /* Slightly bigger */
+    }
+    30% {
+        top: 30vh; /* Mid-flight */
+        opacity: 1;
+        transform: translateX(-50%) scale(1.5); /* Getting bigger */
+    }
+    60% {
+        top: -20vh; /* Off-screen top */
+        opacity: 0; /* Fade out as it leaves */
+        transform: translateX(-50%) scale(2); /* Max size */
+    }
+    100% {
+        top: 100vh; /* Reset to start position for seamless loop */
+        opacity: 0;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+
+/* Corrected styling for the main teaser image (Picsart_25-09-21_10-14-23-094.png) */
+.teaser .main-teaser-image {
+  max-width: 380px; /* Increased max-width for better visibility, adjust as needed */
+  width: 100%; /* Ensure it's responsive */
+  height: auto;
+  border-radius: 14px;
+  margin-top: 30px; /* Space from the H2 or rocket */
+  box-shadow: 0 4px 15px rgba(0, 245, 255, 0.2); /* A subtle glow */
 }
 
 .status-box{max-width:600px;margin:28px auto 0;text-align:center;color:#ccc;font-size:1.05rem;line-height:1.6}
@@ -240,8 +243,8 @@ footer p{color:#aaa}
     height: 45px;
     font-size: 1.3rem;
   }
-  .rocket-animation-container img {
-      width: 60px; /* Smaller rocket on small screens */
+  .rocket-fly-icon {
+      width: 70px; /* Smaller rocket on small screens */
   }
 }
 
@@ -281,11 +284,10 @@ footer p{color:#aaa}
 
 <section id="teaser" class="teaser">
   <h2>Coming Soon...</h2>
-  <div class="rocket-animation-container">
-    <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon">
-  </div>
+  <img id="rocketFlyIcon" src="images/Picsart_25-09-24_13-44-18-609.png" alt="Animated rocket icon" class="rocket-fly-icon">
   
-  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy">
+  <img src="images/Picsart_25-09-21_10-14-23-094.png" alt="Coming soon" loading="lazy" class="main-teaser-image">
+  
   <div class="status-box">
     <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
     <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
@@ -419,8 +421,6 @@ const obs=new IntersectionObserver(entries=>{
 items.forEach(i=>obs.observe(i));
 
 // Modern countdown
-// Set a fixed countdown date to ensure synchronization across all users
-// You can change "October 10, 2025 10:00:00 GMT+00:00" to your desired date and time
 const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
 
 function updateCountdown(){
@@ -466,6 +466,27 @@ function scrollToTop() {
     behavior: 'smooth'
   });
 }
+
+// Rocket animation logic (to start it when section is visible)
+const rocketIcon = document.getElementById("rocketFlyIcon");
+const teaserSection = document.getElementById("teaser");
+
+const rocketObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            rocketIcon.style.display = "block"; // Show rocket
+            rocketIcon.style.animationPlayState = "running"; // Start animation
+        } else {
+            rocketIcon.style.animationPlayState = "paused"; // Pause when off-screen
+            // You might want to reset its position here if you want it to restart
+            // every time it comes into view. For infinite loop across screen,
+            // pausing/resuming is fine.
+        }
+    });
+}, { threshold: 0.1 }); // Trigger when 10% of the section is visible
+
+rocketObserver.observe(teaserSection);
+
 </script>
 </body>
 </html>
