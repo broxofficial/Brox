@@ -343,7 +343,9 @@
             border-top-right-radius: 8px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.3);
             background: #1a1a1a;
-            padding-top: 45px;
+            /* توجيه المحتوى إلى الأسفل في النصف العلوي */
+            align-items: flex-end; 
+            padding-bottom: 2px;
         }
 
         .flip-clock-box .bottom {
@@ -351,7 +353,9 @@
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
             background: #1a1a1a;
-            padding-bottom: 45px;
+            /* توجيه المحتوى إلى الأعلى في النصف السفلي */
+            align-items: flex-start;
+            padding-top: 2px;
         }
 
         .flip-clock-unit small {
@@ -626,11 +630,12 @@
                 height: 70px;
                 font-size: 2rem;
             }
+            /* تحديثات الأنماط للـ Flip Clock */
             .flip-clock-box .top {
-                padding-top: 35px;
+                padding-bottom: 2px;
             }
             .flip-clock-box .bottom {
-                padding-bottom: 35px;
+                padding-top: 2px;
             }
             .countdown-container {
                 gap: 10px;
@@ -900,17 +905,20 @@
             let d = "00", h = "00", m = "00", s = "00";
 
             if (rem > 0) {
+                // حساب الأيام والساعات والدقائق والثواني
                 d = Math.floor(rem / (1000 * 60 * 60 * 24));
                 h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
                 s = Math.floor((rem % (1000 * 60)) / 1000);
 
+                // التأكد من تنسيق رقمين
                 d = String(d).padStart(2, '0');
                 h = String(h).padStart(2, '0');
                 m = String(m).padStart(2, '0');
                 s = String(s).padStart(2, '0');
             }
 
+            // تحديث محتوى الـ Flip Clock
             // Days
             document.getElementById("days-top").textContent = d;
             document.getElementById("days-bottom").textContent = d;
