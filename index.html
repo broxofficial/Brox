@@ -17,7 +17,6 @@
         }
 
         body {
-            /* إضافة خط احتياطي */
             font-family: 'Rajdhani', sans-serif, Arial;
             background: #000000;
             color: #fff;
@@ -91,7 +90,6 @@
             color: #ff0077;
             text-shadow: 0 0 8px #ff0077;
             animation: glitch-text 4s infinite alternate;
-            /* للتأكد من ان النص لا يخرج عن محاذاة الهيدر */
             line-height: 1; 
         }
 
@@ -220,7 +218,6 @@
             height: 100%;
             gap: 25px;
             padding: 0 20px;
-            /* ضمان أن محتوى الهيرو لا يتداخل مع الهيدر */
             z-index: 5; 
         }
 
@@ -231,7 +228,6 @@
             box-shadow: 0 0 50px rgba(0, 255, 194, 0.6), 0 0 20px rgba(255, 0, 119, 0.8);
             border: 3px solid #00ffc2;
             transition: all 0.5s;
-            /* الصورة لا تحتاج z-index عالي لأنها خلف الهيدر */
             z-index: 3; 
         }
 
@@ -862,7 +858,6 @@
             
             .brox-effect {
                 font-size: 6rem;
-                /* تقليل الحجم على التابلت */
             }
         }
 
@@ -873,11 +868,9 @@
 
             .brox-effect {
                 font-size: 4.5rem;
-                /* تقليل الحجم على الموبايل */
             }
             
             .hero-content {
-                /* زيادة المسافة من الأعلى لتجنب تداخل الشعار */
                 padding-top: 100px;
             }
 
@@ -922,7 +915,6 @@
         @media(max-width:480px) {
             .brox-effect {
                 font-size: 3rem;
-                /* حجم أصغر للآيفون */
                 -webkit-text-stroke: 1.5px #00ffc2;
             }
 
@@ -985,7 +977,7 @@
     <section id="hero" class="hero">
         <div class="hero-content">
             <h1 class="slogan">⚡️ ACTIVATE PROTOCOL: NEXT MEME ERA</h1>
-            <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
+            <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
 
             <span class="brox-effect">BROX</span>
             <p style="max-width: 850px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">**The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for speed and maximum community impact. Time to breach the market.</p>
@@ -1033,7 +1025,7 @@
             <div class="countdown-box glass-card"><span id="minutes">00</span><small>MINUTES LEFT</small></div>
             <div class="countdown-box glass-card"><span id="seconds">00</span><small>SECONDS LEFT</small></div>
         </div>
-        <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="Additional BROX image" class="moved-image" loading="lazy">
+        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
     </section>
 
     <section id="allocation" class="allocation">
@@ -1066,8 +1058,8 @@
         </div>
     </section>
 
-    <section id="preRoadmapImage" style="padding: 0 20px;">
-        <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+    <section id="preRoadmapImage" style="padding: 0 20px; text-align: center;">
+        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="moved-image" loading="lazy" style="margin: 0 auto;">
     </section>
 
     <section id="roadmap" class="roadmap">
@@ -1218,7 +1210,6 @@
         items.forEach(i => obs.observe(i));
 
         // --- Modern Countdown (Enhanced) ---
-        // التاريخ: 20 نوفمبر 2025
         const countdownDate = new Date("November 20, 2025 12:00:00 GMT+00:00").getTime();
 
         function updateCountdown() {
@@ -1242,7 +1233,6 @@
         const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
         window.onscroll = function() {
-            // إظهار الزر بعد التمرير 200 بكسل
             scrollToTopBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "flex" : "none";
         };
 
@@ -1260,7 +1250,6 @@
                 const content = header.nextElementSibling;
                 const icon = header.querySelector('i');
 
-                // إغلاق أي عناصر مفتوحة أخرى
                 document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
                     if (activeHeader !== header) {
                         activeHeader.classList.remove('active');
