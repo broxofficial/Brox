@@ -38,7 +38,8 @@
             text-align: center;
             font-size: 3rem;
             font-weight: 700;
-            color: #00ffc2; /* Neon Green/Cyan for extreme energy */
+            color: #00ffc2;
+            /* Neon Green/Cyan for extreme energy */
             text-transform: uppercase;
             letter-spacing: 2px;
             /* Glitch/Neon Effect */
@@ -94,13 +95,16 @@
             text-shadow: 0 0 10px #ff0077;
             animation: glitch-text 4s infinite alternate;
         }
-        
+
         /* --- Menu/Navigation --- */
         .menu-btn {
             font-size: 2.2rem;
             width: 55px;
             height: 55px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             background: linear-gradient(45deg, #00ffc2, #ff0077);
             color: #000;
             box-shadow: 0 0 20px rgba(0, 255, 194, 0.6);
@@ -115,13 +119,16 @@
         }
 
         .side-menu {
+            position: fixed;
             right: -300px;
             width: 280px;
             top: 80px;
             height: calc(100% - 80px);
             background: rgba(0, 0, 0, 0.98);
-            border-left: 2px solid #ff0077;
+            padding: 30px 20px;
             box-shadow: -15px 0 40px rgba(255, 0, 119, 0.3);
+            border-left: 2px solid #ff0077;
+            z-index: 9998;
             transition: right .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
@@ -138,6 +145,9 @@
             border-left: 5px solid #00ffc2;
             box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
             transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .side-menu a:hover {
@@ -148,15 +158,34 @@
             box-shadow: 5px 5px 15px rgba(255, 0, 119, 0.3);
         }
 
+        .menu-overlay {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: 9997;
+            background: transparent;
+            pointer-events: none;
+            transition: .25s
+        }
+
+        .menu-overlay.visible {
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: auto
+        }
+
         /* --- Hero (Video Background & High Contrast) --- */
         .hero {
             height: 100vh;
             padding-top: 80px;
             position: relative;
             z-index: 1;
-            /* Ensures content stays above the video */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        
+
         /* Video Background Styling */
         .video-background {
             position: absolute;
@@ -178,7 +207,8 @@
             left: 50%;
             transform: translate(-50%, -50%);
             object-fit: cover;
-            opacity: 0.1; /* Subtly dark */
+            opacity: 0.1;
+            /* Subtly dark */
             filter: grayscale(100%) brightness(1.2);
         }
 
@@ -208,6 +238,7 @@
         }
 
         .hero .slogan {
+            font-family: 'Rajdhani', sans-serif;
             font-size: 1.8rem;
             color: #ff0077;
             font-weight: 700;
@@ -243,6 +274,8 @@
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
         .cta::before {
@@ -259,7 +292,7 @@
         .cta:hover::before {
             left: 100%;
         }
-        
+
         .cta:hover {
             box-shadow: 0 0 35px rgba(255, 0, 119, 1), 0 0 10px rgba(0, 255, 194, 0.5);
             border-color: #00ffc2;
@@ -267,12 +300,15 @@
 
         /* --- How to Buy Section --- */
         .how-to-buy .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
         }
 
         .how-to-buy .step {
             /* Uses glass-card class */
             padding: 35px 25px;
+            text-align: center;
         }
 
         .how-to-buy .step-icon {
@@ -282,6 +318,8 @@
             box-shadow: none;
             text-shadow: 0 0 10px #00ffc2;
             animation: icon-hover 3s infinite alternate;
+            margin-bottom: 15px;
+            display: block;
         }
 
         .how-to-buy .step:hover .step-icon {
@@ -294,6 +332,7 @@
             color: #ff0077;
             font-size: 1.5rem;
             letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
         /* --- Countdown & Early Access Section --- */
@@ -308,10 +347,17 @@
             box-shadow: none;
             border: none;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 30px;
         }
-        
+
         .status-box p {
             background: #00ffc210;
+            padding: 10px 20px;
+            border-radius: 8px;
             border: 1px dashed #00ffc2;
             font-weight: 600;
             color: #fff;
@@ -321,14 +367,24 @@
         .status-box strong {
             color: #ff0077;
         }
-        
+
         .moved-image {
+            max-width: 700px;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 50px auto 20px auto;
+            border-radius: 20px;
             border: 3px solid #ff0077;
             box-shadow: 0 0 40px rgba(255, 0, 119, 0.5);
         }
 
         .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 30px;
+            margin-top: 40px;
         }
 
         .countdown-box {
@@ -337,65 +393,139 @@
             backdrop-filter: blur(8px);
             border: 2px solid #ff007750;
             box-shadow: 0 0 20px rgba(255, 0, 119, 0.3);
+            padding: 25px 20px;
+            min-width: 100px;
+            text-align: center;
         }
 
         .countdown-box span {
+            display: block;
             font-size: 3rem;
+            font-weight: 900;
             color: #00ffc2;
             text-shadow: 0 0 10px #00ffc2;
+            line-height: 1;
         }
 
         .countdown-box small {
             color: #fff;
             font-weight: 700;
             text-shadow: 0 0 5px #00ffc2;
+            display: block;
+            margin-top: 5px;
         }
-        
+
         /* --- Allocation Donut (Dynamic Glow) --- */
+        .allocation {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
         .donut-wrapper {
             width: 350px;
             height: 350px;
+            margin: 50px auto 0;
+            position: relative;
+            border-radius: 50%;
+            background: conic-gradient(
+                #00ffc2 0% 70%,
+                #41ff68 70% 90%,
+                #ff66ff 90% 99%,
+                #ff0077 99% 100%
+            );
             box-shadow: 0 0 40px rgba(0, 255, 194, 0.8), 0 0 20px rgba(255, 0, 119, 0.8);
             border: 4px solid #00ffc2;
             animation: spin 12s linear infinite, halo-pulse 3s infinite alternate;
         }
 
         .donut-inner {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             width: 200px;
             height: 200px;
+            border-radius: 50%;
             background: #000;
             border: 3px solid #ff0077;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        
+
         .donut-inner strong {
             font-size: 2.5rem;
             color: #ff0077;
         }
         
-        .allocation-details {
-            gap: 30px;
-        }
-        
-        .allocation-item {
-            /* Uses glass-card class */
-            border-left: 5px solid;
-            padding: 30px;
+        .donut-inner small {
+            color:#00ffc2;
+            font-weight: 700;
         }
 
-        .color-community { border-left-color: #00ffc2; color: #00ffc2; }
-        .color-airdrop { border-left-color: #41ff68; color: #41ff68; }
-        .color-burn { border-left-color: #ff66ff; color: #ff66ff; }
-        .color-team { border-left-color: #ff0077; color: #ff0077; }
-        
+        .allocation-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+            text-align: left;
+        }
+
+        .allocation-item {
+            /* Uses glass-card class */
+            padding: 30px;
+            border-left: 5px solid;
+        }
+
+        .allocation-item h3 {
+            margin-bottom: 8px;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .color-community {
+            border-left-color: #00ffc2;
+            color: #00ffc2;
+        }
+
+        .color-airdrop {
+            border-left-color: #41ff68;
+            color: #41ff68;
+        }
+
+        .color-burn {
+            border-left-color: #ff66ff;
+            color: #ff66ff;
+        }
+
+        .color-team {
+            border-left-color: #ff0077;
+            color: #ff0077;
+        }
+
 
         /* --- Roadmap (Extreme Timeline) --- */
         .roadmap {
             background: #000000;
         }
 
+        .timeline {
+            position: relative;
+            margin: 0 auto;
+            max-width: 800px;
+            padding-left: 60px;
+        }
+
         .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
             width: 8px;
+            height: 100%;
             background: linear-gradient(to bottom, #00ffc2, #ff0077);
+            border-radius: 4px;
             box-shadow: 0 0 10px #00ffc2;
         }
 
@@ -404,78 +534,124 @@
             margin: 50px 0;
             padding: 30px;
             border: 1px solid #ff007740;
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all .6s ease-out;
         }
-        
+
         .timeline .item:nth-child(even) {
-            margin-left: 10px; /* Slight horizontal shift */
+            transform: translateX(-30px);
         }
-        
-        .timeline .item:nth-child(odd) {
-            margin-right: 10px;
+
+        .timeline .item.visible {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .timeline .item::before {
+            content: '';
+            position: absolute;
+            left: -48px;
+            top: 35px;
             width: 25px;
             height: 25px;
             background: #ff0077;
+            border-radius: 50%;
             border: 5px solid #000;
             box-shadow: 0 0 12px #ff0077, 0 0 20px #ff0077;
             animation: point-glow 2s infinite alternate;
         }
-        
-        .timeline .item.visible::before {
-            animation-play-state: running;
-        }
-        
+
         .timeline .item h3 {
             color: #00ffc2;
             font-size: 1.8rem;
             letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .timeline .item p {
+            color: #ccc;
         }
 
         /* --- FAQ (Visual Accordion) --- */
+        .faq {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: left
+        }
+
         .accordion-item {
             /* Uses glass-card style */
+            margin-bottom: 15px;
             background: rgba(18, 18, 18, 0.7);
             border: 1px solid rgba(255, 0, 119, 0.2);
             box-shadow: 0 0 10px rgba(0, 255, 194, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
         }
 
         .accordion-header {
             padding: 20px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             font-size: 1.25rem;
+            font-weight: 600;
             color: #00ffc2;
             background: #111;
-            border-bottom: none;
             text-shadow: 0 0 5px #00ffc2;
+            transition: all 0.2s;
         }
-        
+
+        .accordion-header:hover {
+            background: #1a1a1a;
+        }
+
         .accordion-header.active {
             color: #ff0077;
             text-shadow: 0 0 10px #ff0077;
             border-bottom: 2px solid #ff0077;
+            background: #1a1a1a;
         }
-        
+
         .accordion-content {
             padding: 0 30px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            color: #ccc;
         }
-        
+
         .accordion-content.open {
+            max-height: 300px;
+            /* Increased for safety */
             padding: 20px 30px 30px;
             border-top: 1px dashed #1a1a1a;
         }
 
         /* --- Footer (Cyberpunk Grid) --- */
         footer {
+            padding: 40px 20px;
             background: #070707;
+            text-align: center;
             border-top: 3px double #00ffc2;
             box-shadow: 0 -4px 30px rgba(0, 255, 194, 0.3);
+        }
+
+        .socials {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 20px
         }
 
         .socials a {
             font-size: 2.5rem;
             color: #00ffc2;
             text-shadow: 0 0 10px #00ffc2;
+            transition: color 0.3s, transform 0.3s
         }
 
         .socials a:hover {
@@ -490,11 +666,77 @@
             font-weight: 600;
             letter-spacing: 1px;
         }
-        
+
+        /* --- Modal (Launch Notification System) --- */
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 99999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal.show {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal .card {
+            background: #151515;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 40px rgba(255, 0, 119, 0.5);
+        }
+
+        .modal .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #00ffc2;
+        }
+
+        .modal .message {
+            margin-top: 15px;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
         /* --- Scroll to Top Button --- */
         #scrollToTopBtn {
+            display: none;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
             background: linear-gradient(135deg, #00ffc2, #ff0077);
+            color: #000;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             box-shadow: 0 4px 15px rgba(0, 255, 194, 0.6);
+            transition: transform 0.3s ease;
+        }
+
+        #scrollToTopBtn:hover {
+            transform: translateY(-5px);
         }
 
 
@@ -508,72 +750,193 @@
                 text-shadow: 0 0 15px #00ffc2, 0 0 30px #ff0077;
             }
         }
-        
-        @keyframes brox-glitch {
+
+        @keyframes glitch-text {
             0% {
                 transform: translate(0);
-                text-shadow: 0 0 10px #00ffc2, 0 0 20px #ff0077;
             }
             20% {
-                transform: translate(-2px, 2px);
+                transform: translate(-1px, 1px);
             }
             40% {
-                transform: translate(-2px, -2px);
+                transform: translate(-1px, -1px);
             }
             60% {
-                transform: translate(2px, 2px);
+                transform: translate(1px, 1px);
             }
             80% {
-                transform: translate(2px, -2px);
+                transform: translate(1px, -1px);
             }
             100% {
                 transform: translate(0);
             }
         }
         
-        @keyframes pulse-slogan {
-            0% { opacity: 0.8; }
-            50% { opacity: 1; }
-            100% { opacity: 0.8; }
+        @keyframes brox-glitch {
+            0% {
+                transform: translate(0);
+                text-shadow: 0 0 10px #00ffc2, 0 0 20px #ff0077;
+            }
+
+            20% {
+                transform: translate(-2px, 2px);
+            }
+
+            40% {
+                transform: translate(-2px, -2px);
+            }
+
+            60% {
+                transform: translate(2px, 2px);
+            }
+
+            80% {
+                transform: translate(2px, -2px);
+            }
+
+            100% {
+                transform: translate(0);
+            }
         }
-        
+
+        @keyframes pulse-slogan {
+            0% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.8;
+            }
+        }
+
         @keyframes halo-pulse {
-            0% { box-shadow: 0 0 40px #00ffc280, 0 0 20px #ff007780; }
-            100% { box-shadow: 0 0 50px #00ffc2, 0 0 30px #ff0077; }
+            0% {
+                box-shadow: 0 0 40px #00ffc280, 0 0 20px #ff007780;
+            }
+
+            100% {
+                box-shadow: 0 0 50px #00ffc2, 0 0 30px #ff0077;
+            }
         }
 
         @keyframes point-glow {
-            from { box-shadow: 0 0 8px #ff0077, 0 0 15px #ff0077; }
-            to { box-shadow: 0 0 15px #ff0077, 0 0 25px #ff0077; }
+            from {
+                box-shadow: 0 0 8px #ff0077, 0 0 15px #ff0077;
+            }
+
+            to {
+                box-shadow: 0 0 15px #ff0077, 0 0 25px #ff0077;
+            }
         }
-        
+
         @keyframes icon-hover {
-            0% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-            100% { transform: translateY(0); }
+            0% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-3px);
+            }
+
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
 
         /* --- Responsive Tweaks --- */
         @media(max-width:768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .brox-effect { font-size: 5rem; }
-            h2 { font-size: 2.2rem; margin-bottom: 40px; }
-            .donut-wrapper { width: 280px; height: 280px; }
-            .donut-inner { width: 160px; height: 160px; }
-            .countdown-box span { font-size: 2.5rem; }
-            .timeline { padding-left: 40px; }
-            .timeline .item::before { left: -36px; width: 20px; height: 20px; }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .brox-effect {
+                font-size: 5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+                margin-bottom: 40px;
+            }
+
+            .donut-wrapper {
+                width: 280px;
+                height: 280px;
+            }
+
+            .donut-inner {
+                width: 160px;
+                height: 160px;
+            }
+
+            .countdown-box span {
+                font-size: 2.5rem;
+            }
+
+            .timeline {
+                padding-left: 40px;
+            }
+
+            .timeline .item::before {
+                left: -36px;
+                width: 20px;
+                height: 20px;
+            }
+            
+            .how-to-buy .steps {
+                grid-template-columns: 1fr;
+            }
+            
+            .allocation-details {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media(max-width:480px) {
-            .brox-effect { font-size: 3rem; }
-            .hero .slogan { font-size: 1.2rem; }
-            .hero .gemini-image { width: 95%; margin-bottom: 10px; }
-            .cta { padding: 15px 30px; font-size: 1.1rem; }
-            h2 { font-size: 1.8rem; }
-            .how-to-buy .step h3 { font-size: 1.3rem; }
-            .side-menu { width: 100%; right: -100%; }
+            .brox-effect {
+                font-size: 3rem;
+            }
+
+            .hero .slogan {
+                font-size: 1.2rem;
+            }
+
+            .hero .gemini-image {
+                width: 95%;
+                margin-bottom: 10px;
+            }
+
+            .cta {
+                padding: 15px 30px;
+                font-size: 1.1rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .how-to-buy .step h3 {
+                font-size: 1.3rem;
+            }
+
+            .side-menu {
+                width: 100%;
+                right: -100%;
+            }
         }
     </style>
 </head>
@@ -609,7 +972,7 @@
         <div class="hero-content">
             <h1 class="slogan">⚡️ ACTIVATE PROTOCOL: NEXT MEME ERA</h1>
             <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
-            
+
             <span class="brox-effect">BROX</span>
             <p style="max-width: 850px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">**The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for speed and maximum community impact. Time to breach the market.</p>
             <button class="cta" onclick="openModal()">INITIATE EARLY ACCESS // JOIN</button>
@@ -668,7 +1031,7 @@
                 <small style="color:#00ffc2; font-weight: 700;">TRANSPARENT</small>
             </div>
         </div>
-        
+
         <div class="allocation-details">
             <div class="allocation-item glass-card color-community">
                 <h3>70% COMMUNITY DIRECT // LIQUIDITY</h3>
@@ -684,7 +1047,7 @@
             </div>
             <div class="allocation-item glass-card color-team">
                 <h3>1% TEAM // LONG-TERM VESTING</h3>
-                <p>Minimal allocation for the core development team, fully vested over an extended period. Focus on commitment, not profit.</p>
+                <p>Minimal allocation for the core development team, vested over an extended period. Focus on commitment, not profit.</p>
             </div>
         </div>
     </section>
@@ -702,7 +1065,7 @@
             </div>
             <div class="item glass-card">
                 <h3>PHASE 2: MARKET BREACH AND LISTINGS</h3>
-                <p>DEX Stealth Launch. Liquidity Pool Lock (Permanent). CMC/Coingecko Fast-Track. Initial marketing blitz (influencers & paid ads).</p>
+                <p>DEX Stealth Launch. Liquidity Pool Lock. CMC/Coingecko Fast-Track. Initial marketing blitz (influencers & paid ads).</p>
             </div>
             <div class="item glass-card">
                 <h3>PHASE 3: ECOSYSTEM INTEGRATION</h3>
@@ -791,6 +1154,7 @@
         function toggleMenu() {
             const isOpen = sideMenu.classList.toggle("open");
             menuOverlay.classList.toggle("visible");
+            // Corrected: Use specific Font Awesome icons for better visual feedback
             menuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         }
 
@@ -834,8 +1198,6 @@
         const obs = new IntersectionObserver(entries => {
             entries.forEach(e => {
                 if (e.isIntersecting) e.target.classList.add('visible');
-                // Optional: Stop observing once visible to prevent repeated animations
-                // if (e.isIntersecting) obs.unobserve(e.target);
             })
         }, {
             threshold: 0.2
@@ -848,12 +1210,12 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const rem = countdownDate - now;
-            
+
             const d = Math.max(0, Math.floor(rem / (1000 * 60 * 60 * 24)));
             const h = Math.max(0, Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
             const m = Math.max(0, Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60)));
             const s = Math.max(0, Math.floor((rem % (1000 * 60)) / 1000));
-            
+
             document.getElementById("days").textContent = String(d).padStart(2, '0');
             document.getElementById("hours").textContent = String(h).padStart(2, '0');
             document.getElementById("minutes").textContent = String(m).padStart(2, '0');
@@ -875,14 +1237,14 @@
                 behavior: 'smooth'
             });
         }
-        
+
         // --- FAQ Accordion Script ---
         const headers = document.querySelectorAll('.accordion-header');
         headers.forEach(header => {
             header.addEventListener('click', () => {
                 const content = header.nextElementSibling;
                 const icon = header.querySelector('i');
-                
+
                 document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
                     if (activeHeader !== header) {
                         activeHeader.classList.remove('active');
