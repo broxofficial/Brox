@@ -17,7 +17,8 @@
         }
 
         body {
-            font-family: 'Rajdhani', sans-serif;
+            /* إضافة خط احتياطي */
+            font-family: 'Rajdhani', sans-serif, Arial;
             background: #000000;
             color: #fff;
             line-height: 1.6;
@@ -47,7 +48,7 @@
         section {
             padding: 120px 20px;
             position: relative;
-            z-index: 2; /* إبقاء الأقسام العادية في طبقة متوسطة */
+            z-index: 2;
         }
 
         /* --- Global Components & Advanced Effects --- */
@@ -67,7 +68,7 @@
             transform: scale(1.02) translateY(-3px);
         }
 
-        /* --- Header (Dynamic Glitch) - تم رفعه إلى 9999 لضمان ظهوره فوق كل شيء --- */
+        /* --- Header (Dynamic Glitch) - Z-index: 9999 is crucial --- */
         header {
             position: fixed;
             top: 0;
@@ -82,15 +83,16 @@
             backdrop-filter: blur(15px);
             border-bottom: 2px solid #00ffc2;
             box-shadow: 0 4px 20px rgba(0, 255, 194, 0.4);
-            /* التصحيح الرئيسي: رفع الـ z-index */
-            z-index: 9999; 
+            z-index: 9999;
         }
 
         .logo h1 {
             font-size: 1.8rem;
             color: #ff0077;
-            text-shadow: 0 0 10px #ff0077;
+            text-shadow: 0 0 8px #ff0077;
             animation: glitch-text 4s infinite alternate;
+            /* للتأكد من ان النص لا يخرج عن محاذاة الهيدر */
+            line-height: 1; 
         }
 
         /* --- Menu/Navigation --- */
@@ -108,8 +110,12 @@
             border: none;
             cursor: pointer;
             transition: all 0.2s;
-            /* للتأكد من ظهوره ضمن الهيدر */
-            z-index: 10000; 
+            z-index: 10000;
+        }
+
+        .menu-btn:hover {
+            transform: rotate(360deg) scale(1.1);
+            box-shadow: 0 0 30px rgba(255, 0, 119, 0.8);
         }
 
         .side-menu {
@@ -122,8 +128,7 @@
             padding: 30px 20px;
             box-shadow: -15px 0 40px rgba(255, 0, 119, 0.3);
             border-left: 2px solid #ff0077;
-            /* التصحيح الرئيسي: رفع الـ z-index */
-            z-index: 9998; 
+            z-index: 9998;
             transition: right .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
@@ -131,57 +136,6 @@
             right: 0
         }
 
-        .menu-overlay {
-            position: fixed;
-            top: 80px;
-            left: 0;
-            width: 100%;
-            height: calc(100% - 80px);
-            /* التصحيح الرئيسي: طبقة أقل بقليل من القائمة الجانبية */
-            z-index: 9997; 
-            background: transparent;
-            pointer-events: none;
-            transition: .25s
-        }
-
-        .menu-overlay.visible {
-            background: rgba(0, 0, 0, 0.6);
-            pointer-events: auto
-        }
-
-        /* --- Hero (Video Background & High Contrast) --- */
-        .hero {
-            height: 100vh;
-            padding-top: 80px;
-            position: relative;
-            z-index: 1; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .video-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: -1; 
-        }
-
-        .hero .gemini-image {
-            max-width: 90%;
-            width: 500px;
-            border-radius: 30px;
-            box-shadow: 0 0 50px rgba(0, 255, 194, 0.6), 0 0 20px rgba(255, 0, 119, 0.8);
-            border: 3px solid #00ffc2;
-            transition: all 0.5s;
-            /* ز-إندكس الصورة أقل من الهيدر */
-            z-index: 3; 
-        }
-
-        /* باقي تنسيقات CSS كما هي... */
         .side-menu a {
             padding: 15px 20px;
             margin-bottom: 8px;
@@ -203,7 +157,46 @@
             transform: translateX(-5px);
             box-shadow: 5px 5px 15px rgba(255, 0, 119, 0.3);
         }
-        
+
+        .menu-overlay {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 80px);
+            z-index: 9997;
+            background: transparent;
+            pointer-events: none;
+            transition: .25s
+        }
+
+        .menu-overlay.visible {
+            background: rgba(0, 0, 0, 0.6);
+            pointer-events: auto
+        }
+
+        /* --- Hero (Video Background & High Contrast) --- */
+        .hero {
+            height: 100vh;
+            padding-top: 80px;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Video Background Styling */
+        .video-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
         .video-background video {
             min-width: 100%;
             min-height: 100%;
@@ -223,10 +216,23 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            text-align: center;
             height: 100%;
             gap: 25px;
             padding: 0 20px;
-            text-align: center;
+            /* ضمان أن محتوى الهيرو لا يتداخل مع الهيدر */
+            z-index: 5; 
+        }
+
+        .hero .gemini-image {
+            max-width: 90%;
+            width: 500px;
+            border-radius: 30px;
+            box-shadow: 0 0 50px rgba(0, 255, 194, 0.6), 0 0 20px rgba(255, 0, 119, 0.8);
+            border: 3px solid #00ffc2;
+            transition: all 0.5s;
+            /* الصورة لا تحتاج z-index عالي لأنها خلف الهيدر */
+            z-index: 3; 
         }
 
         .hero .gemini-image:hover {
@@ -244,8 +250,9 @@
             animation: pulse-slogan 1.5s infinite;
         }
 
+        /* BROX Text: Maximum Glitch/Neon Impact */
         .brox-effect {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', sans-serif, 'Impact';
             font-size: 7rem;
             font-weight: 900;
             text-transform: uppercase;
@@ -729,7 +736,7 @@
             transform: translateY(-5px);
         }
 
-        /* --- Animations (Same as before) --- */
+        /* --- Animations --- */
         @keyframes neon-pulse {
             from {
                 text-shadow: 0 0 5px #00ffc2, 0 0 10px #ff0077;
@@ -847,14 +854,31 @@
         }
 
 
-        /* --- Responsive Tweaks --- */
+        /* --- Responsive Tweaks (Optimized for Mobile) --- */
+        @media(max-width:992px) {
+            header {
+                padding: 0 20px;
+            }
+            
+            .brox-effect {
+                font-size: 6rem;
+                /* تقليل الحجم على التابلت */
+            }
+        }
+
         @media(max-width:768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
 
             .brox-effect {
-                font-size: 5rem;
+                font-size: 4.5rem;
+                /* تقليل الحجم على الموبايل */
+            }
+            
+            .hero-content {
+                /* زيادة المسافة من الأعلى لتجنب تداخل الشعار */
+                padding-top: 100px;
             }
 
             h2 {
@@ -898,6 +922,8 @@
         @media(max-width:480px) {
             .brox-effect {
                 font-size: 3rem;
+                /* حجم أصغر للآيفون */
+                -webkit-text-stroke: 1.5px #00ffc2;
             }
 
             .hero .slogan {
@@ -940,7 +966,6 @@
 
     <header>
         <div class="logo">
-            <img src="images/Picsart_25-09-20_12-05-00-500.png" alt="BROX logo" loading="lazy">
             <h1>BROX // GLITCH</h1>
         </div>
         <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
@@ -960,7 +985,7 @@
     <section id="hero" class="hero">
         <div class="hero-content">
             <h1 class="slogan">⚡️ ACTIVATE PROTOCOL: NEXT MEME ERA</h1>
-            <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
+            <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
 
             <span class="brox-effect">BROX</span>
             <p style="max-width: 850px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">**The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for speed and maximum community impact. Time to breach the market.</p>
@@ -1008,7 +1033,7 @@
             <div class="countdown-box glass-card"><span id="minutes">00</span><small>MINUTES LEFT</small></div>
             <div class="countdown-box glass-card"><span id="seconds">00</span><small>SECONDS LEFT</small></div>
         </div>
-        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
+        <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="Additional BROX image" class="moved-image" loading="lazy">
     </section>
 
     <section id="allocation" class="allocation">
@@ -1042,7 +1067,7 @@
     </section>
 
     <section id="preRoadmapImage" style="padding: 0 20px;">
-        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+        <img src="images/image.png-d92b98d8-b51e-4476-849a-248faffc646f" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
     </section>
 
     <section id="roadmap" class="roadmap">
@@ -1193,6 +1218,7 @@
         items.forEach(i => obs.observe(i));
 
         // --- Modern Countdown (Enhanced) ---
+        // التاريخ: 20 نوفمبر 2025
         const countdownDate = new Date("November 20, 2025 12:00:00 GMT+00:00").getTime();
 
         function updateCountdown() {
@@ -1216,6 +1242,7 @@
         const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
         window.onscroll = function() {
+            // إظهار الزر بعد التمرير 200 بكسل
             scrollToTopBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "flex" : "none";
         };
 
@@ -1233,6 +1260,7 @@
                 const content = header.nextElementSibling;
                 const icon = header.querySelector('i');
 
+                // إغلاق أي عناصر مفتوحة أخرى
                 document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
                     if (activeHeader !== header) {
                         activeHeader.classList.remove('active');
