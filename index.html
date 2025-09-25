@@ -67,6 +67,28 @@
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 0, 119, 0.5);
             transform: scale(1.02) translateY(-3px);
         }
+        
+        /* CTA Button Style */
+        .cta {
+            background: linear-gradient(45deg, #ff0077, #00ffc2);
+            border: none;
+            color: #000;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(0, 255, 194, 0.8);
+            transition: all 0.3s;
+            margin-top: 30px;
+        }
+        
+        .cta:hover {
+            box-shadow: 0 0 30px #ff0077;
+            transform: scale(1.05);
+        }
+
 
         /* --- Header (Static Neon) --- */
         header {
@@ -93,7 +115,7 @@
             line-height: 1;
         }
 
-        /* --- Menu/Navigation (Quarter Screen Fix) --- */
+        /* --- Menu/Navigation (1/3 Screen Fix) --- */
         .menu-btn {
             font-size: 2.2rem;
             width: 55px;
@@ -117,10 +139,11 @@
         }
 
         .side-menu {
-            /* العرض الثابت لربع الشاشة (280px) */
+            /* العرض: ثلث الشاشة تقريباً على الشاشات الكبيرة */
             position: fixed;
-            right: -280px;
-            width: 280px;
+            right: -33.33%; 
+            width: 33.33%; 
+            max-width: 350px; /* للتحكم في العرض على الشاشات الكبيرة جداً */
             top: 80px;
             height: calc(100% - 80px);
             background: rgba(0, 0, 0, 0.98);
@@ -129,7 +152,6 @@
             border-left: 2px solid #ff0077;
             z-index: 9998;
             transition: right .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            /* إضافة خاصية الـ display: flex لترتيب الروابط عمودياً */
             display: flex;
             flex-direction: column;
         }
@@ -137,7 +159,8 @@
         .side-menu.open {
             right: 0
         }
-
+        
+        /* ... Menu link styles remain the same ... */
         .side-menu a {
             padding: 15px 20px;
             margin-bottom: 8px;
@@ -196,7 +219,7 @@
 
         .brox-effect {
             font-family: 'Poppins', sans-serif;
-            font-size: 8rem; /* تم تكبير الخط ليكون أكثر تأثيراً */
+            font-size: 8rem;
             font-weight: 900;
             line-height: 0.8;
             color: #fff;
@@ -207,7 +230,7 @@
 
         .hero .gemini-image {
             max-width: 90%;
-            width: 450px; /* تم تحديد عرض ثابت مع الاحتفاظ بالمرونة */
+            width: 450px;
             height: auto;
             object-fit: cover;
             border-radius: 30px;
@@ -216,10 +239,10 @@
             transition: all 0.5s;
             z-index: 3;
             margin: 30px auto;
-            display: block; /* لضمان التمركز */
+            display: block;
         }
-
-        /* --- General Image Sizing Fix (for roadmap image, etc.) --- */
+        
+        /* General Image Sizing Fix */
         .moved-image {
             max-width: 100%;
             height: auto;
@@ -229,7 +252,7 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px #ff0077;
         }
 
-        /* --- Countdown & Early Access Section (Flip Clock Style Fix) --- */
+        /* --- Countdown & Early Access Section (Flip Clock Style FIX) --- */
         .early-access .glass-card {
             background: none;
             backdrop-filter: none;
@@ -247,12 +270,11 @@
 
         .time-group {
             display: flex;
-            gap: 5px; /* تقليل المسافة داخل المجموعة */
+            gap: 5px;
             align-items: center;
             margin: 0 10px;
         }
 
-        /* الفاصل الزمني (:) */
         .time-group:not(:last-child)::after {
             content: ':';
             font-size: 3.5rem;
@@ -265,9 +287,9 @@
         }
 
         .countdown-box {
-            /* تصميم العداد المشابه لـ Flip Clock */
+            /* تصميم Flip Clock المحسّن */
             background: #111;
-            box-shadow: 0 0 10px #00ffc2, inset 0 0 5px #ff0077;
+            box-shadow: 0 0 10px rgba(0, 255, 194, 0.5), inset 0 0 5px #ff0077;
             border: 2px solid #00ffc2;
             padding: 0;
             width: 70px;
@@ -292,7 +314,7 @@
             line-height: 1;
             padding-top: 5px;
             text-shadow: 0 0 8px #00ffc2;
-            border-bottom: 2px solid #ff0077; /* خط فاصل يحاكي طية الورقة */
+            border-bottom: 2px solid #ff0077;
             height: 60%;
         }
 
@@ -312,19 +334,18 @@
             height: 40%;
         }
 
-        /* --- Allocation Donut (Always Spinning) --- */
+        /* --- Allocation Donut (FIXED to show correct proportions) --- */
         .donut-wrapper {
-             /* تم حذف الأنماط القديمة وتعويضها بخصائص أنيميشن فقط إذا كنت تستخدم صورة أو SVG متحرك */
-             /* اذا كانت دائرية يتم وضعها هنا */
             width: 250px;
             height: 250px;
             margin: 50px auto;
             border-radius: 50%;
+            /* FIX: استخدام conic-gradient لتمثيل النسب بشكل صحيح */
             background: conic-gradient(
-                #00ffc2 0 70%,    /* Community 70% */
-                #ff0077 70% 90%,   /* Airdrop 20% */
-                #9b00e3 90% 99%,   /* Burn 9% */
-                #ffd700 99% 100%   /* Team 1% */
+                #00ffc2 0%, #00ffc2 70%,    /* Community 70% */
+                #ff0077 70%, #ff0077 90%,   /* Airdrop 20% (70+20=90) */
+                #9b00e3 90%, #9b00e3 99%,   /* Burn 9% (90+9=99) */
+                #ffd700 99%, #ffd700 100%   /* Team 1% (99+1=100) */
             );
             border: 5px solid rgba(0, 255, 194, 0.5);
             display: flex;
@@ -332,7 +353,7 @@
             justify-content: center;
             animation: spin 12s linear infinite, halo-pulse 3s infinite alternate;
         }
-        
+
         .donut-inner {
             width: 80%;
             height: 80%;
@@ -344,26 +365,44 @@
             justify-content: center;
             text-align: center;
         }
+        
+        .allocation-details {
+             display: grid; 
+             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+             gap: 20px; 
+             margin-top: 50px;
+        }
+        
+        /* Coloring for Allocation Details for Better Visualization */
+        .allocation-details h3 {
+            font-size: 1.5rem;
+            text-shadow: 0 0 5px currentColor;
+        }
+        .allocation-item:nth-child(1) h3 { color: #00ffc2; }
+        .allocation-item:nth-child(2) h3 { color: #ff0077; }
+        .allocation-item:nth-child(3) h3 { color: #9b00e3; }
+        .allocation-item:nth-child(4) h3 { color: #ffd700; }
 
-        /* --- How To Buy Steps Layout --- */
-        .how-to-buy .steps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+        /* --- Footer Styles (Social Icons FIX) --- */
+        footer {
+            padding: 60px 20px;
+            text-align: center;
+            border-top: 1px solid #ff0077;
+            margin-top: 50px;
         }
 
-        .how-to-buy .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-        }
-
-        .how-to-buy .step-icon {
+        .social-links a {
             font-size: 2rem;
+            margin: 0 15px;
+            transition: transform 0.3s, color 0.3s;
+            color: #00ffc2;
+            text-shadow: 0 0 10px #00ffc2;
+        }
+
+        .social-links a:hover {
             color: #ff0077;
-            flex-shrink: 0;
-            margin-top: 5px;
-            text-shadow: 0 0 10px #ff0077;
+            transform: scale(1.2) translateY(-5px);
+            text-shadow: 0 0 15px #ff0077;
         }
 
         /* --- Roadmap Timeline Layout --- */
@@ -411,8 +450,9 @@
                 font-size: 6rem;
             }
             .side-menu {
-                width: 250px;
-                right: -250px;
+                /* 1/3 الشاشة على اللابتوبات/التابلت */
+                width: 300px;
+                right: -300px;
             }
         }
 
@@ -427,7 +467,7 @@
             .countdown-box span {
                 font-size: 2.8rem;
             }
-            /* في الشاشات الصغيرة جدًا، يجب أن تأخذ القائمة كامل العرض */
+            /* شاشة الجوال: تأخذ كامل العرض */
             .side-menu {
                 width: 100%;
                 right: -100%;
@@ -493,7 +533,7 @@
             <p style="max-width: 850px; margin: 0 auto 30px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">
                 **The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for
                 speed and maximum community impact. Time to breach the market.</p>
-            <button class="cta" onclick="openModal()">INITIATE EARLY ACCESS // JOIN</button>
+            <button class="cta" onclick="openModal()">INITIATE EARLY ACCESS</button>
         </div>
     </section>
 
@@ -572,7 +612,7 @@
             </div>
         </div>
 
-        <div class="allocation-details" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 50px;">
+        <div class="allocation-details">
             <div class="allocation-item glass-card color-community">
                 <h3>70% COMMUNITY DIRECT // LIQUIDITY</h3>
                 <p>Maximum decentralization. Tokens channeled directly to liquidity pools and community incentives. Power to the holders.</p>
@@ -639,8 +679,21 @@
                     <p>Solana offers superior transaction speeds and extremely low gas fees, making $BROX highly accessible and efficient for frequent trading—essential for a high-volume meme token.</p>
                 </div>
             </div>
-             </div>
+        </div>
     </section>
+
+    <footer id="footer">
+        <h3>ACTIVATE & CONNECT</h3>
+        <p style="margin-bottom: 25px; color: #aaa;">Join the $BROX Revolution across all channels.</p>
+        <div class="social-links">
+            <a href="#" target="_blank" title="Telegram"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" target="_blank" title="X / Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
+            <a href="#" target="_blank" title="Etherscan/Solscan"><i class="fas fa-satellite-dish"></i></a>
+        </div>
+        <p style="font-size: 0.9rem; margin-top: 25px; color: #555;">&copy; 2025 BROX Protocol. All Rights Reserved. Decentralized by Design.</p>
+    </footer>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -653,6 +706,7 @@
             const toggleMenu = () => {
                 sideMenu.classList.toggle('open');
                 menuOverlay.classList.toggle('visible');
+                // تغيير الأيقونة
                 menuBtn.querySelector('i').classList.toggle('fa-bars');
                 menuBtn.querySelector('i').classList.toggle('fa-times');
             };
@@ -689,6 +743,7 @@
                         icon.classList.remove('fa-chevron-up');
                         icon.classList.add('fa-chevron-down');
                     } else {
+                        // استخدام scrollHeight لضبط الارتفاع ديناميكياً
                         content.style.maxHeight = content.scrollHeight + "px";
                         icon.classList.remove('fa-chevron-down');
                         icon.classList.add('fa-chevron-up');
@@ -703,7 +758,7 @@
                 content.style.maxHeight = null; // Start closed
             });
 
-            // ************** DUMMY COUNTDOWN LOGIC (You MUST replace this with a real date/time) *************
+            // ************** DUMMY COUNTDOWN LOGIC (Replace this with your actual date) *************
             const launchDate = new Date("2025-12-31T23:59:59").getTime();
 
             const updateCountdown = () => {
@@ -730,7 +785,7 @@
 
                 if (distance < 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById("countdown").innerHTML = "<h2 style='color:#ff0077;'>LAUNCH ACTIVATED!</h2>";
+                    document.getElementById("countdown").innerHTML = "<h2 style='color:#ff0077; text-shadow: 0 0 10px #ff0077;'>LAUNCH ACTIVATED!</h2>";
                 }
             };
 
