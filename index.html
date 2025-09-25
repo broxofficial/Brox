@@ -40,6 +40,7 @@
             color: #00ffc2;
             text-transform: uppercase;
             letter-spacing: 2px;
+            /* تم إبقاء الـ Neon Pulse هنا كتأثير جمالي على العناوين */
             text-shadow: 0 0 10px #00ffc2, 0 0 20px #ff0077;
             animation: neon-pulse 1.5s infinite alternate;
         }
@@ -67,7 +68,7 @@
             transform: scale(1.02) translateY(-3px);
         }
 
-        /* --- Header (Dynamic Glitch) - Z-index: 9999 is crucial --- */
+        /* --- Header (Static Neon) --- */
         header {
             position: fixed;
             top: 0;
@@ -86,10 +87,10 @@
         }
 
         .logo h1 {
+            /* تم إزالة الـ Glitch Animation */
             font-size: 1.8rem;
             color: #ff0077;
             text-shadow: 0 0 8px #ff0077;
-            animation: glitch-text 4s infinite alternate;
             line-height: 1; 
         }
 
@@ -243,7 +244,7 @@
             font-weight: 700;
             letter-spacing: 3px;
             text-shadow: 0 0 10px #ff0077;
-            animation: pulse-slogan 1.5s infinite;
+            /* تم إزالة الـ Pulse Animation من السلوجان */
         }
 
         /* BROX Text: Maximum Glitch/Neon Impact */
@@ -255,7 +256,7 @@
             color: #000;
             -webkit-text-stroke: 2px #00ffc2;
             text-shadow: 0 0 10px #00ffc2, 0 0 20px #ff0077, 0 0 30px #00ffc2;
-            animation: brox-glitch 0.5s infinite alternate;
+            /* تم إزالة الـ Glitch Animation من العنوان الرئيسي */
             line-height: 1;
         }
 
@@ -315,11 +316,13 @@
             background: none;
             box-shadow: none;
             text-shadow: 0 0 10px #00ffc2;
-            animation: icon-hover 3s infinite alternate;
+            /* تم إزالة الـ Icon Hover Animation */
             margin-bottom: 15px;
             display: block;
+            transition: color 0.3s, text-shadow 0.3s;
         }
-
+        
+        /* تأثير ثابت لـ Hover دون حركة */
         .how-to-buy .step:hover .step-icon {
             color: #ff0077;
             text-shadow: 0 0 15px #ff0077;
@@ -432,8 +435,14 @@
             );
             box-shadow: 0 0 40px rgba(0, 255, 194, 0.8), 0 0 20px rgba(255, 0, 119, 0.8);
             border: 4px solid #00ffc2;
+            /* تم إزالة الـ Spin animation والإبقاء على الـ Halo Pulse فقط */
+            animation: halo-pulse 3s infinite alternate; 
+        }
+        /* تم إضافة الـ Spin animation ليبقى التأثير الديناميكي */
+        .donut-wrapper:hover {
             animation: spin 12s linear infinite, halo-pulse 3s infinite alternate;
         }
+
 
         .donut-inner {
             position: absolute;
@@ -554,8 +563,8 @@
             background: #ff0077;
             border-radius: 50%;
             border: 5px solid #000;
-            box-shadow: 0 0 12px #ff0077, 0 0 20px #ff0077;
-            animation: point-glow 2s infinite alternate;
+            /* تم إزالة الـ Point Glow Animation */
+            box-shadow: 0 0 12px #ff0077;
         }
 
         .timeline .item h3 {
@@ -743,67 +752,12 @@
             }
         }
 
-        @keyframes glitch-text {
-            0% {
-                transform: translate(0);
-            }
-            20% {
-                transform: translate(-1px, 1px);
-            }
-            40% {
-                transform: translate(-1px, -1px);
-            }
-            60% {
-                transform: translate(1px, 1px);
-            }
-            80% {
-                transform: translate(1px, -1px);
-            }
-            100% {
-                transform: translate(0);
-            }
-        }
-        
-        @keyframes brox-glitch {
-            0% {
-                transform: translate(0);
-                text-shadow: 0 0 10px #00ffc2, 0 0 20px #ff0077;
-            }
+        /* تم إزالة @keyframes glitch-text */
+        /* تم إزالة @keyframes brox-glitch */
+        /* تم إزالة @keyframes pulse-slogan */
+        /* تم إزالة @keyframes point-glow */
+        /* تم إزالة @keyframes icon-hover */
 
-            20% {
-                transform: translate(-2px, 2px);
-            }
-
-            40% {
-                transform: translate(-2px, -2px);
-            }
-
-            60% {
-                transform: translate(2px, 2px);
-            }
-
-            80% {
-                transform: translate(2px, -2px);
-            }
-
-            100% {
-                transform: translate(0);
-            }
-        }
-
-        @keyframes pulse-slogan {
-            0% {
-                opacity: 0.8;
-            }
-
-            50% {
-                opacity: 1;
-            }
-
-            100% {
-                opacity: 0.8;
-            }
-        }
 
         @keyframes halo-pulse {
             0% {
@@ -812,30 +766,6 @@
 
             100% {
                 box-shadow: 0 0 50px #00ffc2, 0 0 30px #ff0077;
-            }
-        }
-
-        @keyframes point-glow {
-            from {
-                box-shadow: 0 0 8px #ff0077, 0 0 15px #ff0077;
-            }
-
-            to {
-                box-shadow: 0 0 15px #ff0077, 0 0 25px #ff0077;
-            }
-        }
-
-        @keyframes icon-hover {
-            0% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-3px);
-            }
-
-            100% {
-                transform: translateY(0);
             }
         }
 
@@ -958,7 +888,7 @@
 
     <header>
         <div class="logo">
-            <h1>BROX // GLITCH</h1>
+            <h1>BROX</h1>
         </div>
         <button id="menuBtn" class="menu-btn"><i class="fas fa-bars"></i></button>
     </header>
