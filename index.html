@@ -723,4 +723,144 @@
             <h3>Where can I join the community?</h3>
             <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
             <h3>Is BROX safe?</h3>
-            <p>Yes. Allocation is transparent (70% Commun
+            <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+        </div>
+    </section>
+
+    <footer id="footer">
+        <div class="socials">
+            <a href="https://www.instagram.com/brox__official" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.tiktok.com/@brox__official" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://x.com/Brox__official" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://t.me/brox_official" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+        </div>
+        <p>&copy; 2025 BROX. All Rights Reserved.</p>
+    </footer>
+
+    <div id="modal" class="modal">
+        <div class="card">
+            <button class="close-btn" onclick="closeModal()">✖</button>
+            <h2 style="color:#00f5ff">Get Notified</h2>
+            <p>Enter your email to join early access.</p>
+            <input id="emailInput" type="email" placeholder="you@example.com" style="width:100%;padding:10px;margin-top:10px;border-radius:6px;background:#111;color:#fff">
+            <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
+            <div id="modalMessage" class="message"></div>
+        </div>
+    </div>
+
+    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Menu
+        const menuBtn = document.getElementById("menuBtn");
+        const sideMenu = document.getElementById("sideMenu");
+        const menuOverlay = document.getElementById("menuOverlay");
+
+        menuBtn.addEventListener("click", () => {
+            sideMenu.classList.toggle("open");
+            menuOverlay.classList.toggle("visible");
+            // تبديل الأيقونة
+            menuBtn.innerHTML = sideMenu.classList.contains("open") ? '<i class="fas fa-times"></i>' : '☰';
+        });
+
+        menuOverlay.addEventListener("click", () => {
+            sideMenu.classList.remove("open");
+            menuOverlay.classList.remove("visible");
+            // إعادة أيقونة القائمة
+            menuBtn.innerHTML = '☰';
+        });
+
+        // Close side menu when a link is clicked
+        const sideMenuLinks = document.querySelectorAll('#sideMenu a');
+        sideMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                sideMenu.classList.remove('open');
+                menuOverlay.classList.remove('visible');
+                // إعادة أيقونة القائمة
+                menuBtn.innerHTML = '☰';
+            });
+        });
+
+        // Modal
+        const modal = document.getElementById("modal");
+        const modalMessage = document.getElementById("modalMessage");
+
+        function openModal() {
+            modal.classList.add("show");
+            modalMessage.textContent = '';
+        }
+
+        function closeModal() {
+            modal.classList.remove("show");
+        }
+
+        function submitEmail() {
+            const email = document.getElementById("emailInput").value.trim();
+            if (!email || !/\S+@\S+\.\S+/.test(email)) { // إضافة تحقق بسيط للبريد الإلكتروني
+                modalMessage.textContent = "الرجاء إدخال بريد إلكتروني صحيح.";
+                return;
+            }
+            modalMessage.textContent = "شكراً لك! سنقوم بإخطارك قريباً: " + email;
+            document.getElementById("emailInput").value = '';
+        }
+
+        // Roadmap reveal
+        const items = document.querySelectorAll('.timeline .item');
+        const obs = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) e.target.classList.add('visible')
+            })
+        }, {
+            threshold: 0.2
+        });
+        items.forEach(i => obs.observe(i));
+
+        // Modern countdown
+        // تم تحديث التوقيت ليكون في المستقبل لتجنب البدء من 00 دائمًا
+        const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const rem = countdownDate - now;
+            if (rem <= 0) {
+                document.getElementById("days").textContent = "00";
+                document.getElementById("hours").textContent = "00";
+                document.getElementById("minutes").textContent = "00";
+                document.getElementById("seconds").textContent = "00";
+                return;
+            }
+            const d = Math.floor(rem / (1000 * 60 * 60 * 24));
+            const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((rem % (1000 * 60)) / 1000);
+            document.getElementById("days").textContent = String(d).padStart(2, '0');
+            document.getElementById("hours").textContent = String(h).padStart(2, '0');
+            document.getElementById("minutes").textContent = String(m).padStart(2, '0');
+            document.getElementById("seconds").textContent = String(s).padStart(2, '0');
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+
+        // Scroll to Top Button Logic
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        window.onscroll = function() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                scrollToTopBtn.style.display = "flex";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
+</body>
+
+</html>
