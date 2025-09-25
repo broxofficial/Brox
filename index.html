@@ -162,6 +162,15 @@
             border-radius: 50%
         }
 
+        .hero .gemini-image { /* NEW style for Gemini image */
+            max-width: 90%; /* Adjust as needed */
+            height: auto;
+            border-radius: 15px; /* Optional: adds rounded corners */
+            margin-bottom: 20px; /* Space below the image */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
+
         .hero h1 {
             font-size: 3rem;
             color: #00f5ff
@@ -222,20 +231,6 @@
             }
         }
 
-        /* Extra Image Section Styling (NEW) */
-        .extra-image-section {
-            text-align: center;
-            padding: 40px 20px; /* Some padding */
-            background: #111; /* Slightly different background */
-        }
-        .extra-image-section img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            margin-top: 20px;
-        }
-
         /* How to Buy Section */
         .how-to-buy {
             text-align: center;
@@ -291,6 +286,17 @@
             font-size: 1.05rem;
             line-height: 1.6
         }
+
+        /* Moved Image Style */
+        .moved-image { /* NEW style for the moved image */
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 40px auto 20px auto; /* Adjust margin as needed */
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+
 
         /* Modern Countdown */
         .countdown-container {
@@ -359,7 +365,7 @@
             line-height: 1.6
         }
 
-        /* New Image Style */
+        /* New Image Style (Pre-Roadmap) */
         .pre-roadmap-image {
             max-width: 100%;
             height: auto;
@@ -605,7 +611,7 @@
 
     <div id="sideMenu" class="side-menu">
         <a href="#hero">Home</a>
-        <a href="#extraImageSection">Our Vision</a> <a href="#howToBuy">How to buy</a>
+        <a href="#howToBuy">How to buy</a>
         <a href="#allocation">Allocation</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#faq">FAQ</a>
@@ -615,15 +621,10 @@
 
     <section id="hero" class="hero">
         <img class="logoBig" src="images/Picsart_25-09-21_10-14-23-094.png" alt="BROX big logo" loading="lazy">
+        <img src="images/Gemini_Generated_Image_873q3e8.jpeg" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
         <h1>🔥 Welcome to</h1>
         <span class="brox-effect">BROX</span>
         <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-    </section>
-
-    <section id="extraImageSection" class="extra-image-section">
-        <h2>Our Vision</h2>
-        <p>A glimpse into the future of BROX, driven by community passion.</p>
-        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" loading="lazy">
     </section>
 
     <section id="howToBuy" class="how-to-buy">
@@ -667,6 +668,7 @@
             <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
         </div>
         <button class="cta" onclick="openModal()">Early Access</button>
+        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
     </section>
 
     <section id="allocation" class="allocation">
