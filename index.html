@@ -299,13 +299,13 @@
         }
 
 
-        /* NEW: Flip Clock Look */
+        /* NEW: Flip Clock Look - Simplified & Corrected Display */
         .countdown-container {
             display: flex;
             justify-content: center;
-            gap: 20px; /* زيادة التباعد بين الوحدات */
+            gap: 15px; /* تباعد أقل */
             margin-top: 32px;
-            perspective: 800px; /* لإضافة عمق لتأثير الـ 3D */
+            /* تم إزالة Perspective حيث لا يوجد تقليب 3D حقيقي */
         }
 
         .flip-clock-unit {
@@ -314,7 +314,7 @@
 
         .flip-clock-box {
             position: relative;
-            width: 80px; /* حجم الصندوق */
+            width: 80px;
             height: 90px;
             margin-bottom: 8px;
             font-size: 2.8rem;
@@ -323,39 +323,40 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
             background: #1a1a1a;
+            /* لضمان توسيط الأرقام الجديدة */
+            display: flex;
+            flex-direction: column;
         }
 
         .flip-clock-box span {
-            position: absolute;
-            left: 0;
+            /* تم تعديل الأنماط لعرض النصفين بشكل صحيح داخل الصندوق */
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
             height: 50%;
             overflow: hidden;
             line-height: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            /* الخلفية والحدود */
+            background: #1a1a1a;
         }
 
         .flip-clock-box .top {
-            top: 0;
+            /* النصف العلوي يظهر الرقم كاملاً ولكن يتم قص النصف السفلي */
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
-            background: #1a1a1a;
-            /* توجيه المحتوى إلى الأسفل في النصف العلوي */
-            align-items: flex-end; 
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5); /* خط فاصل واضح */
+            align-items: flex-end; /* لتركيز النص في أسفل النصف العلوي */
             padding-bottom: 2px;
         }
 
         .flip-clock-box .bottom {
-            bottom: 0;
+            /* النصف السفلي يظهر الرقم كاملاً ولكنه مقصوص */
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
-            background: #1a1a1a;
-            /* توجيه المحتوى إلى الأعلى في النصف السفلي */
-            align-items: flex-start;
+            align-items: flex-start; /* لتركيز النص في أعلى النصف السفلي */
             padding-top: 2px;
+            /* يتم الآن عرض القيمة مرة واحدة في كل نصف دون استخدام position absolute مع offset */
         }
 
         .flip-clock-unit small {
@@ -630,13 +631,6 @@
                 height: 70px;
                 font-size: 2rem;
             }
-            /* تحديثات الأنماط للـ Flip Clock */
-            .flip-clock-box .top {
-                padding-bottom: 2px;
-            }
-            .flip-clock-box .bottom {
-                padding-top: 2px;
-            }
             .countdown-container {
                 gap: 10px;
             }
@@ -896,7 +890,7 @@
         });
         items.forEach(i => obs.observe(i));
 
-        // Flip Clock Countdown
+        // Flip Clock Countdown - Corrected Timing Logic
         const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
 
         function updateCountdown() {
