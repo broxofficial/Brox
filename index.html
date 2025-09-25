@@ -7,7 +7,8 @@
     <title>BROX — The MEME Revolution ⚡️ (Ultimate Edition)</title>
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:wght@900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Poppins:wght@900&display=swap"
+        rel="stylesheet">
     <style>
         /* Base Reset & Typography */
         * {
@@ -89,7 +90,7 @@
             font-size: 1.8rem;
             color: #ff0077;
             text-shadow: 0 0 8px #ff0077;
-            line-height: 1; 
+            line-height: 1;
         }
 
         /* --- Menu/Navigation (Quarter Screen Fix) --- */
@@ -118,8 +119,8 @@
         .side-menu {
             /* العرض الثابت لربع الشاشة (280px) */
             position: fixed;
-            right: -280px; 
-            width: 280px; 
+            right: -280px;
+            width: 280px;
             top: 80px;
             height: calc(100% - 80px);
             background: rgba(0, 0, 0, 0.98);
@@ -128,6 +129,9 @@
             border-left: 2px solid #ff0077;
             z-index: 9998;
             transition: right .4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            /* إضافة خاصية الـ display: flex لترتيب الروابط عمودياً */
+            display: flex;
+            flex-direction: column;
         }
 
         .side-menu.open {
@@ -173,7 +177,7 @@
             pointer-events: auto
         }
 
-        /* --- Hero (Image Fix) --- */
+        /* --- Hero (Image Fix and BROX Effect) --- */
         .hero {
             height: 100vh;
             padding-top: 80px;
@@ -182,107 +186,191 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
+        .brox-effect {
+            font-family: 'Poppins', sans-serif;
+            font-size: 8rem; /* تم تكبير الخط ليكون أكثر تأثيراً */
+            font-weight: 900;
+            line-height: 0.8;
+            color: #fff;
+            text-shadow: 0 0 20px #ff0077, 0 0 40px #00ffc2;
+            display: block;
+            margin-bottom: 20px;
         }
 
         .hero .gemini-image {
             max-width: 90%;
-            width: 500px;
-            height: 400px; 
-            object-fit: contain; 
+            width: 450px; /* تم تحديد عرض ثابت مع الاحتفاظ بالمرونة */
+            height: auto;
+            object-fit: cover;
             border-radius: 30px;
             box-shadow: 0 0 50px rgba(0, 255, 194, 0.6), 0 0 20px rgba(255, 0, 119, 0.8);
             border: 3px solid #00ffc2;
             transition: all 0.5s;
-            z-index: 3; 
+            z-index: 3;
+            margin: 30px auto;
+            display: block; /* لضمان التمركز */
+        }
+
+        /* --- General Image Sizing Fix (for roadmap image, etc.) --- */
+        .moved-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 40px auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 25px #ff0077;
         }
 
         /* --- Countdown & Early Access Section (Flip Clock Style Fix) --- */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            /* تم تقليل المسافة بين الأرقام لتبدو كصفحة واحدة */
-            gap: 5px; 
-            margin-top: 40px;
-        }
-        
-        .countdown-box {
-            /* تصميم العداد الورقي (Flip Card Look) */
-            background: rgba(255, 255, 255, 0.95); /* خلفية فاتحة تحاكي الورق */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid #ccc;
-            padding: 0;
-            min-width: 80px; 
-            text-align: center;
-            border-radius: 4px;
-            overflow: hidden;
-            position: relative;
-            height: 100px; 
-            margin: 0 5px; /* مسافة أفقية بسيطة */
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        
-        .countdown-box span {
-            /* الأرقام (الوجه الأساسي للورقة) */
-            display: block;
-            font-size: 3.5rem;
-            font-weight: 900;
-            color: #000; /* لون أسود للأرقام */
-            line-height: 1.1; 
-            background: #fff;
-            padding: 10px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .countdown-box small {
-            /* التسمية (DAYS, HOURS...) */
-            color: #555;
-            font-weight: 700;
-            display: block;
-            padding: 5px 0;
-            background: #f0f0f0; /* خلفية فاتحة للتسمية */
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* تعديل الـ CSS للصندوق الزجاجي ليتناسب مع تصميم العداد */
         .early-access .glass-card {
             background: none;
             backdrop-filter: none;
             border: none;
             box-shadow: none;
         }
-        
-        /* Box to hold two digits together (like Minutes, Seconds) */
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
         .time-group {
             display: flex;
-            gap: 2px;
+            gap: 5px; /* تقليل المسافة داخل المجموعة */
             align-items: center;
-            margin: 0 15px; /* مسافة بين المجموعات (أيام، ساعات، إلخ) */
+            margin: 0 10px;
         }
-        
+
+        /* الفاصل الزمني (:) */
         .time-group:not(:last-child)::after {
             content: ':';
-            font-size: 3rem;
-            color: #00ffc2;
-            font-weight: 700;
+            font-size: 3.5rem;
+            color: #ff0077;
+            font-weight: 900;
             position: relative;
-            top: -15px;
-            margin-right: -10px;
+            top: -10px;
+            margin-left: 5px;
+            text-shadow: 0 0 10px #ff0077;
         }
-        
-        /* Overriding flex container for countdown to use time-group */
-        #countdown {
-            gap: 0;
+
+        .countdown-box {
+            /* تصميم العداد المشابه لـ Flip Clock */
+            background: #111;
+            box-shadow: 0 0 10px #00ffc2, inset 0 0 5px #ff0077;
+            border: 2px solid #00ffc2;
+            padding: 0;
+            width: 70px;
+            height: 85px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
         }
-        
+
+        .countdown-box span {
+            /* الجزء العلوي - الرقم */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #00ffc2;
+            line-height: 1;
+            padding-top: 5px;
+            text-shadow: 0 0 8px #00ffc2;
+            border-bottom: 2px solid #ff0077; /* خط فاصل يحاكي طية الورقة */
+            height: 60%;
+        }
+
+        .countdown-box small {
+            /* الجزء السفلي - التسمية */
+            color: #ff0077;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            background: #000;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            line-height: 1;
+            height: 40%;
+        }
+
         /* --- Allocation Donut (Always Spinning) --- */
         .donut-wrapper {
-            /* ... (Other styles are kept) */
-            animation: spin 12s linear infinite, halo-pulse 3s infinite alternate; 
+             /* تم حذف الأنماط القديمة وتعويضها بخصائص أنيميشن فقط إذا كنت تستخدم صورة أو SVG متحرك */
+             /* اذا كانت دائرية يتم وضعها هنا */
+            width: 250px;
+            height: 250px;
+            margin: 50px auto;
+            border-radius: 50%;
+            background: conic-gradient(
+                #00ffc2 0 70%,    /* Community 70% */
+                #ff0077 70% 90%,   /* Airdrop 20% */
+                #9b00e3 90% 99%,   /* Burn 9% */
+                #ffd700 99% 100%   /* Team 1% */
+            );
+            border: 5px solid rgba(0, 255, 194, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: spin 12s linear infinite, halo-pulse 3s infinite alternate;
+        }
+        
+        .donut-inner {
+            width: 80%;
+            height: 80%;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- How To Buy Steps Layout --- */
+        .how-to-buy .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .how-to-buy .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .how-to-buy .step-icon {
+            font-size: 2rem;
+            color: #ff0077;
+            flex-shrink: 0;
+            margin-top: 5px;
+            text-shadow: 0 0 10px #ff0077;
+        }
+
+        /* --- Roadmap Timeline Layout --- */
+        .roadmap .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
         }
 
         /* --- Animations --- */
@@ -317,14 +405,13 @@
         }
 
 
-        /* --- Responsive Tweaks (Quarter Screen Fix for Menu) --- */
+        /* --- Responsive Tweaks --- */
         @media(max-width:992px) {
             .brox-effect {
                 font-size: 6rem;
             }
-            /* في الشاشات الأصغر، لا تزال القائمة تأخذ عرضًا محددًا */
             .side-menu {
-                width: 250px; 
+                width: 250px;
                 right: -250px;
             }
         }
@@ -334,11 +421,11 @@
                 font-size: 4.5rem;
             }
             .countdown-box {
-                min-width: 60px;
-                height: 80px;
+                width: 60px;
+                height: 75px;
             }
             .countdown-box span {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
             /* في الشاشات الصغيرة جدًا، يجب أن تأخذ القائمة كامل العرض */
             .side-menu {
@@ -352,19 +439,19 @@
                 font-size: 3rem;
             }
             .countdown-box {
-                min-width: 50px;
+                width: 55px;
                 height: 70px;
                 margin: 0 2px;
             }
             .countdown-box span {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             .time-group {
-                margin: 0 8px;
+                margin: 0 5px;
             }
             .time-group:not(:last-child)::after {
-                font-size: 2rem;
-                top: -10px;
+                font-size: 2.5rem;
+                top: -8px;
             }
         }
     </style>
@@ -399,10 +486,13 @@
     <section id="hero" class="hero">
         <div class="hero-content">
             <h1 class="slogan">⚡️ ACTIVATE PROTOCOL: NEXT MEME ERA</h1>
-            <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
+            <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image"
+                class="gemini-image" loading="lazy">
 
             <span class="brox-effect">BROX</span>
-            <p style="max-width: 850px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">**The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for speed and maximum community impact. Time to breach the market.</p>
+            <p style="max-width: 850px; margin: 0 auto 30px; color: #00ffc2; font-size: 1.3rem; font-weight: 600; text-shadow: 0 0 5px #00ffc2;">
+                **The Solana Catalyst:** We are not just a coin; we are a decentralized digital revolution, optimized for
+                speed and maximum community impact. Time to breach the market.</p>
             <button class="cta" onclick="openModal()">INITIATE EARLY ACCESS // JOIN</button>
         </div>
     </section>
@@ -414,21 +504,24 @@
                 <span class="step-icon"><i class="fas fa-wallet"></i></span>
                 <div>
                     <h3>STEP 1: SECURE CRYPTO MODULE</h3>
-                    <p>Initialize a secure **Solana Wallet** (Phantom or Trust Wallet). Your seed phrase is the key. Protect it at all costs.</p>
+                    <p>Initialize a secure **Solana Wallet** (Phantom or Trust Wallet). Your seed phrase is the key.
+                        Protect it at all costs.</p>
                 </div>
             </div>
             <div class="step glass-card">
                 <span class="step-icon"><i class="fas fa-coins"></i></span>
                 <div>
                     <h3>STEP 2: LOAD SOL POWER</h3>
-                    <p>Acquire **Solana (SOL)** from your primary exchange. Transfer the SOL to your module. This fuels your transaction on the network.</p>
+                    <p>Acquire **Solana (SOL)** from your primary exchange. Transfer the SOL to your module. This fuels
+                        your transaction on the network.</p>
                 </div>
             </div>
             <div class="step glass-card">
                 <span class="step-icon"><i class="fas fa-exchange-alt"></i></span>
                 <div>
                     <h3>STEP 3: EXECUTE SWAP COMMAND</h3>
-                    <p>Connect your module to **Raydium or Jupiter**. Input the official $BROX contract address and execute the swap from SOL to BROX.</p>
+                    <p>Connect your module to **Raydium or Jupiter**. Input the official $BROX contract address and
+                        execute the swap from SOL to BROX.</p>
                 </div>
             </div>
         </div>
@@ -436,10 +529,12 @@
 
     <section id="earlyAccess" class="early-access">
         <h2>:: LAUNCH SEQUENCE INITIATED ::</h2>
-        <div class="status-box">
-            <p><strong style="color:#ff0077">STATUS:</strong> PRE-LAUNCH / CRITICAL</p>
-            <p><strong style="color:#ff0077">AUDIT:</strong> Q4 2025 / VERIFIED</p>
-            <p><strong style="color:#ff0077">CHAIN:</strong> SOLANA / HIGH-VELOCITY</p>
+        <div class="glass-card" style="max-width: 600px; margin: 0 auto 40px; text-align: center;">
+            <div class="status-box">
+                <p><strong style="color:#ff0077">STATUS:</strong> PRE-LAUNCH / CRITICAL</p>
+                <p><strong style="color:#ff0077">AUDIT:</strong> Q4 2025 / VERIFIED</p>
+                <p><strong style="color:#ff0077">CHAIN:</strong> SOLANA / HIGH-VELOCITY</p>
+            </div>
         </div>
         
         <div class="countdown-container" id="countdown">
@@ -468,7 +563,8 @@
 
     <section id="allocation" class="allocation">
         <h2>:: TOKEN MATRIX BREAKDOWN ::</h2>
-        <p style="color:#999; margin-bottom: 20px; font-size: 1.2rem; font-weight: 600;">Total Supply: 1,000,000,000 $BROX // DECENTRALIZED MANDATE</p>
+        <p style="color:#999; margin-bottom: 20px; font-size: 1.2rem; font-weight: 600; text-align: center;">Total Supply: 1,000,000,000 $BROX // DECENTRALIZED MANDATE</p>
+        
         <div class="donut-wrapper">
             <div class="donut-inner">
                 <strong>100%</strong>
@@ -476,7 +572,7 @@
             </div>
         </div>
 
-        <div class="allocation-details">
+        <div class="allocation-details" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 50px;">
             <div class="allocation-item glass-card color-community">
                 <h3>70% COMMUNITY DIRECT // LIQUIDITY</h3>
                 <p>Maximum decentralization. Tokens channeled directly to liquidity pools and community incentives. Power to the holders.</p>
@@ -497,7 +593,7 @@
     </section>
 
     <section id="preRoadmapImage" style="padding: 0 20px; text-align: center;">
-        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="moved-image" loading="lazy" style="margin: 0 auto;">
+        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="moved-image" loading="lazy" style="margin: 40px auto;">
     </section>
 
     <section id="roadmap" class="roadmap">
@@ -524,7 +620,7 @@
 
     <section id="faq">
         <h2>:: FREQUENCY QUERY FIREWALL ::</h2>
-        <div class="faq">
+        <div class="faq" style="max-width: 900px; margin: 0 auto;">
             <div class="accordion-item glass-card">
                 <div class="accordion-header">
                     What is the core function of BROX?
@@ -543,189 +639,103 @@
                     <p>Solana offers superior transaction speeds and extremely low gas fees, making $BROX highly accessible and efficient for frequent trading—essential for a high-volume meme token.</p>
                 </div>
             </div>
-            <div class="accordion-item glass-card">
-                <div class="accordion-header">
-                    Where can I find the official contract address?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <p>The official contract address will only be released through our primary channels (Telegram, X) and announced here *immediately* upon launch to prevent scams. Join Early Access to be notified instantly.</p>
-                </div>
-            </div>
-            <div class="accordion-item glass-card">
-                <div class="accordion-header">
-                    Is the project secure and liquidity locked?
-                    <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="accordion-content">
-                    <p>Yes. Contract audit is scheduled for Q4 2025. Furthermore, all initial liquidity will be permanently locked at launch to ensure the community's safety and prevent rug pulls.</p>
-                </div>
-            </div>
-        </div>
+             </div>
     </section>
 
-    <footer id="footer">
-        <div class="socials">
-            <a href="https://www.instagram.com/brox__official" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://www.tiktok.com/@brox__official" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
-            <a href="https://x.com/Brox__official" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
-            <a href="https://t.me/brox_official" target="_blank" title="Telegram"><i class="fa-brands fa-telegram"></i></a>
-        </div>
-        <p>BROX // THE NEXT MEME ERA // POWERED BY SOLANA // ALL RIGHTS RESERVED 2025</p>
-    </footer>
-
-    <div id="modal" class="modal">
-        <div class="card glass-card" style="box-shadow: 0 0 40px rgba(255, 0, 119, 0.5);">
-            <button class="close-btn" onclick="closeModal()">✖</button>
-            <h2 class="color-community" style="text-shadow: 0 0 10px #ff0077; font-size: 2rem;">PROTOCOL ACCESS REQUIRED</h2>
-            <p style="color:#ccc; font-weight: 600;">Input validated email to receive **Critical Launch Coordinates**.</p>
-            <input id="emailInput" type="email" placeholder="ACCESS_CODE@BROX.COM" style="width:100%;padding:15px;margin-top:25px;border-radius:10px;background:#050505;color:#00ffc2;border:2px solid #ff0077; font-size: 1.1rem; text-align: center;">
-            <button class="cta" style="margin-top:20px; width: 100%;" onclick="submitEmail()">DEPLOY NOTIFICATION SYSTEM</button>
-            <div id="modalMessage" class="message"></div>
-        </div>
-    </div>
-
-    <button onclick="scrollToTop()" id="scrollToTopBtn" title="Go to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
     <script>
-        // --- Menu Script ---
-        const menuBtn = document.getElementById("menuBtn");
-        const sideMenu = document.getElementById("sideMenu");
-        const menuOverlay = document.getElementById("menuOverlay");
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menuBtn');
+            const sideMenu = document.getElementById('sideMenu');
+            const menuOverlay = document.getElementById('menuOverlay');
+            const menuLinks = sideMenu.querySelectorAll('a');
 
-        function toggleMenu() {
-            const isOpen = sideMenu.classList.toggle("open");
-            menuOverlay.classList.toggle("visible");
-            menuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
-        }
+            // Toggle menu function
+            const toggleMenu = () => {
+                sideMenu.classList.toggle('open');
+                menuOverlay.classList.toggle('visible');
+                menuBtn.querySelector('i').classList.toggle('fa-bars');
+                menuBtn.querySelector('i').classList.toggle('fa-times');
+            };
 
-        menuBtn.addEventListener("click", toggleMenu);
-        menuOverlay.addEventListener("click", toggleMenu);
+            // Event Listeners for menu button and overlay
+            menuBtn.addEventListener('click', toggleMenu);
+            menuOverlay.addEventListener('click', toggleMenu);
 
-        const sideMenuLinks = document.querySelectorAll('#sideMenu a');
-        sideMenuLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // --- Modal Script ---
-        const modal = document.getElementById("modal");
-        const modalMessage = document.getElementById("modalMessage");
-        const emailInput = document.getElementById("emailInput");
-
-        function openModal() {
-            modal.classList.add("show");
-            modalMessage.textContent = '';
-            emailInput.value = '';
-        }
-
-        function closeModal() {
-            modal.classList.remove("show");
-        }
-
-        function submitEmail() {
-            const email = emailInput.value.trim();
-            if (!email || !/\S+@\S+\.\S+/.test(email)) {
-                modalMessage.textContent = "ACCESS DENIED: Invalid email format. Retrying...";
-                modalMessage.style.color = "#ff0077";
-                return;
-            }
-            modalMessage.textContent = "ACCESS GRANTED: Notifications deployed to " + email;
-            modalMessage.style.color = "#00ffc2";
-            emailInput.value = '';
-        }
-
-        // --- Roadmap reveal (Intersection Observer) ---
-        const items = document.querySelectorAll('.timeline .item');
-        const obs = new IntersectionObserver(entries => {
-            entries.forEach(e => {
-                if (e.isIntersecting) e.target.classList.add('visible');
-            })
-        }, {
-            threshold: 0.2
-        });
-        items.forEach(i => obs.observe(i));
-
-        // --- Modern Countdown (Flip Clock Logic) ---
-        const countdownDate = new Date("November 20, 2025 12:00:00 GMT+00:00").getTime();
-
-        function updateFlipClock() {
-            const now = new Date().getTime();
-            const rem = countdownDate - now;
-
-            const d = Math.max(0, Math.floor(rem / (1000 * 60 * 60 * 24)));
-            const h = Math.max(0, Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)));
-            const m = Math.max(0, Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60)));
-            const s = Math.max(0, Math.floor((rem % (1000 * 60)) / 1000));
-            
-            // Helper function to update two digits
-            function updateDigits(elementPrefix, value) {
-                const str = String(value).padStart(2, '0');
-                const tensEl = document.getElementById(elementPrefix + '-tens');
-                const onesEl = document.getElementById(elementPrefix + '-ones');
-                
-                // Add a simple transition class for the "flip" effect
-                function applyFlip(element, oldValue, newValue) {
-                    if (oldValue !== newValue) {
-                        element.classList.add('flipping');
-                        setTimeout(() => {
-                            element.textContent = newValue;
-                            element.classList.remove('flipping');
-                        }, 200); // Small delay to simulate the flip
-                    } else {
-                        element.textContent = newValue;
-                    }
-                }
-
-                // Simple check for now since we don't have true 3D flip animation
-                if (tensEl) tensEl.textContent = str[0]; 
-                if (onesEl) onesEl.textContent = str[1];
-            }
-
-            // Update all groups
-            updateDigits('days', d);
-            updateDigits('hours', h);
-            updateDigits('minutes', m);
-            updateDigits('seconds', s);
-        }
-        updateFlipClock();
-        setInterval(updateFlipClock, 1000);
-
-        // --- Scroll to Top Button Logic ---
-        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-
-        window.onscroll = function() {
-            scrollToTopBtn.style.display = (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) ? "flex" : "none";
-        };
-
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            // Close menu when a link is clicked
+            menuLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
             });
-        }
 
-        // --- FAQ Accordion Script ---
-        const headers = document.querySelectorAll('.accordion-header');
-        headers.forEach(header => {
-            header.addEventListener('click', () => {
-                const content = header.nextElementSibling;
-                const icon = header.querySelector('i');
 
-                document.querySelectorAll('.accordion-header.active').forEach(activeHeader => {
-                    if (activeHeader !== header) {
-                        activeHeader.classList.remove('active');
-                        activeHeader.nextElementSibling.classList.remove('open');
-                        activeHeader.querySelector('i').classList.replace('fa-chevron-up', 'fa-chevron-down');
+            // Accordion Functionality for FAQ
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('i');
+
+                    // Close all other open items
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            otherHeader.nextElementSibling.style.maxHeight = null;
+                            otherHeader.querySelector('i').classList.remove('fa-chevron-up');
+                            otherHeader.querySelector('i').classList.add('fa-chevron-down');
+                        }
+                    });
+
+                    // Toggle current item
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.classList.remove('fa-chevron-up');
+                        icon.classList.add('fa-chevron-down');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + "px";
+                        icon.classList.remove('fa-chevron-down');
+                        icon.classList.add('fa-chevron-up');
                     }
                 });
-
-                header.classList.toggle('active');
-                content.classList.toggle('open');
-                icon.classList.toggle('fa-chevron-up');
-                icon.classList.toggle('fa-chevron-down');
             });
+
+            // Initial setup for accordion content visibility
+            document.querySelectorAll('.accordion-content').forEach(content => {
+                content.style.overflow = 'hidden';
+                content.style.transition = 'max-height 0.3s ease-out';
+                content.style.maxHeight = null; // Start closed
+            });
+
+            // ************** DUMMY COUNTDOWN LOGIC (You MUST replace this with a real date/time) *************
+            const launchDate = new Date("2025-12-31T23:59:59").getTime();
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = launchDate - now;
+
+                // Time calculations
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Function to split a number into tens and ones digits
+                const splitTime = (time, tensId, onesId) => {
+                    document.getElementById(tensId).innerText = String(time).padStart(2, '0')[0];
+                    document.getElementById(onesId).innerText = String(time).padStart(2, '0')[1];
+                };
+
+                // Update the countdown boxes
+                splitTime(days, 'days-tens', 'days-ones');
+                splitTime(hours, 'hours-tens', 'hours-ones');
+                splitTime(minutes, 'minutes-tens', 'minutes-ones');
+                splitTime(seconds, 'seconds-tens', 'seconds-ones');
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("countdown").innerHTML = "<h2 style='color:#ff0077;'>LAUNCH ACTIVATED!</h2>";
+                }
+            };
+
+            updateCountdown(); // Run immediately
+            const countdownInterval = setInterval(updateCountdown, 1000); // Update every second
         });
     </script>
 </body>
