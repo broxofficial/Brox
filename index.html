@@ -371,81 +371,6 @@
             }
         }
 
-        /* How to Buy Section */
-        .how-to-buy {
-            text-align: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .how-to-buy .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .how-to-buy .step {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            text-align: left;
-            padding: 25px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 245, 255, 0.15);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .how-to-buy .step::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to bottom, #00f5ff, #00c3cc);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .how-to-buy .step:hover::before {
-            opacity: 1;
-        }
-
-        .how-to-buy .step:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(0, 245, 255, 0.4);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .how-to-buy .step-icon {
-            font-size: 2.5rem;
-            color: #00f5ff;
-            min-width: 60px;
-            display: flex;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .how-to-buy .step:hover .step-icon {
-            transform: scale(1.2);
-        }
-
-        .how-to-buy .step h3 {
-            color: #00f5ff;
-            margin-bottom: 8px;
-            font-size: 1.4rem;
-        }
-
-        .how-to-buy .step p {
-            color: #ddd;
-            line-height: 1.7;
-        }
-
         /* Countdown & Early Access Section */
         .early-access {
             text-align: center;
@@ -549,6 +474,81 @@
             font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 1px;
+        }
+
+        /* How to Buy Section */
+        .how-to-buy {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .how-to-buy .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .how-to-buy .step {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            text-align: left;
+            padding: 25px;
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 245, 255, 0.15);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .how-to-buy .step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #00f5ff, #00c3cc);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .how-to-buy .step:hover::before {
+            opacity: 1;
+        }
+
+        .how-to-buy .step:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(0, 245, 255, 0.4);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .how-to-buy .step-icon {
+            font-size: 2.5rem;
+            color: #00f5ff;
+            min-width: 60px;
+            display: flex;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .how-to-buy .step:hover .step-icon {
+            transform: scale(1.2);
+        }
+
+        .how-to-buy .step h3 {
+            color: #00f5ff;
+            margin-bottom: 8px;
+            font-size: 1.4rem;
+        }
+
+        .how-to-buy .step p {
+            color: #ddd;
+            line-height: 1.7;
         }
 
         /* Allocation Donut (modern style) */
@@ -1174,6 +1174,7 @@
 
     <div id="sideMenu" class="side-menu">
         <a href="#hero">Home</a>
+        <a href="#earlyAccess">Early Access</a>
         <a href="#howToBuy">How to buy</a>
         <a href="#allocation">Allocation</a>
         <a href="#roadmap">Roadmap</a>
@@ -1190,6 +1191,26 @@
         <button class="cta" onclick="openModal()">Early Access</button>
     </section>
 
+    <!-- Early Access Section - NOW COMES FIRST -->
+    <section id="earlyAccess" class="early-access">
+        <div class="section-title">
+            <h2>🚀 Coming Soon...</h2>
+        </div>
+        <div class="status-box">
+            <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+            <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+            <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
+        </div>
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+            <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+            <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+        </div>
+        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image floating" loading="lazy">
+    </section>
+
+    <!-- How to Buy Section - NOW COMES AFTER Early Access -->
     <section id="howToBuy" class="how-to-buy">
         <div class="section-title">
             <h2>How to buy</h2>
@@ -1219,24 +1240,7 @@
         </div>
     </section>
 
-    <section id="earlyAccess" class="early-access">
-        <div class="section-title">
-            <h2>🚀 Coming Soon...</h2>
-        </div>
-        <div class="status-box">
-            <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-            <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-            <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-        </div>
-        <div class="countdown-container" id="countdown">
-            <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-            <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-            <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-            <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
-        </div>
-        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image floating" loading="lazy">
-    </section>
-
+    <!-- Rest of the sections remain the same -->
     <section id="allocation" class="allocation">
         <div class="section-title">
             <h2>Token Allocation</h2>
