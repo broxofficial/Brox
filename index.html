@@ -857,6 +857,124 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
+
+        /* NEW IMPROVEMENTS */
+
+        /* 1. Enhanced Particle Background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* 2. Improved Typography */
+        .section-subtitle {
+            text-align: center;
+            color: #cfefff;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        /* 3. Enhanced Card Components */
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid rgba(0, 245, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.1);
+            border-color: rgba(0, 245, 255, 0.3);
+        }
+
+        /* 4. Improved Navigation */
+        .nav-indicator {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: #00f5ff;
+            transform: scale(1.3);
+        }
+
+        /* 5. Enhanced Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* 6. Improved Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #cfefff;
+        }
+
+        /* 7. Better Mobile Experience */
+        .mobile-optimized {
+            touch-action: manipulation;
+        }
+
+        /* 8. Enhanced Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* 9. Performance Optimizations */
+        .will-change {
+            will-change: transform, opacity;
+        }
+
+        /* 10. Enhanced Visual Feedback */
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 245, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 245, 255, 0); }
+        }
     </style>
 </head>
 
@@ -864,6 +982,9 @@
     <div class="loading" id="loading">
         <div class="spinner"></div>
     </div>
+
+    <!-- Particle Background -->
+    <canvas class="particles" id="particles"></canvas>
 
     <header id="header">
         <div class="logo">
@@ -873,9 +994,20 @@
         <button id="menuBtn" class="menu-btn">☰</button>
     </header>
 
+    <!-- Navigation Indicator -->
+    <div class="nav-indicator" id="navIndicator">
+        <div class="nav-dot" data-section="hero"></div>
+        <div class="nav-dot" data-section="howToBuy"></div>
+        <div class="nav-dot" data-section="earlyAccess"></div>
+        <div class="nav-dot" data-section="allocation"></div>
+        <div class="nav-dot" data-section="roadmap"></div>
+        <div class="nav-dot" data-section="faq"></div>
+    </div>
+
     <div id="sideMenu" class="side-menu">
         <a href="#hero">Home</a>
         <a href="#howToBuy">How to buy</a>
+        <a href="#earlyAccess">Early Access</a>
         <a href="#allocation">Allocation</a>
         <a href="#roadmap">Roadmap</a>
         <a href="#faq">FAQ</a>
@@ -884,31 +1016,32 @@
     <div id="menuOverlay" class="menu-overlay"></div>
 
     <section id="hero" class="hero">
-        <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image" loading="lazy">
+        <img src="images/Gemini_Generated_Image_873q3e873q3e873q.png" alt="Gemini Generated Image" class="gemini-image floating" loading="lazy">
         
         <span class="brox-effect">BROX</span>
         <p>The meme revolution begins. Powered by community. Join early access and watch the roadmap unfold.</p>
-        <button class="cta" onclick="openModal()">Early Access</button>
+        <button class="cta pulse" onclick="openModal()">Early Access</button>
     </section>
 
     <section id="howToBuy" class="how-to-buy">
         <h2>How to buy</h2>
+        <p class="section-subtitle">Follow these simple steps to join the BROX revolution and become part of our growing community.</p>
         <div class="steps">
-            <div class="step">
+            <div class="step card">
                 <span class="step-icon"><i class="fas fa-wallet"></i></span>
                 <div>
                     <h3>1. Create a wallet</h3>
                     <p>Download Phantom or Trust Wallet from the App Store or Google Play Store, or visit phantom.app.</p>
                 </div>
             </div>
-            <div class="step">
+            <div class="step card">
                 <span class="step-icon"><i class="fas fa-coins"></i></span>
                 <div>
                     <h3>2. Get some SOL</h3>
                     <p>Have Solana (SOL) in your wallet to trade for $BROX. You can get SOL on exchanges like Coinbase, Binance, or directly from your wallet.</p>
                 </div>
             </div>
-            <div class="step">
+            <div class="step card">
                 <span class="step-icon"><i class="fas fa-exchange-alt"></i></span>
                 <div>
                     <h3>3. Go to Raydium or Jupiter</h3>
@@ -920,7 +1053,7 @@
 
     <section id="earlyAccess" class="early-access">
         <h2>🚀 Coming Soon...</h2>
-        <div class="status-box">
+        <div class="status-box card">
             <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
             <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
             <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
@@ -931,16 +1064,16 @@
             <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
             <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
         </div>
-        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
+        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image floating" loading="lazy">
     </section>
 
     <section id="allocation" class="allocation">
         <h2>Token Allocation</h2>
-        <p>Community 70% • Airdrop 20% • Burn 9% • Team 1%</p>
-        <div class="donut-wrapper">
+        <p class="section-subtitle">Transparent and community-focused token distribution to ensure long-term growth and sustainability.</p>
+        <div class="donut-wrapper floating">
             <div class="donut-inner"></div>
         </div>
-        <div class="allocation-details">
+        <div class="allocation-details card">
             <h3 style="color:#00f5ff">70% Community Direct</h3>
             <p>Allocated directly to the community for liquidity and future rewards.</p>
             <h3 style="color:#00ff77">20% Airdrop</h3>
@@ -953,25 +1086,26 @@
     </section>
 
     <section id="preRoadmapImage" style="padding: 0 20px;">
-        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image" loading="lazy">
+        <img src="images/1758200237004.jpg" alt="A relevant image before roadmap" class="pre-roadmap-image floating" loading="lazy">
     </section>
 
     <section id="roadmap" class="roadmap">
         <h2>Roadmap</h2>
+        <p class="section-subtitle">Our strategic plan for growth and development, designed to maximize community value and project success.</p>
         <div class="timeline">
-            <div class="item">
+            <div class="item card">
                 <h3>Phase 1</h3>
                 <p>Launch socials and community building.</p>
             </div>
-            <div class="item">
+            <div class="item card">
                 <h3>Phase 2</h3>
                 <p>Website upgrade and growth.</p>
             </div>
-            <div class="item">
+            <div class="item card">
                 <h3>Phase 3</h3>
                 <p>Listings on DEX/CEX.</p>
             </div>
-            <div class="item">
+            <div class="item card">
                 <h3>Phase 4</h3>
                 <p>Partnerships and ecosystem expansion.</p>
             </div>
@@ -980,13 +1114,20 @@
 
     <section id="faq">
         <h2>FAQ</h2>
+        <p class="section-subtitle">Find answers to the most commonly asked questions about BROX and our community.</p>
         <div class="faq">
-            <h3>What is BROX?</h3>
-            <p>BROX is a meme coin built by the community for the community.</p>
-            <h3>Where can I join the community?</h3>
-            <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
-            <h3>Is BROX safe?</h3>
-            <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+            <div class="card">
+                <h3>What is BROX?</h3>
+                <p>BROX is a meme coin built by the community for the community.</p>
+            </div>
+            <div class="card">
+                <h3>Where can I join the community?</h3>
+                <p>You can follow us on Telegram, X, Instagram, and TikTok.</p>
+            </div>
+            <div class="card">
+                <h3>Is BROX safe?</h3>
+                <p>Yes. Allocation is transparent (70% Community, 20% Airdrop, 9% Burn, 1% Team).</p>
+            </div>
         </div>
     </section>
 
@@ -1005,7 +1146,9 @@
             <button class="close-btn" onclick="closeModal()">✖</button>
             <h2 style="color:#00f5ff">Get Notified</h2>
             <p>Enter your email to join early access.</p>
-            <input id="emailInput" type="email" placeholder="you@example.com">
+            <div class="form-group">
+                <input id="emailInput" type="email" placeholder="you@example.com">
+            </div>
             <button class="cta" style="margin-top:14px" onclick="submitEmail()">Submit</button>
             <div id="modalMessage" class="message"></div>
         </div>
@@ -1165,6 +1308,221 @@
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             elementObserver.observe(el);
         });
+
+        // NEW IMPROVEMENTS
+
+        // 1. Particle Background
+        function initParticles() {
+            const canvas = document.getElementById('particles');
+            const ctx = canvas.getContext('2d');
+            let particlesArray = [];
+            const numberOfParticles = 100;
+
+            // Set canvas size
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+
+            // Particle class
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2 + 1;
+                    this.speedX = Math.random() * 0.5 - 0.25;
+                    this.speedY = Math.random() * 0.5 - 0.25;
+                    this.color = `rgba(0, 245, 255, ${Math.random() * 0.5})`;
+                }
+
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+
+                    if (this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+                    if (this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+                }
+
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            // Create particles
+            function init() {
+                particlesArray = [];
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particlesArray.push(new Particle());
+                }
+            }
+
+            // Animation loop
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                    particlesArray[i].draw();
+                }
+                requestAnimationFrame(animate);
+            }
+
+            init();
+            animate();
+        }
+
+        // Initialize particles when page loads
+        window.addEventListener('load', initParticles);
+
+        // 2. Navigation Indicator
+        function initNavIndicator() {
+            const sections = document.querySelectorAll('section');
+            const navDots = document.querySelectorAll('.nav-dot');
+            
+            function updateNavIndicator() {
+                let currentSection = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= (sectionTop - 200)) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                
+                navDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === currentSection) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+            
+            // Scroll to section when dot is clicked
+            navDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    if (section) {
+                        window.scrollTo({
+                            top: section.offsetTop - 70,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            window.addEventListener('scroll', updateNavIndicator);
+            updateNavIndicator(); // Initialize on page load
+        }
+
+        initNavIndicator();
+
+        // 3. Enhanced Form Validation
+        function enhanceFormValidation() {
+            const emailInput = document.getElementById('emailInput');
+            
+            emailInput.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.style.borderColor = 'rgba(0, 245, 255, 0.5)';
+                } else {
+                    this.style.borderColor = 'rgba(255, 0, 0, 0.5)';
+                }
+            });
+        }
+
+        enhanceFormValidation();
+
+        // 4. Performance Optimizations
+        function addPerformanceOptimizations() {
+            // Add will-change to elements that will be animated
+            const animatedElements = document.querySelectorAll('.step, .countdown-box, .donut-wrapper, .card');
+            animatedElements.forEach(el => {
+                el.classList.add('will-change');
+            });
+        }
+
+        addPerformanceOptimizations();
+
+        // 5. Improved Mobile Experience
+        function improveMobileExperience() {
+            // Add touch-friendly classes
+            const interactiveElements = document.querySelectorAll('.cta, .step, .card, .socials a');
+            interactiveElements.forEach(el => {
+                el.classList.add('mobile-optimized');
+            });
+        }
+
+        improveMobileExperience();
+
+        // 6. Enhanced Accessibility
+        function enhanceAccessibility() {
+            // Add ARIA labels where needed
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                if (!button.getAttribute('aria-label')) {
+                    const text = button.textContent || button.getAttribute('title');
+                    if (text) {
+                        button.setAttribute('aria-label', text);
+                    }
+                }
+            });
+        }
+
+        enhanceAccessibility();
+
+        // 7. Improved Image Loading
+        function improveImageLoading() {
+            const images = document.querySelectorAll('img');
+            images.forEach(img => {
+                // Add error handling
+                img.addEventListener('error', function() {
+                    this.alt = 'Image failed to load';
+                    this.style.border = '1px solid rgba(255, 0, 0, 0.3)';
+                });
+            });
+        }
+
+        improveImageLoading();
+
+        // 8. Enhanced Visual Feedback
+        function enhanceVisualFeedback() {
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        }
+
+        enhanceVisualFeedback();
+
+        // 9. Better Scroll Performance
+        function improveScrollPerformance() {
+            // Use passive event listeners for better scroll performance
+            document.addEventListener('touchstart', function() {}, { passive: true });
+            document.addEventListener('wheel', function() {}, { passive: true });
+        }
+
+        improveScrollPerformance();
+
+        // 10. Enhanced Error Handling
+        function enhanceErrorHandling() {
+            window.addEventListener('error', function(e) {
+                console.error('Error occurred:', e.error);
+            });
+        }
+
+        enhanceErrorHandling();
     </script>
 </body>
 
