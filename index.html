@@ -25,8 +25,7 @@
             background: #0d0d0d;
             color: #fff;
             line-height: 1.6;
-            overflow-x: hidden;
-            background: radial-gradient(ellipse at center, #0d0d0d 0%, #000000 100%);
+            overflow-x: hidden
         }
 
         a {
@@ -38,36 +37,12 @@
             color: #00f5ff;
             margin-bottom: 16px;
             text-align: center;
-            font-size: 2.5rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, #00f5ff, #00c3cc);
-            border-radius: 2px;
+            font-size: 2.2rem;
         }
 
         section {
             padding: 80px 20px;
             position: relative;
-        }
-
-        /* Particles Background */
-        #particles-js {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
         }
 
         /* Header */
@@ -236,6 +211,12 @@
             z-index: -1;
         }
 
+        .hero .logoBig {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%
+        }
+
         .hero .gemini-image {
             max-width: 90%;
             height: auto;
@@ -299,7 +280,7 @@
             box-shadow: 0 10px 20px rgba(0, 245, 255, 0.3);
         }
 
-        /* BROX Text Styling for Lava/Glow Effect */
+        /* NEW: BROX Text Styling for Lava/Glow Effect */
         .brox-effect {
             font-family: 'Arial Black', sans-serif;
             font-size: 5rem;
@@ -388,14 +369,21 @@
             color: #ccc;
         }
 
-        /* Early Access INSIDE How to Buy Section */
-        .early-access-container {
-            margin-top: 50px;
-            padding: 40px 20px;
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(0, 245, 255, 0.1);
+        /* Countdown & Early Access Section */
+        .early-access {
             text-align: center;
+            position: relative;
+        }
+
+        .early-access::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(0, 245, 255, 0.03) 0%, transparent 70%);
+            z-index: -1;
         }
 
         .status-box {
@@ -407,13 +395,28 @@
             line-height: 1.6
         }
 
+        /* Moved Image Style */
+        .moved-image {
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 40px auto 20px auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .moved-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 245, 255, 0.2);
+        }
+
         /* Modern Countdown */
         .countdown-container {
             display: flex;
             justify-content: center;
             gap: 12px;
-            margin-top: 32px;
-            flex-wrap: wrap;
+            margin-top: 32px
         }
 
         .countdown-box {
@@ -444,23 +447,7 @@
             font-size: 0.8rem
         }
 
-        /* Moved Image Style */
-        .moved-image {
-            max-width: 90%;
-            height: auto;
-            display: block;
-            margin: 40px auto 20px auto;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-        }
-
-        .moved-image:hover {
-            transform: scale(1.02);
-            box-shadow: 0 12px 30px rgba(0, 245, 255, 0.2);
-        }
-
-        /* Allocation Donut */
+        /* Allocation Donut (modern style) */
         .allocation {
             text-align: center;
             position: relative;
@@ -787,10 +774,6 @@
             .timeline {
                 padding-left: 20px
             }
-
-            .hero .gemini-image {
-                max-width: 95%;
-            }
         }
 
         @media(max-width:480px) {
@@ -832,16 +815,6 @@
                 width: 45px;
                 height: 45px;
                 font-size: 1.3rem;
-            }
-
-            .hero .gemini-image {
-                max-width: 95%;
-                margin-bottom: 15px;
-            }
-
-            .hero p {
-                font-size: 1rem;
-                padding: 0 15px;
             }
         }
 
@@ -918,7 +891,6 @@
         <button class="cta" onclick="openModal()">Early Access</button>
     </section>
 
-    <!-- How to Buy Section with Early Access INSIDE -->
     <section id="howToBuy" class="how-to-buy">
         <h2>How to buy</h2>
         <div class="steps">
@@ -944,23 +916,22 @@
                 </div>
             </div>
         </div>
+    </section>
 
-        <!-- Early Access moved INSIDE How to Buy section -->
-        <div class="early-access-container">
-            <h2 style="margin-bottom: 10px;">🚀 Coming Soon...</h2>
-            <div class="status-box">
-                <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
-                <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
-                <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
-            </div>
-            <div class="countdown-container" id="countdown">
-                <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
-                <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
-                <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
-                <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
-            </div>
-            <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
+    <section id="earlyAccess" class="early-access">
+        <h2>🚀 Coming Soon...</h2>
+        <div class="status-box">
+            <p><strong style="color:#00f5ff">Status:</strong> Pre-Launch</p>
+            <p><strong style="color:#00f5ff">Audit:</strong> Planned</p>
+            <p><strong style="color:#00f5ff">Chain:</strong> Solana</p>
         </div>
+        <div class="countdown-container" id="countdown">
+            <div class="countdown-box"><span id="days">00</span><small>Days</small></div>
+            <div class="countdown-box"><span id="hours">00</span><small>Hours</small></div>
+            <div class="countdown-box"><span id="minutes">00</span><small>Mins</small></div>
+            <div class="countdown-box"><span id="seconds">00</span><small>Secs</small></div>
+        </div>
+        <img src="images/Picsart_25-09-24_13-44-18-609.png" alt="Additional BROX image" class="moved-image" loading="lazy">
     </section>
 
     <section id="allocation" class="allocation">
@@ -1071,12 +1042,14 @@
         menuBtn.addEventListener("click", () => {
             sideMenu.classList.toggle("open");
             menuOverlay.classList.toggle("visible");
+            // تبديل الأيقونة
             menuBtn.innerHTML = sideMenu.classList.contains("open") ? '<i class="fas fa-times"></i>' : '☰';
         });
 
         menuOverlay.addEventListener("click", () => {
             sideMenu.classList.remove("open");
             menuOverlay.classList.remove("visible");
+            // إعادة أيقونة القائمة
             menuBtn.innerHTML = '☰';
         });
 
@@ -1086,6 +1059,7 @@
             link.addEventListener('click', () => {
                 sideMenu.classList.remove('open');
                 menuOverlay.classList.remove('visible');
+                // إعادة أيقونة القائمة
                 menuBtn.innerHTML = '☰';
             });
         });
@@ -1105,13 +1079,14 @@
 
         function submitEmail() {
             const email = document.getElementById("emailInput").value.trim();
-            if (!email || !/\S+@\S+\.\S+/.test(email)) {
+            if (!email || !/\S+@\S+\.\S+/.test(email)) { // إضافة تحقق بسيط للبريد الإلكتروني
                 modalMessage.textContent = "Please enter a valid email address.";
                 return;
             }
             modalMessage.textContent = "Thank you! We'll notify you soon: " + email;
             document.getElementById("emailInput").value = '';
             
+            // إغلاق النافذة بعد 3 ثوانٍ
             setTimeout(() => {
                 closeModal();
             }, 3000);
@@ -1128,13 +1103,13 @@
         });
         items.forEach(i => obs.observe(i));
 
-        // FIXED Countdown - Working properly
-        const countdownDate = new Date("December 31, 2025 23:59:59 GMT+00:00").getTime();
+        // Modern countdown
+        // تم تحديث التوقيت ليكون في المستقبل لتجنب البدء من 00 دائمًا
+        const countdownDate = new Date("October 10, 2025 10:00:00 GMT+00:00").getTime();
 
         function updateCountdown() {
             const now = new Date().getTime();
             const rem = countdownDate - now;
-            
             if (rem <= 0) {
                 document.getElementById("days").textContent = "00";
                 document.getElementById("hours").textContent = "00";
@@ -1142,19 +1117,15 @@
                 document.getElementById("seconds").textContent = "00";
                 return;
             }
-            
             const d = Math.floor(rem / (1000 * 60 * 60 * 24));
             const h = Math.floor((rem % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((rem % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((rem % (1000 * 60)) / 1000);
-            
             document.getElementById("days").textContent = String(d).padStart(2, '0');
             document.getElementById("hours").textContent = String(h).padStart(2, '0');
             document.getElementById("minutes").textContent = String(m).padStart(2, '0');
             document.getElementById("seconds").textContent = String(s).padStart(2, '0');
         }
-
-        // Initialize countdown immediately and update every second
         updateCountdown();
         setInterval(updateCountdown, 1000);
 
@@ -1194,43 +1165,6 @@
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
             elementObserver.observe(el);
         });
-
-        // Simple particles effect without heavy library
-        function createParticles() {
-            const container = document.createElement('div');
-            container.id = 'particles-js';
-            container.style.position = 'fixed';
-            container.style.top = '0';
-            container.style.left = '0';
-            container.style.width = '100%';
-            container.style.height = '100%';
-            container.style.zIndex = '-1';
-            container.style.pointerEvents = 'none';
-            document.body.appendChild(container);
-
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = '2px';
-                particle.style.height = '2px';
-                particle.style.background = '#00f5ff';
-                particle.style.borderRadius = '50%';
-                particle.style.opacity = '0.3';
-                
-                const left = Math.random() * 100;
-                const top = Math.random() * 100;
-                const duration = 3 + Math.random() * 2;
-                
-                particle.style.left = left + 'vw';
-                particle.style.top = top + 'vh';
-                particle.style.animation = `float ${duration}s infinite linear`;
-                
-                container.appendChild(particle);
-            }
-        }
-
-        // Initialize particles
-        createParticles();
     </script>
 </body>
 
