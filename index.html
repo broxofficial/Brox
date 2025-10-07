@@ -408,6 +408,8 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             transition: var(--transition);
             border: 2px solid rgba(0, 245, 255, 0.3);
+            /* التعديل لضمان ظهور الصورة كاملة */
+            object-fit: contain; 
         }
 
         .hero .gemini-image:hover {
@@ -818,6 +820,19 @@
             font-size: 2rem;
             font-weight: 900;
             margin-bottom: 0.5rem;
+        }
+
+        /* **NEW FIX: Pre-Roadmap Image** */
+        .pre-roadmap-image {
+            width: 100%; 
+            height: auto;
+            max-width: 800px;
+            display: block;
+            margin: 2rem auto; 
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            /* التعديل الجديد هنا لضمان ظهور الصورة كاملة */
+            object-fit: contain; 
         }
 
         /* Enhanced Roadmap */
@@ -2090,7 +2105,7 @@
         function scrollToSection(sectionId) {
             const section = document.getElementById(sectionId);
             if (section) {
-                section.scrollIntoView({
+                target.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
                 });
