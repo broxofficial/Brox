@@ -66,7 +66,7 @@
             color: var(--light-text);
             line-height: 1.6;
             /* FIX 1: ضمان عدم ظهور شريط التمرير الأفقي */
-            overflow-x: hidden; 
+            overflow-x: hidden;
             position: relative;
         }
 
@@ -167,7 +167,7 @@
             margin: 0 auto;
             padding: 0 var(--container-padding);
         }
-        
+
         /* FIX 2: ضمان عدم تجاوز أي عنصر رئيسي عرض الشاشة */
         .container,
         section,
@@ -409,7 +409,7 @@
             transition: var(--transition);
             border: 2px solid rgba(0, 245, 255, 0.3);
             /* التعديل لضمان ظهور الصورة كاملة */
-            object-fit: contain; 
+            object-fit: contain;
         }
 
         .hero .gemini-image:hover {
@@ -657,6 +657,16 @@
             font-size: 1.2rem;
         }
 
+        /* **NEW FIX: Image inside Early Access** */
+        .early-access-container img.moved-image {
+            max-width: 150px;
+            height: auto;
+            display: block;
+            margin: 1rem auto;
+            object-fit: contain; /* تأكيد ظهور الصورة كاملة */
+            transition: var(--transition);
+        }
+
         /* Enhanced Countdown */
         .countdown-container {
             display: flex;
@@ -822,17 +832,16 @@
             margin-bottom: 0.5rem;
         }
 
-        /* **NEW FIX: Pre-Roadmap Image** */
+        /* **FIX: Pre-Roadmap Image** */
         .pre-roadmap-image {
-            width: 100%; 
+            width: 100%;
             height: auto;
             max-width: 800px;
             display: block;
-            margin: 2rem auto; 
+            margin: 2rem auto;
             border-radius: var(--border-radius);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            /* التعديل الجديد هنا لضمان ظهور الصورة كاملة */
-            object-fit: contain; 
+            object-fit: contain;
         }
 
         /* Enhanced Roadmap */
@@ -1090,9 +1099,17 @@
 
         .footer-content {
             display: grid;
+            /* Adjust grid to reflect removal of Quick Links */
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
             margin-bottom: 2rem;
+            /* Center the content horizontally */
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .footer-section {
+            padding: 0 1rem;
         }
 
         .footer-section h3 {
@@ -1422,6 +1439,11 @@
             .footer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
+                gap: 1rem;
+            }
+            
+            .footer-section {
+                padding: 0;
             }
 
             .footer-section h3 {
@@ -1807,14 +1829,6 @@
                 <div class="footer-section" data-aos="fade-up" data-aos-delay="200">
                     <h3>BROX</h3>
                     <p>The new digital revolution. A community-backed meme coin on the Solana network.</p>
-                </div>
-
-                <div class="footer-section" data-aos="fade-up" data-aos-delay="400">
-                    <h3>Quick Links</h3>
-                    <a href="#hero">Home</a><br>
-                    <a href="#howToBuy">How to Buy</a><br>
-                    <a href="#roadmap">Roadmap</a><br>
-                    <a href="#faq">FAQ</a>
                 </div>
 
                 <div class="footer-section" data-aos="fade-up" data-aos-delay="600">
